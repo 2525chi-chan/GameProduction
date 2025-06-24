@@ -9,7 +9,7 @@ public class BazuriCameraMove : MonoBehaviour
     [SerializeField] float moveSpeed;
     [Header("カメラの回転速度")]
     [SerializeField] float rotateSpeed;
-    [SerializeField] float rotateSmoothingSpeed;
+    [Header("必要なコンポーネント")]
     [SerializeField] BazuriShot bazuri;
 
     float cameraYaw;
@@ -17,15 +17,10 @@ public class BazuriCameraMove : MonoBehaviour
     Vector2 moveInput;
     Vector2 lookInput;
     float verticalInput;
-    Quaternion targetRotation;
-    private void Start()
-    {
-       // ResetCameraRotation();
-       
-       
-    }
-   
-   public void OnMove(InputAction.CallbackContext context)
+
+
+
+    public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
@@ -35,7 +30,7 @@ public class BazuriCameraMove : MonoBehaviour
     }
     public void OnCameraUpDown(InputAction.CallbackContext context)
     {
-        verticalInput=context.ReadValue<float>();
+        verticalInput = context.ReadValue<float>();
     }
     public void OnShot()
     {
@@ -44,20 +39,19 @@ public class BazuriCameraMove : MonoBehaviour
 
     void Update()
     {
-        if(bazuri.IsBazuriMode) {
+        if (bazuri.IsBazuriMode)
+        {
             HandleCameraMovement();
             HandleCameraRotation();
-         
+
         }
     }
     public void ResetCameraRotation()
     {
         if (bazuri.BazuriCamera != null)
         {
-
             cameraYaw = 0f;
-            cameraXaw =0f;
-          
+            cameraXaw = 0f;
         }
     }
     public void HandleCameraRotation()//回転制御
@@ -65,10 +59,10 @@ public class BazuriCameraMove : MonoBehaviour
         cameraYaw += lookInput.x * rotateSpeed;
         cameraXaw += -lookInput.y * rotateSpeed;
         cameraXaw = Mathf.Clamp(cameraXaw, -90, 90);
-        targetRotation = Quaternion.Euler(cameraXaw, cameraYaw, 0);
+
 
         bazuri.BazuriCamera.transform.localRotation = Quaternion.Euler(cameraXaw, cameraYaw, 0);
-           
+
     }
     public void HandleCameraMovement()//移動制御
     {
@@ -80,13 +74,14 @@ public class BazuriCameraMove : MonoBehaviour
         foward.Normalize();
         right.Normalize();
 
-        Vector3 move = foward * moveInput.y + right * moveInput.x;
+        Vector3 horizontalmove = (foward * moveInput.y + right * moveInput.x) * moveSpeed * Time.unscaledDeltaTime;//前後左右移動
 
-        bazuri.BazuriCamera.transform.position += move * moveSpeed * Time.unscaledDeltaTime;
+        bazuri.BazuriCamera.transform.Translate(horizontalmove, Space.World);
 
-        if (Mathf.Abs(verticalInput) > 0.01f)
+        if (Mathf.Abs(verticalInput) > 0.01f)//上下移動
         {
             Vector3 verticalmove = verticalInput * moveSpeed * Time.unscaledDeltaTime * Vector3.up;
+
             bazuri.BazuriCamera.transform.Translate(verticalmove, Space.World);
 
         }

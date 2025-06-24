@@ -18,36 +18,38 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     public GameObject BazuriCamera
     {
         get
-        {   return bazuriCamera;
+        {
+            return bazuriCamera;
         }
         set
-        {    bazuriCamera = value;
+        {
+            bazuriCamera = value;
         }
     }
+
     [Header("カメラの操作時間")]
     [SerializeField] float cameraTime;
     [Header("スロー時のゲーム速度(1未満じゃないとスローにならない)")]
     [SerializeField] float slowSpeed;
-    
-   [SerializeField] BazuriCameraMove cameraMove;
+
+    [Header("必要なコンポーネント")]
+    [SerializeField] BazuriCameraMove cameraMove;
+
     private Coroutine bazuriCoroutine;
     private bool isBazuriMode = false;
     public bool IsBazuriMode
     {
         get { return isBazuriMode; }
     }
-    private float  count;
-    
     private void Start()
     {
-        bazuriCamera.SetActive(false);
-      
-       
+        if (bazuriCamera != null)
+        {
+            bazuriCamera.SetActive(false);
+        }
+
     }
 
-  
-
-   
     public void TryBazuriShot()
     {
 
@@ -55,44 +57,43 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         {
             StopCoroutine(bazuriCoroutine);
         }
-        bazuriCoroutine=StartCoroutine(BazuriModeRoutine());
-       
+        bazuriCoroutine = StartCoroutine(BazuriModeRoutine());
+
     }
 
-    private IEnumerator BazuriModeRoutine()
+    private IEnumerator BazuriModeRoutine()//バズリショットモードに切り替え
     {
         isBazuriMode = true;
         mainCamera.SetActive(false);
         bazuriCamera.SetActive(true);
-       
+
         playerInput.SwitchCurrentActionMap("Bazuri");
         ResetCamera();
 
-        Time.timeScale= slowSpeed;
+        Time.timeScale = slowSpeed;
 
         yield return new WaitForSecondsRealtime(cameraTime);
 
         EndBazuriMode();
     }
 
-    private void EndBazuriMode()
+    private void EndBazuriMode()//プレイヤーモードに切り替え
     {
         isBazuriMode = false;
         Time.timeScale = 1f;
 
-        if(mainCamera!=null) mainCamera.SetActive(true);
+        if (mainCamera != null) mainCamera.SetActive(true);
         if (bazuriCamera != null) bazuriCamera.SetActive(false);
 
         playerInput.SwitchCurrentActionMap("Player");
         ResetCamera();
     }
-    private void ResetCamera()
+    private void ResetCamera()//カメラ位置、回転の初期化
     {
         if (bazuriCamera != null)
         {
-            
-            bazuriCamera.transform.localPosition=Vector3.zero;
-          
+
+            bazuriCamera.transform.localPosition = Vector3.zero;
             bazuriCamera.transform.localRotation = Quaternion.identity;
             cameraMove.ResetCameraRotation();
         }
