@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.SceneView;
 //作成者:福島
+
+
 public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
 {
     [SerializeField] PlayerInput playerInput;
@@ -25,50 +28,80 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] float cameraTime;
     [Header("スロー時のゲーム速度(1未満じゃないとスローにならない)")]
     [SerializeField] float slowSpeed;
-
-  
-    private bool isBazuri = false;
-    public bool IsBazuri
+    
+   [SerializeField] BazuriCameraMove cameraMove;
+    private Coroutine bazuriCoroutine;
+    private bool isBazuriMode = false;
+    public bool IsBazuriMode
     {
-        get { return isBazuri; }
+        get { return isBazuriMode; }
     }
     private float  count;
     
     private void Start()
     {
         bazuriCamera.SetActive(false);
+      
        
     }
 
-    private void Update()
-    {
-        if (isBazuri)
-        {
-            count += Time.unscaledDeltaTime;
-            if (count >= cameraTime)
-            {
-                isBazuri = false;
-                mainCamera.SetActive(true); 
-                bazuriCamera.SetActive(false);
-                Time.timeScale = 1;
-                playerInput.SwitchCurrentActionMap("Player");
-                bazuriCamera.transform.localPosition = Vector3.zero;
-                bazuriCamera.transform.rotation =new  Quaternion(0, 0, 0,0);
+  
 
-                count = 0;
-
-            }
-        }
-    }
+   
     public void TryBazuriShot()
     {
-        if (isBazuri) return;
-        Debug.Log("バズりショット発動！");
-        isBazuri = true;
+
+        if (bazuriCoroutine != null)
+        {
+            StopCoroutine(bazuriCoroutine);
+        }
+        bazuriCoroutine=StartCoroutine(BazuriModeRoutine());
+       
+    }
+
+    private IEnumerator BazuriModeRoutine()
+    {
+        isBazuriMode = true;
         mainCamera.SetActive(false);
         bazuriCamera.SetActive(true);
-        Time.timeScale = slowSpeed;
+       
         playerInput.SwitchCurrentActionMap("Bazuri");
-        bazuriCamera.transform.LookAt(player) ;
+        ResetCamera();
+
+        Time.timeScale= slowSpeed;
+
+        yield return new WaitForSecondsRealtime(cameraTime);
+
+        EndBazuriMode();
+    }
+
+    private void EndBazuriMode()
+    {
+        isBazuriMode = false;
+        Time.timeScale = 1f;
+
+        if(mainCamera!=null) mainCamera.SetActive(true);
+        if (bazuriCamera != null) bazuriCamera.SetActive(false);
+
+        playerInput.SwitchCurrentActionMap("Player");
+        ResetCamera();
+    }
+    private void ResetCamera()
+    {
+        if (bazuriCamera != null)
+        {
+            
+            bazuriCamera.transform.localPosition=Vector3.zero;
+          
+            bazuriCamera.transform.localRotation = Quaternion.identity;
+            cameraMove.ResetCameraRotation();
+        }
+    }
+    private void OnDestroy()
+    {
+        if (isBazuriMode)
+        {
+            EndBazuriMode();
+        }
     }
 }

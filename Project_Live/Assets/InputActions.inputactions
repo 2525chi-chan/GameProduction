@@ -741,6 +741,17 @@
                     "action": "BazuriShot",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "40f04c3c-3d52-4314-b289-7c081ad837d0",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BazuriShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
