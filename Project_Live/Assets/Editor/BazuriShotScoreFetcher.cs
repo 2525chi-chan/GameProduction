@@ -57,20 +57,44 @@ public class BazuriShotScoreFetcher : EditorWindow
             if(!float.TryParse(score,out float scoreValue)) {  continue; }
         
             var obj=GameObject.Find(objName);
-            if (obj == null)
+            if (obj != null)
             {
-                Debug.LogWarning(objName+"未検出");
+                var scorable = obj.GetComponent<BazuriShotData>() ?? obj.AddComponent<BazuriShotData>();
+
+                scorable.tag = tagValue;
+                scorable.score = scoreValue;
+                EditorUtility.SetDirty(obj); 
+                Debug.Log("適用完了");
                 continue;
             }
 
-            var scorable=obj.GetComponent<BazuriShotData>()??obj.AddComponent<BazuriShotData>();
+           
+        string[] guids = AssetDatabase.FindAssets($"{objName} t:Prefab");
 
-            scorable.tag = tagValue;
-            scorable.score = scoreValue;
-            EditorUtility.SetDirty(obj);
+            foreach( string guid in guids )
+            {
+                string path=AssetDatabase.GUIDToAssetPath(guid);
+                GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+
+
+                if(prefab.name!=objName)
+                {
+                    continue;
+                }
+                var scorable = prefab.GetComponent<BazuriShotData>() ?? prefab.AddComponent<BazuriShotData>();
+                scorable.tag = tagValue;
+                scorable.score = scoreValue;
+                EditorUtility.SetDirty(prefab);
+                PrefabUtility.SaveAsPrefabAsset(prefab,path);
+
+
+
+            }
         }
-        Debug.Log("適用完了");
+       
     }
+
+   
 
     
 }
