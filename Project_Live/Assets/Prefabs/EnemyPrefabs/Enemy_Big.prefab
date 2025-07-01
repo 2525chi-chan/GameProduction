@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3064175969719533876, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
       propertyPath: m_Name
-      value: ElietEnemy
+      value: Enemy_Big
       objectReference: {fileID: 0}
     - target: {fileID: 4515992174774905601, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -27,6 +27,10 @@ PrefabInstance:
     - target: {fileID: 5621649024667784325, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
       propertyPath: hp
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678132285394263426, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: score
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6188201578832378370, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
       propertyPath: m_Materials.Array.data[0]
