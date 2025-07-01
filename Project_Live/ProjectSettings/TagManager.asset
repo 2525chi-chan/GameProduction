@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - LookPoint
   - Camera
+  - Effect
   layers:
   - Default
   - TransparentFX

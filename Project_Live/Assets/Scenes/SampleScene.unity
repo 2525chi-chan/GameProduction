@@ -4341,8 +4341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c757f62a75c73b14b9c63b1c37d9bab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  rotateSpeed: 3
+  moveSpeed: 3
+  rotateSpeed: 1.5
   bazuri: {fileID: 2145068195}
 --- !u!114 &1711699310
 MonoBehaviour:
@@ -5338,7 +5338,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097959998}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.018189488, y: 0.000000017203536, z: 3.1297526e-10, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189488, y: -0.000000017203536, z: -3.1297526e-10, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

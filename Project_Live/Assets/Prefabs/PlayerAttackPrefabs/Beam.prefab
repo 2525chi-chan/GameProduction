@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6502001243641348044}
   m_Layer: 0
   m_Name: Beam
-  m_TagString: Untagged
+  m_TagString: Effect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -266,6 +266,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Enemy
+  MaxHitCount: 1
+  hitIntervalTime: 0.5
   damageToTarget: {fileID: 6502001243641348044}
 --- !u!198 &8124846511821320432
 ParticleSystem:
