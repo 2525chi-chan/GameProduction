@@ -32,10 +32,7 @@ public class BazuriCameraMove : MonoBehaviour
     {
         verticalInput = context.ReadValue<float>();
     }
-    public void OnShot()
-    {
-
-    }
+    
 
     void Update()
     {

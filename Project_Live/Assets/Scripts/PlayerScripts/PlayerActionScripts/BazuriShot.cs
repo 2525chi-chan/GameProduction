@@ -31,21 +31,26 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] float cameraTime;
     [Header("スロー時のゲーム速度(1未満じゃないとスローにならない)")]
     [SerializeField] float slowSpeed;
-
+    [Header("デフォルトのレイヤー(カメラ判定に用いるレイヤー)")]
+    [SerializeField] LayerMask layer;
     [Header("必要なコンポーネント")]
     [SerializeField] BazuriCameraMove cameraMove;
+    [SerializeField] BazuriShotAnalyzer analyzer;
 
+    private Camera analyzerCamera;
     private Coroutine bazuriCoroutine;
     private bool isBazuriMode = false;
     public bool IsBazuriMode
     {
         get { return isBazuriMode; }
+        set {isBazuriMode=value;}
     }
     private void Start()
     {
         if (bazuriCamera != null)
         {
             bazuriCamera.SetActive(false);
+            analyzerCamera=bazuriCamera.GetComponent<Camera>();
         }
 
     }
@@ -67,12 +72,25 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         mainCamera.SetActive(false);
         bazuriCamera.SetActive(true);
 
+        float elapsed = 0f;
+
         playerInput.SwitchCurrentActionMap("Bazuri");
         ResetCamera();
 
         Time.timeScale = slowSpeed;
 
-        yield return new WaitForSecondsRealtime(cameraTime);
+        while (elapsed < cameraTime)//操作時間中にショットボタンが押されればバズリショット中断
+        {
+            if (playerInput.actions["Shot"].WasPressedThisFrame())
+            {
+                analyzer.Analyzer(analyzerCamera, layer);
+                break;
+            }
+
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+       
 
         EndBazuriMode();
     }

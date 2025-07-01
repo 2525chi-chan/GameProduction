@@ -123,6 +123,59 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &141125264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 141125265}
+  - component: {fileID: 141125266}
+  m_Layer: 0
+  m_Name: EnemySpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &141125265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141125264}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 927355122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &141125266
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141125264}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 50, y: 1, z: 45}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &199806488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,16 +1705,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnParameters:
   - enemyPrefab: {fileID: 3064175969719533876, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
-    maxSpawnCount: 10
+    maxSpawnCount: 20
     enemyType: 0
   - enemyPrefab: {fileID: 1686963957830972649, guid: 7ec15a4a766bd5645ad22156012d4566, type: 3}
-    maxSpawnCount: 5
+    maxSpawnCount: 10
     enemyType: 2
   - enemyPrefab: {fileID: 4566157072714159284, guid: 0ca38b335cd5ce943841935d2bf66391, type: 3}
-    maxSpawnCount: 1
+    maxSpawnCount: 5
     enemyType: 1
-  spawnArea: {fileID: 1141219673}
-  checkInterval: 0.5
+  spawnArea: {fileID: 141125266}
+  checkInterval: 0.1
 --- !u!1 &912281677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,6 +1870,11 @@ Transform:
   - {fileID: 2119038038}
   m_Father: {fileID: 1113225796}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &927355122 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
+  m_PrefabInstance: {fileID: 1984172591}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &952118407
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,7 +2569,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -8513424388201257645, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
   m_PrefabInstance: {fileID: 1984172591}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1141219673
+--- !u!65 &1141219677
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2530,8 +2588,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 157.36714, y: 100, z: 212.41563}
-  m_Center: {x: 5.6954527, y: 0, z: 3.7721786}
+  m_Size: {x: 100, y: 100, z: 100}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1183036780
 GameObject:
   m_ObjectHideFlags: 0
@@ -4248,6 +4306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1711699308}
   - component: {fileID: 1711699309}
+  - component: {fileID: 1711699310}
   m_Layer: 0
   m_Name: BazuriShotManager
   m_TagString: Untagged
@@ -4284,8 +4343,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   rotateSpeed: 3
-  rotateSmoothingSpeed: 2
   bazuri: {fileID: 2145068195}
+--- !u!114 &1711699310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711699307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff1d267c0fd5518478da4b772074a402, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectableLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &1716161651 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7571560763133770188, guid: b1815c325bd7c244ab4202e1c2ec429c, type: 3}
@@ -4943,11 +5016,14 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 0967c62b93cb21d4f9d3ec4c1d080165, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 141125265}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -8513424388201257645, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1141219673}
+      addedObject: {fileID: 1141219677}
   m_SourcePrefab: {fileID: 100100000, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
 --- !u!1 &1992809004
 GameObject:
@@ -5544,7 +5620,11 @@ MonoBehaviour:
   bazuriCamera: {fileID: 1229364333}
   cameraTime: 5
   slowSpeed: 0.01
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
   cameraMove: {fileID: 1711699309}
+  analyzer: {fileID: 1711699310}
 --- !u!1 &1110890836914444254
 GameObject:
   m_ObjectHideFlags: 0
