@@ -9,8 +9,6 @@ using static UnityEditor.SceneView;
 public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
 {
     [SerializeField] PlayerInput playerInput;
-    [Header("プレイヤー")]
-    [SerializeField] Transform player;
     [Header("メインのカメラ")]
     [SerializeField] GameObject mainCamera;
     [Header("バズリショットの際に操作するカメラ")]
