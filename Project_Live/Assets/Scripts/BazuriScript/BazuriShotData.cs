@@ -7,7 +7,7 @@ using UnityEngine;
 public class BazuriShotData:MonoBehaviour
 {
  
-    public BazuriTag tag;
+    public new BazuriTag tag=new BazuriTag();
     public float score;
 }
 publicÅ@enum BazuriTag
