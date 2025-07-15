@@ -2,30 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ì¬ÒFŒKŒ´
+//ï¿½ì¬ï¿½ÒFï¿½Kï¿½ï¿½
 
 public class EnemyStatus : CharacterStatus
 {
-    [Header("HP‚ª0‚É‚È‚Á‚Ä‚©‚çÁ–Å‚·‚é‚Ü‚Å‚ÌŠÔ")]
+    [Header("HPï¿½ï¿½0ï¿½É‚È‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½Ü‚Å‚Ìï¿½ï¿½ï¿½")]
     [SerializeField] float destroyDuration = 1f;
     public float DestroyDuration
     {
         get { return destroyDuration; }
         set { destroyDuration = value; }
     }
-    [Header("€–S‚ÌƒGƒtƒFƒNƒg")]
+    [Header("ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½ÌƒGï¿½tï¿½Fï¿½Nï¿½g")]
     [SerializeField] GameObject deathEffect;
 
 
-    [Header("‚«”ò‚Ô—Íi‰œj")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô—Íiï¿½ï¿½ï¿½j")]
     [SerializeField] float knockbackForce_Back = 5f;
     public float KnockBackForce_Back
     {
         get { return knockbackForce_Back; }
         set { knockbackForce_Back = value; }
     }
-    [Header("‚«”ò‚Ô—Íiãj")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô—Íiï¿½ï¿½j")]
     [SerializeField] float knockbackForce_Up = 0.5f;
+
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½M
+
+    [Header("ï¿½lï¿½ï¿½ï¿½Å‚ï¿½ï¿½é‚¢ï¿½ï¿½ï¿½Ëï¿½")]
+    [SerializeField] float getGoodNum;
+
+    GoodSystem goodSystem;
+
+    //
+
     public float KnockBackForce_Up
     {
         get { return knockbackForce_Up; }
@@ -37,6 +47,12 @@ public class EnemyStatus : CharacterStatus
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½M
+
+        goodSystem = GameObject.FindWithTag("GoodSystem").GetComponent<GoodSystem>();
+
+        //
     }
 
     private void Update()
@@ -50,13 +66,17 @@ public class EnemyStatus : CharacterStatus
 
         if (deathEffect != null) Instantiate(deathEffect, transform.position, Quaternion.identity);
 
-        // ‚«”ò‚Ñˆ—i‘O•ûŒü + ã•ûŒü‚ğŒÂ•Ê‚É‰ÁZj
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñï¿½ï¿½ï¿½ï¿½iï¿½Oï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â•Ê‚É‰ï¿½ï¿½Zï¿½j
         Vector3 backwardForce = -transform.forward * knockbackForce_Back;
         Vector3 upwardForce = Vector3.up * knockbackForce_Up;
 
-        // ‡¬‚µ‚Ä“K—p
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä“Kï¿½p
         rb.AddForce(backwardForce + upwardForce, ForceMode.Impulse);
 
         Destroy(gameObject, destroyDuration);
+
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½M
+        goodSystem.AddGood(getGoodNum);
+        //
     }
 }

@@ -180,6 +180,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Enemy
+  MaxHitCount: 1
+  hitIntervalTime: 1
+  hitEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
   damageToTarget: {fileID: 8233913610039435407}
 --- !u!114 &8233913610039435407
 MonoBehaviour:

@@ -4866,6 +4866,7 @@ MonoBehaviour:
   targetTag: Enemy
   MaxHitCount: 1
   hitIntervalTime: 0.5
+  hitEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
   damageToTarget: {fileID: 1480980070649777115}
 --- !u!114 &3082032483941784094
 MonoBehaviour:
