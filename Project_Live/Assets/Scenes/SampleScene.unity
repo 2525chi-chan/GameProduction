@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -496,7 +496,7 @@ MonoBehaviour:
   targetTag: Enemy
   MaxHitCount: 1
   hitIntervalTime: 0.5
-  hitEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
+  hitEffect: {fileID: 0}
   damageToTarget: {fileID: 837679871}
 --- !u!1 &373681935
 GameObject:
@@ -651,7 +651,7 @@ MonoBehaviour:
   targetTag: Enemy
   MaxHitCount: 1
   hitIntervalTime: 0.5
-  hitEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
+  hitEffect: {fileID: 0}
   damageToTarget: {fileID: 837679871}
 --- !u!1 &501464748
 GameObject:
@@ -1991,13 +1991,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnParameters:
-  - enemyPrefab: {fileID: 3064175969719533876, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+  - enemyPrefab: {fileID: 7764904506935383429, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
     maxSpawnCount: 20
     enemyType: 0
-  - enemyPrefab: {fileID: 1686963957830972649, guid: 7ec15a4a766bd5645ad22156012d4566, type: 3}
+  - enemyPrefab: {fileID: 8576028282158982197, guid: ab8394dab7a780b4096606b704093574, type: 3}
     maxSpawnCount: 10
     enemyType: 2
-  - enemyPrefab: {fileID: 4566157072714159284, guid: 0ca38b335cd5ce943841935d2bf66391, type: 3}
+  - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
     maxSpawnCount: 5
     enemyType: 1
   spawnArea: {fileID: 141125266}
@@ -2200,7 +2200,7 @@ MonoBehaviour:
   targetTag: Enemy
   MaxHitCount: 1
   hitIntervalTime: 0.5
-  hitEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
+  hitEffect: {fileID: 0}
   damageToTarget: {fileID: 837679871}
 --- !u!1 &923284088
 GameObject:
@@ -2361,7 +2361,7 @@ MonoBehaviour:
   targetTag: Enemy
   MaxHitCount: 1
   hitIntervalTime: 0.5
-  hitEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
+  hitEffect: {fileID: 0}
   damageToTarget: {fileID: 837679871}
 --- !u!1 &963194225
 GameObject:
@@ -2520,7 +2520,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1981465881}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &972647955
 MonoBehaviour:
@@ -3664,7 +3664,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1981465881}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1353061385
 MonoBehaviour:
@@ -5784,10 +5784,7 @@ Transform:
   - {fileID: 7324377562995865312}
   - {fileID: 1711699308}
   - {fileID: 847291717}
-
-  - {fileID: 1981465881}
   - {fileID: 1390467026}
-
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1952928674 stripped
@@ -5841,11 +5838,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tag: 0
   score: 100
---- !u!1 &1982247282 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a37385701f4454f438505e60d15e9750, type: 3}
-  m_PrefabInstance: {fileID: 1025815186}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &1982247283 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: a37385701f4454f438505e60d15e9750, type: 3}
@@ -6957,34 +6949,23 @@ MonoBehaviour:
     commentSpawnTime: 5
     rankColor: {r: 1, g: 0, b: 0.9365468, a: 1}
     commentContent:
-    - "\u521D\u898B\u3067\u3059"
-    - "\u306A\u306B\u3084\u3063\u3066\u3093\u306E\uFF1F"
-    - "\u3084\u3070"
+    - "\u3053\u3093\u306B\u3061\u306F"
+    - "\u3053\u3093\u3070\u3093\u306F"
+    - "\u304A\u91D1\u304F\u3060\u3055\u3044"
+    - "\u30C6\u30B9\u30C8"
   - name: "\u30D0\u30BA"
     needNum: 50
     goodMagnification: 1.5
     commentSpawnTime: 3
     rankColor: {r: 0.9091859, g: 1, b: 0, a: 1}
     commentContent:
-    - "\u521D\u898B\u3067\u3059"
-    - "\u306A\u306B\u3084\u3063\u3066\u3093\u306E\uFF1F"
-    - "\u3084\u3070"
-    - "\u3044\u3044\u305E\u30FC"
-    - "\u3082\u3063\u3068\u3084\u308C\u30FC"
+    - 
   - name: "\u6FC0\u30D0\u30BA"
     needNum: 100
     goodMagnification: 2
     commentSpawnTime: 1
     rankColor: {r: 1, g: 0.060753986, b: 0, a: 1}
-    commentContent:
-    - "\u521D\u898B\u3067\u3059"
-    - "\u306A\u306B\u3084\u3063\u3066\u3093\u306E\uFF1F"
-    - "\u3084\u3070"
-    - "\u3044\u3044\u305E\u30FC"
-    - "\u3082\u3063\u3068\u3084\u308C\u30FC"
-    - 8888888888
-    - "\u8349"
-    - "Twitter\u3067\u30D0\u30BA\u3063\u3066\u305F\u306E\u898B\u3066\u6765\u307E\u3057\u305F"
+    commentContent: []
   BuzuriSlider: {fileID: 784623466}
   buzuriGage: {fileID: 845023827}
 --- !u!1660057539 &9223372036854775807
@@ -7003,3 +6984,5 @@ SceneRoots:
   - {fileID: 1984172591}
   - {fileID: 706776579}
   - {fileID: 1842560225}
+  - {fileID: 972647954}
+  - {fileID: 1353061384}
