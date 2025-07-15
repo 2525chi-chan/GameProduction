@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//作成者　寺村
+
 [System.Serializable]
 public class BuzzRank
 {
@@ -18,6 +20,11 @@ public class BuzzRank
     public float CommentSpawnTime => commentSpawnTime;    //スポーン時間参照用ゲッター
     [Header("このバズリランクの色")]
     [SerializeField] public Color rankColor;
+    [Header("このバズリランクで表示されるコメント")]
+    [SerializeField] List<string> commentContent = new List<string>();
+    public List<string> CommentContent => commentContent;
+    public int comentNum=>CommentContent.Count;
+
 }
 
 public class BuzuriRank : MonoBehaviour

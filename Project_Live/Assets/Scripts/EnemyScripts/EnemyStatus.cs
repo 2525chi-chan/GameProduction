@@ -18,12 +18,27 @@ public class EnemyStatus : CharacterStatus
     [Header("‚«”ò‚Ô—Íiãj")]
     [SerializeField] float knockbackForce_Up = 0.5f;
 
+    //›‘º‰Á•M
+
+    [Header("Šl“¾‚Å‚«‚é‚¢‚¢‚Ë”")]
+    [SerializeField] float getGoodNum;
+
+    GoodSystem goodSystem;
+
+    //
+
     bool isDead = false;
     Rigidbody rb;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        //›‘º‰Á•M
+
+        goodSystem = GameObject.FindWithTag("GoodSystem").GetComponent<GoodSystem>();
+
+        //
     }
 
     private void Update()
@@ -45,5 +60,9 @@ public class EnemyStatus : CharacterStatus
         rb.AddForce(backwardForce + upwardForce, ForceMode.Impulse);
 
         Destroy(gameObject, destroyDuration);
+
+        //›‘º‰Á•M
+        goodSystem.AddGood(getGoodNum);
+        //
     }
 }
