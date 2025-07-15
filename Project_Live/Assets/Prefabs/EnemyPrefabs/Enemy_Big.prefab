@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.64
       objectReference: {fileID: 0}
+    - target: {fileID: 598356610869345821, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 598356610869345821, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3064175969719533876, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
       propertyPath: m_Name
       value: Enemy_Big
@@ -31,6 +39,14 @@ PrefabInstance:
     - target: {fileID: 5678132285394263426, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
       propertyPath: score
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5801283340682902446, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945412360165361734, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6188201578832378370, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
       propertyPath: m_Materials.Array.data[0]

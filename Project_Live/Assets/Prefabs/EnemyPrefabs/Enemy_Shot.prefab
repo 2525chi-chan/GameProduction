@@ -16,13 +16,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Shot
       objectReference: {fileID: 0}
+    - target: {fileID: 4306139552831706767, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: attackPrefab
+      value: 
+      objectReference: {fileID: 3639142487518129109, guid: d22b8a17371922e4f97dceb680772443, type: 3}
     - target: {fileID: 4515992174774905601, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d63a1f98c22543949ae901bc94baf7a2, type: 2}
+    - target: {fileID: 5137848472750011584, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5678132285394263426, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
       propertyPath: score
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945412360165361734, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945412360165361734, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: stopRange
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945412360165361734, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: rotateSpeed
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6188201578832378370, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -82,6 +102,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318118443885309351, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
       propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249389644151004242, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249389644151004242, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7249389644151004242, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
+      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8852180878318343403, guid: 7f70ecbc35e196948bcc99c86b346e9b, type: 3}
