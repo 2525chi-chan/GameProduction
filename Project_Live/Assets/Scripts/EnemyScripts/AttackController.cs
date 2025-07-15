@@ -26,7 +26,7 @@ public class AttackController : MonoBehaviour
 
     void InstanceAttack() //UŒ‚ˆ—
     {
-        Instantiate(attackPrefab, attackPos);
+        Instantiate(attackPrefab, attackPos.position, attackPos.rotation);
 
         attackTimer = 0f;
         attackTrigger.IsAttackTrigger = false;

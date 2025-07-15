@@ -7,15 +7,8 @@ public class MoveBullet : MonoBehaviour
     [Header("’e‚Ì‘¬“x")]
     [SerializeField] float bulletSpeed;
 
-    Rigidbody rb;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
     void Update()
     {
-        rb.velocity = transform.forward * bulletSpeed * Time.deltaTime;
+        transform.localPosition += transform.forward * bulletSpeed * Time.deltaTime;
     }
 }

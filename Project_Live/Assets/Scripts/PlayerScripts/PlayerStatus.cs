@@ -28,6 +28,8 @@ public class PlayerStatus : CharacterStatus
     void Update()
     {
         if (!isDead && Hp <= 0) Die();
+
+        if (Hp <= 0) Hp = 0;
     }
 
     void Die() //Ž€–SŽž‚Ìˆ—

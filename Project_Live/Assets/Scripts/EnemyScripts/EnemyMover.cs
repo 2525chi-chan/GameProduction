@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyMover : MonoBehaviour
 {
+    enum MoveState { stop, lookOnly, move }
+
     [Header("移動するか判断するプレイヤーとの距離")]
     [SerializeField] float detectionRange = 10f;
     [Header("停止するか判断するプレイヤーとの距離")]
@@ -15,8 +17,11 @@ public class EnemyMover : MonoBehaviour
 
     private Transform lookTarget; //追いかける対象
 
+    MoveState moveState;
+
     void Start()
     {
+        moveState = MoveState.stop;
         lookTarget = GameObject.FindGameObjectWithTag("LookPoint").transform;
     }
 
@@ -24,17 +29,40 @@ public class EnemyMover : MonoBehaviour
     {
         if (lookTarget == null) return;
 
-        float distance = Vector3.Distance(transform.position, lookTarget.position);
+        float distance = Vector3.Distance(transform.position, lookTarget.position); //プレイヤーとの距離を算出する
 
-        if (distance <= detectionRange && distance >= stopRange) MoveTowardsPlayer();
+        if (distance <= detectionRange && distance >= stopRange) //一定以上距離が離れたら
+            moveState = MoveState.move;
 
+        else if (distance <= detectionRange && distance < stopRange) //一定距離以下まで近づいたら
+            moveState = MoveState.lookOnly;
+
+        else moveState = MoveState.stop; //一定以上距離が離れたら
+
+        switch(moveState)
+        {
+            case MoveState.stop: //停止状態（プレイヤーを追従する必要がない）
+                return;
+
+            case MoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態
+                LookPlayer();
+                return;
+
+            case MoveState.move: //プレイヤーの方向を向いて追従する状態
+                LookPlayer();
+                MoveTowardsPlayer();
+                return;
+
+            default:
+                return;
+        }
     }
-    void MoveTowardsPlayer()
+
+    void MoveTowardsPlayer()//プレイヤーに向かって移動する
     {
         Vector3 direction = (lookTarget.position - transform.position).normalized;
 
         transform.position += direction * moveSpeed * Time.deltaTime;
-        LookPlayer();
     }
 
     void LookPlayer()//Y軸だけ変える

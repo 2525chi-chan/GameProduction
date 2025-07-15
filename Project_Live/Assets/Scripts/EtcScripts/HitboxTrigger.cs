@@ -49,7 +49,7 @@ public class HitboxTrigger : MonoBehaviour
             if (targetTag == "Player") damageToTarget?.AddDamageToPlayer(other.gameObject); //プレイヤーへのダメージ処理
             else if (targetTag == "Enemy") damageToTarget?.AddDamageToEnemy(other.gameObject); //敵へのダメージ処理
 
-            if (hitEffect != null) Instantiate(hitEffect, other.gameObject.transform); //エフェクトが設定されてたら、命中時にエフェクトを生成する
+            if (hitEffect != null) Instantiate(hitEffect, other.bounds.center, other.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
             
             damageToTarget?.ApplyKnockback(other.gameObject); //吹き飛び処理
 
