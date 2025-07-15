@@ -15,11 +15,9 @@ public class CommentMove : MonoBehaviour
     float perFrameMoveSpeed;
 
     void Start()
-    {
-        Application.targetFrameRate = 60;
+    { 
         rectTransform = GetComponent<RectTransform>();
-        perFrameMoveSpeed = ((Screen.width + rectTransform.sizeDelta.x) / existSeconds) / 60;
-        
+        perFrameMoveSpeed = ((Screen.width + rectTransform.sizeDelta.x) / existSeconds) / Application.targetFrameRate;  
     }
 
     void Update()
