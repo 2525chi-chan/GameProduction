@@ -11,17 +11,47 @@ public class DamageToTarget : MonoBehaviour
     float upwardKnockbackForce;
 
     public float Damage { get { return damage; } set { damage = value; } }
-    public float ForwardKnockbackForce { get { return forwardKnockbackForce; } set {  forwardKnockbackForce = value; } }
-    public float UpwardKnockbackForce { get { return upwardKnockbackForce; } set { upwardKnockbackForce= value; } }
+    public float ForwardKnockbackForce { get { return forwardKnockbackForce; } set { forwardKnockbackForce = value; } }
+    public float UpwardKnockbackForce { get { return upwardKnockbackForce; } set { upwardKnockbackForce = value; } }
 
-    public void TakeDamage(GameObject enemy) //ダメージを与える
+    public void AddDamageToPlayer(GameObject player) //ダメージを与える
+    {
+        PlayerStatus playerStatus = player.GetComponent<PlayerStatus>();
+
+        // なければ子孫オブジェクトから探す
+        if (playerStatus == null)
+        {
+            playerStatus = player.GetComponentInChildren<PlayerStatus>();
+        }
+
+        if (playerStatus == null)
+        {
+            Debug.LogWarning($"PlayerStatus が {player.name} および、その子に見つかりませんでした");
+            return;
+        }
+
+        playerStatus.Hp -= damage;
+        Debug.Log(damage + "ダメージを与えた");
+    }
+
+    public void AddDamageToEnemy(GameObject enemy)
     {
         EnemyStatus enemyStatus = enemy.GetComponent<EnemyStatus>();
 
-        if (enemyStatus == null) return;
+        // なければ子孫オブジェクトから探す
+        if (enemyStatus == null)
+        {
+            enemyStatus = enemy.GetComponentInChildren<EnemyStatus>();
+        }
+
+        if (enemyStatus == null)
+        {
+            Debug.LogWarning($"EnemyStatus が {enemy.name} および、その子に見つかりませんでした");
+            return;
+        }
 
         enemyStatus.Hp -= damage;
-        //Debug.Log(damage + "ダメージを与えた");
+        Debug.Log(damage + "ダメージを与えた");
     }
 
     public void ApplyKnockback(GameObject enemy) //吹き飛ぶ力を加える

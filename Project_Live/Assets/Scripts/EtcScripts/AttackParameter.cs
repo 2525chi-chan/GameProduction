@@ -15,14 +15,14 @@ public class AttackParameter : MonoBehaviour
     [Header("必要なコンポーネント")]
     [SerializeField] DamageToTarget damageToTarget;
 
-    GameObject player;
+    GameObject target;
     PlayerStatus status;
 
     void Start()
     {
-        player = GameObject.Find(objectName);
+        target = GameObject.Find(objectName);
 
-        if (player != null) status = player.GetComponent<PlayerStatus>();
+        if (target != null) status = target.GetComponent<PlayerStatus>();
 
         if (status != null) SetParameters();
     }
@@ -36,16 +36,16 @@ public class AttackParameter : MonoBehaviour
 
     float GetDamage() //最終的なダメージ量を取得する
     {
-        return player != null ? baceDamage * status.AttackPower : baceDamage;
+        return target != null ? baceDamage * status.AttackPower : baceDamage;
     }
 
     float GetForwardForce() //最終的な上方向への吹き飛ばし力を取得する
     {
-        return player != null ? baceForwardKnockbackForce * status.AttackPower : baceForwardKnockbackForce;
+        return target != null ? baceForwardKnockbackForce * status.AttackPower : baceForwardKnockbackForce;
     }
 
     float GetUpwardForce() //最終的な前方向への吹き飛ばし力を取得する
     {
-        return player != null ? baceUpwardKnockbackForce * status.AttackPower : baceUpwardKnockbackForce;
+        return target != null ? baceUpwardKnockbackForce * status.AttackPower : baceUpwardKnockbackForce;
     }
 }

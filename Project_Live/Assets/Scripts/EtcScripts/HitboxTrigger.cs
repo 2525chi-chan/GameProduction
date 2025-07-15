@@ -12,13 +12,15 @@ public class HitboxTrigger : MonoBehaviour
     [SerializeField] int MaxHitCount = 1;
     [Header("命中判定を行う時間の間隔")]
     [SerializeField] float hitIntervalTime = 0.5f;
+    [Header("命中時に発生するエフェクト")]
+    [SerializeField] GameObject hitEffect;
 
     [Header("必要なコンポーネント")]
     [SerializeField] DamageToTarget damageToTarget;
 
     //敵ごとの最後に攻撃が当たってからの経過時間
     Dictionary<Collider, float> hitIntervalTimers = new Dictionary<Collider, float>();
-    
+
     //敵ごとの今まで攻撃が命中した回数
     Dictionary<Collider, int> hitCounts = new Dictionary<Collider, int>();
 
@@ -44,7 +46,11 @@ public class HitboxTrigger : MonoBehaviour
 
         if (hitIntervalTimers[other] >= hitIntervalTime) //ヒット可能な時間が経過していた場合
         {
-   　       damageToTarget?.TakeDamage(other.gameObject); //ダメージ処理
+            if (targetTag == "Player") damageToTarget?.AddDamageToPlayer(other.gameObject); //プレイヤーへのダメージ処理
+            else if (targetTag == "Enemy") damageToTarget?.AddDamageToEnemy(other.gameObject); //敵へのダメージ処理
+
+            if (hitEffect != null) Instantiate(hitEffect, other.gameObject.transform); //エフェクトが設定されてたら、命中時にエフェクトを生成する
+            
             damageToTarget?.ApplyKnockback(other.gameObject); //吹き飛び処理
 
             hitIntervalTimers[other] = 0f; //攻撃命中後の経過時間をリセットする
@@ -60,7 +66,7 @@ public class HitboxTrigger : MonoBehaviour
         ResetHits();
     }
 
-    public void ResetHits()
+    public void ResetHits() //命中回数のリセット
     {
         hitCounts.Clear();
         hitIntervalTimers.Clear();

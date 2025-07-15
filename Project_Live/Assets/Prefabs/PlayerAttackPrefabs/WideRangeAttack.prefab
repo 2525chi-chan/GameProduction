@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 4519553172102967373}
   - component: {fileID: 3393917515326004994}
   - component: {fileID: 3012535522191844047}
-  - component: {fileID: 511870310876325751}
   - component: {fileID: 278236563394270022}
+  - component: {fileID: 511870310876325751}
   - component: {fileID: 6511622800160731565}
   - component: {fileID: 4727338974566578474}
   - component: {fileID: 3724209822148768802}
@@ -142,19 +142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expandValue: 15
---- !u!114 &511870310876325751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5487005367828503272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72b50e7d229de66489b057bbe57c1976, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyDelay: 1
 --- !u!114 &278236563394270022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +157,21 @@ MonoBehaviour:
   targetTag: Enemy
   MaxHitCount: 1
   hitIntervalTime: 0.5
+  hitEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
   damageToTarget: {fileID: 6511622800160731565}
+--- !u!114 &511870310876325751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5487005367828503272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b50e7d229de66489b057bbe57c1976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyDelay: 1
 --- !u!114 &6511622800160731565
 MonoBehaviour:
   m_ObjectHideFlags: 0

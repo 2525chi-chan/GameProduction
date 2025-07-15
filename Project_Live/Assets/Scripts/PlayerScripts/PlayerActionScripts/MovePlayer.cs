@@ -12,6 +12,8 @@ public class MovePlayer : MonoBehaviour
     [SerializeField] float speed = 1f;
     [Header("回転スピードの倍率")]
     [SerializeField] float rotationSpeed = 1f;
+    [Header("プレイヤーの質量")]
+    [SerializeField] float mass = 1f;
 
     [Header("必要なコンポーネント")]
     [SerializeField] PlayerStatus status;
@@ -84,5 +86,12 @@ public class MovePlayer : MonoBehaviour
     public void GetMoveVector(Vector3 getVec)
     {
         move = new Vector3(getVec.x, 0, getVec.z); //入力値の取得
+    }
+
+    float AddGravity()
+    {
+        float gravity = -9.8f * mass * Time.deltaTime;
+
+        return gravity;
     }
 }
