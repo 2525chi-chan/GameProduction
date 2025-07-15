@@ -18,11 +18,8 @@ public class DamageToTarget : MonoBehaviour
     {
         PlayerStatus playerStatus = player.GetComponent<PlayerStatus>();
 
-        // なければ子孫オブジェクトから探す
-        if (playerStatus == null)
-        {
-            playerStatus = player.GetComponentInChildren<PlayerStatus>();
-        }
+        // なければ子オブジェクトから探す
+        if (playerStatus == null)  playerStatus = player.GetComponentInChildren<PlayerStatus>();
 
         if (playerStatus == null)
         {
