@@ -8,16 +8,29 @@ public class EnemyStatus : CharacterStatus
 {
     [Header("HPが0になってから消滅するまでの時間")]
     [SerializeField] float destroyDuration = 1f;
-
+    public float DestroyDuration
+    {
+        get { return destroyDuration; }
+        set { destroyDuration = value; }
+    }
     [Header("死亡時のエフェクト")]
     [SerializeField] GameObject deathEffect;
 
+
     [Header("吹き飛ぶ力（奥）")]
     [SerializeField] float knockbackForce_Back = 5f;
-
+    public float KnockBackForce_Back
+    {
+        get { return knockbackForce_Back; }
+        set { knockbackForce_Back = value; }
+    }
     [Header("吹き飛ぶ力（上）")]
     [SerializeField] float knockbackForce_Up = 0.5f;
-
+    public float KnockBackForce_Up
+    {
+        get { return knockbackForce_Up; }
+        set { knockbackForce_Up = value; }
+    }
     bool isDead = false;
     Rigidbody rb;
 

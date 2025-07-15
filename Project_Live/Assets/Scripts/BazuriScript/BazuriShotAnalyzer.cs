@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public  class BazuriShotAnalyzer :MonoBehaviour
+public  class BazuriShotAnalyzer :MonoBehaviour//バズリショットの評価を行うスクリプト
 {
     [Header("スコア減衰距離(これ以上距離が離れるとスコアが減衰する)")]
     [SerializeField] float scoredecrementDistance;
@@ -12,7 +12,7 @@ public  class BazuriShotAnalyzer :MonoBehaviour
     [SerializeField] float facingRate;
     [Header("正面閾値(どれくらいの正面を許容するか。1は真正面、0は真横)")]
     [SerializeField] float facingThreshold;
-  public  void Analyzer(Camera camera,LayerMask layer)
+  public  int Analyzer(Camera camera,LayerMask layer)
     {
         List<GameObject> gameObjects=DetectVisibleObjects(camera,layer);
         float sumScore = 0f;
@@ -27,6 +27,7 @@ public  class BazuriShotAnalyzer :MonoBehaviour
             sumScore += score;
         }  
             Debug.Log(sumScore);
+        return (int)sumScore;
     }
     public bool IsFacingCamera(Transform obj,Camera camera, float threshold)
     {
