@@ -261,6 +261,7 @@ MonoBehaviour:
   deathEffect: {fileID: 2970488489590598586, guid: 8bcb93189acc69c4494bebb4c3eb3997, type: 3}
   knockbackForce_Back: 1
   knockbackForce_Up: 1
+  getGoodNum: 5
 --- !u!114 &8852180878318343403
 MonoBehaviour:
   m_ObjectHideFlags: 0
