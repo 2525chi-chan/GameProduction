@@ -61,6 +61,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: getGoodNum
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: attackPower
       value: 1000
       objectReference: {fileID: 0}
