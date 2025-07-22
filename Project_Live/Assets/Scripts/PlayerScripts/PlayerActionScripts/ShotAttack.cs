@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ì¬ÒFŒKŒ´
+//ä½œæˆè€…ï¼šæ¡‘åŸ
 
 public class ShotAttack : MonoBehaviour
 {
-    [Header("”­Ë‚·‚é’e")]
+    [Header("å¼¾ã®ãƒ—ãƒ¬ãƒãƒ–")]
     [SerializeField] GameObject bulletPrefab;
-    [Header("”­ËˆÊ’u")]
+    [Header("ç™ºå°„ä½ç½®")]
     [SerializeField] Transform shotPos;
-    [Header("’e‚Ì‘¬“x")]
+    [Header("å¼¾ã®ã‚¹ãƒ”ãƒ¼ãƒ‰")]
     [SerializeField] float bulletSpeed;
-    [Header("”­Ë‚Ü‚Å‚ÌŠÔ")]
+    [Header("æºœã‚æ™‚é–“(ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ã¦ã‹ã‚‰å¼¾ãŒå‡ºã‚‹ã¾ã§ã®æ™‚é–“)")]
     [SerializeField] float chargeTime = 0.5f;
-    [Header("”­ËŒãA“ü—Í‚ğÄ“xó‚¯•t‚¯‚é‚Ü‚Å‚ÌŠÔ")]
+    [Header("ç™ºå°„ã—ã¦ã‹ã‚‰ã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«")]
     [SerializeField] float shotInterval = 0.5f;
-    [Header("’e‚ğ”­Ë‚µ‚Ä‚©‚ç‘¼‚Ìó‘Ô‚É‘JˆÚ‚·‚é‚Ü‚Å‚ÌŠÔ")]
+    [Header("ä»–ã®çŠ¶æ…‹ã«é·ç§»ã™ã‚‹ã¾ã§ã®æ™‚é–“")]
     [SerializeField] float changeStateInterval = 0.5f;
-    [Header("ˆÚ“®’†A’e‚ğ”­Ë‚Å‚«‚é‚©")]
+    [Header("ç§»å‹•ä¸­ã«å¼¾ã‚’ç™ºå°„ã§ãã‚‹ã‹ã©ã†ã‹")]
     [SerializeField] bool canMovingShot = false;    
 
     float timeSinceLastShot = 0f;
@@ -52,17 +52,17 @@ public class ShotAttack : MonoBehaviour
 
         if (currentChargeTime >= chargeTime)
         {
-            ShotBullet(); //ˆê’èŠÔŒo‰ß‚µ‚½‚ç”­Ë
+            ShotBullet(); //ä¸€å®šæ™‚é–“çµŒéã—ãŸã‚‰å¼¾ã‚’ç™ºå°„
             isCharging = false;
         }
     }
 
-    void ShotBullet() //’e‚Ì¶¬E‰Á‘¬ˆ—
+    void ShotBullet() //å¼¾ã®ç”Ÿæˆãƒ»åŠ é€Ÿå‡¦ç†
     {
         GameObject bullet = Instantiate(bulletPrefab, shotPos.transform.position, shotPos.transform.rotation);
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.velocity = shotPos.forward * bulletSpeed;
+        rb.linearVelocity = shotPos.forward * bulletSpeed;
 
         timeSinceLastShot = 0f;
     }
