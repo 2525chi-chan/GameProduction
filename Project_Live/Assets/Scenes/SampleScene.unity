@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -97,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -448,6 +444,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -603,6 +602,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -753,15 +755,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1205,15 +1209,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1264,9 +1270,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 1
-  m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -1316,8 +1321,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!4 &705507995
 Transform:
   m_ObjectHideFlags: 0
@@ -2152,6 +2161,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2313,6 +2325,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2689,15 +2704,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -3533,6 +3550,63 @@ Transform:
   - {fileID: 952118408}
   m_Father: {fileID: 1113225796}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1341146209
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
+      propertyPath: m_Name
+      value: hanger prototype3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: db11622b7c9321f49a96f3a93d5810ec, type: 3}
 --- !u!1 &1351349862
 GameObject:
   m_ObjectHideFlags: 0
@@ -3923,6 +3997,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4212,15 +4289,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -4388,15 +4467,15 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 96599398-34c6-4721-941a-3bf4bd4bef87
-    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 2588f777-4af3-4def-85ac-5b3a0e497eef
-    m_ActionName: Player/Look[/Mouse/delta]
+    m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 7bf1545d-6cf6-405a-aa20-9ecca0d9f4c2
-    m_ActionName: Player/Fire[/Mouse/leftButton]
+    m_ActionName: 'Player/Fire[/Mouse/leftButton]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1585006560}
@@ -4532,35 +4611,35 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: ae946012-4e5e-45e6-a286-91140ff333ce
-    m_ActionName: UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+    m_ActionName: 'UI/Navigate[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 31486584-46c7-47d1-8370-69971eaf015f
-    m_ActionName: UI/Submit[/Keyboard/enter]
+    m_ActionName: 'UI/Submit[/Keyboard/enter]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 52baa4a0-7088-431b-ba00-21107c31955c
-    m_ActionName: UI/Cancel[/Keyboard/escape]
+    m_ActionName: 'UI/Cancel[/Keyboard/escape]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 9c8bd63a-09a0-43c8-80ee-fb4d803903e3
-    m_ActionName: UI/Point[/Mouse/position]
+    m_ActionName: 'UI/Point[/Mouse/position]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 1b880515-5101-420f-b9ed-712b871b5443
-    m_ActionName: UI/Click[/Mouse/leftButton]
+    m_ActionName: 'UI/Click[/Mouse/leftButton]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 3c93dd1e-d0a8-4a5d-9b1c-1de614b02a8c
-    m_ActionName: UI/ScrollWheel[/Mouse/scroll]
+    m_ActionName: 'UI/ScrollWheel[/Mouse/scroll]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 422172c6-f50b-48ee-8994-ed52e35bd1ea
-    m_ActionName: UI/MiddleClick[/Mouse/middleButton]
+    m_ActionName: 'UI/MiddleClick[/Mouse/middleButton]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: a46f97c4-9e25-42ae-8ff8-bb63774120a3
-    m_ActionName: UI/RightClick[/Mouse/rightButton]
+    m_ActionName: 'UI/RightClick[/Mouse/rightButton]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 0e8c17e1-4f9a-4d32-b2a8-2de903aee5f4
@@ -4584,7 +4663,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 9e079628-5fa4-47ad-a154-c9e416c02455
-    m_ActionName: Bazuri/CameraMove[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+    m_ActionName: 'Bazuri/CameraMove[/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1711699309}
@@ -4600,7 +4679,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: bd3d5d8a-c314-4f4c-b643-a10dca0b6849
-    m_ActionName: Bazuri/CameraRotate[/XInputControllerWindows/rightStick,/Mouse/delta,/Pen/delta]
+    m_ActionName: 'Bazuri/CameraRotate[/XInputControllerWindows/rightStick,/Mouse/delta,/Pen/delta]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1711699309}
@@ -4616,15 +4695,15 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
     m_ActionId: 6c8183af-3665-4ccb-887c-19d370177746
-    m_ActionName: Bazuri/CameraUp[/XInputControllerWindows/leftShoulder]
+    m_ActionName: 'Bazuri/CameraUp[/XInputControllerWindows/leftShoulder]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 4d3cac64-847e-4d82-a146-8882a0a8937d
-    m_ActionName: Bazuri/CameraDown[/XInputControllerWindows/rightShoulder]
+    m_ActionName: 'Bazuri/CameraDown[/XInputControllerWindows/rightShoulder]'
   - m_PersistentCalls:
       m_Calls: []
     m_ActionId: 27dbbc45-bb9b-49ca-a8ce-00fbaaef0257
-    m_ActionName: Bazuri/Shot[/XInputControllerWindows/rightTrigger,/Mouse/leftButton,/XInputControllerWindows/buttonEast]
+    m_ActionName: 'Bazuri/Shot[/XInputControllerWindows/rightTrigger,/Mouse/leftButton,/XInputControllerWindows/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -4894,15 +4973,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -5033,15 +5114,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -5314,6 +5397,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5433,7 +5519,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1769332078}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.03632495, y: -0, z: -0, w: 0.99934006}
+  m_LocalRotation: {x: -0.03632495, y: 0, z: 0, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5897,19 +5983,19 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -6067185528594298527, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 01f946ac36292de4d9f0bce5c0c8482e, type: 2}
     - target: {fileID: -4795165560744122111, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0967c62b93cb21d4f9d3ec4c1d080165, type: 2}
     - target: {fileID: -3316209038747775882, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0967c62b93cb21d4f9d3ec4c1d080165, type: 2}
     - target: {fileID: -3035608602465568333, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0967c62b93cb21d4f9d3ec4c1d080165, type: 2}
     - target: {fileID: 919132149155446097, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
@@ -5921,23 +6007,23 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1170970068873931921, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0967c62b93cb21d4f9d3ec4c1d080165, type: 2}
     - target: {fileID: 2869344807088711131, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0967c62b93cb21d4f9d3ec4c1d080165, type: 2}
     - target: {fileID: 2929640277652407947, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0967c62b93cb21d4f9d3ec4c1d080165, type: 2}
     - target: {fileID: 5901893356585517859, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0967c62b93cb21d4f9d3ec4c1d080165, type: 2}
     - target: {fileID: 7483894711331120201, guid: 5288b7b60f9e5634698985f2e98571e0, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0967c62b93cb21d4f9d3ec4c1d080165, type: 2}
     m_RemovedComponents: []
@@ -6323,15 +6409,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -6488,7 +6576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2097959998}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.018189488, y: -0.000000017203536, z: -3.1297526e-10, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189492, y: 0, z: 0, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6687,6 +6775,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6892,7 +6983,7 @@ PrefabInstance:
       value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8898164449426694890, guid: b1815c325bd7c244ab4202e1c2ec429c, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 570748282521afd449257a1ec21baf3b, type: 2}
     m_RemovedComponents: []
@@ -6947,25 +7038,58 @@ MonoBehaviour:
     needNum: 0
     goodMagnification: 1
     commentSpawnTime: 5
-    rankColor: {r: 1, g: 0, b: 0.9365468, a: 1}
+    rankColor: {r: 1, g: 0, b: 0.9372549, a: 1}
     commentContent:
-    - "\u3053\u3093\u306B\u3061\u306F"
-    - "\u3053\u3093\u3070\u3093\u306F"
-    - "\u304A\u91D1\u304F\u3060\u3055\u3044"
-    - "\u30C6\u30B9\u30C8"
+    - "\u8349"
+    - "\u3046\u308F"
+    - "\u306F\uFF1F"
+    - "\u3078\u3047"
+    - "\u3059\u3054\u3044\u306D"
+    - "\u3053\u308C\u30B5\u30AF\u30E9\uFF1F"
+    - www
+    - w
+    - "\u30AD\u30C3\u30C4"
+    - "\u30EF\u30ED\u30BF"
   - name: "\u30D0\u30BA"
-    needNum: 50
+    needNum: 2000
+    goodMagnification: 1.3
+    commentSpawnTime: 4
+    rankColor: {r: 0.9098039, g: 1, b: 0, a: 1}
+    commentContent:
+    - "\u8349"
+    - www
+    - w
+    - "\u3044\u3051\u30FC\uFF01"
+    - "\u304A\u5F37\u3044"
+    - "\u6C17\u6301\u3061\u3047^~"
+    - "\u30EF\u30ED\u30BF"
+  - name: "\u6FC0\u30D0\u30BA"
+    needNum: 5000
     goodMagnification: 1.5
     commentSpawnTime: 3
-    rankColor: {r: 0.9091859, g: 1, b: 0, a: 1}
+    rankColor: {r: 1, g: 0.05882353, b: 0, a: 1}
     commentContent:
-    - 
-  - name: "\u6FC0\u30D0\u30BA"
-    needNum: 100
+    - "\u8349"
+    - www
+    - w
+    - "Foo\u2191"
+    - "\u30EF\u30ED\u30BF"
+    - "\u30B9\u30AF\u30E9\u30C3\u30D1\u30FC\u306E\u9854\u3067\u30C0\u30E1\u3060\u3063\u305F"
+    - "\u304B\u308F\u3044\u3044"
+    - "\u9811\u5F35\u308C\uFF01\uFF01\uFF01"
+  - name: "\u795E\u30D0\u30BA"
+    needNum: 10000
     goodMagnification: 2
     commentSpawnTime: 1
-    rankColor: {r: 1, g: 0.060753986, b: 0, a: 1}
-    commentContent: []
+    rankColor: {r: 0, g: 1, b: 1, a: 1}
+    commentContent:
+    - "\u8349"
+    - www
+    - w
+    - "\u597D\u304D\u3067\u3059"
+    - "\u30EF\u30ED\u30BF"
+    - "\u3057\u3085\u304D"
+    - "\uFF01\uFF1F\uFF01\uFF1F\uFF01\uFF1F\uFF01\uFF1F\uFF01\uFF1F"
   BuzuriSlider: {fileID: 784623466}
   buzuriGage: {fileID: 845023827}
 --- !u!1660057539 &9223372036854775807
@@ -6986,3 +7110,4 @@ SceneRoots:
   - {fileID: 1842560225}
   - {fileID: 972647954}
   - {fileID: 1353061384}
+  - {fileID: 1341146209}

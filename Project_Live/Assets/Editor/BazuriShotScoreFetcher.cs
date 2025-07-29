@@ -10,12 +10,15 @@ using Unity.Plastic.Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.Runtime.Remoting.Messaging;
 using System;
+using System.Linq;
 
 public class SpreadSheetDataFetcher : EditorWindow
 {
     public string jsonUrl = "https://script.google.com/macros/s/AKfycbyiDwvmP8zr3EQKNVwpVs-TyzdAnTV9x1sqHjHH1py73nUGH8CI0CJZAAXRyscUZgdoOw/exec";
     private bool applyAllSheets = true;
     private string targetSheetName = "";
+    private bool fetchedSheetList = false;
+    private Dictionary<string,bool>sheetSelection=new Dictionary<string, bool>();
 
     [MenuItem("Tools/Sheet Data Applier")]
     public static void ShowWindow()
@@ -34,43 +37,73 @@ public class SpreadSheetDataFetcher : EditorWindow
 
         }
 
-        if(GUILayout.Button("Fetch and Apply"))
+        if(GUILayout.Button("Load Sheet List"))
         {
-            EditorCoroutineUtility.StartCoroutineOwnerless(FetchandApply());
+            EditorCoroutineUtility.StartCoroutineOwnerless(FetchSheetListOnly());
+        }
+
+        if (GUILayout.Button("Fetch and Apply Selected"))
+        {
+            EditorCoroutineUtility.StartCoroutineOwnerless(FetchAndApplySelected());
+        }
+
+        if (fetchedSheetList)
+        {
+            EditorGUILayout.LabelField("Apply Sheets:");
+
+            foreach (var key in sheetSelection.Keys.ToList())
+            {
+                sheetSelection[key] = EditorGUILayout.ToggleLeft(key, sheetSelection[key]);
+            }   
         }
     }
-  private IEnumerator FetchandApply()
+    private IEnumerator FetchAndApplySelected()
     {
-        using UnityWebRequest www=UnityWebRequest.Get(jsonUrl);
+        using UnityWebRequest www = UnityWebRequest.Get(jsonUrl);
         yield return www.SendWebRequest();
 
         if (www.result != UnityWebRequest.Result.Success)
         {
+            Debug.LogError("データ取得失敗：" + www.error);
             yield break;
         }
+
         var json = www.downloadHandler.text;
         var allSheets = JsonConvert.DeserializeObject<Dictionary<string, List<List<object>>>>(json);
-        if (applyAllSheets)
+
+        foreach (var kv in sheetSelection)
         {
-            foreach (var sheet in allSheets)
+            if (kv.Value && allSheets.ContainsKey(kv.Key))
             {
-                ApplySheetData(sheet.Key, sheet.Value);
+                ApplySheetData(kv.Key, allSheets[kv.Key]);
             }
         }
-        else
-        {
-            if (allSheets.ContainsKey(targetSheetName))
-            {
-                ApplySheetData(targetSheetName, allSheets[targetSheetName]);
-            }
-            else
-            {
-                Debug.LogWarning("Sheet Not Found");
-            }
-        }
-        Debug.Log("適用完了");
+
+        Debug.Log("選択されたシートの適用完了");
     }
 
+    private IEnumerator FetchSheetListOnly()
+    {
+        using UnityWebRequest www = UnityWebRequest.Get(jsonUrl);
+        yield return www.SendWebRequest();
+
+        if (www.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError("Failed to fetch sheet list.");
+            yield break;
+        }
+
+        var json = www.downloadHandler.text;
+        var allSheets = JsonConvert.DeserializeObject<Dictionary<string, List<List<object>>>>(json);
+
+        sheetSelection.Clear();
+        foreach (var key in allSheets.Keys)
+        {
+            sheetSelection[key] = true; // 初期状態では全選択
+        }
+
+        fetchedSheetList = true;
+    }
 
     private void ApplySheetData(string sheetName, List<List<object>> rows)
     {

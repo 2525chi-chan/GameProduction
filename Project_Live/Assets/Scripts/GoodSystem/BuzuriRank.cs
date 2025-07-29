@@ -10,6 +10,7 @@ public class BuzzRank
 {
     [Header("バズリランク名")]
     [SerializeField] string name;
+
     [Header("このバズリランクに必要ないいね数")]
     [SerializeField] public float needNum;
     [Header("このバズリランクのいいね取得倍率")]
