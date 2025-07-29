@@ -57,8 +57,6 @@ public class CloseAttack : MonoBehaviour
         if (isAttackBuffered || currentComboIndex >= comboSteps.Count) return;
 
         isAttackBuffered = true;
-        movePlayer.MoveSpeedMultiplier = 0f; //ˆÚ“®‚ð§ŒÀ
-        //stateTimer = 0f;
         attackState = AttackState.Windup;
 
         ComboStep step = comboSteps[currentComboIndex];
@@ -77,6 +75,7 @@ public class CloseAttack : MonoBehaviour
         switch (attackState)
         {
             case AttackState.Windup: //UŒ‚‘Ò‹@
+                movePlayer.MoveSpeedMultiplier = 0f; //ˆÚ“®‚ð§ŒÀ
                 if (stateTimer >= comboSteps[currentComboIndex].windupTime)
                     BeginAttack();
                 break;
