@@ -12,7 +12,9 @@ using System.Linq;
 public class BuzzRankDataImporter : EditorWindow
 {
     public string jsonUrl = "https://script.google.com/macros/s/AKfycbyiDwvmP8zr3EQKNVwpVs-TyzdAnTV9x1sqHjHH1py73nUGH8CI0CJZAAXRyscUZgdoOw/exec";
-    public GameObject targetObject; // BuzuriRankがアタッチされたオブジェクト
+    private string targetName = "GoodSystem";
+    private GameObject targetObject; // BuzuriRankがアタッチされたオブジェクト
+    
 
     [MenuItem("Tools/BuzzRank Data Importer")]
     public static void ShowWindow()
@@ -22,6 +24,8 @@ public class BuzzRankDataImporter : EditorWindow
 
     private void OnGUI()
     {
+        targetObject=GameObject.Find(targetName);
+
         jsonUrl = EditorGUILayout.TextField("JSON URL", jsonUrl);
         targetObject = (GameObject)EditorGUILayout.ObjectField("ターゲット", targetObject, typeof(GameObject), true);
 
