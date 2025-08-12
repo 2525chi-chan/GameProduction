@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
+using UnityEngine.InputSystem.XR.Haptics;
 
 public class PlayerStatus : CharacterStatus
 {
@@ -10,15 +11,21 @@ public class PlayerStatus : CharacterStatus
     [Header("消滅させるオブジェクト")]
     [SerializeField] GameObject target;
 
-    bool isDead = false;
-    Rigidbody rb;
-
-    public bool IsDead { get { return isDead; } set { isDead = value; } }
-
     public enum PlayerState
     {
         Normal, Invincible
     }
+
+    PlayerState currentState = PlayerState.Normal;
+
+    bool isDead = false;
+
+    Rigidbody rb;
+
+    public PlayerState CurrentState { get { return currentState; } set { currentState = value; } }
+    public bool IsDead { get { return isDead; } set { isDead = value; } }
+
+    
 
     void Start()
     {

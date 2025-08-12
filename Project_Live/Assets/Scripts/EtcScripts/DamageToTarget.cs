@@ -6,15 +6,18 @@ using UnityEngine;
 
 public class DamageToTarget : MonoBehaviour
 {
+    [Header("命中時に発生するエフェクト")]
+    [SerializeField] GameObject damageEffect;
+
     float damage;
     float forwardKnockbackForce;
     float upwardKnockbackForce;
-
+    
     public float Damage { get { return damage; } set { damage = value; } }
     public float ForwardKnockbackForce { get { return forwardKnockbackForce; } set { forwardKnockbackForce = value; } }
     public float UpwardKnockbackForce { get { return upwardKnockbackForce; } set { upwardKnockbackForce = value; } }
 
-    public void AddDamageToPlayer(GameObject player) //ダメージを与える
+    public void AddDamageToPlayer(Collider player) //ダメージを与える
     {
         PlayerStatus playerStatus = player.GetComponent<PlayerStatus>();
 
@@ -26,12 +29,22 @@ public class DamageToTarget : MonoBehaviour
             Debug.LogWarning($"PlayerStatus が {player.name} および、その子に見つかりませんでした");
             return;
         }
+        //
+
+        //プレイヤーが回避中はダメージを与えないようにする
+        if (playerStatus.CurrentState == PlayerStatus.PlayerState.Invincible)
+        {
+            //Debug.Log("プレイヤーは攻撃を回避した");
+            return;
+        }
 
         playerStatus.Hp -= damage;
-        Debug.Log(damage + "ダメージを与えた");
+        //Debug.Log(damage + "ダメージを与えた");
+
+        if (damageEffect != null) Instantiate(damageEffect, player.bounds.center, player.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
     }
 
-    public void AddDamageToEnemy(GameObject enemy)
+    public void AddDamageToEnemy(Collider enemy)
     {
         EnemyStatus enemyStatus = enemy.GetComponent<EnemyStatus>();
 
@@ -49,9 +62,11 @@ public class DamageToTarget : MonoBehaviour
 
         enemyStatus.Hp -= damage;
         Debug.Log(damage + "ダメージを与えた");
+
+        if (damageEffect != null) Instantiate(damageEffect, enemy.bounds.center, enemy.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
     }
 
-    public void ApplyKnockback(GameObject enemy) //吹き飛ぶ力を加える
+    public void ApplyKnockback(Collider enemy) //吹き飛ぶ力を加える
     {
         Rigidbody rb = enemy.GetComponent<Rigidbody>();
 

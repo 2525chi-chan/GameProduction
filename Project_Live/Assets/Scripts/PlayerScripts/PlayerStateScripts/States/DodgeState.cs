@@ -20,13 +20,13 @@ public class DodgeState : IPlayerState
     public void Enter()
     {
         //Debug.Log("回避状態に移行");
-        anim.PlayDodge();
-        dodge.TryDodge();
+        anim.PlayDodge(); //回避アニメーションの再生
+        dodge.TryDodge(); //回避の開始
     }
 
     public void Update()
     {
-        dodge.DodgeProcess();
+        dodge.DodgeProcess(); //回避中の処理
     }
 
     public void Exit()
