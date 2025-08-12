@@ -66,6 +66,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -157,7 +160,6 @@ MonoBehaviour:
   targetTag: Enemy
   MaxHitCount: 1
   hitIntervalTime: 0.5
-  hitEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
   damageToTarget: {fileID: 6511622800160731565}
 --- !u!114 &511870310876325751
 MonoBehaviour:
@@ -184,6 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
 --- !u!198 &4727338974566578474
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4925,6 +4928,9 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

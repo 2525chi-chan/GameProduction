@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //作成者：桑原
+//敵の吹っ飛びの修正
+//回避時の命中判定の有無
 
 public class HitboxTrigger : MonoBehaviour
 {
@@ -12,8 +14,8 @@ public class HitboxTrigger : MonoBehaviour
     [SerializeField] int MaxHitCount = 1;
     [Header("命中判定を行う時間の間隔")]
     [SerializeField] float hitIntervalTime = 0.5f;
-    [Header("命中時に発生するエフェクト")]
-    [SerializeField] GameObject hitEffect;
+    //[Header("命中時に発生するエフェクト")]
+    //[SerializeField] GameObject hitEffect;
 
     [Header("必要なコンポーネント")]
     [SerializeField] DamageToTarget damageToTarget;
@@ -46,12 +48,12 @@ public class HitboxTrigger : MonoBehaviour
 
         if (hitIntervalTimers[other] >= hitIntervalTime) //ヒット可能な時間が経過していた場合
         {
-            if (targetTag == "Player") damageToTarget?.AddDamageToPlayer(other.gameObject); //プレイヤーへのダメージ処理
-            else if (targetTag == "Enemy") damageToTarget?.AddDamageToEnemy(other.gameObject); //敵へのダメージ処理
+            if (targetTag == "Player") damageToTarget?.AddDamageToPlayer(other); //プレイヤーへのダメージ処理
+            else if (targetTag == "Enemy") damageToTarget?.AddDamageToEnemy(other); //敵へのダメージ処理
 
-            if (hitEffect != null) Instantiate(hitEffect, other.bounds.center, other.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+            //if (hitEffect != null) Instantiate(hitEffect, other.bounds.center, other.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
             
-            damageToTarget?.ApplyKnockback(other.gameObject); //吹き飛び処理
+            damageToTarget?.ApplyKnockback(other); //吹き飛び処理
 
             hitIntervalTimers[other] = 0f; //攻撃命中後の経過時間をリセットする
             hitCounts[other]++; //現在のヒット回数を増やす
