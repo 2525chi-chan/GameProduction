@@ -56,7 +56,9 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
     {
 
         List<GameObject> viewObjects = new List<GameObject>();
-        var allObjects=GameObject.FindObjectsOfType<Transform>();
+       
+        var allObjects = Resources.FindObjectsOfTypeAll<Transform>();
+
 
         foreach (var obj in allObjects)
         {
