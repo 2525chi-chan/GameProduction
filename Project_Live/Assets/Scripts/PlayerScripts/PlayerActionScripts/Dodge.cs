@@ -14,6 +14,11 @@ public class Dodge : MonoBehaviour
     [SerializeField] float dodgeInterval = 0.5f;
     [Header("回避による移動速度の加速量")]
     [SerializeField] float dodgeSpeed = 20f;
+    [Header("回避中であることを示すエフェクト")]
+    [SerializeField] ParticleSystem dodgeEffect;
+
+    [Header("必要なコンポーネント")]
+    [SerializeField] PlayerStatus status;
 
     float dodgeTimer = 0f; //回避状態に移行してからの経過時間計測用
     float intervalTimer = 0f; //回避状態解除後の経過時間計測用
@@ -26,7 +31,8 @@ public class Dodge : MonoBehaviour
     void Start()
     {
         dodgeTimer = dodgeInterval; //初回のみ、時間を待たずに回避できるようにする
-        Debug.Log(dodgeTimer);
+
+        //Debug.Log(dodgeTimer);
     }
     void Update()
     {
@@ -40,6 +46,8 @@ public class Dodge : MonoBehaviour
         if (isDodging) return;
 
         isDodging = true; //回避中
+        status.CurrentState = PlayerStatus.PlayerState.Invincible; //プレイヤーを無敵状態にする
+        dodgeEffect.Play();
         dodgeTimer = 0f;
     }
 
@@ -56,14 +64,16 @@ public class Dodge : MonoBehaviour
                 isDodging = false;
                 dodgeTimer = 0f;
                 intervalTimer = 0f;
-                PlayerActionEvents.IdleEvent();
+                status.CurrentState = PlayerStatus.PlayerState.Normal; //プレイヤーの無敵状態を解除する
+                dodgeEffect.Stop();
+                PlayerActionEvents.IdleEvent(); //待機状態に移行する
             }
         }
     }
 
     void DodgeMove() //回避中の移動処理
     {
-        if (target == null || !isDodging) return;
+        if (target == null || !isDodging) return; //移動させる対象が設定されていないか、回避中でない場合は何も行わない
 
         target.position += target.forward  * dodgeSpeed * Time.deltaTime;
     }
