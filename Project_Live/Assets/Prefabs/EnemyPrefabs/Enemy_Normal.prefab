@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag: 1
-  score: 1333
+  score: 10
 --- !u!114 &4750362542482719141
 MonoBehaviour:
   m_ObjectHideFlags: 0

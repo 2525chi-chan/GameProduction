@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,17 @@ using static UnityEditor.SceneView;
 
 public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
 {
-    [SerializeField] PlayerInput playerInput;
     [Header("メインのカメラ")]
-    [SerializeField] GameObject mainCamera;
+    [SerializeField]CinemachineBrain cinemachineBrain;
+    [SerializeField] PlayerInput playerInput;
+    [Header("プレイヤーが操作するカメラ")]
+    [SerializeField] CinemachineFreeLook mainCamera;
     [Header("バズリショットの際に操作するカメラ")]
-    [SerializeField] GameObject bazuriCamera;
-    public GameObject BazuriCamera
+    [SerializeField] CinemachineVirtualCamera bazuriCamera;
+
+    const int highPriority = 10; //表示させる方
+   const int lowPriority = 0; //表示させない方  
+    public CinemachineVirtualCamera BazuriCamera
     {
         get
         {
@@ -47,10 +53,12 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     }
     private void Start()
     {
-        if (bazuriCamera != null)
+        if (bazuriCamera != null&&mainCamera!=null)
         {
-            bazuriCamera.SetActive(false);
-            analyzerCamera=bazuriCamera.GetComponent<Camera>();
+            bazuriCamera.Priority =lowPriority ;
+            mainCamera.Priority = highPriority;
+            analyzerCamera =bazuriCamera.GetComponent<Camera>();
+            cinemachineBrain.m_CameraActivatedEvent.AddListener(OnCameraActivated);
         }
 
     }
@@ -73,13 +81,13 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     private IEnumerator BazuriModeRoutine()//バズリショットモードに切り替え
     {
         isBazuriMode = true;
-        mainCamera.SetActive(false);
-        bazuriCamera.SetActive(true);
+        mainCamera.Priority=lowPriority;
+        bazuriCamera.Priority = highPriority;
 
         float elapsed = 0f;
 
         playerInput.SwitchCurrentActionMap("Bazuri");
-        ResetCamera();
+       // ResetCamera();
 
         Time.timeScale = slowSpeed;
 
@@ -104,13 +112,15 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         isBazuriMode = false;
         Time.timeScale = 1f;
 
-        if (mainCamera != null) mainCamera.SetActive(true);
-        if (bazuriCamera != null) bazuriCamera.SetActive(false);
-
+        if (mainCamera != null && bazuriCamera != null)
+        {
+            mainCamera.Priority = highPriority;
+            bazuriCamera.Priority = lowPriority;
+        }
         shotStock--;
         
         playerInput.SwitchCurrentActionMap("Player");
-        ResetCamera();
+       // ResetCamera();
     }
     private void ResetCamera()//カメラ位置、回転の初期化
     {
@@ -132,5 +142,9 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     public void RecoveryShotStock(int count)
     {
         shotStock+=count;
+    }
+     void OnCameraActivated(ICinemachineCamera newcam,ICinemachineCamera oldcam)
+    {
+        ResetCamera();
     }
 }
