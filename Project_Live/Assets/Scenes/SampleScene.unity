@@ -5543,7 +5543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7907,22 +7907,18 @@ MonoBehaviour:
     goodCost: 50
     actionInterval: 1
     changeStateInterval: 2
-    isInvulnerable: 1
   goodAction2:
     goodCost: 100
     actionInterval: 1
     changeStateInterval: 2
-    isInvulnerable: 1
   goodAction3:
     goodCost: 150
     actionInterval: 0.5
     changeStateInterval: 1.5
-    isInvulnerable: 1
   goodAction4:
     goodCost: 200
     actionInterval: 1.2
     changeStateInterval: 2
-    isInvulnerable: 1
   goodSystem: {fileID: 8272935803192008037}
   wideAttack: {fileID: 1289444029}
   longRangeAttack: {fileID: 797087819}
@@ -10205,6 +10201,7 @@ GameObject:
   - component: {fileID: 1711699308}
   - component: {fileID: 1711699309}
   - component: {fileID: 1711699310}
+  - component: {fileID: 1711699311}
   m_Layer: 0
   m_Name: BazuriShotManager
   m_TagString: Untagged
@@ -10258,6 +10255,21 @@ MonoBehaviour:
   scoredecrementRate: 0.25
   facingRate: 1.2
   facingThreshold: 0.3
+--- !u!114 &1711699311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1711699307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0313ab7820fbe47927f191895fc1d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashPanel: {fileID: 474760670}
+  flashSpeed: 5
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1722835343
 GameObject:
   m_ObjectHideFlags: 0
@@ -11907,6 +11919,7 @@ MonoBehaviour:
   cameraMove: {fileID: 1711699309}
   analyzer: {fileID: 1711699310}
   goodSystem: {fileID: 8272935803192008037}
+  cameraFlash: {fileID: 1711699311}
 --- !u!1 &1110890836914444254
 GameObject:
   m_ObjectHideFlags: 0

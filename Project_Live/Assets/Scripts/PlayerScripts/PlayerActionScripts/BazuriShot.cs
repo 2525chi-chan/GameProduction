@@ -43,6 +43,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] BazuriCameraMove cameraMove;
     [SerializeField] BazuriShotAnalyzer analyzer;
     [SerializeField] GoodSystem goodSystem;
+    [SerializeField]CameraFlash cameraFlash;
     private Camera analyzerCamera;
     private Coroutine bazuriCoroutine;
     private bool isBazuriMode = false;
@@ -80,6 +81,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
 
     private IEnumerator BazuriModeRoutine()//バズリショットモードに切り替え
     {
+        cameraFlash.ResetAlpha();
         isBazuriMode = true;
         mainCamera.Priority=lowPriority;
         bazuriCamera.Priority = highPriority;
@@ -95,6 +97,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         {
             if (playerInput.actions["Shot"].WasPressedThisFrame())
             {
+                cameraFlash.StartFlash();
                goodSystem.AddGood(analyzer.Analyzer(analyzerCamera, layer));
                 break;
             }
