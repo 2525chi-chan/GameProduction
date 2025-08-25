@@ -87,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: deathEffect
       value: 
-      objectReference: {fileID: 2970488489590598586, guid: 8bcb93189acc69c4494bebb4c3eb3997, type: 3}
+      objectReference: {fileID: 1376598843723980918, guid: 416ceb4e2c39a5d458d3cb632268b888, type: 3}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: knockbackForce_Up
       value: 30

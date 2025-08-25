@@ -42,6 +42,8 @@ public class DamageToTarget : MonoBehaviour
         //Debug.Log(damage + "ダメージを与えた");
 
         if (damageEffect != null) Instantiate(damageEffect, player.bounds.center, player.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+  //  Debug.Log(player.bounds.center+",aaaa,"+player.gameObject.transform.position);
+        
     }
 
     public void AddDamageToEnemy(Collider enemy)
@@ -64,6 +66,7 @@ public class DamageToTarget : MonoBehaviour
         Debug.Log(damage + "ダメージを与えた");
 
         if (damageEffect != null) Instantiate(damageEffect, enemy.bounds.center, enemy.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+    //Debug.Log(enemy.bounds.center + ",aaaa," + enemy.gameObject.transform.position);
     }
 
     public void ApplyKnockback(Collider enemy) //吹き飛ぶ力を加える
