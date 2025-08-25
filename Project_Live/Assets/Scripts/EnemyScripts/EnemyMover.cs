@@ -15,6 +15,9 @@ public class EnemyMover : MonoBehaviour
     [Header("回転速度")]
     [SerializeField] float rotateSpeed;
 
+    [Header("必要なコンポーネント")]
+    [SerializeField] EnemyStatus enemyStatus;
+
     private Transform lookTarget; //追いかける対象
 
     MoveState moveState;
@@ -27,7 +30,7 @@ public class EnemyMover : MonoBehaviour
 
     void Update()
     {
-        if (lookTarget == null) return;
+        if (enemyStatus.IsDead || lookTarget == null) return; //HPが0、または追いかける対象が見つからない場合
 
         float distance = Vector3.Distance(transform.position, lookTarget.position); //プレイヤーとの距離を算出する
 
