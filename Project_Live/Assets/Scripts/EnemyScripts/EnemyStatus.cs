@@ -26,23 +26,24 @@ public class EnemyStatus : CharacterStatus
     }
     [Header("上に吹き飛ばされる力")]
     [SerializeField] float knockbackForce_Up = 0.5f;
- public float KnockBackForce_Up
+    public float KnockBackForce_Up
     {
         get { return knockbackForce_Up; }
         set { knockbackForce_Up = value; }
     }
-
-   
-
-    
-
    
     bool isDead = false;
+    public bool IsDead { get { return isDead; } }
+
     Rigidbody rb;
+    
     [Header("いいね獲得数")]
     [SerializeField] float getGoodNum;
 
-    GoodSystem goodSystem;
+    [Header("必要なコンポーネント")]
+    [SerializeField] EnemyDeathHandler deathHandler;
+
+    //GoodSystem goodSystem;
 
     void Awake()
     {
@@ -50,14 +51,19 @@ public class EnemyStatus : CharacterStatus
 
         
 
-        goodSystem = GameObject.FindWithTag("GoodSystem").GetComponent<GoodSystem>();
+        //goodSystem = GameObject.FindWithTag("GoodSystem").GetComponent<GoodSystem>();
 
         
     }
 
     private void Update()
     {
-        if (!isDead && Hp <= 0) Die();
+        //if (!isDead && Hp <= 0) Die();
+        if (Hp <= 0 && !deathHandler.IsProcessing)
+        {
+            isDead = true;
+            deathHandler.StartDeathProcess();
+        }
     }
 
     void Die()
@@ -76,7 +82,7 @@ public class EnemyStatus : CharacterStatus
         Destroy(gameObject, destroyDuration);
 
         //いいね取得
-        goodSystem.AddGood(getGoodNum);
+        //goodSystem.AddGood(getGoodNum);
         //
     }
 }

@@ -8,10 +8,12 @@ public class AttackTrigger : MonoBehaviour
     [SerializeField] SphereCollider triggerRange;
     [Header("判定を行う対象のオブジェクト")]
     [SerializeField] string targetTag = "Player";
-    //[Header("判定を始めるプレイヤーとの距離")]
-    //[SerializeField] float triggerDistance;
+    
     [Header("攻撃を行うまでに必要な判定時間")]
     [SerializeField] float triggerDuration = 1f;
+
+    [Header("必要なコンポーネント")]
+    [SerializeField] EnemyStatus enemyStatus;
 
     float currentTimer = 0f; //経過時間の測定用
     bool isAttackTrigger = false; //攻撃するかどうか
@@ -22,7 +24,7 @@ public class AttackTrigger : MonoBehaviour
     {
         if (!other.CompareTag(targetTag)) return; //当たり判定を行うオブジェクトのタグがPlayerでなければ処理を行わない
 
-        if (isAttackTrigger == true) return;
+        if (enemyStatus.IsDead && isAttackTrigger == true) return; //敵のHPが0、または攻撃の処理を開始している場合は何もしない
 
         currentTimer += Time.deltaTime;
 
