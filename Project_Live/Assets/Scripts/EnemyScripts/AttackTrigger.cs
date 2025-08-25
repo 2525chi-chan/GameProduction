@@ -10,7 +10,7 @@ public class AttackTrigger : MonoBehaviour
     [SerializeField] string targetTag = "Player";
     
     [Header("攻撃を行うまでに必要な判定時間")]
-    [SerializeField] float triggerDuration = 1f;
+    [SerializeField] float triggerDuration = 0.8f;
 
     [Header("必要なコンポーネント")]
     [SerializeField] EnemyStatus enemyStatus;
@@ -24,7 +24,7 @@ public class AttackTrigger : MonoBehaviour
     {
         if (!other.CompareTag(targetTag)) return; //当たり判定を行うオブジェクトのタグがPlayerでなければ処理を行わない
 
-        if (enemyStatus.IsDead && isAttackTrigger == true) return; //敵のHPが0、または攻撃の処理を開始している場合は何もしない
+        if (enemyStatus.IsDead || isAttackTrigger == true) return; //敵のHPが0、または攻撃の処理を開始している場合は何もしない
 
         currentTimer += Time.deltaTime;
 

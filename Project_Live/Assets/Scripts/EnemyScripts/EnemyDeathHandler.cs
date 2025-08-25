@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class EnemyDeathHandler : MonoBehaviour
 {
-    //[Header("HPが0になってから消えるまでの時間")]
-    //[SerializeField] float destroyDuration = 1f;
-
     [Header("地面に設置してから死亡までの時間")]
-    [SerializeField] float groundStayDuration = 2f;
+    [SerializeField] float groundStayDuration = 1f;
+
+    [Header("地面に設置しているかどうかを判定する距離")]
+    [SerializeField] float groundCheckDistance = 1f;
 
     [Header("撃破時のエフェクト")]
     [SerializeField] GameObject deathEffect;
@@ -20,16 +20,16 @@ public class EnemyDeathHandler : MonoBehaviour
     [Header("いいね獲得数")]
     [SerializeField] float getGoodNum;
 
-    bool isDead = false;
-    public bool IsDead { get { return isDead; } }
+    float groundTimer = 0f;
 
+    bool isDead = false;
     bool isProcessing = false;
+
+    public bool IsDead { get { return isDead; } }
     public bool IsProcessing { get { return isProcessing; } }
 
     Rigidbody rb;
     GoodSystem goodSystem;
-
-    float groundTimer = 0f;
 
     private void Awake()
     {
@@ -41,10 +41,12 @@ public class EnemyDeathHandler : MonoBehaviour
     {
         if (isProcessing)
         {
-            Debug.Log("死亡状態に移行");
+            //Debug.Log("死亡状態に移行");
             if (IsGrounded())
             {
                 groundTimer += Time.deltaTime;
+
+                Debug.Log(groundTimer);
 
                 if (groundTimer >= groundStayDuration) Die(); //地面に設置している状態で一定時間経過後、死亡時の処理を行う
             }
@@ -78,6 +80,6 @@ public class EnemyDeathHandler : MonoBehaviour
 
     private bool IsGrounded() //地面に設置しているかどうかを判定する処理
     {
-        return Physics.Raycast(transform.position, Vector3.down, 1.1f);
+        return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
     }
 }
