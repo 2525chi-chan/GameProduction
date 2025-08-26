@@ -8,6 +8,7 @@ public class GoodAction2State : IPlayerState
 {
     PlayerAnimationController anim;
     GoodAction goodAction;
+    GameObject actionUsedEffect;
 
     float currentStateTime = 0f;
     bool isActionActivated = false;
@@ -16,12 +17,15 @@ public class GoodAction2State : IPlayerState
     {
         this.anim = anim;
         this.goodAction = goodAction;
+
+        actionUsedEffect = goodAction?.GoodAction1Parameters.GoodActionUsedEffect;
     }
 
     public void Enter()
     {
         //Debug.Log("いいねアクション2状態に移行");
         anim.PlayGoodAction2();
+        actionUsedEffect?.SetActive(true);
     }
 
     public void Update()
@@ -34,6 +38,7 @@ public class GoodAction2State : IPlayerState
         {
             goodAction.GoodAction2();
             isActionActivated = true;
+            actionUsedEffect?.SetActive(false);
         }
 
         if (currentStateTime < goodAction.GoodAction2Parameters.ChangeStateInterval) return;
@@ -45,6 +50,7 @@ public class GoodAction2State : IPlayerState
     {
         currentStateTime = 0f;
         isActionActivated = false;
+        actionUsedEffect?.SetActive(false);
         //Debug.Log("いいねアクション2状態を終了");
     }
 }

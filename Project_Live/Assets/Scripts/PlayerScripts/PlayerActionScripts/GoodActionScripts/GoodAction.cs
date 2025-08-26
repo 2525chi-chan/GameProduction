@@ -14,10 +14,13 @@ public class GoodActionParameters
     [SerializeField] float actionInterval = 1f;
     [Header("待機状態に移行するまでの時間")]
     [SerializeField] float changeStateInterval = 2f;
+    [Header("いいねアクション使用時に発生するエフェクト")]
+    [SerializeField] public GameObject goodActionUsedEffect;
 
     public int GoodCost { get { return goodCost; } }
     public float ActionInterval { get { return actionInterval;} }
     public float ChangeStateInterval { get { return changeStateInterval;} }
+    public GameObject GoodActionUsedEffect { get { return goodActionUsedEffect; } }
 }
 
 public class GoodAction : MonoBehaviour
@@ -91,7 +94,7 @@ public class GoodAction : MonoBehaviour
         if (currentGoodPoint1 < goodAction1.GoodCost) return;
 
         wideAttack.InstantiateWideRangeAttack();
-        Debug.Log("イイネアクション1発動！");
+        //Debug.Log("イイネアクション1発動！");
         currentGoodPoint1 = 0;
     }
 
@@ -100,7 +103,7 @@ public class GoodAction : MonoBehaviour
         if (currentGoodPoint2 < goodAction2.GoodCost) return;
 
         longRangeAttack.ShotBeam();
-        Debug.Log("イイネアクション2発動！");
+        //Debug.Log("イイネアクション2発動！");
         currentGoodPoint2 = 0;
     }
 
@@ -109,7 +112,7 @@ public class GoodAction : MonoBehaviour
         if (currentGoodPoint3 < goodAction3.GoodCost) return;
 
         continuosHitAttack.GenerateAttack();
-        Debug.Log("イイネアクション3発動！");
+        //Debug.Log("イイネアクション3発動！");
         currentGoodPoint3 = 0;
     }
 
@@ -118,7 +121,7 @@ public class GoodAction : MonoBehaviour
         if (currentGoodPoint4 < goodAction4.GoodCost) return;
 
         explosionAttack.TriggerExplosions();
-        Debug.Log("イイネアクション4発動！");
+        //Debug.Log("イイネアクション4発動！");
         currentGoodPoint4 = 0;
     }
 }

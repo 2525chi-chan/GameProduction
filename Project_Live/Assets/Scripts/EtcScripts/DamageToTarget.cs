@@ -9,9 +9,13 @@ public class DamageToTarget : MonoBehaviour
     [Header("命中時に発生するエフェクト")]
     [SerializeField] GameObject damageEffect;
 
+    GameObject hitEffect;
+
     float damage;
     float forwardKnockbackForce;
     float upwardKnockbackForce;
+
+    public GameObject HitEffect { get { return hitEffect; } set { hitEffect = value; } }
     
     public float Damage { get { return damage; } set { damage = value; } }
     public float ForwardKnockbackForce { get { return forwardKnockbackForce; } set { forwardKnockbackForce = value; } }
@@ -41,9 +45,8 @@ public class DamageToTarget : MonoBehaviour
         playerStatus.Hp -= damage;
         //Debug.Log(damage + "ダメージを与えた");
 
-        if (damageEffect != null) Instantiate(damageEffect, player.bounds.center, player.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
-  //  Debug.Log(player.bounds.center+",aaaa,"+player.gameObject.transform.position);
-        
+        //if (damageEffect != null) Instantiate(damageEffect, player.bounds.center, player.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+        if (hitEffect != null) Instantiate(hitEffect, player.bounds.center, player.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
     }
 
     public void AddDamageToEnemy(Collider enemy)
@@ -65,8 +68,8 @@ public class DamageToTarget : MonoBehaviour
         enemyStatus.Hp -= damage;
         Debug.Log(damage + "ダメージを与えた");
 
-        if (damageEffect != null) Instantiate(damageEffect, enemy.bounds.center, enemy.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
-    //Debug.Log(enemy.bounds.center + ",aaaa," + enemy.gameObject.transform.position);
+        //if (damageEffect != null) Instantiate(damageEffect, enemy.bounds.center, enemy.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+        if (hitEffect != null) Instantiate(hitEffect, enemy.bounds.center, enemy.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
     }
 
     public void ApplyKnockback(Collider enemy) //吹き飛ぶ力を加える

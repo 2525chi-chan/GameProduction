@@ -46,7 +46,7 @@ public class EnemyDeathHandler : MonoBehaviour
             {
                 groundTimer += Time.deltaTime;
 
-                Debug.Log(groundTimer);
+                //Debug.Log(groundTimer);
 
                 if (groundTimer >= groundStayDuration) Die(); //地面に設置している状態で一定時間経過後、死亡時の処理を行う
             }

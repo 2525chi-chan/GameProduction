@@ -9,6 +9,8 @@ class ComboStep
 {
     [Header("攻撃判定用オブジェクト")]
     [SerializeField] public GameObject hitbox;
+    [Header("命中時に発生するエフェクト")]
+    [SerializeField] public GameObject hitEffect;
     [Header("基本ダメージ")]
     [SerializeField] public float baseDamage = 10f;
     [Header("前方向への基本の吹き飛ばし力")]
@@ -102,6 +104,7 @@ public class CloseAttack : MonoBehaviour
         damageToTarget.Damage = GetCurrentDamage(); //与えるダメージの代入
         damageToTarget.ForwardKnockbackForce = GetCurrentForwardForce(); //前方向へ吹き飛ばす力の代入
         damageToTarget.UpwardKnockbackForce = GetCurrentUpwardForce(); //上方向へ吹き飛ばす力の代入
+        damageToTarget.HitEffect = comboSteps[currentComboIndex].hitEffect; //開始された攻撃の命中時エフェクトの設定
 
         if (step.hitbox != null) step.hitbox.SetActive(true); //攻撃判定の有効化
 
