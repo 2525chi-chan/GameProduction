@@ -50,21 +50,18 @@ public class HitboxTrigger : MonoBehaviour
         {
             if (targetTag == "Player") damageToTarget?.AddDamageToPlayer(other); //プレイヤーへのダメージ処理
             else if (targetTag == "Enemy") damageToTarget?.AddDamageToEnemy(other); //敵へのダメージ処理
-
-            //if (hitEffect != null) Instantiate(hitEffect, other.bounds.center, other.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
             
             damageToTarget?.ApplyKnockback(other); //吹き飛び処理
 
             hitIntervalTimers[other] = 0f; //攻撃命中後の経過時間をリセットする
             hitCounts[other]++; //現在のヒット回数を増やす
 
-            //Debug.Log("命中");
+            Debug.Log(hitCounts[other]);
         }
     }
 
     void OnDisable()
     {
-        //Debug.Log(currentHitCount + "ヒット");
         ResetHits();
     }
 

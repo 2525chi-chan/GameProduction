@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baceDamage: 5
+  hitEffect: {fileID: 1044492289889190018, guid: 993441711f651c545bcc0c39bb7e345f, type: 3}
   baceForwardKnockbackForce: 0.25
   baceUpwardKnockbackForce: 0.5
   objectName: PlayerStatus

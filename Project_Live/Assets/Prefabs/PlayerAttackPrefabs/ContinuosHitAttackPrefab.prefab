@@ -101,8 +101,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baceDamage: 10
+  hitEffect: {fileID: 1044492289889190018, guid: 993441711f651c545bcc0c39bb7e345f, type: 3}
   baceForwardKnockbackForce: 0.1
-  baceUpwardKnockbackForce: 0.4
+  baceUpwardKnockbackForce: 3
   objectName: PlayerStatus
   damageToTarget: {fileID: 2488150014433308063}
 --- !u!114 &2488150014433308063
@@ -117,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEffect: {fileID: 0}
+  damageEffect: {fileID: 1044492289889190018, guid: 993441711f651c545bcc0c39bb7e345f, type: 3}
 --- !u!1 &4769858372488797926
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,10 +131,8 @@ GameObject:
   - component: {fileID: 3288896416031329418}
   - component: {fileID: 8372186439602837317}
   - component: {fileID: 802302393949189061}
-  - component: {fileID: 719399785380147038}
   - component: {fileID: 9157700342470989762}
   - component: {fileID: 8910629225834719325}
-  - component: {fileID: 8899491701466418169}
   m_Layer: 0
   m_Name: ContinuosHitAttackPrefab
   m_TagString: Effect
@@ -4979,23 +4978,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &719399785380147038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4769858372488797926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b4942550ff06747ab6ed31589685dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baceDamage: 10
-  baceForwardKnockbackForce: 0.1
-  baceUpwardKnockbackForce: 0.4
-  objectName: PlayerStatus
-  damageToTarget: {fileID: 2488150014433308063}
 --- !u!114 &9157700342470989762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5023,18 +5005,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTag: Enemy
   MaxHitCount: 5
-  hitIntervalTime: 0.3
+  hitIntervalTime: 0.5
   damageToTarget: {fileID: 2488150014433308063}
---- !u!114 &8899491701466418169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4769858372488797926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}

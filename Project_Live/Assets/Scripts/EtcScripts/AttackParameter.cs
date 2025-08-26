@@ -6,6 +6,8 @@ public class AttackParameter : MonoBehaviour
 {
     [Header("基本ダメージ")]
     [SerializeField] float baceDamage = 5f;
+    [Header("命中時に発生させるエフェクト")]
+    [SerializeField] GameObject hitEffect;
     [Header("基本となる前方向への吹き飛ばし力")]
     [SerializeField] float baceForwardKnockbackForce = 1f;
     [Header("基本となる上方向への吹き飛ばし力")]
@@ -27,9 +29,10 @@ public class AttackParameter : MonoBehaviour
         if (status != null) SetParameters();
     }
 
-    void SetParameters() //ダメージ、吹き飛ばし力を設定する
+    void SetParameters() //ダメージ、命中時のエフェクト、吹き飛ばし力を設定する
     {
         damageToTarget.Damage = GetDamage();
+        damageToTarget.HitEffect = hitEffect;
         damageToTarget.ForwardKnockbackForce = GetForwardForce();
         damageToTarget.UpwardKnockbackForce = GetUpwardForce();
     }
