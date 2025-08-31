@@ -39,11 +39,15 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] int shotStock;
     [Header("デフォルトのレイヤー(カメラ判定に用いるレイヤー)")]
     [SerializeField] LayerMask layer;
+    [Header("ボタン押下からモード移行のインターバル")]
+    [SerializeField]float shotIntarval;
     [Header("必要なコンポーネント")]
     [SerializeField] BazuriCameraMove cameraMove;
     [SerializeField] BazuriShotAnalyzer analyzer;
     [SerializeField] GoodSystem goodSystem;
     [SerializeField]CameraFlash cameraFlash;
+    [SerializeField] Transform player;
+    [SerializeField] GameObject effect;
     private Camera analyzerCamera;
     private Coroutine bazuriCoroutine;
     private bool isBazuriMode = false;
@@ -82,14 +86,19 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     private IEnumerator BazuriModeRoutine()//バズリショットモードに切り替え
     {
         cameraFlash.ResetAlpha();
+      
         isBazuriMode = true;
+         BazuriEffect();
+yield return new WaitForSeconds(shotIntarval);
+
         mainCamera.Priority=lowPriority;
         bazuriCamera.Priority = highPriority;
 
         float elapsed = 0f;
-
         playerInput.SwitchCurrentActionMap("Bazuri");
-       // ResetCamera();
+         ResetCamera();
+
+      
 
         Time.timeScale = slowSpeed;
 
@@ -148,6 +157,15 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     }
      void OnCameraActivated(ICinemachineCamera newcam,ICinemachineCamera oldcam)
     {
+    
         ResetCamera();
+    }
+    public void BazuriEffect()
+    {
+        if (effect != null && player != null)
+        {
+            Instantiate(effect, player.position, Quaternion.identity,player);
+        }
+
     }
 }
