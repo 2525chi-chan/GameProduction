@@ -19,7 +19,9 @@ public class RunningEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        runningEffect.SetActive(animator.GetCurrentAnimatorStateInfo(0).IsName("Running"));
-        
+        if (runningEffect != null)
+        {
+            runningEffect.SetActive(animator.GetCurrentAnimatorStateInfo(0).IsName("Running"));
+        }
     }
 }
