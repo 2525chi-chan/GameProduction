@@ -9757,6 +9757,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 27dbbc45-bb9b-49ca-a8ce-00fbaaef0257
     m_ActionName: 'Bazuri/Shot[/XInputControllerWindows/rightTrigger,/Mouse/leftButton,/XInputControllerWindows/buttonEast]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1685322165}
+        m_TargetAssemblyTypeName: GameClearManager, Assembly-CSharp
+        m_MethodName: StartClearSequence
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5c010371-faf4-4f3f-9b5f-220d5cc4c3c5
+    m_ActionName: 'Player/GameClear(Debug)[/Keyboard/alt]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -10261,6 +10277,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1685322162}
   - component: {fileID: 1685322163}
+  - component: {fileID: 1685322164}
+  - component: {fileID: 1685322165}
   m_Layer: 0
   m_Name: EtcManager
   m_TagString: Untagged
@@ -10297,6 +10315,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1982247283}
   runningEffect: {fileID: 609409970}
+--- !u!114 &1685322164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685322161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9206ebdee48646449901c0d947160117, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverTime: 2
+--- !u!114 &1685322165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685322161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a215ebd4ba1b54e88bb50ad84833c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clearInterval: 2
 --- !u!1 &1705931597
 GameObject:
   m_ObjectHideFlags: 3
@@ -12120,7 +12164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d95abeed3bd01841bfd8bc62c2750bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cinemachineBrain: {fileID: 0}
+  cinemachineBrain: {fileID: 963194229}
   playerInput: {fileID: 1585006559}
   mainCamera: {fileID: 1186035187}
   bazuriCamera: {fileID: 1229364337}
@@ -12130,6 +12174,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 1
+  shotIntarval: 0
   cameraMove: {fileID: 1711699309}
   analyzer: {fileID: 1711699310}
   goodSystem: {fileID: 8272935803192008037}

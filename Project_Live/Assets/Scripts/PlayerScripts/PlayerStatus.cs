@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR.Haptics;
 
@@ -10,6 +11,7 @@ public class PlayerStatus : CharacterStatus
     [SerializeField] GameObject deathEffect;
     [Header("消滅させるオブジェクト")]
     [SerializeField] GameObject target;
+    
 
     public enum PlayerState
     {
@@ -44,7 +46,11 @@ public class PlayerStatus : CharacterStatus
         isDead = true;
 
         if (deathEffect != null) Instantiate(deathEffect, transform.position, Quaternion.identity);
-
+       
+        
         Destroy(target);
+        GameOverManager.Instance.StartGameOver();
     }
+
+   
 }

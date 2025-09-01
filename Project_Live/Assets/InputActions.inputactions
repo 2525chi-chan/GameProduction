@@ -108,7 +108,16 @@
                     "name": "BazuriShot",
                     "type": "Button",
                     "id": "5b51b97c-160e-4cf8-b3a1-66fc333904d8",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GameClear(Debug)",
+                    "type": "Button",
+                    "id": "5c010371-faf4-4f3f-9b5f-220d5cc4c3c5",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -750,6 +759,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "BazuriShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c566f2d-843f-4589-b709-b1e7e3ed28de",
+                    "path": "<Keyboard>/alt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GameClear(Debug)",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
