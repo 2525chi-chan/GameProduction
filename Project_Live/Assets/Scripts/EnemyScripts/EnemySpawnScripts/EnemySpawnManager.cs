@@ -19,6 +19,8 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] List<SpawnParameter> spawnParameters;
     [Header("¶¬”ÍˆÍ")]
     [SerializeField] BoxCollider spawnArea;
+    [Header("“G‚ğÄ¶¬‚·‚é‚©‚Ç‚¤‚©")]
+    [SerializeField] bool enableRespawn = true;
     [Header("“G‚Ì”‚Ìƒ`ƒFƒbƒNŠÔŠu")]
     [SerializeField] float checkInterval = 1.0f;
 
@@ -26,6 +28,7 @@ public class EnemySpawnManager : MonoBehaviour
     Dictionary<EnemyType, EnemyCountTracker> trackers = new();
 
     float timer = 0f;
+
     void Start()
     {
         foreach (var param in spawnParameters) //İ’è‚³‚ê‚½“G‚Ìí—Ş‚Ì”‚¾‚¯ˆ—‚ğŒJ‚è•Ô‚·
@@ -35,8 +38,11 @@ public class EnemySpawnManager : MonoBehaviour
             spawners[param.enemyType].SpawnEnemies(param.maxSpawnCount); //“G‚Ì‰Šú¶¬
         }
     }
+
     void Update()
     {
+        if (!enableRespawn) return;
+
         timer += Time.deltaTime;
 
         foreach (var param in spawnParameters)
