@@ -7690,12 +7690,12 @@ MonoBehaviour:
     changeStateInterval: 2
     goodActionUsedEffect: {fileID: 747110499}
   goodAction2:
-    goodCost: 100
+    goodCost: 0
     actionInterval: 1
     changeStateInterval: 2
     goodActionUsedEffect: {fileID: 747110499}
   goodAction3:
-    goodCost: 150
+    goodCost: 0
     actionInterval: 0.5
     changeStateInterval: 1.5
     goodActionUsedEffect: {fileID: 747110499}
