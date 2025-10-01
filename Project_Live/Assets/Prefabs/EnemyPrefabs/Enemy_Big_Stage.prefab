@@ -52,7 +52,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4, y: 0.1, z: 4}
+  m_Size: {x: 3, y: 0.1, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4227629285071904794
 MonoBehaviour:
@@ -67,12 +67,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnParameters:
-  - enemyPrefab: {fileID: 8576028282158982197, guid: ab8394dab7a780b4096606b704093574, type: 3}
+  - enemyPrefab: {fileID: 7764904506935383429, guid: 0b918fd5c8547fb46b99f5101e50e5cc, type: 3}
     maxSpawnCount: 2
-    moveType: 0
-  - enemyPrefab: {fileID: 7764904506935383429, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
-    maxSpawnCount: 3
-    moveType: 0
+    moveType: 2
   spawnArea: {fileID: 3517984116219197449}
   enableRespawn: 0
   checkInterval: 5
@@ -87,6 +84,14 @@ PrefabInstance:
     - target: {fileID: -4404924394619826991, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: score
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 446971775148853601, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: attackPrefab
+      value: 
+      objectReference: {fileID: 5255598490899312179, guid: 9a5c5888ed6234c4591014a88e5a4ef4, type: 3}
+    - target: {fileID: 1276372281413812872, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.31
       objectReference: {fileID: 0}
     - target: {fileID: 2405998444838165316, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_LocalScale.x
@@ -144,6 +149,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2434253285504405187, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: targetTag
+      value: Breakable
+      objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: hp
       value: 110
@@ -182,7 +191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7764904506935383429, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_Name
-      value: Enemy_Big
+      value: Enemy_Big 2
       objectReference: {fileID: 0}
     - target: {fileID: 8259107007558549480, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: moveType

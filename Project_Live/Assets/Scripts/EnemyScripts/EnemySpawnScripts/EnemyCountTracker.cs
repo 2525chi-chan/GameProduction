@@ -5,24 +5,21 @@ using UnityEngine;
 
 public class EnemyCountTracker
 {
-    EnemyType enemyType;
+    GameObject enemyPrefab;
     int prev_Count;
 
-    public EnemyCountTracker(EnemyType enemyType)
+    public EnemyCountTracker(GameObject enemyPrefab)
     {
-        this.enemyType = enemyType;
+        this.enemyPrefab = enemyPrefab;
         prev_Count = -1;
     }
 
     public bool HasChanged(out int currentCount) //“G‚Ì”‚ª•Ï‚í‚Á‚½‚Ç‚¤‚©”»’è‚·‚é
     {
-        currentCount = EnemyRegistry.GetCount(enemyType);
-
-        //Debug.Log(enemyType + ":" + currentCount);
+        currentCount = EnemyRegistry.GetCount(enemyPrefab);
 
         if (currentCount != prev_Count)
         {
-            //Debug.Log(enemyType + "‚Ì”‚ª•Ï‰»‚µ‚½");
             prev_Count = currentCount;
             return true;
         }

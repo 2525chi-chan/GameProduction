@@ -41,6 +41,11 @@ public class GoodAction1State : IPlayerState
             actionUsedEffect?.SetActive(false);
         }
 
+        if (isActionActivated)
+        {
+
+        }
+
         if (currentStateTime < goodAction.GoodAction1Parameters.ChangeStateInterval) return;
 
         PlayerActionEvents.IdleEvent();

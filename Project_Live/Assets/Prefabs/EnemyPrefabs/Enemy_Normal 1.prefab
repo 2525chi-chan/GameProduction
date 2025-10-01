@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerRange: {fileID: 8850819913040691998}
-  targetTag: Player
+  targetTag: Breakable
   triggerDuration: 2
   enemyStatus: {fileID: 4098828232468043532}
 --- !u!114 &446971775148853601
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8416449f1ed1ed745861fc490df3e611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPrefab: {fileID: 5255598490899312179, guid: 4b98bf51e5c42e74fb4c5683938d47dc, type: 3}
+  attackPrefab: {fileID: 5255598490899312179, guid: 9a5c5888ed6234c4591014a88e5a4ef4, type: 3}
   attackDuration: 1
   attackPos: {fileID: 1276372281413812872}
   attackTrigger: {fileID: 2434253285504405187}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 8259107007558549480}
   - component: {fileID: 2213797413019997299}
   m_Layer: 0
-  m_Name: Enemy_Normal
+  m_Name: Enemy_Normal 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

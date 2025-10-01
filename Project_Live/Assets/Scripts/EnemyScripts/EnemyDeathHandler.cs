@@ -41,6 +41,8 @@ public class EnemyDeathHandler : MonoBehaviour
     {
         if (isProcessing)
         {
+            if (groundStayDuration == 0f) Die();
+
             //Debug.Log("€–Só‘Ô‚ÉˆÚs");
             if (IsGrounded())
             {

@@ -12,8 +12,8 @@ public class AttackParameter : MonoBehaviour
     [SerializeField] float baceForwardKnockbackForce = 1f;
     [Header("基本となる上方向への吹き飛ばし力")]
     [SerializeField] float baceUpwardKnockbackForce = 1f;
-    [Header("取得するコンポーネントのオブジェクト名")]
-    [SerializeField] string objectName = "PlayerStatus";
+    //[Header("取得するコンポーネントのオブジェクト名")]
+    //[SerializeField] string objectName = "PlayerStatus";
     [Header("必要なコンポーネント")]
     [SerializeField] DamageToTarget damageToTarget;
 
@@ -22,11 +22,7 @@ public class AttackParameter : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.Find(objectName);
-
-        if (target != null) status = target.GetComponent<PlayerStatus>();
-
-        if (status != null) SetParameters();
+        SetParameters();
     }
 
     void SetParameters() //ダメージ、命中時のエフェクト、吹き飛ばし力を設定する

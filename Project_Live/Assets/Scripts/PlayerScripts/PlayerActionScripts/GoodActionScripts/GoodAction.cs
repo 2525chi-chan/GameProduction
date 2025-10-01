@@ -36,9 +36,11 @@ public class GoodAction : MonoBehaviour
 
     [Header("必要なコンポーネント")]
     [SerializeField] GoodSystem goodSystem;
+    [SerializeField] RushAttack rushAttack;
     [SerializeField] WideRangeAttack wideAttack;
     [SerializeField] LongRangeAttack longRangeAttack;
     [SerializeField] ContinuosHitAttack continuosHitAttack;
+    //[SerializeField] ShrowBomb shrowBomb;
     [SerializeField] ExplosionAttack explosionAttack;
 
     float currentGoodNum = 0;
@@ -93,7 +95,8 @@ public class GoodAction : MonoBehaviour
     {
         if (currentGoodPoint1 < goodAction1.GoodCost) return;
 
-        wideAttack.InstantiateWideRangeAttack();
+        //wideAttack.InstantiateWideRangeAttack();
+        rushAttack.SetIsActivate();
         //Debug.Log("イイネアクション1発動！");
         currentGoodPoint1 = 0;
     }

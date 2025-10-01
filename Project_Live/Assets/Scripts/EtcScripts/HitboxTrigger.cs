@@ -50,6 +50,9 @@ public class HitboxTrigger : MonoBehaviour
         {
             if (targetTag == "Player") damageToTarget?.AddDamageToPlayer(other); //プレイヤーへのダメージ処理
             else if (targetTag == "Enemy") damageToTarget?.AddDamageToEnemy(other); //敵へのダメージ処理
+            else if (targetTag == "Breakable") damageToTarget?.AddDamageToObject(other); //破壊可能オブジェクトへのダメージ処理（仮）
+
+            Debug.Log(targetTag);
             
             damageToTarget?.ApplyKnockback(other); //吹き飛び処理
 

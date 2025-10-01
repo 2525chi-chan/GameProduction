@@ -4,27 +4,27 @@ using UnityEngine;
 
 public static class EnemyRegistry
 {
-    static Dictionary<EnemyType, int> enemyCounts = new();
+    static Dictionary<GameObject, int> enemyCounts = new();
 
-    public static void Register(EnemyType type) //指定された種類の敵のカウントを増やす
+    public static void Register(GameObject prefab) //指定された種類の敵のカウントを増やす
     {
-        if (!enemyCounts.ContainsKey(type))
-            enemyCounts[type] = 0;
+        if (!enemyCounts.ContainsKey(prefab))
+            enemyCounts[prefab] = 0;
 
-        enemyCounts[type]++;
+        enemyCounts[prefab]++;
     }
 
-    public static void Unregister(EnemyType type) //指定された種類の敵のカウントを減らす
+    public static void Unregister(GameObject prefab) //指定された種類の敵のカウントを減らす
     {
-        if (!enemyCounts.ContainsKey(type)) return;
+        if (!enemyCounts.ContainsKey(prefab)) return;
 
-        enemyCounts[type]--;
+        enemyCounts[prefab]--;
 
-        if (enemyCounts[type] <= 0) enemyCounts[type] = 0;
-     }
+        if (enemyCounts[prefab] <= 0) enemyCounts[prefab] = 0;
+    }
 
-    public static int GetCount(EnemyType type) //指定された種類の敵が現在存在している数を取得する
+    public static int GetCount(GameObject prefab) //指定された種類の敵が現在存在している数を取得する
     {
-        return enemyCounts.TryGetValue(type, out var count) ? count : 0;
+        return enemyCounts.TryGetValue(prefab, out var count) ? count : 0;
     }
 }

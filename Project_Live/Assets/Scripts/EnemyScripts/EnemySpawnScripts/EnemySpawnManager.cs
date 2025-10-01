@@ -9,14 +9,15 @@ public class SpawnParameter
     public GameObject enemyPrefab;
     [Header("‚±‚Ì“G‚ÌÅ‘å“¯oŒ»”")]
     public int maxSpawnCount;
-    [Header("‚±‚Ì“G‚Ìí—Ş")]
-    public EnemyType enemyType;
+    [Header("‚±‚Ì“G‚ÌˆÚ“®ƒ^ƒCƒv")]
+    public EnemyMover.MoveType moveType;
 }
 
 public class EnemySpawnManager : MonoBehaviour
 {
     [Header("ƒXƒ|[ƒ“‚³‚¹‚éƒIƒuƒWƒFƒNƒg‚Ìİ’è")]
     [SerializeField] List<SpawnParameter> spawnParameters;
+    
     [Header("¶¬”ÍˆÍ")]
     [SerializeField] BoxCollider spawnArea;
     [Header("“G‚ğÄ¶¬‚·‚é‚©‚Ç‚¤‚©")]
@@ -24,8 +25,8 @@ public class EnemySpawnManager : MonoBehaviour
     [Header("“G‚Ì”‚Ìƒ`ƒFƒbƒNŠÔŠu")]
     [SerializeField] float checkInterval = 1.0f;
 
-    Dictionary<EnemyType, EnemySpawn> spawners = new();
-    Dictionary<EnemyType, EnemyCountTracker> trackers = new();
+    Dictionary<GameObject, EnemySpawn> spawners = new();
+    Dictionary<GameObject, EnemyCountTracker> trackers = new();
 
     float timer = 0f;
 
@@ -33,9 +34,9 @@ public class EnemySpawnManager : MonoBehaviour
     {
         foreach (var param in spawnParameters) //İ’è‚³‚ê‚½“G‚Ìí—Ş‚Ì”‚¾‚¯ˆ—‚ğŒJ‚è•Ô‚·
         {
-            spawners[param.enemyType] = new EnemySpawn(param.enemyPrefab, spawnArea);
-            trackers[param.enemyType] = new EnemyCountTracker(param.enemyType);
-            spawners[param.enemyType].SpawnEnemies(param.maxSpawnCount); //“G‚Ì‰Šú¶¬
+            spawners[param.enemyPrefab] = new EnemySpawn(param.enemyPrefab, spawnArea, param.moveType);
+            trackers[param.enemyPrefab] = new EnemyCountTracker(param.enemyPrefab);
+            spawners[param.enemyPrefab].SpawnEnemies(param.maxSpawnCount); // ‰Šú¶¬
         }
     }
 
@@ -47,7 +48,7 @@ public class EnemySpawnManager : MonoBehaviour
 
         foreach (var param in spawnParameters)
         {
-            var tracker = trackers[param.enemyType];
+            var tracker = trackers[param.enemyPrefab];
 
             if (timer >= checkInterval && tracker.HasChanged(out int currentCount)) //’²‚×‚½í—Ş‚Ì“G‚Ì”‚ª­‚È‚­‚È‚Á‚Ä‚¢‚½‚ç
             {
@@ -55,7 +56,7 @@ public class EnemySpawnManager : MonoBehaviour
 
                 int toSpawn = param.maxSpawnCount - currentCount; //‚»‚Ìí—Ş‚Ì“G‚ÌÅ‘å“¯oŒ»”‚ÆŒ»İ‚Ì”‚Æ‚Ì·•ª‚ğ‹‚ß‚é
 
-                if (toSpawn >= 0) spawners[param.enemyType].SpawnEnemies(toSpawn); //­‚È‚¢•ª‚¾‚¯“G‚ğ¶¬‚·‚é
+                if (toSpawn > 0) spawners[param.enemyPrefab].SpawnEnemies(toSpawn); //­‚È‚¢•ª‚¾‚¯“G‚ğ¶¬‚·‚é
             }
         }
     }
