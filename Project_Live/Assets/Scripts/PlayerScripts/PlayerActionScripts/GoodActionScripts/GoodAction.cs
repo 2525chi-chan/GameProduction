@@ -16,7 +16,7 @@ public class GoodActionParameters
     [SerializeField] float changeStateInterval = 2f;
     [Header("いいねアクション使用時に発生するエフェクト")]
     [SerializeField] public GameObject goodActionUsedEffect;
-
+    
     public int GoodCost { get { return goodCost; } }
     public float ActionInterval { get { return actionInterval;} }
     public float ChangeStateInterval { get { return changeStateInterval;} }
