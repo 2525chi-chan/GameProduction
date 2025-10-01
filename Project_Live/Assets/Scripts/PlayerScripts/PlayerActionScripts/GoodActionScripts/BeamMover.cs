@@ -18,6 +18,7 @@ public class BeamMover : MonoBehaviour
     float previewLength = 0f;
     Vector3 initialScale;
      VisualEffect vfx;
+    Transform endPos;
     void Start()
     {
         if (target == null) return;
@@ -55,8 +56,10 @@ public class BeamMover : MonoBehaviour
 
         vfx.SetVector3("EndPos", target.position);
         vfx.SetFloat("BeamScale", beamScale);
+        vfx.SetVector3("EndPoint", beamEnd);
+      
+        vfx.SetVector3("Up", transform.up);
+        vfx.SetVector3("Right",transform.right);
 
-
-       
     }
 }

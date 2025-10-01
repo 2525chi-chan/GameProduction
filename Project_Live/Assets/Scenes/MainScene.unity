@@ -7685,7 +7685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goodAction1:
-    goodCost: 50
+    goodCost: 0
     actionInterval: 1
     changeStateInterval: 2
     goodActionUsedEffect: {fileID: 747110499}
@@ -7700,7 +7700,7 @@ MonoBehaviour:
     changeStateInterval: 1.5
     goodActionUsedEffect: {fileID: 747110499}
   goodAction4:
-    goodCost: 200
+    goodCost: 0
     actionInterval: 1.2
     changeStateInterval: 2
     goodActionUsedEffect: {fileID: 47901976984480875, guid: 8f1cae56c441cf84e8b27d53f3c1a1fe, type: 3}
