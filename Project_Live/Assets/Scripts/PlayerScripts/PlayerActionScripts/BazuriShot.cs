@@ -89,7 +89,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
       
         isBazuriMode = true;
          BazuriEffect();
-yield return new WaitForSeconds(shotIntarval);
+//yield return new WaitForSeconds(shotIntarval);
 
         mainCamera.Priority=lowPriority;
         bazuriCamera.Priority = highPriority;

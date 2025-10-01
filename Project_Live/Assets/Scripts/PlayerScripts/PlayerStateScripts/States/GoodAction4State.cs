@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 //作成者：桑原
@@ -12,20 +13,22 @@ public class GoodAction4State : IPlayerState
 
     float currentStateTime = 0f;
     bool isActionActivated = false;
-
+    Transform origin;
     public GoodAction4State(PlayerAnimationController anim, GoodAction goodAction)
     {
         this.anim = anim;
         this.goodAction = goodAction;
-
-        actionUsedEffect = goodAction?.GoodAction1Parameters.GoodActionUsedEffect;
+        origin= goodAction.transform;
+        actionUsedEffect = goodAction?.GoodAction4Parameters.GoodActionUsedEffect;
     }
 
     public void Enter()
     {
         //Debug.Log("いいねアクション4状態に移行");
         anim.PlayGoodAction4();
-        actionUsedEffect?.SetActive(true);
+
+        GameObject effect=GameObject.Instantiate(actionUsedEffect,origin.position,Quaternion.identity);
+      
     }
 
     public void Update()
@@ -38,7 +41,7 @@ public class GoodAction4State : IPlayerState
         {
             goodAction.GoodAction4();
             isActionActivated = true;
-            actionUsedEffect?.SetActive(false);
+          //  actionUsedEffect?.SetActive(false);
         }
 
         if (currentStateTime < goodAction.GoodAction4Parameters.ChangeStateInterval) return;
@@ -50,7 +53,7 @@ public class GoodAction4State : IPlayerState
     {
         currentStateTime = 0f;
         isActionActivated = false;
-        actionUsedEffect?.SetActive(false);
+       // actionUsedEffect?.SetActive(false);
         //Debug.Log("いいねアクション4状態を終了");
     }
 }
