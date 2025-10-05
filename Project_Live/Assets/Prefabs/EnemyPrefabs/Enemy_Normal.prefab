@@ -220,8 +220,8 @@ MonoBehaviour:
   groundStayDuration: 2
   groundCheckDistance: 0.7
   deathEffect: {fileID: 7533723596493378062, guid: 0c9e22b293126624aaba4f8eba475c9c, type: 3}
-  knockbackForce_Back: 2
-  knockbackForce_Up: 30
+  knockbackForce_Back: 0
+  knockbackForce_Up: 0
   getGoodNum: 10
 --- !u!114 &-4404924394619826991
 MonoBehaviour:

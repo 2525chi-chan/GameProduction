@@ -85,16 +85,14 @@ public class EnemyMover : MonoBehaviour
         switch (moveType)
         {
             case MoveType.PlayerChase:
-                moveState = MoveState.move;
+                if (distance >= stopRange) moveState = MoveState.move;
+                else moveState = MoveState.stop;
                 break;
 
             case MoveType.BlockPlayer:
                 if (distance <= detectionRange && distance >= stopRange) moveState = MoveState.move;
-
                 else if (distance < stopRange) moveState = MoveState.lookOnly;
-
                 else moveState = MoveState.stop;
-
                 break;
 
             case MoveType.StageDestroy:

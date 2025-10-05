@@ -12,6 +12,8 @@ public class AttackParameter : MonoBehaviour
     [SerializeField] float baceForwardKnockbackForce = 1f;
     [Header("基本となる上方向への吹き飛ばし力")]
     [SerializeField] float baceUpwardKnockbackForce = 1f;
+    [Header("基本となる下方向への吹き飛ばし力")]
+    [SerializeField] float baceDownwardKnockbackForce = 0f;
     //[Header("取得するコンポーネントのオブジェクト名")]
     //[SerializeField] string objectName = "PlayerStatus";
     [Header("必要なコンポーネント")]
@@ -31,20 +33,26 @@ public class AttackParameter : MonoBehaviour
         damageToTarget.HitEffect = hitEffect;
         damageToTarget.ForwardKnockbackForce = GetForwardForce();
         damageToTarget.UpwardKnockbackForce = GetUpwardForce();
+        damageToTarget.DownwardKnockbackForce = GetDownwardForce();
     }
 
-    float GetDamage() //最終的なダメージ量を取得する
+    float GetDamage() //ダメージ量を取得する
     {
         return target != null ? baceDamage * status.AttackPower : baceDamage;
     }
 
-    float GetForwardForce() //最終的な上方向への吹き飛ばし力を取得する
+    float GetForwardForce() //上方向への吹き飛ばし力を取得する
     {
         return target != null ? baceForwardKnockbackForce * status.AttackPower : baceForwardKnockbackForce;
     }
 
-    float GetUpwardForce() //最終的な前方向への吹き飛ばし力を取得する
+    float GetUpwardForce() //前方向への吹き飛ばし力を取得する
     {
         return target != null ? baceUpwardKnockbackForce * status.AttackPower : baceUpwardKnockbackForce;
+    }
+
+    float GetDownwardForce() //下方向への吹き飛ばし力を取得する
+    {
+        return target != null ? baceDownwardKnockbackForce * status.AttackPower : baceDownwardKnockbackForce;
     }
 }

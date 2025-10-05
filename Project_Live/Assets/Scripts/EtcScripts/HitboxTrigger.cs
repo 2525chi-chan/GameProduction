@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //作成者：桑原
-//敵の吹っ飛びの修正
-//回避時の命中判定の有無
 
 public class HitboxTrigger : MonoBehaviour
 {
@@ -14,8 +12,6 @@ public class HitboxTrigger : MonoBehaviour
     [SerializeField] int MaxHitCount = 1;
     [Header("命中判定を行う時間の間隔")]
     [SerializeField] float hitIntervalTime = 0.5f;
-    //[Header("命中時に発生するエフェクト")]
-    //[SerializeField] GameObject hitEffect;
 
     [Header("必要なコンポーネント")]
     [SerializeField] DamageToTarget damageToTarget;

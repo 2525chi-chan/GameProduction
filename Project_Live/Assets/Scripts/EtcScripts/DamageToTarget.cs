@@ -6,20 +6,19 @@ using UnityEngine;
 
 public class DamageToTarget : MonoBehaviour
 {
-    [Header("命中時に発生するエフェクト")]
-    [SerializeField] GameObject damageEffect;
-
     GameObject hitEffect;
 
     float damage;
     float forwardKnockbackForce;
     float upwardKnockbackForce;
+    float downwardKnockbackForce;
 
     public GameObject HitEffect { get { return hitEffect; } set { hitEffect = value; } }
     
     public float Damage { get { return damage; } set { damage = value; } }
     public float ForwardKnockbackForce { get { return forwardKnockbackForce; } set { forwardKnockbackForce = value; } }
     public float UpwardKnockbackForce { get { return upwardKnockbackForce; } set { upwardKnockbackForce = value; } }
+    public float DownwardKnockbackForce { get { return downwardKnockbackForce; } set { downwardKnockbackForce = value; } }
 
     public void AddDamageToPlayer(Collider player) //ダメージを与える
     {
@@ -96,7 +95,10 @@ public class DamageToTarget : MonoBehaviour
         {
             Vector3 forwardDirection = (target.transform.position - transform.position).normalized;
 
-            Vector3 knockback = forwardDirection * forwardKnockbackForce + Vector3.up * upwardKnockbackForce;
+            Vector3 knockback =
+                forwardDirection * forwardKnockbackForce
+                + Vector3.up * upwardKnockbackForce
+                - Vector3.up * downwardKnockbackForce;
 
             rb.AddForce(knockback, ForceMode.Impulse);
         }
