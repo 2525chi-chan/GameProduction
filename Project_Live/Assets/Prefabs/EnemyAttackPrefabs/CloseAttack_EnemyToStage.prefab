@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5492397270312447590}
   - component: {fileID: 6673356702039420970}
   m_Layer: 0
-  m_Name: CloseAttack_Enemy
+  m_Name: CloseAttack_EnemyToStage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +128,7 @@ MonoBehaviour:
   hitEffect: {fileID: 1044492289889190018, guid: 993441711f651c545bcc0c39bb7e345f, type: 3}
   baceForwardKnockbackForce: 1
   baceUpwardKnockbackForce: 1
-  baceDownwardKnockbackForce: 0
+  objectName: EnemyStatus
   damageToTarget: {fileID: 5492397270312447590}
 --- !u!114 &1647647762713440664
 MonoBehaviour:
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0c412be842d834abcc2c404e58d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Player
+  targetTag: Breakable
   MaxHitCount: 1
   hitIntervalTime: 0
   damageToTarget: {fileID: 5492397270312447590}
@@ -158,6 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
 --- !u!114 &6673356702039420970
 MonoBehaviour:
   m_ObjectHideFlags: 0

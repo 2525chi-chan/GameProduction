@@ -10,6 +10,7 @@ TagManager:
   - LookPoint
   - Camera
   - Effect
+  - Breakable
   layers:
   - Default
   - TransparentFX

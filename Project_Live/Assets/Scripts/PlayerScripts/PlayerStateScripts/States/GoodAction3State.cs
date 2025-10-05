@@ -8,15 +8,17 @@ using static UnityEngine.UI.Image;
 public class GoodAction3State : IPlayerState
 {
     PlayerAnimationController anim;
+    PlayerStatus status;
     GoodAction goodAction;
     GameObject actionUsedEffect;
 
     float currentStateTime = 0f;
     bool isActionActivated = false;
     Transform origin;
-    public GoodAction3State(PlayerAnimationController anim, GoodAction goodAction)
+    public GoodAction3State(PlayerAnimationController anim, PlayerStatus status, GoodAction goodAction)
     {
         this.anim = anim;
+        this.status = status;
         this.goodAction = goodAction;
         origin = goodAction.transform;
         actionUsedEffect = goodAction?.GoodAction3Parameters.GoodActionUsedEffect;
@@ -26,6 +28,10 @@ public class GoodAction3State : IPlayerState
     {
         //Debug.Log("いいねアクション3状態に移行");
         anim.PlayGoodAction3();
+
+        if (goodAction.GoodAction3Parameters.IsInvincible)
+            status.CurrentState = PlayerStatus.PlayerState.Invincible;
+
         GameObject effect = GameObject.Instantiate(actionUsedEffect, origin.position, Quaternion.identity);
       
     }
@@ -52,7 +58,9 @@ public class GoodAction3State : IPlayerState
     {
         currentStateTime = 0f;
         isActionActivated = false;
-      //  actionUsedEffect?.SetActive(false);
+        if (goodAction.GoodAction3Parameters.IsInvincible)
+            status.CurrentState = PlayerStatus.PlayerState.Normal;
+        //  actionUsedEffect?.SetActive(false);
         //Debug.Log("いいねアクション3状態を終了");
     }
 }

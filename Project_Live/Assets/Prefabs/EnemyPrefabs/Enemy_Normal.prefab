@@ -220,8 +220,8 @@ MonoBehaviour:
   groundStayDuration: 2
   groundCheckDistance: 0.7
   deathEffect: {fileID: 7533723596493378062, guid: 0c9e22b293126624aaba4f8eba475c9c, type: 3}
-  knockbackForce_Back: 2
-  knockbackForce_Up: 30
+  knockbackForce_Back: 0
+  knockbackForce_Up: 0
   getGoodNum: 10
 --- !u!114 &-4404924394619826991
 MonoBehaviour:
@@ -249,7 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2900cc65b231b48b1e2f9b789721e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
 --- !u!114 &8259107007558549480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +264,7 @@ MonoBehaviour:
   detectionRange: 10
   stopRange: 2
   moveSpeed: 3
-  rotateSpeed: 35
+  rotateSpeed: 100
   enemyStatus: {fileID: 4098828232468043532}
 --- !u!54 &2213797413019997299
 Rigidbody:

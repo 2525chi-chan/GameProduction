@@ -6,20 +6,19 @@ using UnityEngine;
 
 public class DamageToTarget : MonoBehaviour
 {
-    [Header("命中時に発生するエフェクト")]
-    [SerializeField] GameObject damageEffect;
-
     GameObject hitEffect;
 
     float damage;
     float forwardKnockbackForce;
     float upwardKnockbackForce;
+    float downwardKnockbackForce;
 
     public GameObject HitEffect { get { return hitEffect; } set { hitEffect = value; } }
     
     public float Damage { get { return damage; } set { damage = value; } }
     public float ForwardKnockbackForce { get { return forwardKnockbackForce; } set { forwardKnockbackForce = value; } }
     public float UpwardKnockbackForce { get { return upwardKnockbackForce; } set { upwardKnockbackForce = value; } }
+    public float DownwardKnockbackForce { get { return downwardKnockbackForce; } set { downwardKnockbackForce = value; } }
 
     public void AddDamageToPlayer(Collider player) //ダメージを与える
     {
@@ -43,9 +42,8 @@ public class DamageToTarget : MonoBehaviour
         }
 
         playerStatus.Hp -= damage;
-        //Debug.Log(damage + "ダメージを与えた");
+        Debug.Log(damage + "ダメージを与えた");
 
-        //if (damageEffect != null) Instantiate(damageEffect, player.bounds.center, player.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
         if (hitEffect != null) Instantiate(hitEffect, player.bounds.center, player.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
     }
 
@@ -54,33 +52,53 @@ public class DamageToTarget : MonoBehaviour
         EnemyStatus enemyStatus = enemy.GetComponent<EnemyStatus>();
 
         // なければ子孫オブジェクトから探す
-        if (enemyStatus == null)
-        {
-            enemyStatus = enemy.GetComponentInChildren<EnemyStatus>();
-        }
+        if (enemyStatus == null) enemyStatus = enemy.GetComponentInChildren<EnemyStatus>();
 
         if (enemyStatus == null)
         {
             Debug.LogWarning($"EnemyStatus が {enemy.name} および、その子に見つかりませんでした");
             return;
         }
+        //
 
         enemyStatus.Hp -= damage;
         Debug.Log(damage + "ダメージを与えた");
 
-        //if (damageEffect != null) Instantiate(damageEffect, enemy.bounds.center, enemy.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
         if (hitEffect != null) Instantiate(hitEffect, enemy.bounds.center, enemy.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
     }
 
-    public void ApplyKnockback(Collider enemy) //吹き飛ぶ力を加える
+    public void AddDamageToObject(Collider obj) //ダメージを与える
     {
-        Rigidbody rb = enemy.GetComponent<Rigidbody>();
+        ObjectStatus objStatus = obj.GetComponent<ObjectStatus>();
+
+        // なければ子オブジェクトから探す
+        if (objStatus == null) objStatus = obj.GetComponentInChildren<ObjectStatus>();
+
+        if (objStatus == null)
+        {
+            Debug.LogWarning($"PlayerStatus が {obj.name} および、その子に見つかりませんでした");
+            return;
+        }
+        //
+
+        objStatus.Hp -= damage;
+        Debug.Log(damage + "ダメージを与えた");
+
+        if (hitEffect != null) Instantiate(hitEffect, obj.bounds.center, obj.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+    }
+
+    public void ApplyKnockback(Collider target) //吹き飛ぶ力を加える
+    {
+        Rigidbody rb = target.GetComponent<Rigidbody>();
 
         if (rb != null && !rb.isKinematic)
         {
-            Vector3 forwardDirection = (enemy.transform.position - transform.position).normalized;
+            Vector3 forwardDirection = (target.transform.position - transform.position).normalized;
 
-            Vector3 knockback = forwardDirection * forwardKnockbackForce + Vector3.up * upwardKnockbackForce;
+            Vector3 knockback =
+                forwardDirection * forwardKnockbackForce
+                + Vector3.up * upwardKnockbackForce
+                - Vector3.up * downwardKnockbackForce;
 
             rb.AddForce(knockback, ForceMode.Impulse);
         }

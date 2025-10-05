@@ -12,6 +12,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
 
     [Header("必要なコンポーネント")]
     [SerializeField] PlayerAnimationController animController;
+    [SerializeField] PlayerStatus playerStatus;
     [SerializeField] MovePlayer movePlayer;
     [SerializeField] CloseAttack closeAttack;
     [SerializeField] ShotAttack shotAttack;
@@ -110,7 +111,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
         if ((currentState is IdleState || currentState is MoveState)
             && !(currentState is GoodAction1State))
         {
-            ChangeState(new GoodAction1State(anim, goodAction));
+            ChangeState(new GoodAction1State(anim, playerStatus, goodAction));
         }
     }
 
@@ -121,7 +122,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
         if ((currentState is IdleState || currentState is MoveState)
             && !(currentState is GoodAction2State))
         {
-            ChangeState(new GoodAction2State(anim, goodAction));
+            ChangeState(new GoodAction2State(anim, playerStatus, goodAction));
         }
     }
 
@@ -132,7 +133,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
         if ((currentState is IdleState || currentState is MoveState)
             && !(currentState is GoodAction3State))
         {
-            ChangeState(new GoodAction3State(anim, goodAction));
+            ChangeState(new GoodAction3State(anim, playerStatus, goodAction));
         }
     }
 
@@ -143,7 +144,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
         if ((currentState is IdleState || currentState is MoveState)
             && !(currentState is GoodAction4State))
         {
-            ChangeState(new GoodAction4State(anim, goodAction));
+            ChangeState(new GoodAction4State(anim, playerStatus, goodAction));
         }
     }
 }

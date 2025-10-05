@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class EnemyMover : MonoBehaviour
 {
+    public enum MoveType { PlayerChase, BlockPlayer, StageDestroy }
     enum MoveState { stop, lookOnly, move }
 
     [Header("移動するか判断するプレイヤーとの距離")]
@@ -19,30 +22,94 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] EnemyStatus enemyStatus;
 
     private Transform lookTarget; //追いかける対象
-
+    GameObject[] breakables; //破壊できる対象
+    MoveType moveType;
     MoveState moveState;
+
+    public void SetMoveType(MoveType moveType)
+    {
+        this.moveType = moveType;
+        InitTarget(); //移動タイプに応じてターゲットを設定する
+    }
 
     void Start()
     {
         moveState = MoveState.stop;
-        lookTarget = GameObject.FindGameObjectWithTag("LookPoint").transform;
     }
 
     void Update()
     {
-        if (enemyStatus.IsDead || lookTarget == null) return; //HPが0、または追いかける対象が見つからない場合
+        if (enemyStatus.IsDead) return; //HPが0、または追いかける対象が見つからない場合
 
-        float distance = Vector3.Distance(transform.position, lookTarget.position); //プレイヤーとの距離を算出する
+        if (moveType == MoveType.StageDestroy && lookTarget == null)
+        {
+            InitTarget();
+            Debug.Log("ターゲットの再設定");
+        }
 
-        if (distance <= detectionRange && distance >= stopRange) //一定以上距離が離れたら
-            moveState = MoveState.move;
+        if (lookTarget != null)
+        {
+            float distance = Vector3.Distance(transform.position, lookTarget.position); //プレイヤーとの距離を算出する
 
-        else if (distance <= detectionRange && distance < stopRange) //一定距離以下まで近づいたら
-            moveState = MoveState.lookOnly;
+            MoveTypeProcess(distance);
+            MoveStateProcess();
+        }
+    }
 
-        else moveState = MoveState.stop; //一定以上距離が離れたら
+    void InitTarget() //移動タイプに応じてターゲットを設定する
+    {
+        switch (moveType)
+        {
+            case MoveType.PlayerChase: //プレイヤーの位置に関わらず、プレイヤーに向かって移動する
 
-        switch(moveState)
+            case MoveType.BlockPlayer: //プレイヤーが一定距離まで近づいたときのみプレイヤーに向かって移動する
+                GameObject player = GameObject.FindGameObjectWithTag("LookPoint");
+                if (player != null) lookTarget = player.transform;
+                break;
+
+            case MoveType.StageDestroy:
+                breakables = GameObject.FindGameObjectsWithTag("Breakable"); //攻撃できるオブジェクトに設定されているタグ名を()内に記述する
+                Debug.Log(breakables.Length);
+                if (breakables.Length > 0)
+                {
+                    lookTarget = GetNearestTarget(breakables); //一番近いオブジェクトに向かって移動する
+                }
+
+                else return;
+                break;
+        }
+    }
+
+    void MoveTypeProcess(float distance) //移動タイプに沿った、移動状態の遷移を行う
+    {
+        switch (moveType)
+        {
+            case MoveType.PlayerChase:
+                if (distance >= stopRange) moveState = MoveState.move;
+                else moveState = MoveState.stop;
+                break;
+
+            case MoveType.BlockPlayer:
+                if (distance <= detectionRange && distance >= stopRange) moveState = MoveState.move;
+                else if (distance < stopRange) moveState = MoveState.lookOnly;
+                else moveState = MoveState.stop;
+                break;
+
+            case MoveType.StageDestroy:
+                if (lookTarget == null || !lookTarget.gameObject.activeInHierarchy)
+                {
+                    breakables = GameObject.FindGameObjectsWithTag("Breakable");
+                    lookTarget = (breakables.Length > 0) ? GetNearestTarget(breakables) : null;
+                }
+
+                moveState = (lookTarget != null && distance >= stopRange) ? MoveState.move : MoveState.stop;
+                break;
+        }
+    }
+
+    void MoveStateProcess() //移動状態ごとの移動処理を行う
+    {
+        switch (moveState)
         {
             case MoveState.stop: //停止状態（プレイヤーを追従する必要がない）
                 return;
@@ -79,5 +146,25 @@ public class EnemyMover : MonoBehaviour
         targetRotation.z = 0f;
 
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+    }
+
+    Transform GetNearestTarget(GameObject[] objects)
+    {
+        Transform nearest = null;
+
+        float minDist = Mathf.Infinity;
+
+        foreach (GameObject obj in objects)
+        {
+            float dist = Vector3.Distance(transform.position, obj.transform.position);
+
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = obj.transform;
+            }
+        }
+
+        return nearest;
     }
 }

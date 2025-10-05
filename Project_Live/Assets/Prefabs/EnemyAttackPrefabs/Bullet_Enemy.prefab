@@ -107,10 +107,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b4942550ff06747ab6ed31589685dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baceDamage: 1
+  baceDamage: 5
+  hitEffect: {fileID: 1044492289889190018, guid: 993441711f651c545bcc0c39bb7e345f, type: 3}
   baceForwardKnockbackForce: 1
   baceUpwardKnockbackForce: 1
-  objectName: PlayerStatus
+  baceDownwardKnockbackForce: 0
   damageToTarget: {fileID: 8534326383652295850}
 --- !u!114 &9113308982886054910
 MonoBehaviour:
@@ -166,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
 --- !u!135 &8562064809351789325
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -244,8 +244,4 @@ MonoBehaviour:
   hp: 9
   attackPower: 1000
   agility: 20
-  destroyDuration: 1
-  deathEffect: {fileID: 0}
-  knockbackForce_Back: 2
-  knockbackForce_Up: 30
-  getGoodNum: 0
+  deathHandler: {fileID: 0}

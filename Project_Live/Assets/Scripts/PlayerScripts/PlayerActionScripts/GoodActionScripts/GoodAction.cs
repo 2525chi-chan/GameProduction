@@ -8,6 +8,9 @@ using UnityEngine;
 [System.Serializable]
 public class GoodActionParameters
 {
+#pragma warning disable 0414
+    [SerializeField] string actionName = "未設定";
+#pragma warning restore 0414
     [Header("発動に必要ないいね数")]
     [SerializeField] int goodCost = 100;
     [Header("攻撃が発生するまでの時間")]
@@ -16,11 +19,14 @@ public class GoodActionParameters
     [SerializeField] float changeStateInterval = 2f;
     [Header("いいねアクション使用時に発生するエフェクト")]
     [SerializeField] public GameObject goodActionUsedEffect;
+    [Header("アクション発動中、ダメージを無効化するかどうか")]
+    [SerializeField] bool isInvincible = false;
     
     public int GoodCost { get { return goodCost; } }
     public float ActionInterval { get { return actionInterval;} }
     public float ChangeStateInterval { get { return changeStateInterval;} }
     public GameObject GoodActionUsedEffect { get { return goodActionUsedEffect; } }
+    public bool IsInvincible { get { return isInvincible; } }
 }
 
 public class GoodAction : MonoBehaviour
@@ -36,9 +42,11 @@ public class GoodAction : MonoBehaviour
 
     [Header("必要なコンポーネント")]
     [SerializeField] GoodSystem goodSystem;
+    [SerializeField] RushAttack rushAttack;
     [SerializeField] WideRangeAttack wideAttack;
     [SerializeField] LongRangeAttack longRangeAttack;
     [SerializeField] ContinuosHitAttack continuosHitAttack;
+    [SerializeField] ThrowBomb throwBomb;
     [SerializeField] ExplosionAttack explosionAttack;
 
     float currentGoodNum = 0;
@@ -93,7 +101,8 @@ public class GoodAction : MonoBehaviour
     {
         if (currentGoodPoint1 < goodAction1.GoodCost) return;
 
-        wideAttack.InstantiateWideRangeAttack();
+        rushAttack.Activate();
+        //wideAttack.InstantiateWideRangeAttack();
         //Debug.Log("イイネアクション1発動！");
         currentGoodPoint1 = 0;
     }
@@ -111,7 +120,8 @@ public class GoodAction : MonoBehaviour
     {
         if (currentGoodPoint3 < goodAction3.GoodCost) return;
 
-        continuosHitAttack.GenerateAttack();
+        throwBomb.Throw();
+        //continuosHitAttack.GenerateAttack();
         //Debug.Log("イイネアクション3発動！");
         currentGoodPoint3 = 0;
     }
