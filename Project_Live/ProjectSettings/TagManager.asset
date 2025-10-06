@@ -48,5 +48,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: FrontVFX
+    uniqueID: 2886529843
+    locked: 0
   m_RenderingLayers:
   - Default

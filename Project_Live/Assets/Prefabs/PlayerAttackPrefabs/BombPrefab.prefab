@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 1377678455019481319, guid: 803f7a73a83746f449e7c3764dba9f26, type: 3}
   explosionDelay: 2
-  effect: {fileID: 9027850949254913784, guid: 2331e24e8c8d2c84cb86e301edcfcc99, type: 3}
+  effect: {fileID: 3268733254871707116, guid: 3b69c39cd95638343bf26cb429bc8987, type: 3}
 --- !u!54 &5034195230171636694
 Rigidbody:
   m_ObjectHideFlags: 0

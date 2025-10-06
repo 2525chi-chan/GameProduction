@@ -128,9 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baceDamage: 50
   hitEffect: {fileID: 1044492289889190018, guid: 993441711f651c545bcc0c39bb7e345f, type: 3}
-  baceForwardKnockbackForce: 1
-  baceUpwardKnockbackForce: 1
-  objectName: PlayerStatus
+  baceForwardKnockbackForce: 22
+  baceUpwardKnockbackForce: 20
+  baceDownwardKnockbackForce: 0
   damageToTarget: {fileID: 1480980070649777115}
 --- !u!114 &3117325585535943531
 MonoBehaviour:
@@ -173,7 +173,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageEffect: {fileID: 1677793234245174481, guid: 52b93a8ee50a49746b5cf9abd2817bd9, type: 3}
 --- !u!2083052967 &4731264458171413533
 VisualEffect:
   m_ObjectHideFlags: 0

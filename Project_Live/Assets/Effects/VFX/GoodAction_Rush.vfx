@@ -2587,7 +2587,7 @@ MonoBehaviour:
   particlePerStripCount: 128
   needsComputeBounds: 0
   boundsMode: 0
-  m_Space: 0
+  m_Space: 1
 --- !u!114 &8926484042661615014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4329,7 +4329,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":0.03742632642388344,"outTangent":0.03742632642388344,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":2.811614990234375,"value":0.10522842407226563,"inTangent":0.03742632642388344,"outTangent":0.03742632642388344,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":0.24386021494865418,"outTangent":0.24386021494865418,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false},{"time":0.918914794921875,"value":0.22408676147460938,"inTangent":0.24386021494865418,"outTangent":0.24386021494865418,"tangentMode":0,"leftTangentMode":1,"rightTangentMode":1,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: -1
   m_Property:
     name: Size
@@ -6332,7 +6332,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1.5
+      m_SerializableObject: 2.5
     m_Space: -1
   m_Property:
     name: _Size
