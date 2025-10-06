@@ -419,9 +419,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -6929426462287308094, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4471147055834684964}
-    - targetCorrespondingSourceObject: {fileID: -6929426462287308094, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8488598224634001118}
     - targetCorrespondingSourceObject: {fileID: 2773309787870893844, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 30788584320344205}
@@ -528,27 +525,6 @@ CharacterJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!135 &8488598224634001118
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 305632327033997920}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.03
-  m_Center: {x: 0, y: -0.04, z: 0}
 --- !u!1 &825260295891280883 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8026680631913745583, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
