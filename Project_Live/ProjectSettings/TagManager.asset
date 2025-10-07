@@ -11,6 +11,7 @@ TagManager:
   - Camera
   - Effect
   - Breakable
+  - BazuriShot
   layers:
   - Default
   - TransparentFX

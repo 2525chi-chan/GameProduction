@@ -40,7 +40,7 @@ MonoBehaviour:
     x: 1574
     y: -1110
     width: 2752
-    height: 2594
+    height: 2595
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -263,7 +263,7 @@ MonoBehaviour:
   angularIntegration: 0
   ageParticles: 1
   reapParticles: 1
-  skipZeroDeltaUpdate: 0
+  skipZeroDeltaUpdate: 1
 --- !u!114 &8926484042661617113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4236,7 +4236,7 @@ MonoBehaviour:
   angularIntegration: 0
   ageParticles: 1
   reapParticles: 1
-  skipZeroDeltaUpdate: 0
+  skipZeroDeltaUpdate: 1
 --- !u!114 &8926484042661617660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5086,7 +5086,7 @@ MonoBehaviour:
   angularIntegration: 0
   ageParticles: 1
   reapParticles: 1
-  skipZeroDeltaUpdate: 0
+  skipZeroDeltaUpdate: 1
 --- !u!114 &8926484042661617688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6251,7 +6251,7 @@ MonoBehaviour:
   angularIntegration: 0
   ageParticles: 1
   reapParticles: 1
-  skipZeroDeltaUpdate: 0
+  skipZeroDeltaUpdate: 1
 --- !u!114 &8926484042661617735
 MonoBehaviour:
   m_ObjectHideFlags: 0

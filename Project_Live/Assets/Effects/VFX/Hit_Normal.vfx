@@ -674,7 +674,7 @@ MonoBehaviour:
   angularIntegration: 0
   ageParticles: 1
   reapParticles: 1
-  skipZeroDeltaUpdate: 0
+  skipZeroDeltaUpdate: 1
 --- !u!114 &114350483966675057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1576,7 +1576,7 @@ MonoBehaviour:
   angularIntegration: 0
   ageParticles: 1
   reapParticles: 1
-  skipZeroDeltaUpdate: 0
+  skipZeroDeltaUpdate: 1
 --- !u!114 &114350483966675647
 MonoBehaviour:
   m_ObjectHideFlags: 0

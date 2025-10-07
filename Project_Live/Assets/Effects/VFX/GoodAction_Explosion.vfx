@@ -36,9 +36,9 @@ MonoBehaviour:
   - title: Burst
     position:
       serializedVersion: 2
-      x: 1556
+      x: 1557
       y: 486
-      width: 1598
+      width: 1597
       height: 2337
     contents:
     - model: {fileID: 8926484042661615038}
@@ -486,7 +486,7 @@ MonoBehaviour:
   angularIntegration: 0
   ageParticles: 1
   reapParticles: 1
-  skipZeroDeltaUpdate: 0
+  skipZeroDeltaUpdate: 1
 --- !u!114 &8926484042661614775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4903,7 +4903,7 @@ MonoBehaviour:
   angularIntegration: 0
   ageParticles: 1
   reapParticles: 1
-  skipZeroDeltaUpdate: 0
+  skipZeroDeltaUpdate: 1
 --- !u!114 &8926484042661615096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6739,7 +6739,7 @@ MonoBehaviour:
   angularIntegration: 0
   ageParticles: 1
   reapParticles: 1
-  skipZeroDeltaUpdate: 0
+  skipZeroDeltaUpdate: 1
 --- !u!114 &8926484042661615186
 MonoBehaviour:
   m_ObjectHideFlags: 0

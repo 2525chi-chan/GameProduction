@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 8615130907802494211}
   - component: {fileID: 4359863584132807323}
   - component: {fileID: 493949113795250111}
+  - component: {fileID: -760869708185463378}
+  - component: {fileID: -8598198291619836624}
   m_Layer: 0
   m_Name: GoodAction_Explision_Charge
   m_TagString: Untagged
@@ -114,3 +116,32 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-760869708185463378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47901976984480875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2904633bc1ff9ff4dbd724f972f41cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 2
+  isDestroy: 1
+  BazuriShot: {fileID: 0}
+--- !u!114 &-8598198291619836624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47901976984480875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1f968a7f2380c49bc240cd8499728c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 2
+  score: 15

@@ -39,8 +39,8 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] int shotStock;
     [Header("デフォルトのレイヤー(カメラ判定に用いるレイヤー)")]
     [SerializeField] LayerMask layer;
-    [Header("ボタン押下からモード移行のインターバル")]
-    [SerializeField]float shotIntarval;
+    [Header("時間が遅くなる速度")]
+    [SerializeField]float timeScaleDownSpeed;
     [Header("必要なコンポーネント")]
     [SerializeField] BazuriCameraMove cameraMove;
     [SerializeField] BazuriShotAnalyzer analyzer;
@@ -82,6 +82,31 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         
 
     }
+    private IEnumerator SlowTimeScaleDown(float start,float target,float speed)
+    {
+        float t = 0;
+        float duration = 1.0f / speed;
+        while (t < duration)
+        {
+            if (isBazuriMode)//途中でバズリショットモードが解除されたら強制終了
+            {
+                t += Time.unscaledDeltaTime;
+                Time.timeScale = Mathf.Lerp(start, target, t / duration);
+
+                yield return null;
+
+            }
+            else
+            {
+
+                Time.timeScale = 1f;
+                yield break;
+
+            }
+           
+        } 
+        Time.timeScale = target;
+    }
 
     private IEnumerator BazuriModeRoutine()//バズリショットモードに切り替え
     {
@@ -89,7 +114,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
       
         isBazuriMode = true;
          BazuriEffect();
-//yield return new WaitForSeconds(shotIntarval);
+
 
         mainCamera.Priority=lowPriority;
         bazuriCamera.Priority = highPriority;
@@ -98,10 +123,12 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         playerInput.SwitchCurrentActionMap("Bazuri");
          ResetCamera();
 
+        StartCoroutine(SlowTimeScaleDown(Time.timeScale, 0, timeScaleDownSpeed));
+
+        
       
 
-        Time.timeScale = slowSpeed;
-
+       
         while (elapsed < cameraTime)//操作時間中にショットボタンが押されればバズリショット中断
         {
             if (playerInput.actions["Shot"].WasPressedThisFrame())
@@ -123,7 +150,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     {
         isBazuriMode = false;
         Time.timeScale = 1f;
-
+       
         if (mainCamera != null && bazuriCamera != null)
         {
             mainCamera.Priority = highPriority;
