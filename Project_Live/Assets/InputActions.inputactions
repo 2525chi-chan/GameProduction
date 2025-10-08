@@ -27,7 +27,7 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "7bf1545d-6cf6-405a-aa20-9ecca0d9f4c2",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -36,7 +36,7 @@
                     "name": "CloseRangeAttack",
                     "type": "Button",
                     "id": "d0f04c86-6884-4b30-a474-36fbd7ac9e27",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -63,7 +63,7 @@
                     "name": "FocusTarget",
                     "type": "Button",
                     "id": "235840e1-8d87-4b0c-8133-90da1586d7c3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -72,7 +72,7 @@
                     "name": "GoodAction1",
                     "type": "Button",
                     "id": "2cbdb58d-9908-47c3-b46b-54ef7716a5bf",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -81,7 +81,7 @@
                     "name": "GoodAction2",
                     "type": "Button",
                     "id": "0edd9649-9341-4455-81c1-5432c8a6e47e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -99,7 +99,7 @@
                     "name": "GoodAction4",
                     "type": "Button",
                     "id": "dc1ed0fa-f18b-436a-b733-2cfff9551e17",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -117,6 +117,15 @@
                     "name": "GameClear(Debug)",
                     "type": "Button",
                     "id": "5c010371-faf4-4f3f-9b5f-220d5cc4c3c5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GetComment",
+                    "type": "Button",
+                    "id": "24acb68e-528d-4d92-9d9b-5fa51a20ff53",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -772,6 +781,28 @@
                     "action": "GameClear(Debug)",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eab94983-e01f-4d01-b5d8-d941e695ad85",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "GetComment",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e1a7cfaf-d05f-4151-820c-2ca478341e15",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetComment",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -792,7 +823,7 @@
                     "name": "Submit",
                     "type": "Button",
                     "id": "31486584-46c7-47d1-8370-69971eaf015f",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -801,7 +832,7 @@
                     "name": "Cancel",
                     "type": "Button",
                     "id": "52baa4a0-7088-431b-ba00-21107c31955c",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -1137,11 +1168,11 @@
                 },
                 {
                     "name": "",
-                    "id": "9e92bb26-7e3b-4ec4-b06b-3c8f8e498ddc",
+                    "id": "ef8063f9-719f-4796-97d5-81548decf9c9",
                     "path": "*/{Submit}",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "groups": "",
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
