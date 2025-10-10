@@ -6976,6 +6976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRagdoll: 0
 --- !u!1 &845023825
 GameObject:
   m_ObjectHideFlags: 0
@@ -7158,6 +7159,9 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 5295425210205854736, guid: 5252ca479ee7cf64c8af11b2743bfc12, type: 3}
     maxSpawnCount: 2
     moveType: 2
+  - enemyPrefab: {fileID: 8137719913462244462, guid: 62556fa3e350d9c4db59422a58a75a34, type: 3}
+    maxSpawnCount: 2
+    moveType: 0
   spawnArea: {fileID: 141125266}
   enableRespawn: 1
   checkInterval: 0.1
@@ -11263,6 +11267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRagdoll: 0
 --- !u!114 &1936352949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11535,6 +11540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRagdoll: 0
 --- !u!114 &1944883438
 MonoBehaviour:
   m_ObjectHideFlags: 0
