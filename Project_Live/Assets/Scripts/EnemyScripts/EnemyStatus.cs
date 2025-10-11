@@ -34,15 +34,17 @@ public class EnemyStatus : CharacterStatus
             isDead = true;
             deathHandler.StartDeathProcess(); //死亡時の処理を開始する
         }
-        if (!IsRagdoll&&deathHandler.IsGrounded())
+        if (IsRagdoll&&deathHandler.IsGrounded())
         {
             ragdollCount += Time.deltaTime;
 
 
             if (ragdollCount > returnRagdollTime)
             {
-                this.GetComponent<EnemyRagdoll>().SwitchRagdoll(true);
+                this.GetComponent<EnemyRagdoll>().SwitchRagdoll(false);
                 ragdollCount = 0;
+                Debug.Log("かいじょ");
+                
             }
         }
         else

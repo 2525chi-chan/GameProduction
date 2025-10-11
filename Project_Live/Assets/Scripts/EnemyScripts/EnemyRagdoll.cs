@@ -20,26 +20,27 @@ public class EnemyRagdoll : MonoBehaviour
       animator=this.GetComponent<Animator>();
     }
 
-    public void SwitchRagdoll(bool isRagdol)//ラグドール状態の切り替え。falseでラグドール状態、trueで通常状態
+    public void SwitchRagdoll(bool isRagdol)//ラグドール状態の切り替え。trueでラグドール状態、falseで通常状態
     {
-        if(animator!=null)animator.enabled = isRagdol;
+        if(animator!=null)animator.enabled = !isRagdol;
         status.IsRagdoll = isRagdol;
 
         if (animator.enabled)
         {
-            animator.SetTrigger("Idle");
+           // animator.SetTrigger("Idle");
         }
 
         foreach (Rigidbody rb in rigidbodies)
         {
-            rb.isKinematic =isRagdol;
+            rb.isKinematic =!isRagdol;
             
         }
 
-        if (!isRagdol)
+        if (isRagdol)
         {
             moveState = mover.MoveState;//止まる前の状態を保持
             mover.MoveSetState(EnemyMoveState.stop);
+            Debug.Log("とまる");
         }
         else
         {

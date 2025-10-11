@@ -8001,7 +8001,7 @@ MonoBehaviour:
   normalColor: {r: 0, g: 0, b: 1, a: 1}
   highlightColor: {r: 1, g: 0.5677953, b: 0, a: 1}
   goodAction: {fileID: 1136610103}
-  notifier: {fileID: 0}
+  notifier: {fileID: 1136610104}
 --- !u!1 &974200022
 GameObject:
   m_ObjectHideFlags: 0
@@ -10271,6 +10271,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5c010371-faf4-4f3f-9b5f-220d5cc4c3c5
     m_ActionName: 'Player/GameClear(Debug)[/Keyboard/alt]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 24acb68e-528d-4d92-9d9b-5fa51a20ff53
+    m_ActionName: 'Player/GetComment[/Keyboard/q]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

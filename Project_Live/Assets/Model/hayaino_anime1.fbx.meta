@@ -1,6 +1,5 @@
 fileFormatVersion: 2
 guid: 667f38cb2e69d204eb73ccfcd90f9365
-
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -30,10 +29,9 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-
     clipAnimations:
     - serializedVersion: 16
-      name: Run_Asi
+      name: Take 001
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
@@ -61,7 +59,6 @@ ModelImporter:
       maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
-
     isReadable: 0
   meshes:
     lODScreenPercentages: []

@@ -54,6 +54,8 @@ public class EnemyMover : MonoBehaviour
     {
         if (enemyStatus.IsDead) return; //HPが0、または追いかける対象が見つからない場合
 
+        if(enemyStatus.IsRagdoll) return; //ラグドール状態のときは移動しない
+
         if (moveType == EnemyMoveType.StageDestroy && lookTarget == null)
         {
             InitTarget();

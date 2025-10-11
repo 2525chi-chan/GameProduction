@@ -208,7 +208,7 @@ MonoBehaviour:
   attackPower: 10
   agility: 10
   deathHandler: {fileID: 2420152649761166137}
-  returnRagdollTime: 1
+  returnRagdollTime: 5
 --- !u!114 &2420152649761166137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,7 +364,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7764904506935383429}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
   m_Controller: {fileID: 9100000, guid: e8c9d8e484a053a479d90642b03cbc0c, type: 2}
   m_CullingMode: 0
