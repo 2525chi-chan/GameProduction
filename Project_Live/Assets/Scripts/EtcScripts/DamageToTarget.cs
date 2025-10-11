@@ -107,7 +107,7 @@ public class DamageToTarget : MonoBehaviour
                 EnemyRagdoll enemyRagdoll = target.GetComponent<EnemyRagdoll>();
                 if (enemyRagdoll != null)
                 {
-                    enemyRagdoll.SwitchRagdoll(false,knockback);
+                    enemyRagdoll.SwitchRagdoll(false);
                 }
             }
             rb.AddForce(knockback, ForceMode.Impulse);

@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;  
 
+
+   public  enum EnemyMoveState { stop, lookOnly, move }
 public class EnemyMover : MonoBehaviour
 {
-    public enum MoveType { PlayerChase, BlockPlayer, StageDestroy }
-    enum MoveState { stop, lookOnly, move }
+  public enum EnemyMoveType { PlayerChase, BlockPlayer, StageDestroy }
+
 
     [Header("移動するか判断するプレイヤーとの距離")]
     [SerializeField] float detectionRange = 10f;
@@ -23,25 +25,36 @@ public class EnemyMover : MonoBehaviour
 
     private Transform lookTarget; //追いかける対象
     GameObject[] breakables; //破壊できる対象
-    MoveType moveType;
-    MoveState moveState;
+    EnemyMoveType moveType;
+    EnemyMoveState moveState;
 
-    public void SetMoveType(MoveType moveType)
+  public EnemyMoveState MoveState
+    {
+        get { return moveState; }   
+    }
+
+   
+
+    public void SetMoveType(EnemyMoveType moveType)
     {
         this.moveType = moveType;
         InitTarget(); //移動タイプに応じてターゲットを設定する
     }
-
+    public void MoveSetState(EnemyMoveState state)
+    {
+        moveState = state;
+    }
     void Start()
     {
-        moveState = MoveState.stop;
+        //moveState = MoveState.stop;
+        MoveSetState(EnemyMoveState.stop);
     }
 
     void Update()
     {
         if (enemyStatus.IsDead) return; //HPが0、または追いかける対象が見つからない場合
 
-        if (moveType == MoveType.StageDestroy && lookTarget == null)
+        if (moveType == EnemyMoveType.StageDestroy && lookTarget == null)
         {
             InitTarget();
             Debug.Log("ターゲットの再設定");
@@ -60,14 +73,14 @@ public class EnemyMover : MonoBehaviour
     {
         switch (moveType)
         {
-            case MoveType.PlayerChase: //プレイヤーの位置に関わらず、プレイヤーに向かって移動する
+            case EnemyMoveType.PlayerChase: //プレイヤーの位置に関わらず、プレイヤーに向かって移動する
 
-            case MoveType.BlockPlayer: //プレイヤーが一定距離まで近づいたときのみプレイヤーに向かって移動する
+            case EnemyMoveType.BlockPlayer: //プレイヤーが一定距離まで近づいたときのみプレイヤーに向かって移動する
                 GameObject player = GameObject.FindGameObjectWithTag("LookPoint");
                 if (player != null) lookTarget = player.transform;
                 break;
 
-            case MoveType.StageDestroy:
+            case EnemyMoveType.StageDestroy:
                 breakables = GameObject.FindGameObjectsWithTag("Breakable"); //攻撃できるオブジェクトに設定されているタグ名を()内に記述する
                 Debug.Log(breakables.Length);
                 if (breakables.Length > 0)
@@ -84,25 +97,25 @@ public class EnemyMover : MonoBehaviour
     {
         switch (moveType)
         {
-            case MoveType.PlayerChase:
-                if (distance >= stopRange) moveState = MoveState.move;
-                else moveState = MoveState.stop;
+            case EnemyMoveType.PlayerChase:
+                if (distance >= stopRange) moveState = EnemyMoveState.move;
+                else moveState = EnemyMoveState.stop;
                 break;
 
-            case MoveType.BlockPlayer:
-                if (distance <= detectionRange && distance >= stopRange) moveState = MoveState.move;
-                else if (distance < stopRange) moveState = MoveState.lookOnly;
-                else moveState = MoveState.stop;
+            case EnemyMoveType.BlockPlayer:
+                if (distance <= detectionRange && distance >= stopRange) moveState = EnemyMoveState.move;
+                else if (distance < stopRange) moveState = EnemyMoveState.lookOnly;
+                else moveState = EnemyMoveState.stop;
                 break;
 
-            case MoveType.StageDestroy:
+            case EnemyMoveType.StageDestroy:
                 if (lookTarget == null || !lookTarget.gameObject.activeInHierarchy)
                 {
                     breakables = GameObject.FindGameObjectsWithTag("Breakable");
                     lookTarget = (breakables.Length > 0) ? GetNearestTarget(breakables) : null;
                 }
 
-                moveState = (lookTarget != null && distance >= stopRange) ? MoveState.move : MoveState.stop;
+                moveState = (lookTarget != null && distance >= stopRange) ? EnemyMoveState.move : EnemyMoveState.stop;
                 break;
         }
     }
@@ -111,14 +124,14 @@ public class EnemyMover : MonoBehaviour
     {
         switch (moveState)
         {
-            case MoveState.stop: //停止状態（プレイヤーを追従する必要がない）
+            case   EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
                 return;
 
-            case MoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態
+            case EnemyMoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態
                 LookPlayer();
                 return;
 
-            case MoveState.move: //プレイヤーの方向を向いて追従する状態
+            case EnemyMoveState.move: //プレイヤーの方向を向いて追従する状態
                 LookPlayer();
                 MoveTowardsPlayer();
                 return;
@@ -167,4 +180,6 @@ public class EnemyMover : MonoBehaviour
 
         return nearest;
     }
+
+    
 }

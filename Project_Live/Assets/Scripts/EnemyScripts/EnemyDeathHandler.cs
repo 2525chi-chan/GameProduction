@@ -80,7 +80,7 @@ public class EnemyDeathHandler : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private bool IsGrounded() //地面に設置しているかどうかを判定する処理
+    public bool IsGrounded() //地面に設置しているかどうかを判定する処理
     {
         return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
     }

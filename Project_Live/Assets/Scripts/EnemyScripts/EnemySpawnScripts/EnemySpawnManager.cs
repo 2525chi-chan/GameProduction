@@ -10,7 +10,7 @@ public class SpawnParameter
     [Header("この敵の最大同時出現数")]
     public int maxSpawnCount;
     [Header("この敵の移動タイプ")]
-    public EnemyMover.MoveType moveType;
+    public EnemyMover.EnemyMoveType moveType;
 }
 
 public class EnemySpawnManager : MonoBehaviour

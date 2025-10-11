@@ -136,6 +136,8 @@ GameObject:
   - component: {fileID: 8259107007558549480}
   - component: {fileID: 2213797413019997299}
   - component: {fileID: 2205885403803759370}
+  - component: {fileID: 5049416632878525737}
+  - component: {fileID: 6637680128984497869}
   m_Layer: 6
   m_Name: Enemy_Normal
   m_TagString: Enemy
@@ -206,6 +208,7 @@ MonoBehaviour:
   attackPower: 10
   agility: 10
   deathHandler: {fileID: 2420152649761166137}
+  returnRagdollTime: 1
 --- !u!114 &2420152649761166137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +310,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbodies: []
+--- !u!144 &5049416632878525737
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7764904506935383429}
+  serializedVersion: 3
+  m_ConnectedBody: {fileID: 8483578021601991530}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_SwingAxis: {x: 0, y: 1, z: 0}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -20
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 177
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 30
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 30
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
+--- !u!95 &6637680128984497869
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7764904506935383429}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
+  m_Controller: {fileID: 9100000, guid: e8c9d8e484a053a479d90642b03cbc0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2010973385887092898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -543,7 +614,8 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -714,7 +786,7 @@ CharacterJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305632327033997920}
   serializedVersion: 3
-  m_ConnectedBody: {fileID: 8483578021601991530}
+  m_ConnectedBody: {fileID: 2213797413019997299}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
@@ -736,11 +808,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -835,11 +907,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -934,11 +1006,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -1051,7 +1123,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.07
   m_Center: {x: 0, y: 0, z: 0}
@@ -1117,11 +1189,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -1216,11 +1288,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -1325,15 +1397,15 @@ CharacterJoint:
     spring: 100
     damper: 0
   m_LowTwistLimit:
-    limit: -75.91
+    limit: -4.017125
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 0
+    limit: 177
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
-    spring: 0
+    spring: 20
     damper: 0
   m_Swing1Limit:
     limit: 40
@@ -1414,11 +1486,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -1513,11 +1585,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -1612,11 +1684,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -1704,18 +1776,18 @@ CharacterJoint:
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 0
+    limit: 105.55198
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 0
+    limit: 59.4594
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 77.324776
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -1810,11 +1882,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -1916,25 +1988,25 @@ CharacterJoint:
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
-    spring: 0
+    spring: 100
     damper: 0
   m_LowTwistLimit:
-    limit: 0
+    limit: -20
     bounciness: 0
     contactDistance: 0
   m_HighTwistLimit:
-    limit: 0
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_SwingLimitSpring:
-    spring: 0
+    spring: 15
     damper: 0
   m_Swing1Limit:
-    limit: 0
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 0
+    limit: 87.194176
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0
@@ -1986,7 +2058,7 @@ CharacterJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9103751698182225673}
   serializedVersion: 3
-  m_ConnectedBody: {fileID: 8483578021601991530}
+  m_ConnectedBody: {fileID: 2213797413019997299}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
@@ -2008,11 +2080,11 @@ CharacterJoint:
     spring: 0
     damper: 0
   m_Swing1Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_Swing2Limit:
-    limit: 10
+    limit: 30
     bounciness: 0
     contactDistance: 0
   m_EnableProjection: 0

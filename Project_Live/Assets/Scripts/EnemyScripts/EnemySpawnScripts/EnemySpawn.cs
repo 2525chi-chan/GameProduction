@@ -6,9 +6,9 @@ public class EnemySpawn
 {
     GameObject enemyPrefab;
     SpawnPositionGenerator spawnPositionGenerator;
-    EnemyMover.MoveType moveType;
+    EnemyMover.EnemyMoveType moveType;
 
-    public EnemySpawn(GameObject enemyPrefab, BoxCollider spawnArea, EnemyMover.MoveType moveType)
+    public EnemySpawn(GameObject enemyPrefab, BoxCollider spawnArea, EnemyMover.EnemyMoveType moveType)
     {
         this.enemyPrefab = enemyPrefab;
         this.spawnPositionGenerator = new SpawnPositionGenerator(spawnArea);
