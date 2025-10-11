@@ -25,6 +25,7 @@ class ComboStep
     [SerializeField] public float windupTime = 0.2f;
     [Header("UŒ‚‚ÉˆÚ“®‚·‚é‹——£")]
     [SerializeField] public float attackMoveDistance = 1f;
+
 }
 
 public class CloseAttack : MonoBehaviour
@@ -38,7 +39,7 @@ public class CloseAttack : MonoBehaviour
     [SerializeField] PlayerStatus playerStatus;
     [SerializeField] DamageToTarget damageToTarget;
     [SerializeField] MovePlayer movePlayer;
-
+   
     public enum AttackState { None, Windup, Attacking, Recovering }
 
     AttackState attackState = AttackState.None;

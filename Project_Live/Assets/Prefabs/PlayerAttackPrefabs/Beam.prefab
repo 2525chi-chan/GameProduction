@@ -106,7 +106,7 @@ MonoBehaviour:
   baceDamage: 100
   hitEffect: {fileID: 1044492289889190018, guid: 993441711f651c545bcc0c39bb7e345f, type: 3}
   baceForwardKnockbackForce: 55
-  baceUpwardKnockbackForce: 40
+  baceUpwardKnockbackForce: 120
   baceDownwardKnockbackForce: 0
   damageToTarget: {fileID: 6502001243641348044}
 --- !u!114 &-583937156790667385
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRagdoll: 1
 --- !u!1 &7269343345539358779
 GameObject:
   m_ObjectHideFlags: 0

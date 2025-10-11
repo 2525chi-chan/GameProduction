@@ -12,7 +12,9 @@ public class DamageToTarget : MonoBehaviour
     float forwardKnockbackForce;
     float upwardKnockbackForce;
     float downwardKnockbackForce;
+    
 
+    public bool isRagdoll = false;
     public GameObject HitEffect { get { return hitEffect; } set { hitEffect = value; } }
     
     public float Damage { get { return damage; } set { damage = value; } }
@@ -99,8 +101,17 @@ public class DamageToTarget : MonoBehaviour
                 forwardDirection * forwardKnockbackForce
                 + Vector3.up * upwardKnockbackForce
                 - Vector3.up * downwardKnockbackForce;
+            if (isRagdoll)
+            {
 
+                EnemyRagdoll enemyRagdoll = target.GetComponent<EnemyRagdoll>();
+                if (enemyRagdoll != null)
+                {
+                    enemyRagdoll.SwitchRagdoll(false);
+                }
+            }
             rb.AddForce(knockback, ForceMode.Impulse);
+
         }
     }
 }
