@@ -12,6 +12,9 @@ TagManager:
   - Effect
   - Breakable
   - BazuriShot
+  - PlayerStatus
+  - PlayerBuffManager
+  - CommentSpawn
   layers:
   - Default
   - TransparentFX
