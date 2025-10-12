@@ -15,7 +15,7 @@ public class EnemySpawn
         this.moveType = moveType;
     }
 
-    public void SpawnEnemies(int count) //“G‚Ì¶¬
+    public virtual void SpawnEnemies(int count) //“G‚Ì¶¬
     {
         for (int i = 0; i < count; i++)
         {

@@ -33,7 +33,7 @@ public class EnemyMover : MonoBehaviour
         get { return moveState; }   
     }
 
-   
+    public EnemyMoveType MoveType { get { return moveType; } }   
 
     public void SetMoveType(EnemyMoveType moveType)
     {
@@ -99,7 +99,7 @@ public class EnemyMover : MonoBehaviour
         {
             case EnemyMoveType.PlayerChase:
                 if (distance >= stopRange) moveState = EnemyMoveState.move;
-                else moveState = EnemyMoveState.stop;
+                else moveState = EnemyMoveState.lookOnly;
                 break;
 
             case EnemyMoveType.BlockPlayer:
@@ -143,7 +143,14 @@ public class EnemyMover : MonoBehaviour
 
     void MoveTowardsPlayer()//ÉvÉåÉCÉÑÅ[Ç…å¸Ç©Ç¡Çƒà⁄ìÆÇ∑ÇÈ
     {
-        Vector3 direction = (lookTarget.position - transform.position).normalized;
+        //Vector3 direction = (lookTarget.position - transform.position).normalized;
+
+        //transform.position += direction * moveSpeed * Time.deltaTime;
+
+        Vector3 targetPos = lookTarget.transform.position;
+        targetPos.y = transform.position.y;
+
+        Vector3 direction = (targetPos - transform.position).normalized;
 
         transform.position += direction * moveSpeed * Time.deltaTime;
     }

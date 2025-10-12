@@ -7418,22 +7418,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f9fab46796a094aae21f8c4c4c4768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnParameters:
-  - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 2
-    moveType: 0
-  - enemyPrefab: {fileID: 5295425210205854736, guid: 7067ab8733c8dac46b83c5adedee3b78, type: 3}
-    maxSpawnCount: 4
-    moveType: 1
-  - enemyPrefab: {fileID: 5295425210205854736, guid: 5252ca479ee7cf64c8af11b2743bfc12, type: 3}
-    maxSpawnCount: 2
-    moveType: 2
-  - enemyPrefab: {fileID: 8137719913462244462, guid: 62556fa3e350d9c4db59422a58a75a34, type: 3}
-    maxSpawnCount: 2
-    moveType: 0
   spawnArea: {fileID: 141125266}
   enableRespawn: 1
   checkInterval: 0.1
+  spawnParameters:
+  - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
+    maxSpawnCount: 0
+    moveType: 0
+  - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
+    maxSpawnCount: 0
+    moveType: 1
+  - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
+    maxSpawnCount: 0
+    moveType: 2
+  - enemyPrefab: {fileID: 8137719913462244462, guid: 62556fa3e350d9c4db59422a58a75a34, type: 3}
+    maxSpawnCount: 0
+    moveType: 0
+  - enemyPrefab: {fileID: 8576028282158982197, guid: ab8394dab7a780b4096606b704093574, type: 3}
+    maxSpawnCount: 1
+    moveType: 0
 --- !u!1 &850832793 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -655574477042552035, guid: c499d3441c71b2441b7eff163298bfc0, type: 3}
