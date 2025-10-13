@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerRange: {fileID: 8850819913040691998}
-  targetTag: Player
   triggerDuration: 2
-  enemyStatus: {fileID: 4098828232468043532}
+  status: {fileID: 4098828232468043532}
+  mover: {fileID: 8259107007558549480}
 --- !u!114 &446971775148853601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +66,7 @@ MonoBehaviour:
   attackDuration: 1
   attackPos: {fileID: 1276372281413812872}
   attackTrigger: {fileID: 2434253285504405187}
+  mover: {fileID: 8259107007558549480}
 --- !u!135 &8850819913040691998
 SphereCollider:
   m_ObjectHideFlags: 0

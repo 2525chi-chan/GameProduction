@@ -25,10 +25,12 @@ public class EnemyStatus : CharacterStatus
    
     private void Start()
     {
-      
+        
     }
     private void Update()
     {
+        if (deathHandler == null) return;
+
         if (Hp <= 0 && !deathHandler.IsProcessing) //HPが0になった、かつ死亡時の処理が行われていない場合
         {
             isDead = true;
