@@ -115,7 +115,7 @@ public class EnemyMover : MonoBehaviour
                     lookTarget = (breakables.Length > 0) ? GetNearestTarget(breakables) : null;
                 }
 
-                moveState = (lookTarget != null && distance >= stopRange) ? EnemyMoveState.move : EnemyMoveState.stop;
+                moveState = (lookTarget != null && distance >= stopRange) ? EnemyMoveState.move : EnemyMoveState.lookOnly;
                 break;
         }
     }
