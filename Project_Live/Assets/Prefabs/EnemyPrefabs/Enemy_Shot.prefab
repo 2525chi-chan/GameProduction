@@ -100,11 +100,23 @@ PrefabInstance:
       propertyPath: type
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4801018849258953227, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5049416632878525737, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 6953795121842811901}
     - target: {fileID: 5458364483232681953, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 3997343365882628530}
     - target: {fileID: 5567373102757557537, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7138159337648972899, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 0}

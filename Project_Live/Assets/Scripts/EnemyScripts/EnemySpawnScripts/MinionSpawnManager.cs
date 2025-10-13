@@ -1,39 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 [System.Serializable]
-public class SpawnParameter
+public class SpawnMinionParameter
 {
     [Header("生成する敵プレハブ")]
     public GameObject enemyPrefab;
     [Header("この敵の最大同時出現数")]
     public int maxSpawnCount;
-    [Header("この敵の移動タイプ")]
-    public EnemyMover.EnemyMoveType moveType;
 }
-
-public class EnemySpawnManager : BaseSpawnManager
+public class MinionSpawnManager : BaseSpawnManager
 {
     [Header("生成する敵の設定")]
-    [SerializeField] List<SpawnParameter> spawnParameters;
+    [SerializeField] List<SpawnMinionParameter> minionParameters;
+
+    EnemyMover mover;
 
     void Start()
     {
-        SetUpEnemySpawns();
+        SetUpEnemySpawns();   
     }
 
+    // Update is called once per frame
     void Update()
     {
-        if (!enableRespawn) return;
-        RespawnProcess();
+        
     }
 
     public void SetUpEnemySpawns() //敵生成の初期設定
     {
-        foreach (var param in spawnParameters)
+        mover = GetComponentInParent<EnemyMover>(); //このクラスをアタッチされたオブジェクトを子として持つ親の移動コンポーネントを取得する
+
+        if (mover == null) return;
+
+        foreach (var param in minionParameters)
         {
-            spawners[param.enemyPrefab] = new EnemySpawn(param.enemyPrefab, spawnArea, param.moveType);
+            spawners[param.enemyPrefab] = new EnemySpawn(param.enemyPrefab, spawnArea, mover.MoveType);
             trackers[param.enemyPrefab] = new EnemyCountTracker(param.enemyPrefab);
             spawners[param.enemyPrefab].SpawnEnemies(param.maxSpawnCount);
         }
@@ -45,7 +48,7 @@ public class EnemySpawnManager : BaseSpawnManager
 
         timer += Time.deltaTime;
 
-        foreach (var param in spawnParameters)
+        foreach (var param in minionParameters)
         {
             var tracker = trackers[param.enemyPrefab];
 

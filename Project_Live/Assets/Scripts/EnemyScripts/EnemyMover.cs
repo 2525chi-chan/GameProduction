@@ -33,7 +33,7 @@ public class EnemyMover : MonoBehaviour
         get { return moveState; }   
     }
 
-   
+    public EnemyMoveType MoveType { get { return moveType; } }   
 
     public void SetMoveType(EnemyMoveType moveType)
     {
@@ -59,7 +59,7 @@ public class EnemyMover : MonoBehaviour
         if (moveType == EnemyMoveType.StageDestroy && lookTarget == null)
         {
             InitTarget();
-            Debug.Log("ターゲットの再設定");
+            //Debug.Log("ターゲットの再設定");
         }
 
         if (lookTarget != null)
@@ -84,7 +84,7 @@ public class EnemyMover : MonoBehaviour
 
             case EnemyMoveType.StageDestroy:
                 breakables = GameObject.FindGameObjectsWithTag("Breakable"); //攻撃できるオブジェクトに設定されているタグ名を()内に記述する
-                Debug.Log(breakables.Length);
+                //Debug.Log(breakables.Length);
                 if (breakables.Length > 0)
                 {
                     lookTarget = GetNearestTarget(breakables); //一番近いオブジェクトに向かって移動する
@@ -101,7 +101,7 @@ public class EnemyMover : MonoBehaviour
         {
             case EnemyMoveType.PlayerChase:
                 if (distance >= stopRange) moveState = EnemyMoveState.move;
-                else moveState = EnemyMoveState.stop;
+                else moveState = EnemyMoveState.lookOnly;
                 break;
 
             case EnemyMoveType.BlockPlayer:
@@ -117,7 +117,7 @@ public class EnemyMover : MonoBehaviour
                     lookTarget = (breakables.Length > 0) ? GetNearestTarget(breakables) : null;
                 }
 
-                moveState = (lookTarget != null && distance >= stopRange) ? EnemyMoveState.move : EnemyMoveState.stop;
+                moveState = (lookTarget != null && distance >= stopRange) ? EnemyMoveState.move : EnemyMoveState.lookOnly;
                 break;
         }
     }
@@ -126,7 +126,7 @@ public class EnemyMover : MonoBehaviour
     {
         switch (moveState)
         {
-            case   EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
+            case EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
                 return;
 
             case EnemyMoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態
@@ -145,7 +145,14 @@ public class EnemyMover : MonoBehaviour
 
     void MoveTowardsPlayer()//プレイヤーに向かって移動する
     {
-        Vector3 direction = (lookTarget.position - transform.position).normalized;
+        //Vector3 direction = (lookTarget.position - transform.position).normalized;
+
+        //transform.position += direction * moveSpeed * Time.deltaTime;
+
+        Vector3 targetPos = lookTarget.transform.position;
+        targetPos.y = transform.position.y;
+
+        Vector3 direction = (targetPos - transform.position).normalized;
 
         transform.position += direction * moveSpeed * Time.deltaTime;
     }

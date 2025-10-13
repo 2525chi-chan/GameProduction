@@ -78,7 +78,7 @@ public class DamageToTarget : MonoBehaviour
 
         if (objStatus == null)
         {
-            Debug.LogWarning($"PlayerStatus が {obj.name} および、その子に見つかりませんでした");
+            Debug.LogWarning($"ObjectStatus が {obj.name} および、その子に見つかりませんでした");
             return;
         }
         //
