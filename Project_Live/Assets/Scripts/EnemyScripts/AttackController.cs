@@ -12,6 +12,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] Transform attackPos;
     [Header("必要なコンポーネント")]
     [SerializeField] AttackTrigger attackTrigger;
+    [SerializeField] EnemyMover mover;
 
     float attackTimer = 0f; //攻撃待機時間の計測用変数
 
@@ -26,8 +27,16 @@ public class AttackController : MonoBehaviour
 
     void InstanceAttack() //攻撃処理
     {
-        Instantiate(attackPrefab, attackPos.position, attackPos.rotation);
+        GameObject attackObj = Instantiate(attackPrefab, attackPos.position, attackPos.rotation);
+        
+        if (mover != null)
+        {
+            var hitbox = attackObj.GetComponent<HitboxTrigger>();
 
+            if (hitbox != null)
+                hitbox.SetOwnerMoveType(mover.MoveType); //攻撃判定に、攻撃者の移動タイプを渡す
+        }
+        
         attackTimer = 0f;
         attackTrigger.IsAttackTrigger = false;
     }

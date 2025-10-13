@@ -57,7 +57,7 @@ public class EnemyMover : MonoBehaviour
         if (moveType == EnemyMoveType.StageDestroy && lookTarget == null)
         {
             InitTarget();
-            Debug.Log("ターゲットの再設定");
+            //Debug.Log("ターゲットの再設定");
         }
 
         if (lookTarget != null)
@@ -82,7 +82,7 @@ public class EnemyMover : MonoBehaviour
 
             case EnemyMoveType.StageDestroy:
                 breakables = GameObject.FindGameObjectsWithTag("Breakable"); //攻撃できるオブジェクトに設定されているタグ名を()内に記述する
-                Debug.Log(breakables.Length);
+                //Debug.Log(breakables.Length);
                 if (breakables.Length > 0)
                 {
                     lookTarget = GetNearestTarget(breakables); //一番近いオブジェクトに向かって移動する
@@ -124,7 +124,7 @@ public class EnemyMover : MonoBehaviour
     {
         switch (moveState)
         {
-            case   EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
+            case EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
                 return;
 
             case EnemyMoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態

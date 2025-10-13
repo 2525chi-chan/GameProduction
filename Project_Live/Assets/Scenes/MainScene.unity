@@ -5540,7 +5540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0c412be842d834abcc2c404e58d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Enemy
+  ignoreTags: []
   MaxHitCount: 1
   hitIntervalTime: 0.5
   damageToTarget: {fileID: 837679871}
@@ -5697,7 +5697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0c412be842d834abcc2c404e58d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Enemy
+  ignoreTags: []
   MaxHitCount: 1
   hitIntervalTime: 0.5
   damageToTarget: {fileID: 837679871}
@@ -7423,18 +7423,15 @@ MonoBehaviour:
   checkInterval: 0.1
   spawnParameters:
   - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 0
+    maxSpawnCount: 1
     moveType: 0
   - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 0
+    maxSpawnCount: 1
     moveType: 1
   - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 0
+    maxSpawnCount: 1
     moveType: 2
   - enemyPrefab: {fileID: 8137719913462244462, guid: 62556fa3e350d9c4db59422a58a75a34, type: 3}
-    maxSpawnCount: 0
-    moveType: 0
-  - enemyPrefab: {fileID: 8576028282158982197, guid: ab8394dab7a780b4096606b704093574, type: 3}
     maxSpawnCount: 1
     moveType: 0
 --- !u!1 &850832793 stripped
@@ -7652,7 +7649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0c412be842d834abcc2c404e58d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Enemy
+  ignoreTags: []
   MaxHitCount: 1
   hitIntervalTime: 0.5
   damageToTarget: {fileID: 837679871}
@@ -7777,7 +7774,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0c412be842d834abcc2c404e58d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Enemy
+  ignoreTags: []
   MaxHitCount: 1
   hitIntervalTime: 0.5
   damageToTarget: {fileID: 837679871}
@@ -10620,6 +10617,131 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1595077757}
   m_CullTransparentMesh: 1
+--- !u!1 &1604688786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1604688791}
+  - component: {fileID: 1604688790}
+  - component: {fileID: 1604688789}
+  - component: {fileID: 1604688788}
+  - component: {fileID: 1604688787}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Breakable
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1604688787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604688786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676f06c839b8ff546852eb9822ac3d77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 100
+  attackPower: 10
+  agility: 10
+  destroyEffect: {fileID: 1376598843723980918, guid: 416ceb4e2c39a5d458d3cb632268b888, type: 3}
+--- !u!65 &1604688788
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604688786}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1604688789
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604688786}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1604688790
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604688786}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1604688791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604688786}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.22, y: 2.49, z: 16.49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1619972797
 GameObject:
   m_ObjectHideFlags: 0
@@ -11728,7 +11850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0c412be842d834abcc2c404e58d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Enemy
+  ignoreTags: []
   MaxHitCount: 1
   hitIntervalTime: 0.5
   damageToTarget: {fileID: 1936352948}
@@ -12074,7 +12196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0c412be842d834abcc2c404e58d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Enemy
+  ignoreTags: []
   MaxHitCount: 1
   hitIntervalTime: 0.5
   damageToTarget: {fileID: 1944883437}
@@ -13201,3 +13323,4 @@ SceneRoots:
   - {fileID: 232620080}
   - {fileID: 972647954}
   - {fileID: 1353061384}
+  - {fileID: 1604688791}
