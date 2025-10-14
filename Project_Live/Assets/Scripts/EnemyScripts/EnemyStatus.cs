@@ -22,10 +22,11 @@ public class EnemyStatus : CharacterStatus
     [SerializeField]float returnRagdollTime = 1f;
 
     float ragdollCount;
-   
+
+    Transform pos;
     private void Start()
     {
-        
+        pos = this.transform;
     }
     private void Update()
     {
@@ -36,18 +37,19 @@ public class EnemyStatus : CharacterStatus
             isDead = true;
             deathHandler.StartDeathProcess(); //死亡時の処理を開始する
         }
-        if (IsRagdoll&&deathHandler.IsGrounded())
+        if (IsRagdoll&&deathHandler.IsGrounded()&&!isDead)
         {
             ragdollCount += Time.deltaTime;
 
 
             if (ragdollCount > returnRagdollTime)
             {
-                this.GetComponent<EnemyRagdoll>().SwitchRagdoll(false);
+                this.GetComponent<EnemyRagdoll>().SwitchRagdoll(false,Vector3.zero);
                 ragdollCount = 0;
                 Debug.Log("かいじょ");
                 
             }
+           
         }
         else
         {

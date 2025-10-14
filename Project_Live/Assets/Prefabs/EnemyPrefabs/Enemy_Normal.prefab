@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: 8259107007558549480}
   - component: {fileID: 2213797413019997299}
   - component: {fileID: 2205885403803759370}
-  - component: {fileID: 5049416632878525737}
   - component: {fileID: 6637680128984497869}
   m_Layer: 6
   m_Name: Enemy_Normal
@@ -185,7 +184,7 @@ BoxCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 448
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -209,7 +208,7 @@ MonoBehaviour:
   attackPower: 10
   agility: 10
   deathHandler: {fileID: 2420152649761166137}
-  returnRagdollTime: 5
+  returnRagdollTime: 1
 --- !u!114 &2420152649761166137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundStayDuration: 2
-  groundCheckDistance: 0.7
+  groundCheckDistance: 1.2
   deathEffect: {fileID: 7533723596493378062, guid: 0c9e22b293126624aaba4f8eba475c9c, type: 3}
   knockbackForce_Back: 0
   knockbackForce_Up: 0
@@ -310,53 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b38fdb573ea3314599856a9684ed70e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainRigid: {fileID: 0}
   rigidbodies: []
---- !u!144 &5049416632878525737
-CharacterJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7764904506935383429}
-  serializedVersion: 3
-  m_ConnectedBody: {fileID: 8483578021601991530}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_SwingAxis: {x: 0, y: 1, z: 0}
-  m_TwistLimitSpring:
-    spring: 0
-    damper: 0
-  m_LowTwistLimit:
-    limit: -20
-    bounciness: 0
-    contactDistance: 0
-  m_HighTwistLimit:
-    limit: 177
-    bounciness: 0
-    contactDistance: 0
-  m_SwingLimitSpring:
-    spring: 0
-    damper: 0
-  m_Swing1Limit:
-    limit: 30
-    bounciness: 0
-    contactDistance: 0
-  m_Swing2Limit:
-    limit: 30
-    bounciness: 0
-    contactDistance: 0
-  m_EnableProjection: 0
-  m_ProjectionDistance: 0.1
-  m_ProjectionAngle: 180
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!95 &6637680128984497869
 Animator:
   serializedVersion: 7
@@ -417,15 +371,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -622,7 +576,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7956241635814026785}
+      addedObject: {fileID: 1494517472591631661}
     - targetCorrespondingSourceObject: {fileID: -417878991522404143, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4193121186383364430}
@@ -787,7 +741,7 @@ CharacterJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305632327033997920}
   serializedVersion: 3
-  m_ConnectedBody: {fileID: 2213797413019997299}
+  m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
@@ -842,9 +796,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &825260295891280883 stripped
 GameObject:
@@ -941,9 +895,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1507046182192595708 stripped
 GameObject:
@@ -1040,16 +994,16 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1668865627258727923 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
   m_PrefabInstance: {fileID: 2010973385887092898}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7956241635814026785
+--- !u!65 &1494517472591631661
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1068,7 +1022,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.6, z: 0.4}
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &2045426835636746057 stripped
 Transform:
@@ -1124,7 +1078,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.07
   m_Center: {x: 0, y: 0, z: 0}
@@ -1223,9 +1177,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4529253670986968562 stripped
 GameObject:
@@ -1322,9 +1276,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4998529368244054224 stripped
 GameObject:
@@ -1375,9 +1329,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!144 &4801018849258953227
 CharacterJoint:
@@ -1520,9 +1474,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5602247195976663921 stripped
 GameObject:
@@ -1619,9 +1573,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6745834733922048482 stripped
 GameObject:
@@ -1718,9 +1672,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7051243826272663667 stripped
 GameObject:
@@ -1813,13 +1767,13 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 192
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7709859120189031682 stripped
 GameObject:
@@ -1916,9 +1870,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8746175351402869746 stripped
 GameObject:
@@ -1969,9 +1923,9 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!144 &7138159337648972899
 CharacterJoint:
@@ -2059,7 +2013,7 @@ CharacterJoint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9103751698182225673}
   serializedVersion: 3
-  m_ConnectedBody: {fileID: 2213797413019997299}
+  m_ConnectedBody: {fileID: 0}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
@@ -2114,7 +2068,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 0.07
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
