@@ -44,7 +44,7 @@ public class EnemyStatus : CharacterStatus
 
             if (ragdollCount > returnRagdollTime)
             {
-                this.GetComponent<EnemyRagdoll>().SwitchRagdoll(false,Vector3.zero);
+                this.GetComponent<EnemyRagdoll>().SwitchRagdoll(false);
                 ragdollCount = 0;
                 Debug.Log("かいじょ");
                 
