@@ -36,12 +36,12 @@ public class EnemyRagdoll : MonoBehaviour
 
     public void SwitchRagdoll(bool isRagdol)//ラグドール状態の切り替え。trueでラグドール状態、falseで通常状態
     {
-      //  if(animator!=null)animator.enabled = !isRagdol;
+        if(animator!=null)animator.enabled = !isRagdol;
         status.IsRagdoll = isRagdol;
 
         if (animator.enabled)
         {
-           // animator.SetTrigger("Idle");
+            animator.SetTrigger("Idle");
         }
 
         foreach (Rigidbody rb in rigidbodies)
