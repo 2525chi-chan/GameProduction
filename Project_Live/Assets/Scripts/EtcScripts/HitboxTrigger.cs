@@ -81,6 +81,7 @@ public class HitboxTrigger : MonoBehaviour
         if (!isOwnerSet)
         {
             ignoreTags.Add("Player");
+            ignoreTags.Add("Breakable");
             return;
         }
 
