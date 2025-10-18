@@ -8,6 +8,9 @@ public class EnemyDeathHandler : MonoBehaviour
     [Header("地面に設置しているかどうかを判定する距離")]
     [SerializeField] float groundCheckDistance = 1f;
 
+    [Header("接地判定を行うオブジェクトのレイヤー")]
+    [SerializeField] LayerMask groundLayer;
+
     [Header("撃破時のエフェクト")]
     [SerializeField] GameObject deathEffect;
 
@@ -82,6 +85,9 @@ public class EnemyDeathHandler : MonoBehaviour
 
     public bool IsGrounded() //地面に設置しているかどうかを判定する処理
     {
-        return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance);
+        Vector3 direction = Vector3.down * groundCheckDistance;
+        Debug.DrawRay(transform.position, direction, Color.red);
+
+        return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
     }
 }

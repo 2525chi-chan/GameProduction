@@ -222,7 +222,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundStayDuration: 2
-  groundCheckDistance: 1.2
+  groundCheckDistance: 3
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 512
   deathEffect: {fileID: 7533723596493378062, guid: 0c9e22b293126624aaba4f8eba475c9c, type: 3}
   knockbackForce_Back: 0
   knockbackForce_Up: 0
