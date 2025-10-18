@@ -8085,7 +8085,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 471
+    m_Bits: 983
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -8288,11 +8288,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commentCount: 1
-  Canvas: {fileID: 231769689}
+  Canvas: {fileID: 1351349862}
   CommentPrefab: {fileID: 8250452650546826949, guid: df91c6b479c82e74184e77e95d9e83f2, type: 3}
-  CheeringCommentPrefab: {fileID: 0}
+  CheeringCommentPrefab: {fileID: 5886287236747954287, guid: 61d8eddfc0747684888b5949fa1c324d, type: 3}
   buzuriRank: {fileID: 8272935803192008038}
   cheeringCommentIsExist: 0
+  interceptEnemyIsExist: 0
 --- !u!1 &984644957 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8762990098852401850, guid: c499d3441c71b2441b7eff163298bfc0, type: 3}
@@ -9935,7 +9936,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1351349866
 RectTransform:

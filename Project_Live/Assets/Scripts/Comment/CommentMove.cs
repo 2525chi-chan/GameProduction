@@ -11,27 +11,46 @@ public class CommentMove : MonoBehaviour
     [Header("コメントが画面にいる秒数")]
     [SerializeField] float existSeconds;
 
+    CommentSpawn commentSpawn;
+
     RectTransform rectTransform;
     float perFrameMoveSpeed;
 
     void Start()
     { 
+        commentSpawn=GameObject.FindGameObjectWithTag("CommentSpawn").GetComponent<CommentSpawn>();
         rectTransform = GetComponent<RectTransform>();
-        perFrameMoveSpeed = ((Screen.width + rectTransform.sizeDelta.x) / existSeconds) / Application.targetFrameRate;  
+        perFrameMoveSpeed = ((commentSpawn.Canvas.GetComponent<RectTransform>().rect.width + rectTransform.sizeDelta.x) / existSeconds) / Application.targetFrameRate;  
     }
 
     void Update()
     {
-        rectTransform.position -= new Vector3(perFrameMoveSpeed,0,0); 
+        rectTransform.anchoredPosition -= new Vector2(perFrameMoveSpeed,0);
 
-        if (!IsPartOfRectTransformInsideScreen(rectTransform))
+        //if(commentSpawn.interceptEnemyIsExist)
+        //{
+        //    //this.transform.GetChild(0).gameObject.SetActive(false);
+        //    this.GetComponent<Image>().enabled = true;
+        //}
+        //else
+        //{
+        //    this.GetComponent<Image>().enabled = false;
+        //    this.transform.GetChild(0).gameObject.SetActive(true);
+        //}
+
+        //if (!IsPartOfRectTransformInsideScreen(rectTransform))
+        //{
+        //    Destroy(this.gameObject);
+        //    //Debug.Log("UI Text is outside the screen.");
+        //}
+
+        if (!IsPartOfRectTransformInsideCanvas(rectTransform, commentSpawn.Canvas.GetComponent<Canvas>()))
         {
             Destroy(this.gameObject);
-            //Debug.Log("UI Text is outside the screen.");
         }
     }
 
-    bool IsPartOfRectTransformInsideScreen(RectTransform rect)
+    bool IsPartOfRectTransformInsideScreen(RectTransform rect) //Space-overlay用
     {
         Vector3[] worldCorners = new Vector3[4];
         rect.GetWorldCorners(worldCorners);
@@ -52,5 +71,32 @@ public class CommentMove : MonoBehaviour
         }
 
         return false; 
+    }
+
+    bool IsPartOfRectTransformInsideCanvas(RectTransform rect, Canvas canvas)   //Space-Camera用
+    {
+        Camera cam = canvas.worldCamera;
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+        Vector3[] worldCorners = new Vector3[4];
+        rect.GetWorldCorners(worldCorners);
+
+        foreach (Vector3 corner in worldCorners)
+        {
+            // ワールド座標→Canvasのローカル座標へ変換
+            Vector2 localPoint;
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    canvasRect,
+                    RectTransformUtility.WorldToScreenPoint(cam, corner),
+                    cam,
+                    out localPoint))
+            {
+                // CanvasのRect範囲内か判定
+                if (canvasRect.rect.Contains(localPoint))
+                {
+                    return true; // 少なくとも1点がCanvas内
+                }
+            }
+        }
+        return false;
     }
 }
