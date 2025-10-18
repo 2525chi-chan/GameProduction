@@ -6293,6 +6293,10 @@ PrefabInstance:
       value: main stage
       objectReference: {fileID: 0}
     - target: {fileID: 2040542448765327740, guid: 50e9f14874c96cd4bb5ef4ba6dbec3e8, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2040542448765327740, guid: 50e9f14874c96cd4bb5ef4ba6dbec3e8, type: 3}
       propertyPath: m_TagString
       value: Stage
       objectReference: {fileID: 0}
@@ -6391,6 +6395,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3517226640044197117, guid: 8e525c3c48d1e1845a88b4539ab31f17, type: 3}
   m_PrefabInstance: {fileID: 2839802885050154463}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &620124163
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5823803924358402908, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823803924358402908, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823803924358402908, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823803924358402908, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823803924358402908, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823803924358402908, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823803924358402908, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823803924358402908, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823803924358402908, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5823803924358402908, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216093220783297989, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
+      propertyPath: m_Name
+      value: DestroyArea
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 418126cd97ceb2c419ccdf893df738b7, type: 3}
 --- !u!1 &631511334
 GameObject:
   m_ObjectHideFlags: 3
@@ -8229,7 +8290,7 @@ MonoBehaviour:
   commentCount: 1
   Canvas: {fileID: 231769689}
   CommentPrefab: {fileID: 8250452650546826949, guid: df91c6b479c82e74184e77e95d9e83f2, type: 3}
-  CheeringComment: {fileID: 5886287236747954287, guid: 61d8eddfc0747684888b5949fa1c324d, type: 3}
+  CheeringCommentPrefab: {fileID: 0}
   buzuriRank: {fileID: 8272935803192008038}
   cheeringCommentIsExist: 0
 --- !u!1 &984644957 stripped
@@ -14144,3 +14205,4 @@ SceneRoots:
   - {fileID: 1353061384}
   - {fileID: 751039234}
   - {fileID: 541654345}
+  - {fileID: 620124163}

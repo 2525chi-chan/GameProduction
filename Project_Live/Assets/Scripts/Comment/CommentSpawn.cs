@@ -19,7 +19,7 @@ public class CommentSpawn : MonoBehaviour
     [Header("必要なコンポーネント")]
     [SerializeField] Transform Canvas;
     [SerializeField] GameObject CommentPrefab;
-    [SerializeField] GameObject CheeringComment;
+    [SerializeField] GameObject CheeringCommentPrefab;
     [SerializeField] BuzuriRank buzuriRank;
 
     [HideInInspector]public bool cheeringCommentIsExist ;
@@ -34,7 +34,7 @@ public class CommentSpawn : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cheeringComment=CheeringComment.GetComponent<CheeringComment>();
+        cheeringComment=CheeringCommentPrefab.GetComponent<CheeringComment>();
     }
 
     // Update is called once per frame
@@ -60,12 +60,12 @@ public class CommentSpawn : MonoBehaviour
             if (commentCounter >= commentCount&&!cheeringCommentIsExist)
             {
                 Debug.Log("応援コメントが生成されました。");
-                InstantiateCheeringComment(raneNum);
+                InstantiateComment(raneNum,CheeringCommentPrefab);
                 commentCounter = 0;
             }
             else
             {
-                InstantiateComment(raneNum);
+                InstantiateComment(raneNum,CommentPrefab);
                 commentCounter++;
                 Debug.Log("応援コメントまであと" + (commentCount - commentCounter) + "コメントです。");
             }
@@ -89,38 +89,31 @@ public class CommentSpawn : MonoBehaviour
     }
 
 
-    void InstantiateComment(int raneNum)
+    void InstantiateComment(int raneNum, GameObject CommentType)
     {
-        string selectedText = buzuriRank.currentBuzzRank.CommentContent[Random.Range(0,buzuriRank.currentBuzzRank.comentNum)];
+        string selectedText = null;
 
-        GameObject newTextObj = Instantiate(CommentPrefab, Canvas);
-        //TextMeshProUGUI textBoxSize=newTextObj.GetComponent<TextMeshProUGUI>();
+        if (CommentType == CommentPrefab)
+        {
+            selectedText = buzuriRank.currentBuzzRank.CommentContent[Random.Range(0, buzuriRank.currentBuzzRank.comentNum)];
+        }
+        else if (CommentType == CheeringCommentPrefab)
+        {
+            selectedText = cheeringComment.cheeringCommentContent[Random.Range(0, cheeringComment.cheeringCommentContent.Count)];
+        }
+
+
+        GameObject newTextObj = Instantiate(CommentType, Canvas);
+
+        if(CommentType==CheeringCommentPrefab)
+        {
+            EventSystem.current.SetSelectedGameObject(newTextObj);
+        }
+
         GetCommetText commentText = newTextObj.GetComponent<GetCommetText>();
         RectTransform rectTransform = newTextObj.GetComponent<RectTransform>();
 
         // テキストを設定
-        //TextMeshProUGUI tmp = newTextObj.GetComponent<TextMeshProUGUI>();
-        //if (tmp != null)
-        //{
-        //    tmp.text = selectedText;
-        //}
-
-        commentText.SetCommentText(selectedText);
-
-        //rectTransform.sizeDelta = new Vector2(textBoxSize.preferredWidth, rectTransform.sizeDelta.y);
-        rectTransform.sizeDelta = new Vector2(commentText.GetTextBoxSizeWidth(), rectTransform.sizeDelta.y);
-        rectTransform.position = DecideSpawnPos(rectTransform,raneNum);
-    }
-
-    void InstantiateCheeringComment(int raneNum)
-    {
-        string selectedText = cheeringComment.cheeringCommentContent[Random.Range(0, cheeringComment.cheeringCommentContent.Count)];
-
-        GameObject newTextObj = Instantiate(CheeringComment, Canvas);
-        EventSystem.current.SetSelectedGameObject(newTextObj);
-        GetCommetText commentText=newTextObj.GetComponent<GetCommetText>();
-        RectTransform rectTransform = newTextObj.GetComponent<RectTransform>();
-
         commentText.SetCommentText(selectedText);
 
         rectTransform.sizeDelta = new Vector2(commentText.GetTextBoxSizeWidth(), rectTransform.sizeDelta.y);

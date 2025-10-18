@@ -33,9 +33,14 @@ public class EnemySpawnManager : BaseSpawnManager
     {
         foreach (var param in spawnParameters)
         {
-            spawners[param.enemyPrefab] = new EnemySpawn(param.enemyPrefab, spawnArea, param.moveType);
-            trackers[param.enemyPrefab] = new EnemyCountTracker(param.enemyPrefab);
-            spawners[param.enemyPrefab].SpawnEnemies(param.maxSpawnCount);
+            var key = (param.enemyPrefab, param.moveType);
+
+            spawners[key] = new EnemySpawn(param.enemyPrefab, spawnArea, param.moveType);
+            trackers[key] = new EnemyCountTracker(param.enemyPrefab, param.moveType);
+
+            spawners[key].SpawnEnemies(param.maxSpawnCount, param.moveType);
+            trackers[key].ForceSync();
+            //Debug.Log($"{key} ‚ğ {EnemyRegistry.GetCount(param.enemyPrefab, param.moveType)} ‘Ì¶¬‚µ‚Ü‚µ‚½");
         }
     }
 
@@ -44,18 +49,19 @@ public class EnemySpawnManager : BaseSpawnManager
         if (!enableRespawn) return;
 
         timer += Time.deltaTime;
+        if (timer < checkInterval) return;
+        timer = 0f;
 
         foreach (var param in spawnParameters)
         {
-            var tracker = trackers[param.enemyPrefab];
+            var key = (param.enemyPrefab, param.moveType);
+            int currentCount = EnemyRegistry.GetCount(param.enemyPrefab, param.moveType);
+            int toSpawn = param.maxSpawnCount - currentCount;
 
-            if (timer >= checkInterval && tracker.HasChanged(out int currentCount)) //’²‚×‚½í—Ş‚Ì“G‚Ì”‚ª­‚È‚­‚È‚Á‚Ä‚¢‚½‚ç
+            if (toSpawn > 0)
             {
-                timer = 0f;
-
-                int toSpawn = param.maxSpawnCount - currentCount; //‚»‚Ìí—Ş‚Ì“G‚ÌÅ‘å“¯oŒ»”‚ÆŒ»İ‚Ì”‚Æ‚Ì·•ª‚ğ‹‚ß‚é
-
-                if (toSpawn > 0) spawners[param.enemyPrefab].SpawnEnemies(toSpawn); //­‚È‚¢•ª‚¾‚¯“G‚ğ¶¬‚·‚é
+                spawners[key].SpawnEnemies(toSpawn, param.moveType);
+                //Debug.Log($"{key} ‚ğ {toSpawn} ‘ÌÄ¶¬‚µ‚Ü‚µ‚½");
             }
         }
     }

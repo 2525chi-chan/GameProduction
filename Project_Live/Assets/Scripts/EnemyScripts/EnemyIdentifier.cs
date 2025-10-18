@@ -1,31 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public enum EnemyType //“G‚ÌŽí—Þ
-{
-    Normal, Eliet, Shooter
-}
 
 public class EnemyIdentifier : MonoBehaviour
 {
-    GameObject prefabReference;
+    private GameObject prefabReference;
+    private EnemyMover.EnemyMoveType moveType;
+    private bool isRegistered = false;
 
-    public void Initialize(GameObject prefab)
+    public void Initialize(GameObject prefab, EnemyMover.EnemyMoveType moveType)
     {
         prefabReference = prefab;
-        EnemyRegistry.Register(prefabReference);
+        this.moveType = moveType;
+
+        Register();
+    }
+
+    private void Register()
+    {
+        if (!isRegistered && prefabReference != null)
+        {
+            EnemyRegistry.Register(gameObject, prefabReference, moveType);
+            isRegistered = true;
+        }
+    }
+
+    private void Unregister()
+    {
+        if (isRegistered && prefabReference != null)
+        {
+            EnemyRegistry.Unregister(gameObject, prefabReference, moveType);
+            isRegistered = false;
+        }
     }
 
     void OnEnable()
     {
-        if (prefabReference != null)
-            EnemyRegistry.Register(prefabReference);
+        if (prefabReference != null && !isRegistered) Register();
+    }
+
+    void OnDisable()
+    {
+        Unregister();
     }
 
     void OnDestroy()
     {
-        if (prefabReference != null)
-            EnemyRegistry.Unregister(prefabReference);
+        Unregister();
     }
 }

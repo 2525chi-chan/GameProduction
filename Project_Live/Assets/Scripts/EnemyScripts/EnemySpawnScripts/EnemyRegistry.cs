@@ -4,27 +4,29 @@ using UnityEngine;
 
 public static class EnemyRegistry
 {
-    static Dictionary<GameObject, int> enemyCounts = new();
+    static Dictionary<(GameObject prefab, EnemyMover.EnemyMoveType moveType), List<GameObject>> registry = new();
 
-    public static void Register(GameObject prefab) //w’è‚³‚ê‚½í—Ş‚Ì“G‚ÌƒJƒEƒ“ƒg‚ğ‘‚â‚·
+    //“G‚Ì“o˜^
+    public static void Register(GameObject enemy, GameObject prefab, EnemyMover.EnemyMoveType moveType)
     {
-        if (!enemyCounts.ContainsKey(prefab))
-            enemyCounts[prefab] = 0;
-
-        enemyCounts[prefab]++;
+        var key = (prefab, moveType);
+        if (!registry.ContainsKey(key))
+            registry[key] = new List<GameObject>();
+        registry[key].Add(enemy);
     }
 
-    public static void Unregister(GameObject prefab) //w’è‚³‚ê‚½í—Ş‚Ì“G‚ÌƒJƒEƒ“ƒg‚ğŒ¸‚ç‚·
+    //“G‚Ì“o˜^‰ğœ
+    public static void Unregister(GameObject enemy, GameObject prefab, EnemyMover.EnemyMoveType moveType)
     {
-        if (!enemyCounts.ContainsKey(prefab)) return;
-
-        enemyCounts[prefab]--;
-
-        if (enemyCounts[prefab] <= 0) enemyCounts[prefab] = 0;
+        var key = (prefab, moveType);
+        if (registry.ContainsKey(key))
+            registry[key].Remove(enemy);
     }
 
-    public static int GetCount(GameObject prefab) //w’è‚³‚ê‚½í—Ş‚Ì“G‚ªŒ»İ‘¶İ‚µ‚Ä‚¢‚é”‚ğæ“¾‚·‚é
+    //“G‚Ì”‚Ìæ“¾
+    public static int GetCount(GameObject prefab, EnemyMover.EnemyMoveType moveType)
     {
-        return enemyCounts.TryGetValue(prefab, out var count) ? count : 0;
+        var key = (prefab, moveType);
+        return registry.ContainsKey(key) ? registry[key].Count : 0;
     }
 }

@@ -10,8 +10,8 @@ public class BaseSpawnManager : MonoBehaviour
     [Header("敵数のチェック間隔")]
     [SerializeField] protected float checkInterval = 1.0f;
 
-    protected Dictionary<GameObject, EnemySpawn> spawners = new();
-    protected Dictionary<GameObject, EnemyCountTracker> trackers = new();
+    protected Dictionary<(GameObject prefab, EnemyMover.EnemyMoveType moveType), EnemySpawn> spawners = new();
+    protected Dictionary<(GameObject prefab, EnemyMover.EnemyMoveType moveType), EnemyCountTracker> trackers = new();
 
     protected float timer = 0f;
 }
