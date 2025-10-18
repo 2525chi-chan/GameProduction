@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR.Haptics;
 
 public class PlayerStatus : CharacterStatus
@@ -39,6 +40,12 @@ public class PlayerStatus : CharacterStatus
         if (!isDead && Hp <= 0) Die();
 
         if (Hp <= 0) Hp = 0;
+
+        if (Keyboard.current.uKey.wasPressedThisFrame)
+        {
+            currentState = currentState == PlayerState.Normal ? PlayerState.Invincible : PlayerState.Normal;
+            Debug.Log(currentState + "ó‘Ô‚ÉØ‚è‘Ö‚í‚è‚Ü‚µ‚½B");
+        }
     }
 
     void Die() //Ž€–SŽž‚Ìˆ—

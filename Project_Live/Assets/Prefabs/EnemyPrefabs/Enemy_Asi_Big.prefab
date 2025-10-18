@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2524073153287858498}
   - component: {fileID: 6232195343887444232}
-  - component: {fileID: 5955536925569018600}
+  - component: {fileID: 5825305424829154027}
   m_Layer: 0
   m_Name: EnemySpawnArea
   m_TagString: Untagged
@@ -54,7 +54,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5, y: 0.1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5955536925569018600
+--- !u!114 &5825305424829154027
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -63,16 +63,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5557004249211569860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06f9fab46796a094aae21f8c4c4c4768, type: 3}
+  m_Script: {fileID: 11500000, guid: 99285149245391c4599f80d2d79f70be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   spawnArea: {fileID: 6232195343887444232}
   enableRespawn: 0
   checkInterval: 5
-  spawnParameters:
+  minionParameters:
   - enemyPrefab: {fileID: 4684225412458299657, guid: 6b263ed4d473b0c48aa653016ab60e60, type: 3}
     maxSpawnCount: 5
-    moveType: 0
 --- !u!1001 &3598177179229578599
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,6 +83,10 @@ PrefabInstance:
     - target: {fileID: 533688930206133662, guid: 6b263ed4d473b0c48aa653016ab60e60, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 816789463981475765, guid: 6b263ed4d473b0c48aa653016ab60e60, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 837704049433333704, guid: 6b263ed4d473b0c48aa653016ab60e60, type: 3}
       propertyPath: m_LocalScale.x
