@@ -17,12 +17,13 @@ public class CommentSpawn : MonoBehaviour
     [SerializeField] float commentCount = 50;
 
     [Header("必要なコンポーネント")]
-    [SerializeField] Transform Canvas;
+    public GameObject Canvas;
     [SerializeField] GameObject CommentPrefab;
     [SerializeField] GameObject CheeringCommentPrefab;
     [SerializeField] BuzuriRank buzuriRank;
 
-    [HideInInspector]public bool cheeringCommentIsExist ;
+    [HideInInspector] public bool cheeringCommentIsExist ;
+    /*[HideInInspector]*/public bool interceptEnemyIsExist;
 
     CheeringComment cheeringComment;
     float spawnTime;
@@ -30,11 +31,13 @@ public class CommentSpawn : MonoBehaviour
     int beforeRaneNum;
     bool first = true;
     float commentCounter;
+    RectTransform canvasRect;
 
     // Start is called before the first frame update
     void Start()
     {
         cheeringComment=CheeringCommentPrefab.GetComponent<CheeringComment>();
+        canvasRect=Canvas.GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -75,17 +78,32 @@ public class CommentSpawn : MonoBehaviour
         }
     }
 
-    Vector2 DecideSpawnPos(RectTransform rectTransform,int raneNum)
+    //Vector2 DecideSpawnPos(RectTransform rectTransform, int raneNum)
+    //{
+    //    int[] rane = new int[8];
+    //    for (int i = 0; i < 8; i++)
+    //    {
+    //        rane[i] = (int)((Canvas.rect.height - rectTransform.sizeDelta.y) / 8) * i + 1;
+    //    }
+
+    //    Vector2 screenPos = new Vector2(Canvas.rect.width, rane[raneNum]);
+    //    Vector2 localPos;
+    //    RectTransformUtility.ScreenPointToLocalPointInRectangle(Canvas, screenPos, Camera.main, out localPos);
+
+
+    //    return localPos;
+    //}
+
+    Vector2 DecideSpawnPos(RectTransform rectTransform ,int raneNum)
     {
-        int[] rane = new int[8]; 
-        for (int i=0;i<8;i++)
-        {
-            rane[i] = (int)((Screen.height - rectTransform.sizeDelta.y) / 8) * i + 1;
-        }
+        float raneHeight=(canvasRect.rect.height-rectTransform.sizeDelta.y)/8;
 
-        Vector2 spawnPos = new Vector2(Screen.width, rane[raneNum]);
+        Vector2 CanvasMinY = new Vector2 (canvasRect.rect.width/2,-canvasRect.rect.height/2);
 
-        return spawnPos;
+        Vector2 SpanwPos = new Vector2 (CanvasMinY.x,CanvasMinY.y+(raneHeight*raneNum));
+
+
+        return SpanwPos;
     }
 
 
@@ -103,7 +121,7 @@ public class CommentSpawn : MonoBehaviour
         }
 
 
-        GameObject newTextObj = Instantiate(CommentType, Canvas);
+        GameObject newTextObj = Instantiate(CommentType, canvasRect);
 
         if(CommentType==CheeringCommentPrefab)
         {
@@ -117,6 +135,8 @@ public class CommentSpawn : MonoBehaviour
         commentText.SetCommentText(selectedText);
 
         rectTransform.sizeDelta = new Vector2(commentText.GetTextBoxSizeWidth(), rectTransform.sizeDelta.y);
-        rectTransform.position = DecideSpawnPos(rectTransform, raneNum);
+        //rectTransform.position = DecideSpawnPos(rectTransform, raneNum);
+        //rectTransform.position = DecideSpawnPos(rectTransform, raneNum);
+        rectTransform.anchoredPosition = DecideSpawnPos(rectTransform,raneNum);
     }
 }
