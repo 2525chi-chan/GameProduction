@@ -15,7 +15,7 @@ public class EnemySpawn
         this.moveType = moveType;
     }
 
-    public virtual void SpawnEnemies(int count) //ìGÇÃê∂ê¨
+    public virtual void SpawnEnemies(int count, EnemyMover.EnemyMoveType moveType) //ìGÇÃê∂ê¨
     {
         for (int i = 0; i < count; i++)
         {
@@ -24,9 +24,10 @@ public class EnemySpawn
 
             EnemyMover mover = enemy.GetComponent<EnemyMover>();
             if (mover != null) mover.SetMoveType(moveType);
+            //Debug.Log(moveType);
 
             EnemyIdentifier identifier = enemy.GetComponent<EnemyIdentifier>();
-            if (identifier != null) identifier.Initialize(enemyPrefab);
+            if (identifier != null) identifier.Initialize(enemyPrefab, moveType);
 
         }
     }    
