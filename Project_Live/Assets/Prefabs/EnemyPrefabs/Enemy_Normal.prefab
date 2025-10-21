@@ -315,7 +315,8 @@ MonoBehaviour:
   leftJoint: {fileID: 2483896200833738841}
   rightJoint: {fileID: 4471147055834684964}
   baseJointRigid: {fileID: 8483578021601991530}
-  rigidbodies: []
+  restoreDuration: 1
+  restoreAnimationSpeed: 0.5
 --- !u!95 &6637680128984497869
 Animator:
   serializedVersion: 7

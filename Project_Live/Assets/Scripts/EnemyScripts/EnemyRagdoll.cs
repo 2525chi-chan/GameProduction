@@ -1,15 +1,21 @@
 using UnityEngine;
 using  System.Collections.Generic;
 using System.Linq;
-public class EnemyRagdoll : MonoBehaviour
+using System.Collections;
+public class EnemyRagdoll : MonoBehaviour//ラグドール制御
 {
 
     public CharacterJoint leftJoint;
     public CharacterJoint rightJoint;
     public Rigidbody baseJointRigid;//本体にくっつけるRigidbody
+    public float restoreDuration = 0.2f;//ラグドール解除時に元の位置に戻るまでの時間
+    public float restoreAnimationSpeed = 0.5f;
+    List <Rigidbody> rigidbodies;
     GameObject enemy;
-    public List <Rigidbody> rigidbodies;
-    List <Transform>defaultPos = new List<Transform>();
+   
+  
+    List<Vector3>defaultTrans = new List<Vector3>();
+    List<Quaternion> defaultRote = new List<Quaternion>();
     EnemyStatus status;
     Animator animator;
     EnemyMover mover;
@@ -20,19 +26,22 @@ public class EnemyRagdoll : MonoBehaviour
     void Start()
     {
         enemy = this.gameObject;
-        status= enemy.GetComponent<EnemyStatus>();
+        status = enemy.GetComponent<EnemyStatus>();
         baseRigid = enemy.GetComponent<Rigidbody>();
-        mover =enemy.GetComponent<EnemyMover>();
-        rigidbodies = new List<Rigidbody>(enemy.GetComponentsInChildren<Rigidbody>());
-
-        rigidbodies.RemoveAll(rb => rb.name == enemy.name);
-      animator=this.GetComponent<Animator>();
-    }
-    private void Update()
-    {
-      
+        mover = enemy.GetComponent<EnemyMover>();
+        rigidbodies = new List<Rigidbody>(enemy.GetComponentsInChildren<Rigidbody>());  
         
+        rigidbodies.RemoveAll(rb => rb.name == enemy.name);
+        foreach (Rigidbody rb in rigidbodies)
+        {
+            defaultTrans.Add(rb.transform.localPosition);
+            defaultRote.Add(rb.transform.localRotation);
+        }
+      
+      
+        animator = this.GetComponent<Animator>();
     }
+   
 
     public void SwitchRagdoll(bool isRagdol)//ラグドール状態の切り替え。trueでラグドール状態、falseで通常状態
     {
@@ -44,14 +53,19 @@ public class EnemyRagdoll : MonoBehaviour
             animator.SetTrigger("Idle");
         }
 
-        foreach (Rigidbody rb in rigidbodies)
+        for (int i=0;  i<rigidbodies.Count;i++)
         {
+            var rb = rigidbodies[i];
+           
             rb.isKinematic =!isRagdol;
-            
-            
+            if (!isRagdol)
+            {
+                StartCoroutine(SmoothRestoreRagdoll(rb.transform, restoreDuration, defaultTrans[i], defaultRote[i]));
+            }
+                
         }
 
-        if (isRagdol&&leftJoint!=null&&rightJoint!=null)
+        if (isRagdol&&leftJoint!=null&&rightJoint!=null)//ラグドールにする
         {
 
             enemy.AddComponent<CharacterJoint>();
@@ -64,9 +78,10 @@ public class EnemyRagdoll : MonoBehaviour
             mover.MoveSetState(EnemyMoveState.stop);
             Debug.Log("とまる");
         }
-        else
+        else//通常状態に戻す
         {
             mover.MoveSetState(moveState);
+            
             if (leftJoint != null && rightJoint != null)
             {
                 leftJoint.connectedBody = null;
@@ -78,4 +93,24 @@ public class EnemyRagdoll : MonoBehaviour
      
     }
 
+    public IEnumerator SmoothRestoreRagdoll(Transform target, float duration, Vector3 defaultPos, Quaternion defaultRote)
+    {
+        float timeCount = 0f;
+        Vector3 startPos = target.localPosition;
+        Quaternion startRote = target.localRotation;
+        animator.speed = restoreAnimationSpeed;
+        while (timeCount < duration)
+        {
+            float t = timeCount / duration;
+
+            target.localPosition = Vector3.Lerp(startPos, defaultPos, t);
+            target.localRotation = Quaternion.Lerp(startRote, defaultRote, t);
+            animator.speed=Mathf.Lerp(restoreAnimationSpeed, 1f, t);
+            timeCount += Time.deltaTime;
+            yield return null;
+        }
+        target.localPosition = defaultPos;
+        target.localRotation = defaultRote;
+        animator.speed = 1f;
+    }
 }

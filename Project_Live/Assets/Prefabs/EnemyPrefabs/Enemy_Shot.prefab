@@ -160,9 +160,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7764904506935383429, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -9122437816611138549}
-    - targetCorrespondingSourceObject: {fileID: 7764904506935383429, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1573788113288719216}
     - targetCorrespondingSourceObject: {fileID: 7764904506935383429, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       insertIndex: -1
@@ -706,20 +703,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7764904506935383429, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
   m_PrefabInstance: {fileID: 2073441206489887152}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-9122437816611138549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8576028282158982197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b1f968a7f2380c49bc240cd8499728c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tag: 1
-  score: 90000
 --- !u!198 &1573788113288719216
 ParticleSystem:
   m_ObjectHideFlags: 0
