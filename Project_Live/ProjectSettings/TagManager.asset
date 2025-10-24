@@ -15,6 +15,7 @@ TagManager:
   - PlayerStatus
   - PlayerBuffManager
   - CommentSpawn
+  - EnemySpawnManager
   layers:
   - Default
   - TransparentFX

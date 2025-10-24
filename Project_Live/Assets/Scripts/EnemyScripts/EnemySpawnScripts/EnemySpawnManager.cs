@@ -17,7 +17,23 @@ public class EnemySpawnManager : BaseSpawnManager
 {
     [Header("¶¬‚·‚é“G‚Ìİ’è")]
     [SerializeField] List<SpawnParameter> spawnParameters;
+    [Header("‰½‘Ì“G‚ğ“|‚µ‚½‚çÄ¶¬‚ğI‚í‚ç‚¹‚é‚©")]
+    [SerializeField] int  spawnEndCount;
 
+    private int defeatedEnemyCount = 0;
+    public int DefeatedEnemyCount
+    {
+        get { return defeatedEnemyCount; }
+        set
+        {
+            defeatedEnemyCount = value;
+            if (defeatedEnemyCount >= spawnEndCount)
+            {
+                enableRespawn = false;
+                Debug.Log("“G¶¬I—¹");
+            }
+        }
+    }
     void Start()
     {
         SetUpEnemySpawns();

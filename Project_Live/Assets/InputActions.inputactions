@@ -1649,6 +1649,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Movie",
+            "id": "1adfb7ee-bb33-4599-b798-f9664507a8d5",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "217e93e7-7786-4857-bcea-f768ec24d5c4",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "fed11515-6e91-4e06-8100-8be18f35194b",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

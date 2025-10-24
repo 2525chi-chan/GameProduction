@@ -208,7 +208,7 @@ MonoBehaviour:
   attackPower: 10
   agility: 10
   deathHandler: {fileID: 2420152649761166137}
-  returnRagdollTime: 1
+  returnRagdollTime: 2
 --- !u!114 &2420152649761166137
 MonoBehaviour:
   m_ObjectHideFlags: 0

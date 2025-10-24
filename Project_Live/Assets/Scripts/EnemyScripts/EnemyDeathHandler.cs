@@ -33,11 +33,12 @@ public class EnemyDeathHandler : MonoBehaviour
 
     Rigidbody rb;
     GoodSystem goodSystem;
-
+    EnemySpawnManager spawnManager;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         goodSystem = GameObject.FindWithTag("GoodSystem").GetComponent<GoodSystem>();
+        spawnManager = GameObject.FindWithTag("EnemySpawnManager").GetComponent<EnemySpawnManager>();
     }
 
     private void Update()
@@ -79,7 +80,7 @@ public class EnemyDeathHandler : MonoBehaviour
     {
         if (deathEffect != null)
             Instantiate(deathEffect, transform.position, Quaternion.identity);
-
+        spawnManager.DefeatedEnemyCount++;
         Destroy(gameObject);
     }
 

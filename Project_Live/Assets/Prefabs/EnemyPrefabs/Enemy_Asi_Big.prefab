@@ -148,6 +148,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1306671971181806464, guid: 6b263ed4d473b0c48aa653016ab60e60, type: 3}
+      propertyPath: returnRagdollTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1668119797916014110, guid: 6b263ed4d473b0c48aa653016ab60e60, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
       value: 192
