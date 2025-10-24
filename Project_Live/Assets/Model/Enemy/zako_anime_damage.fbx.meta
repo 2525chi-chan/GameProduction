@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 667f38cb2e69d204eb73ccfcd90f9365
+guid: 9c8a1b9414284ef439aaf76bbe499394
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,18 +31,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Take 001
+      name: Enemy_Damage_Normal
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 50
+      lastFrame: 60
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
