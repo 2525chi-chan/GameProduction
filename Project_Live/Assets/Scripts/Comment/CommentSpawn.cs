@@ -23,7 +23,8 @@ public class CommentSpawn : MonoBehaviour
     [SerializeField] BuzuriRank buzuriRank;
 
     [HideInInspector] public bool cheeringCommentIsExist ;
-    /*[HideInInspector]*/public bool interceptEnemyIsExist;
+    [HideInInspector] public bool interceptEnemyIsExist;
+    [HideInInspector] public float interceptEnemyCount;     //妨害敵用のカウンター　＊あとで敵スポーン系スクリプトのほうに統合したい
 
     CheeringComment cheeringComment;
     float spawnTime;
@@ -38,6 +39,8 @@ public class CommentSpawn : MonoBehaviour
     {
         cheeringComment=CheeringCommentPrefab.GetComponent<CheeringComment>();
         canvasRect=Canvas.GetComponent<RectTransform>();
+        interceptEnemyIsExist = false;
+        interceptEnemyCount = 0;
     }
 
     // Update is called once per frame
@@ -60,7 +63,7 @@ public class CommentSpawn : MonoBehaviour
                 }
             }
 
-            if (commentCounter >= commentCount&&!cheeringCommentIsExist)
+            if (commentCounter >= commentCount&&!cheeringCommentIsExist&&!interceptEnemyIsExist)
             {
                 Debug.Log("応援コメントが生成されました。");
                 InstantiateComment(raneNum,CheeringCommentPrefab);
@@ -134,9 +137,7 @@ public class CommentSpawn : MonoBehaviour
         // テキストを設定
         commentText.SetCommentText(selectedText);
 
-        rectTransform.sizeDelta = new Vector2(commentText.GetTextBoxSizeWidth(), rectTransform.sizeDelta.y);
-        //rectTransform.position = DecideSpawnPos(rectTransform, raneNum);
-        //rectTransform.position = DecideSpawnPos(rectTransform, raneNum);
+        rectTransform.sizeDelta = new Vector2(commentText.GetTextBoxSizeWidth(), commentText.GetTextBoxSizeHeight());
         rectTransform.anchoredPosition = DecideSpawnPos(rectTransform,raneNum);
     }
 }
