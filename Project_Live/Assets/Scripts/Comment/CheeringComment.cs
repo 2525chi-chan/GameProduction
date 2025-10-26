@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class CheeringComment : MonoBehaviour
+public class CheeringComment  :AnimationCheeringComment
 {
     [Header("加えるHP")]
     [SerializeField] float addHPnum;
@@ -16,11 +18,22 @@ public class CheeringComment : MonoBehaviour
     [SerializeField] float buffTime;
     [Header("応援コメントの内容")]
     public  List<string> cheeringCommentContent = new List<string>();
+    [Header("決定時のエフェクト")]
+    [SerializeField] ParticleSystem pressEffect;
+    [Header("軌跡を描くエフェクト")]
+    [SerializeField] GameObject trailEffect;
+    [Header("軌跡エフェクトの有無")]
+    [SerializeField] bool trailFlag;
 
     PlayerStatus playerStatus;
     PlayerBuffManager playerBuffManager;
     CommentSpawn commentSpawn;
+    CommentMove commentMove;
+    
     Button thisComment;
+
+    GameObject PowerBuffImage;
+    GameObject AgilityBuffImage;
 
     private void Start()
     {
@@ -28,7 +41,15 @@ public class CheeringComment : MonoBehaviour
         playerStatus=GameObject.FindGameObjectWithTag("PlayerStatus").GetComponent<PlayerStatus>();
         commentSpawn = GameObject.FindGameObjectWithTag("CommentSpawn").GetComponent<CommentSpawn>();
         thisComment=this.gameObject.GetComponent<Button>();
+        commentMove=this.gameObject.GetComponent<CommentMove>();
 
+        animator = this.gameObject.GetComponent<Animator>();
+
+        rectTransform=this.GetComponent<RectTransform>();
+        PowerBuffImage = GameObject.FindGameObjectWithTag("PowerBuffImage");
+        AgilityBuffImage = GameObject.FindGameObjectWithTag("AgilityBuffImage");
+
+        trailEffect.SetActive(false);
         commentSpawn.cheeringCommentIsExist=true;
 
         SetCommentAction();
@@ -70,7 +91,6 @@ public class CheeringComment : MonoBehaviour
         }
     }
 
-
     public void AddHP()
     {
         playerBuffManager.AddHP(addHPnum);
@@ -79,20 +99,42 @@ public class CheeringComment : MonoBehaviour
 
     public void BuffAtack()
     {
-        playerBuffManager.BuffAttack(attackMagnification, buffTime);
-        DestroyComment();
+        AnimationBeforeMethod();
+
+        // コルーチン完了後にBuffAttackを実行するコールバックを渡す
+        OnButtonClicked(PowerBuffImage, () =>
+        {
+            // アニメーション完了後に実行される
+            playerBuffManager.BuffAttack(attackMagnification, buffTime);
+            DestroyComment();
+        });
     }
 
     public void BuffAgility()
     {
-        playerBuffManager.BuffMoveSpeed(agilityMagnification, buffTime);
-        DestroyComment();
+        AnimationBeforeMethod();
+
+        OnButtonClicked(AgilityBuffImage, () =>
+        {
+            playerBuffManager.BuffMoveSpeed(agilityMagnification, buffTime);
+            DestroyComment();
+        });
+    }
+
+    void AnimationBeforeMethod()
+    {
+        pressEffect.Play();
+        EventSystem.current.SetSelectedGameObject(null);
+        commentMove.enabled = false;
+        if (trailFlag)
+        {
+            trailEffect.SetActive(true);
+        }
     }
 
     void DestroyComment()
     {
         Destroy(this.gameObject);
-        commentSpawn.cheeringCommentIsExist = false;
     }
 
     private void OnDestroy()

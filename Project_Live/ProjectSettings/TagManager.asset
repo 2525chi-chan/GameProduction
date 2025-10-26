@@ -15,7 +15,8 @@ TagManager:
   - PlayerStatus
   - PlayerBuffManager
   - CommentSpawn
-  - EnemySpawnManager
+  - PowerBuffImage
+  - AgilityBuffImage
   layers:
   - Default
   - TransparentFX
@@ -27,7 +28,7 @@ TagManager:
   - EnemyRagdoll
   - EnemySafety
   - Floor
-  - 
+  - ParticleEffect
   - 
   - 
   - 

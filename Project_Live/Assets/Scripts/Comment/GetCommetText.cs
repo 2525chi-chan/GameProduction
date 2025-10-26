@@ -17,5 +17,10 @@ public class GetCommetText : MonoBehaviour
     {
         return text.preferredWidth;
     }
+
+    public float GetTextBoxSizeHeight()
+    {
+        return text.preferredHeight;
+    }
     
 }
