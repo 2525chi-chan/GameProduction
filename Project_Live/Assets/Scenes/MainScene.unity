@@ -5592,6 +5592,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &348594878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 348594875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f6f2b9debe01943a163f4f41497315, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &369292443
 GameObject:
   m_ObjectHideFlags: 0
@@ -7788,6 +7800,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2070294987}
+  - {fileID: 1042366759}
   m_Father: {fileID: 1952108092}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &847291718
@@ -7821,6 +7834,7 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 7764904506935383429, guid: 755d7461fb97e4d44b9d0fb719ee4889, type: 3}
     maxSpawnCount: 2
     moveType: 0
+  spawnEndCount: 0
 --- !u!1 &850832793 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -655574477042552035, guid: c499d3441c71b2441b7eff163298bfc0, type: 3}
@@ -8728,6 +8742,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tag: 0
   score: 30
+--- !u!1 &1042366758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1042366759}
+  - component: {fileID: 1042366760}
+  m_Layer: 0
+  m_Name: EnemyCountManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1042366759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042366758}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 847291717}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1042366760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042366758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e8fffa014bfcdd4582a94b84220b812, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossManager: {fileID: 2070294989}
 --- !u!1 &1113225795
 GameObject:
   m_ObjectHideFlags: 0
@@ -8980,6 +9039,12 @@ MonoBehaviour:
     changeStateInterval: 5
     goodActionUsedEffect: {fileID: 747110499}
     isInvincible: 1
+    animationSpeedCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   goodAction2:
     actionName: "\u30D3\u30FC\u30E0\u7167\u5C04"
     goodCost: 0
@@ -8987,6 +9052,12 @@ MonoBehaviour:
     changeStateInterval: 2
     goodActionUsedEffect: {fileID: 747110499}
     isInvincible: 1
+    animationSpeedCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   goodAction3:
     actionName: "\u7206\u5F3E\u6295\u64F2"
     goodCost: 0
@@ -8994,6 +9065,12 @@ MonoBehaviour:
     changeStateInterval: 1.5
     goodActionUsedEffect: {fileID: 747110499}
     isInvincible: 1
+    animationSpeedCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   goodAction4:
     actionName: "\u885D\u6483\u6CE2"
     goodCost: 0
@@ -9001,6 +9078,12 @@ MonoBehaviour:
     changeStateInterval: 2
     goodActionUsedEffect: {fileID: 47901976984480875, guid: 8f1cae56c441cf84e8b27d53f3c1a1fe, type: 3}
     isInvincible: 1
+    animationSpeedCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   goodSystem: {fileID: 8272935803192008037}
   rushAttack: {fileID: 877382061}
   wideAttack: {fileID: 1289444029}
@@ -11275,6 +11358,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 24acb68e-528d-4d92-9d9b-5fa51a20ff53
     m_ActionName: 'Player/GetComment[/Keyboard/q]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 217e93e7-7786-4857-bcea-f768ec24d5c4
+    m_ActionName: Movie/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -12653,6 +12740,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c499d3441c71b2441b7eff163298bfc0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 348594877}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c499d3441c71b2441b7eff163298bfc0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 348594878}
     - targetCorrespondingSourceObject: {fileID: -417878991522404143, guid: c499d3441c71b2441b7eff163298bfc0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2017607689}
@@ -13615,7 +13705,6 @@ Transform:
   - {fileID: 7324377562995865312}
   - {fileID: 1711699308}
   - {fileID: 847291717}
-  - {fileID: 1414807533}
   - {fileID: 1390467026}
   - {fileID: 1685322162}
   - {fileID: 317195101}

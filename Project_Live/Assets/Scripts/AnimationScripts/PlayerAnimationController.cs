@@ -7,7 +7,11 @@ using UnityEngine;
 public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] Animator animator;
-
+    public Animator Animator
+    {
+        get { return animator; }
+        set { animator = value; }
+    }
     public void PlayIdle() //待機アニメーションの設定
     {
         ResetAllParameters();

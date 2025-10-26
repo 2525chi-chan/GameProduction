@@ -21,12 +21,15 @@ public class GoodActionParameters
     [SerializeField] public GameObject goodActionUsedEffect;
     [Header("アクション発動中、ダメージを無効化するかどうか")]
     [SerializeField] bool isInvincible = false;
-    
+    [Header("アニメーションの再生速度カーブ")]
+    [SerializeField] AnimationCurve animationSpeedCurve;
+  
     public int GoodCost { get { return goodCost; } }
     public float ActionInterval { get { return actionInterval;} }
     public float ChangeStateInterval { get { return changeStateInterval;} }
     public GameObject GoodActionUsedEffect { get { return goodActionUsedEffect; } }
-    public bool IsInvincible { get { return isInvincible; } }
+    public bool IsInvincible { get { return isInvincible; } } 
+    public AnimationCurve AnimationSpeedCurve { get { return animationSpeedCurve; } }
 }
 
 public class GoodAction : MonoBehaviour
