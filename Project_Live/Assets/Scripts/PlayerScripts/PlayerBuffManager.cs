@@ -24,6 +24,11 @@ public class BuffInfo
 
 public class PlayerBuffManager : MonoBehaviour
 {
+    [Header("パワーバフ出現時のエフェクト")]
+    [SerializeField] ParticleSystem powerBuffEffect;
+    [Header("スピードバフ出現時のエフェクト")]
+    [SerializeField] ParticleSystem agilityBuffEffect;
+
     [Header("必要なコンポーネント")]
     [SerializeField] GameObject AgilityImage;
     [SerializeField] TextMeshProUGUI AgilityTimerText;
@@ -101,6 +106,7 @@ public class PlayerBuffManager : MonoBehaviour
         else
         {
             PowerImage.SetActive(true);
+            powerBuffEffect.Play();
             PowerTimerText.enabled = true;
             float original = playerStatus.AttackPower;
             float buffed = original * magnification;
@@ -120,6 +126,7 @@ public class PlayerBuffManager : MonoBehaviour
         else
         {
             AgilityImage.SetActive(true);
+            agilityBuffEffect.Play();
             AgilityTimerText.enabled = true;
             float original = playerStatus.Agility;
             float buffed = original * magnification;

@@ -19,7 +19,11 @@ public class CheeringComment  :AnimationCheeringComment
     [Header("応援コメントの内容")]
     public  List<string> cheeringCommentContent = new List<string>();
     [Header("決定時のエフェクト")]
-    [SerializeField] ParticleSystem particleEffect;
+    [SerializeField] ParticleSystem pressEffect;
+    [Header("軌跡を描くエフェクト")]
+    [SerializeField] GameObject trailEffect;
+    [Header("軌跡エフェクトの有無")]
+    [SerializeField] bool trailFlag;
 
     PlayerStatus playerStatus;
     PlayerBuffManager playerBuffManager;
@@ -45,6 +49,7 @@ public class CheeringComment  :AnimationCheeringComment
         PowerBuffImage = GameObject.FindGameObjectWithTag("PowerBuffImage");
         AgilityBuffImage = GameObject.FindGameObjectWithTag("AgilityBuffImage");
 
+        trailEffect.SetActive(false);
         commentSpawn.cheeringCommentIsExist=true;
 
         SetCommentAction();
@@ -94,9 +99,7 @@ public class CheeringComment  :AnimationCheeringComment
 
     public void BuffAtack()
     {
-        particleEffect.Play();
-        EventSystem.current.SetSelectedGameObject(null);
-        commentMove.enabled = false;
+        AnimationBeforeMethod();
 
         // コルーチン完了後にBuffAttackを実行するコールバックを渡す
         OnButtonClicked(PowerBuffImage, () =>
@@ -109,15 +112,24 @@ public class CheeringComment  :AnimationCheeringComment
 
     public void BuffAgility()
     {
-        particleEffect.Play();
-        EventSystem.current.SetSelectedGameObject(null);
-        commentMove.enabled = false;
+        AnimationBeforeMethod();
 
         OnButtonClicked(AgilityBuffImage, () =>
         {
             playerBuffManager.BuffMoveSpeed(agilityMagnification, buffTime);
             DestroyComment();
         });
+    }
+
+    void AnimationBeforeMethod()
+    {
+        pressEffect.Play();
+        EventSystem.current.SetSelectedGameObject(null);
+        commentMove.enabled = false;
+        if (trailFlag)
+        {
+            trailEffect.SetActive(true);
+        }
     }
 
     void DestroyComment()
