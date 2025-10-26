@@ -46,12 +46,16 @@ public class GoodAction3State : IPlayerState
         {
             goodAction.GoodAction3();
             isActionActivated = true;
-         //   actionUsedEffect?.SetActive(false);
+            //   actionUsedEffect?.SetActive(false);
+        }
+        var animationState = anim.Animator.GetCurrentAnimatorStateInfo(0);
+        //  if (currentStateTime < goodAction.GoodAction3Parameters.ChangeStateInterval) return;
+        if (animationState.normalizedTime >= 1.0f && animationState.IsName("GoodAction3"))
+        {
+            PlayerActionEvents.IdleEvent();
         }
 
-        if (currentStateTime < goodAction.GoodAction3Parameters.ChangeStateInterval) return;
 
-        PlayerActionEvents.IdleEvent();
     }
 
     public void Exit()

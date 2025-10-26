@@ -7,10 +7,7 @@ public class ResetAnimation : StateMachineBehaviour//‘¼‚ÌƒXƒe[ƒg‚ÉØ‚è‘Ö‚í‚é‚
 {
     [SerializeField]float resetDuration = 0.2f; // ƒŠƒZƒbƒg‚Ü‚Å‚Ì’x‰„ŠÔ
 
-    public void Awake()
-    {
-       
-    }
+   
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     { 
          TransformResetHelper helper=animator.gameObject.GetComponent<TransformResetHelper>();

@@ -15,21 +15,20 @@ public class GoodActionParameters
     [SerializeField] int goodCost = 100;
     [Header("攻撃が発生するまでの時間")]
     [SerializeField] float actionInterval = 1f;
-    [Header("待機状態に移行するまでの時間")]
+    [Header("待機状態に移行するまでの時間(現在未使用)")]
     [SerializeField] float changeStateInterval = 2f;
     [Header("いいねアクション使用時に発生するエフェクト")]
     [SerializeField] public GameObject goodActionUsedEffect;
     [Header("アクション発動中、ダメージを無効化するかどうか")]
     [SerializeField] bool isInvincible = false;
-    [Header("アニメーションの再生速度カーブ")]
-    [SerializeField] AnimationCurve animationSpeedCurve;
+    
   
     public int GoodCost { get { return goodCost; } }
     public float ActionInterval { get { return actionInterval;} }
     public float ChangeStateInterval { get { return changeStateInterval;} }
     public GameObject GoodActionUsedEffect { get { return goodActionUsedEffect; } }
     public bool IsInvincible { get { return isInvincible; } } 
-    public AnimationCurve AnimationSpeedCurve { get { return animationSpeedCurve; } }
+   
 }
 
 public class GoodAction : MonoBehaviour
