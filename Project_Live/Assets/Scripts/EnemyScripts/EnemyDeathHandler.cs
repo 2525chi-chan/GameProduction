@@ -66,7 +66,7 @@ public class EnemyDeathHandler : MonoBehaviour
         if (isProcessing) return;
 
         isProcessing = true;
-
+        isDead = true;
         //ÇÃÇØÇºÇËèàóù
         Vector3 backwardForce = -transform.forward * knockbackForce_Back;
         Vector3 upwardForce = Vector3.up * knockbackForce_Up;
