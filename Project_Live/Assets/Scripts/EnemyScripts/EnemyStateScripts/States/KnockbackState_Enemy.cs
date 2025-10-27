@@ -12,7 +12,7 @@ public class KnockbackState_Enemy : IEnemyState
     public void Enter()
     {
         Debug.Log("のけぞり状態に移行");
-        anim.PlayKnockback(); //のけぞりアニメーションの再生
+        anim.PlayDamage(); //のけぞりアニメーションの再生
 
     }
 

@@ -32,7 +32,7 @@ public class PlayerStatus : CharacterStatus
 
     Rigidbody rb;
 
-    float prev_goodNum = 0.1f;
+    //float prev_goodNum = 0.1f;
 
     public PlayerState CurrentState { get { return currentState; } set { currentState = value; } }
     public bool IsDead { get { return isDead; } set { isDead = value; } }

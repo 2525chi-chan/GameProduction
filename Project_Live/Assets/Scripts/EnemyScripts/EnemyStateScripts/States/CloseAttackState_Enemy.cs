@@ -6,7 +6,10 @@ public class CloseAttackState_Enemy : IEnemyState
     EnemyMover mover;
     AttackController attackController;
 
-    float timer = 0f; //攻撃待機時間の計測用変数
+    float durationTimer;
+    float coolTimer;
+    bool isPlayedAnim;
+    bool isAttacked;
 
     public CloseAttackState_Enemy(EnemyAnimationController anim, EnemyMover mover, AttackController attackController)
     {
@@ -17,26 +20,43 @@ public class CloseAttackState_Enemy : IEnemyState
 
     public void Enter()
     {
-        Debug.Log("近接攻撃状態に移行");
-        anim.PlayCloseAttack(); //近接攻撃アニメーションの再生
-
+        durationTimer = 0f;
+        coolTimer = 0f;
+        isPlayedAnim = false;
+        isAttacked = false;
+        //Debug.Log("近接攻撃状態に移行");
     }
 
     public void Update()
     {
         mover.MoveStateProcess(); //移動処理（プレイヤーの注視、回転動作など）
 
-        timer += Time.deltaTime;
+        if (!isAttacked)durationTimer += Time.deltaTime;
+        else coolTimer += Time.deltaTime;
 
-        if (timer > attackController.AttackDuration)
+        if (!isPlayedAnim)
         {
-            timer = 0f;
+            anim.PlayCloseAttack();
+            isPlayedAnim = true;
+        }
+
+        if (durationTimer >= attackController.AttackDuration && isPlayedAnim)
+        {
+            durationTimer = 0f;
             attackController.InstanceAttack();
-        }            
+            isAttacked = true;
+        }
+
+        if (coolTimer >= attackController.AttackCoolTime && isPlayedAnim)
+        {
+            coolTimer = 0f;
+            isPlayedAnim = false;
+            isAttacked = false;
+        }
     }
 
     public void Exit()
     {
-        Debug.Log("近接攻撃状態終了");
+        //Debug.Log("近接攻撃状態終了");
     }
 }

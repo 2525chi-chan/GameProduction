@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+//特定のオブジェクトとのみ当たり判定を行うようにする
+
 public class AttackTrigger : MonoBehaviour
 {
+    public EnemyActionEvents actionEvents = new EnemyActionEvents();
+
     [Header("攻撃を始める判定を行う領域")]
     [SerializeField] SphereCollider triggerRange;
     
@@ -23,24 +27,20 @@ public class AttackTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (IsValidTarget(other))
-        {
-            isInRange = true;
-            currentTimer = 0f;
-            Debug.Log("攻撃範囲に入った");
-        }        
+        if (!IsValidTarget(other)) return;
+        //Debug.Log(other.name + "は有効なターゲットです。攻撃処理を開始します。");
+       isInRange = true;
+        currentTimer = 0f;
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (IsValidTarget(other))
-        {
-            currentTimer = 0f;
-            isInRange = false;            
-            isAttackTrigger = false;
-            Debug.Log("攻撃判定範囲を出た");
-            EnemyActionEvents.IdleEvent();
-        }
+        if (!IsValidTarget(other)) return;
+        //Debug.Log(other.name + "がトリガー範囲内から出ました");
+        currentTimer = 0f;
+        isInRange = false;
+        isAttackTrigger = false;
+        actionEvents.IdleEvent();
     }
 
     void Update()
@@ -49,10 +49,10 @@ public class AttackTrigger : MonoBehaviour
 
         currentTimer += Time.deltaTime;
 
-        if (currentTimer > triggerDuration)
+        if (currentTimer > triggerDuration && !isAttackTrigger)
         {
             isAttackTrigger = true;
-            EnemyActionEvents.CloseAttackEvent();
+            actionEvents.CloseAttackEvent();
         }
     }
 

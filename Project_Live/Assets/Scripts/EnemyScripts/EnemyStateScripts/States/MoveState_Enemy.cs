@@ -13,7 +13,7 @@ public class MoveState_Enemy : IEnemyState
 
     public void Enter()
     {
-        //Debug.Log("移動状態に移行");
+        Debug.Log("移動状態に移行");
         anim.PlayMove();
     }
 
@@ -24,6 +24,6 @@ public class MoveState_Enemy : IEnemyState
 
     public void Exit()
     {
-        //Debug.Log("移動状態を終了");
+        Debug.Log("移動状態を終了");
     }
 }

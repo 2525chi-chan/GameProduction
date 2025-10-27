@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections;
 public class EnemyRagdoll : MonoBehaviour//ラグドール制御
 {
+    public EnemyActionEvents actionEvents = new EnemyActionEvents();
 
     public CharacterJoint leftJoint;
     public CharacterJoint rightJoint;
@@ -76,7 +77,7 @@ public class EnemyRagdoll : MonoBehaviour//ラグドール制御
 
             moveState = mover.MoveState;//止まる前の状態を保持
             mover.MoveSetState(EnemyMoveState.stop);
-            EnemyActionEvents.KnockbackEvent();
+            actionEvents.KnockbackEvent();
             Debug.Log("とまる");
         }
         else//通常状態に戻す
@@ -90,7 +91,7 @@ public class EnemyRagdoll : MonoBehaviour//ラグドール制御
             }
                 
             Destroy(enemy.GetComponent<CharacterJoint>());
-            EnemyActionEvents.IdleEvent();
+            actionEvents.IdleEvent();
         }
      
     }

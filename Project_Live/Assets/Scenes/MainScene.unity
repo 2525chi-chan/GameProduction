@@ -7665,19 +7665,22 @@ MonoBehaviour:
   checkInterval: 0.1
   spawnParameters:
   - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 2
+    maxSpawnCount: 0
     moveType: 0
   - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 4
+    maxSpawnCount: 0
     moveType: 1
   - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 2
+    maxSpawnCount: 0
     moveType: 2
   - enemyPrefab: {fileID: 8137719913462244462, guid: 62556fa3e350d9c4db59422a58a75a34, type: 3}
-    maxSpawnCount: 2
+    maxSpawnCount: 0
     moveType: 0
-  - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 1
+  - enemyPrefab: {fileID: 7764904506935383429, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+    maxSpawnCount: 0
+    moveType: 1
+  - enemyPrefab: {fileID: 7510787986585253425, guid: 3f61bbe730e45554c9e629c7d544b5ca, type: 3}
+    maxSpawnCount: 2
     moveType: 1
 --- !u!1 &850832793 stripped
 GameObject:
@@ -12731,7 +12734,6 @@ MonoBehaviour:
   baceForwardKnockbackForce: 1
   baceUpwardKnockbackForce: 16
   baceDownwardKnockbackForce: 15
-  objectName: PlayerStatus
   damageToTarget: {fileID: 1936352948}
 --- !u!65 &1936352951
 BoxCollider:
@@ -12941,7 +12943,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940885590}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.082480535, y: 0, z: 0, w: 0.9965927}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13077,7 +13079,6 @@ MonoBehaviour:
   baceForwardKnockbackForce: 80
   baceUpwardKnockbackForce: 80
   baceDownwardKnockbackForce: 0
-  objectName: PlayerStatus
   damageToTarget: {fileID: 1944883437}
 --- !u!65 &1944883440
 BoxCollider:

@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class EnemyStatus : CharacterStatus
 {   
+    public EnemyActionEvents actionEvents = new EnemyActionEvents();
     bool isDead = false;
     public bool IsDead { get { return isDead; } }
+
+    float previousHp;
 
     bool isRagdoll = false;
     public bool IsRagdoll
@@ -27,8 +30,9 @@ public class EnemyStatus : CharacterStatus
     private void Start()
     {
         pos = this.transform;
+        previousHp = Hp;
     }
-    private void Update()
+    void Update()
     {
         if (deathHandler == null) return;
 
@@ -36,11 +40,10 @@ public class EnemyStatus : CharacterStatus
         {
             isDead = true;
             deathHandler.StartDeathProcess(); //死亡時の処理を開始する
-            EnemyActionEvents.DownEvent(); //ダウン状態に移行する
+            actionEvents.DownEvent(); //ダウン状態に移行する
         }
         if (IsRagdoll&&deathHandler.IsGrounded()&&!isDead)
         {
-            EnemyActionEvents.KnockbackEvent(); //のけぞり状態に移行する
             ragdollCount += Time.deltaTime;
 
 
@@ -49,7 +52,7 @@ public class EnemyStatus : CharacterStatus
                 this.GetComponent<EnemyRagdoll>().SwitchRagdoll(false);
                 ragdollCount = 0;
                 Debug.Log("かいじょ");
-                EnemyActionEvents.IdleEvent();
+                actionEvents.IdleEvent();
             }
            
         }
@@ -57,5 +60,9 @@ public class EnemyStatus : CharacterStatus
         {
             ragdollCount = 0;
         }
+
+        if (Hp != previousHp && Hp > 0) actionEvents.KnockbackEvent();
+
+        previousHp = Hp;
     }
 }

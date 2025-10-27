@@ -8,6 +8,7 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
    public  enum EnemyMoveState { stop, lookOnly, move }
 public class EnemyMover : MonoBehaviour
 {
+    public EnemyActionEvents actionEvents = new EnemyActionEvents();
   public enum EnemyMoveType { PlayerChase, BlockPlayer, StageDestroy }
 
 
@@ -68,7 +69,7 @@ public class EnemyMover : MonoBehaviour
 
             MoveTypeProcess(distance);
             //MoveStateProcess(); //移動処理はMoveState_Enemyに任せる
-            CallStateEvent();
+            //CallStateEvent();
         }
     }
 
@@ -99,18 +100,18 @@ public class EnemyMover : MonoBehaviour
         switch (moveType)
         {
             case EnemyMoveType.PlayerChase:
-                if (distance >= stopRange) currentMoveState = EnemyMoveState.move;
+                if (distance < stopRange) currentMoveState = EnemyMoveState.lookOnly;
                     
-                else currentMoveState = EnemyMoveState.lookOnly;
+                else currentMoveState = EnemyMoveState.move;
+                CallStateEvent();
                 break;
 
             case EnemyMoveType.BlockPlayer:
-                if (distance <= detectionRange)
-                {
-                    if (distance >= stopRange) currentMoveState = EnemyMoveState.move;
-                    else currentMoveState = EnemyMoveState.lookOnly;
-                }
-                else currentMoveState = EnemyMoveState.stop;
+                if (distance > detectionRange) 
+                    currentMoveState = EnemyMoveState.stop;
+                else if (distance < stopRange) currentMoveState = EnemyMoveState.lookOnly;
+                else currentMoveState = EnemyMoveState.move;
+                CallStateEvent();
                 break;
 
             case EnemyMoveType.StageDestroy:
@@ -148,10 +149,10 @@ public class EnemyMover : MonoBehaviour
         switch (currentMoveState)
         {
             case EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
-                EnemyActionEvents.IdleEvent(); break;                
+                actionEvents.IdleEvent(); break;                
 
             case EnemyMoveState.move: //プレイヤーの方向を向いて追従する状態
-                EnemyActionEvents.MoveEvent(); break;
+                actionEvents.MoveEvent(); break;
 
             case EnemyMoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態
             default: break;

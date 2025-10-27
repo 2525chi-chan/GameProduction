@@ -11,32 +11,37 @@ public class EnemyActionStateMachine : MonoBehaviour
     [SerializeField] EnemyMover mover;
     [SerializeField] AttackController attackController;
     [SerializeField] AttackTrigger attackTrigger;
+
+    public EnemyActionEvents actionEvents = new EnemyActionEvents();
     
     public IEnemyState CurrentState { get { return currentState; } }
 
     void Awake()
     {
+        status.actionEvents = actionEvents;
+        mover.actionEvents = actionEvents;
+        attackTrigger.actionEvents = actionEvents;
         ChangeState(new IdleState_Enemy(anim, status, mover));
     }
 
     void OnEnable()
     {
-        EnemyActionEvents.OnIdleEvent += OnIdleProcess;
-        EnemyActionEvents.OnMoveEvent += OnMoveProcess;
-        EnemyActionEvents.OnKnockbackEvent += OnKnockbackProcess;
-        EnemyActionEvents.OnDownEvent += OnDownProcess;
-        EnemyActionEvents.OnCloseAttackEvent += OnCloseAttackProcess;
-        EnemyActionEvents.OnShotEvent += OnShotProcess;
+        actionEvents.OnIdleEvent += OnIdleProcess;
+        actionEvents.OnMoveEvent += OnMoveProcess;
+        actionEvents.OnKnockbackEvent += OnKnockbackProcess;
+        actionEvents.OnDownEvent += OnDownProcess;
+        actionEvents.OnCloseAttackEvent += OnCloseAttackProcess;
+        actionEvents.OnShotEvent += OnShotProcess;
     }
 
     void OnDisable()
     {
-        EnemyActionEvents.OnIdleEvent -= OnIdleProcess;
-        EnemyActionEvents.OnMoveEvent -= OnMoveProcess;
-        EnemyActionEvents.OnKnockbackEvent -= OnKnockbackProcess;
-        EnemyActionEvents.OnDownEvent -= OnDownProcess;
-        EnemyActionEvents.OnCloseAttackEvent -= OnCloseAttackProcess;
-        EnemyActionEvents.OnShotEvent -= OnShotProcess;
+        actionEvents.OnIdleEvent -= OnIdleProcess;
+        actionEvents.OnMoveEvent -= OnMoveProcess;
+        actionEvents.OnKnockbackEvent -= OnKnockbackProcess;
+        actionEvents.OnDownEvent -= OnDownProcess;
+        actionEvents.OnCloseAttackEvent -= OnCloseAttackProcess;
+        actionEvents.OnShotEvent -= OnShotProcess;
     }
 
     void Update()

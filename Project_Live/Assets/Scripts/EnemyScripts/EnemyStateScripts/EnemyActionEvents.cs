@@ -2,41 +2,41 @@ using Cinemachine;
 using UnityEditor;
 using UnityEngine;
 
-public static class EnemyActionEvents
+public class EnemyActionEvents
 {
-    public static event System.Action OnIdleEvent;
-    public static event System.Action OnMoveEvent;
-    public static event System.Action OnKnockbackEvent;
-    public static event System.Action OnDownEvent;
-    public static event System.Action OnCloseAttackEvent;
-    public static event System.Action OnShotEvent;
+    public event System.Action OnIdleEvent;
+    public event System.Action OnMoveEvent;
+    public event System.Action OnKnockbackEvent;
+    public event System.Action OnDownEvent;
+    public event System.Action OnCloseAttackEvent;
+    public event System.Action OnShotEvent;
 
-    public static void IdleEvent()
+    public void IdleEvent()
     {
         OnIdleEvent?.Invoke();
     }
 
-    public static void MoveEvent()
+    public void MoveEvent()
     {
         OnMoveEvent?.Invoke();
     }
 
-    public static void KnockbackEvent()
+    public void KnockbackEvent()
     {
         OnKnockbackEvent?.Invoke();
     }
 
-    public static void DownEvent()
+    public void DownEvent()
     {
         OnDownEvent?.Invoke();
     }
 
-    public static void CloseAttackEvent()
+    public void CloseAttackEvent()
     {
         OnCloseAttackEvent?.Invoke();
     }
 
-    public static void ShotEvent()
+    public void ShotEvent()
     {
         OnShotEvent?.Invoke();
     }
