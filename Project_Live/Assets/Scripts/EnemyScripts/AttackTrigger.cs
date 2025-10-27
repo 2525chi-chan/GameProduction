@@ -13,6 +13,7 @@ public class AttackTrigger : MonoBehaviour
     [Header("必要なコンポーネント")]
     [SerializeField] EnemyStatus status;
     [SerializeField] EnemyMover mover;
+    [SerializeField] Animator animator;
 
     float currentTimer = 0f; //経過時間の測定用
     bool isAttackTrigger = false; //攻撃するかどうか
@@ -39,11 +40,17 @@ public class AttackTrigger : MonoBehaviour
 
         currentTimer += Time.deltaTime;
 
-        if (currentTimer > triggerDuration) isAttackTrigger = true;//攻撃の処理                                                               
+        if (currentTimer > triggerDuration)
+        {  isAttackTrigger = true;//攻撃の処理
+            if(animator!=null)
+            animator.SetTrigger("Attack");
+        }
+                                                                          
     }
 
     void OnTriggerExit(Collider other)　//攻撃判定を行うエリアからプレイヤーが出たときの処理
     {
         currentTimer = 0f;
     }
+
 }

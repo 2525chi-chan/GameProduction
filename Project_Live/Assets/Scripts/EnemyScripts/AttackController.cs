@@ -13,7 +13,7 @@ public class AttackController : MonoBehaviour
     [Header("必要なコンポーネント")]
     [SerializeField] AttackTrigger attackTrigger;
     [SerializeField] EnemyMover mover;
-
+   
     float attackTimer = 0f; //攻撃待機時間の計測用変数
 
     void Update()

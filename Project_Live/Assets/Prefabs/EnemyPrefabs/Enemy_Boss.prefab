@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2108013824495171527, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2118160177108144318, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: enableRagdoll
       value: 0
@@ -125,3 +129,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathHandler: {fileID: 4581805128912596912}
+  gameClearManager: {fileID: 0}

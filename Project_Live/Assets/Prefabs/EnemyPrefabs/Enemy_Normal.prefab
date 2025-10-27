@@ -50,6 +50,7 @@ MonoBehaviour:
   triggerDuration: 2
   status: {fileID: 4098828232468043532}
   mover: {fileID: 8259107007558549480}
+  animator: {fileID: 6637680128984497869}
 --- !u!114 &446971775148853601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 5255598490899312179, guid: 4b98bf51e5c42e74fb4c5683938d47dc, type: 3}
-  attackDuration: 1
+  attackDuration: 0.5
   attackPos: {fileID: 1276372281413812872}
   attackTrigger: {fileID: 2434253285504405187}
   mover: {fileID: 8259107007558549480}
@@ -317,6 +318,7 @@ MonoBehaviour:
   baseJointRigid: {fileID: 8483578021601991530}
   restoreDuration: 1
   restoreAnimationSpeed: 0.5
+  enableRagdoll: 1
 --- !u!95 &6637680128984497869
 Animator:
   serializedVersion: 7

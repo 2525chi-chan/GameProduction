@@ -19,7 +19,8 @@ public class EnemySpawnManager : BaseSpawnManager
     [SerializeField] List<SpawnParameter> spawnParameters;
     [Header("‰½‘Ì“G‚ğ“|‚µ‚½‚çÄ¶¬‚ğI‚í‚ç‚¹‚é‚©")]
     [SerializeField] int  spawnEndCount;
-
+    [Header("ƒQ[ƒ€ŠJn‚É“G‚ğ¶¬‚·‚é‚©")]
+    [SerializeField] bool spawnOnStart = true;
     private int defeatedEnemyCount = 0;
     public int DefeatedEnemyCount
     {
@@ -36,7 +37,11 @@ public class EnemySpawnManager : BaseSpawnManager
     }
     void Start()
     {
-        SetUpEnemySpawns();
+        if (spawnOnStart)
+        {
+            SetUpEnemySpawns();
+        }
+           
     }
 
     void Update()

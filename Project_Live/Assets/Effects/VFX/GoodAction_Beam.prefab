@@ -140,9 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2904633bc1ff9ff4dbd724f972f41cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyTime: 2
+  destroyTime: 3
   isDestroy: 1
-  BazuriShot: {fileID: 0}
+  vfx: {fileID: 0}
 --- !u!114 &-1496709914321466496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,4 +156,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag: 2
-  score: 15
+  score: 200

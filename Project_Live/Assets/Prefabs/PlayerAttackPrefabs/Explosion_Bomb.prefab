@@ -84,10 +84,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b4942550ff06747ab6ed31589685dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baceDamage: 100
+  baceDamage: 200
   hitEffect: {fileID: 1376598843723980918, guid: 416ceb4e2c39a5d458d3cb632268b888, type: 3}
-  baceForwardKnockbackForce: 30
-  baceUpwardKnockbackForce: 40
+  baceForwardKnockbackForce: 50
+  baceUpwardKnockbackForce: 120
   baceDownwardKnockbackForce: 0
   damageToTarget: {fileID: 7835967089649186805}
 --- !u!114 &-4735040421111715085

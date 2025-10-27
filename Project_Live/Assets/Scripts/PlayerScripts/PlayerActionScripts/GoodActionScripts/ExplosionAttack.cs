@@ -6,6 +6,8 @@ public class ExplosionAttack : MonoBehaviour
 {
     [Header("生成するオブジェクト")]
     [SerializeField] GameObject explosionPrefab;
+    [Header("生成するエフェクト")]
+    [SerializeField] GameObject explosionEffect;
     [Header("生成する爆発の数")]
     [SerializeField] int explosionCount = 5;
     [Header("爆発の生成間隔")]
@@ -49,6 +51,8 @@ public class ExplosionAttack : MonoBehaviour
         randomPos = GetRandomPositionInsideCollider(); //ランダムな位置を取得する
 
         Instantiate(explosionPrefab, randomPos, Quaternion.identity);
+        if (explosionEffect != null)
+            Instantiate(explosionEffect, randomPos, Quaternion.identity);
         currentIntervalTime = 0f; //経過時間をリセットする
         currentExplosionCount++; //爆発のカウント数を増やす
     }

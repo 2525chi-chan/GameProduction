@@ -142,6 +142,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2434253285504405187, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 9125027621926303576}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: hp
       value: 110
@@ -197,5 +201,10 @@ PrefabInstance:
 --- !u!4 &278247329540723409 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2405998444838165316, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+  m_PrefabInstance: {fileID: 2503819622793431445}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &9125027621926303576 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6637680128984497869, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
   m_PrefabInstance: {fileID: 2503819622793431445}
   m_PrefabAsset: {fileID: 0}

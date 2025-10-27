@@ -638,7 +638,7 @@ Transform:
   m_GameObject: {fileID: 199806488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -678,8 +678,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 6079668942156640290, guid: 1a746421f6bc6e54f932994f047b9e58, type: 3}
+  explosionEffect: {fileID: 3583984894416044948, guid: f9b3e54ed9805614392a2080e6bfd4c6, type: 3}
   explosionCount: 1
-  explosionIntervalTime: 0.25
+  explosionIntervalTime: 0
   spawnRange: {fileID: 199806490}
   setToGround: 1
 --- !u!1 &221417347 stripped
@@ -7342,6 +7343,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501464748}
   m_CullTransparentMesh: 1
+--- !u!1 &514488869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 514488870}
+  - component: {fileID: 514488872}
+  - component: {fileID: 514488871}
+  m_Layer: 0
+  m_Name: EnemySpawnManager_Intercept
+  m_TagString: EnemySpawnManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &514488870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514488869}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 847291717}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &514488871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514488869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f9fab46796a094aae21f8c4c4c4768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnArea: {fileID: 141125266}
+  enableRespawn: 1
+  checkInterval: 30
+  spawnParameters:
+  - enemyPrefab: {fileID: 7764904506935383429, guid: 755d7461fb97e4d44b9d0fb719ee4889, type: 3}
+    maxSpawnCount: 2
+    moveType: 0
+  spawnEndCount: 5
+  spawnOnStart: 0
+--- !u!65 &514488872
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514488869}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Size: {x: 15, y: 0, z: 15}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &525923595
 GameObject:
   m_ObjectHideFlags: 0
@@ -8613,7 +8689,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2098856295}
@@ -9351,6 +9427,7 @@ Transform:
   m_Children:
   - {fileID: 2070294987}
   - {fileID: 1042366759}
+  - {fileID: 514488870}
   m_Father: {fileID: 1952108092}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &847291718
@@ -9367,24 +9444,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnArea: {fileID: 141125266}
   enableRespawn: 1
-  checkInterval: 30
+  checkInterval: 0.1
   spawnParameters:
   - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 1
-    moveType: 0
-  - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 0
-    moveType: 1
-  - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 0
-    moveType: 2
-  - enemyPrefab: {fileID: 8137719913462244462, guid: 62556fa3e350d9c4db59422a58a75a34, type: 3}
-    maxSpawnCount: 0
-    moveType: 0
-  - enemyPrefab: {fileID: 7764904506935383429, guid: 755d7461fb97e4d44b9d0fb719ee4889, type: 3}
     maxSpawnCount: 2
     moveType: 0
-  spawnEndCount: 0
+  - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
+    maxSpawnCount: 1
+    moveType: 1
+  - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
+    maxSpawnCount: 1
+    moveType: 2
+  - enemyPrefab: {fileID: 8137719913462244462, guid: 62556fa3e350d9c4db59422a58a75a34, type: 3}
+    maxSpawnCount: 1
+    moveType: 0
+  - enemyPrefab: {fileID: 8008517291889422472, guid: 1f440bc309aa2054aa8763491fad532d, type: 3}
+    maxSpawnCount: 1
+    moveType: 0
+  spawnEndCount: 40
+  spawnOnStart: 1
 --- !u!1 &850832793 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -655574477042552035, guid: c499d3441c71b2441b7eff163298bfc0, type: 3}
@@ -9579,8 +9657,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rushHitbox: {fileID: 1936352946}
   rushEffect: {fileID: 353535090412559159, guid: 3ab0c4e8f91b7f54582cd6d891379d73, type: 3}
-  rushDuration: 2
-  rushInterval: 0.1
+  rushDuration: 1.6
+  rushInterval: 0.2
   finishHitbox: {fileID: 1944883435}
   finishEffect: {fileID: 1677793234245174481, guid: e1d13efade615044bb00d6015241e2df, type: 3}
   finishDelay: 0.5
@@ -10852,29 +10930,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goodAction1:
     actionName: "\u30E9\u30C3\u30B7\u30E5\u653B\u6483"
-    goodCost: 20
-    actionInterval: 0.5
+    goodCost: 0
+    actionInterval: 1
     changeStateInterval: 5
     goodActionUsedEffect: {fileID: 747110499}
     isInvincible: 1
   goodAction2:
     actionName: "\u30D3\u30FC\u30E0\u7167\u5C04"
-    goodCost: 100
+    goodCost: 0
     actionInterval: 1.5
     changeStateInterval: 2
     goodActionUsedEffect: {fileID: 747110499}
     isInvincible: 1
   goodAction3:
     actionName: "\u7206\u5F3E\u6295\u64F2"
-    goodCost: 1000
-    actionInterval: 2
+    goodCost: 0
+    actionInterval: 1.9
     changeStateInterval: 1.5
     goodActionUsedEffect: {fileID: 747110499}
     isInvincible: 1
   goodAction4:
     actionName: "\u885D\u6483\u6CE2"
-    goodCost: 45
-    actionInterval: 2
+    goodCost: 0
+    actionInterval: 1.1
     changeStateInterval: 2
     goodActionUsedEffect: {fileID: 47901976984480875, guid: 8f1cae56c441cf84e8b27d53f3c1a1fe, type: 3}
     isInvincible: 1
@@ -11445,7 +11523,7 @@ Camera:
   m_GameObject: {fileID: 1229364333}
   m_Enabled: 0
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -11463,10 +11541,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.12
+    y: 0.207
+    width: 0.76
+    height: 0.76
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -12682,7 +12760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  attackPower: 80
+  attackPower: 15
   agility: 10
   deathEffect: {fileID: 2970488489590598586, guid: 8bcb93189acc69c4494bebb4c3eb3997, type: 3}
   target: {fileID: 1113225795}
@@ -15285,7 +15363,7 @@ MonoBehaviour:
   baceDamage: 5
   hitEffect: {fileID: 1502491750092207368, guid: 90726ae90ad674442a2df93d617b83b5, type: 3}
   baceForwardKnockbackForce: 1
-  baceUpwardKnockbackForce: 16
+  baceUpwardKnockbackForce: 30
   baceDownwardKnockbackForce: 15
   damageToTarget: {fileID: 1936352948}
 --- !u!65 &1936352951
@@ -15496,7 +15574,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940885590}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.082480535, y: 0, z: 0, w: 0.9965927}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
