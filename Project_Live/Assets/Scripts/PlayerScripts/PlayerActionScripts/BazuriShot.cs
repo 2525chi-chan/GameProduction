@@ -35,7 +35,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] float cameraTime;
     [Header("スロー時のゲーム速度(1未満じゃないとスローにならない)")]
     [SerializeField] float slowSpeed;
-    [Header("バズリショットのストック")]
+    [Header("バズリショットの最大ストック")]
     [SerializeField] int shotStock;
     [Header("デフォルトのレイヤー(カメラ判定に用いるレイヤー)")]
     [SerializeField] LayerMask layer;
@@ -50,6 +50,17 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] GameObject effect;
     private Camera analyzerCamera;
     private Coroutine bazuriCoroutine;
+    private int currentStock;
+    public int CurrentStock
+    {
+        get { return currentStock; }
+        set { currentStock = value; }
+    }
+    public int ShotStock
+    {
+        get { return shotStock; }
+        set { shotStock = value; }
+    }
     private bool isBazuriMode = false;
     public bool IsBazuriMode
     {
@@ -65,7 +76,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
             analyzerCamera =bazuriCamera.GetComponent<Camera>();
             cinemachineBrain.m_CameraActivatedEvent.AddListener(OnCameraActivated);
         }
-
+     
     }
 
     public void TryBazuriShot()
@@ -75,7 +86,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         {
             StopCoroutine(bazuriCoroutine);
         }
-        if (shotStock > 0)
+        if (currentStock > 0)
         {
             bazuriCoroutine = StartCoroutine(BazuriModeRoutine());
         }
@@ -156,7 +167,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
             mainCamera.Priority = highPriority;
             bazuriCamera.Priority = lowPriority;
         }
-        shotStock--;
+        currentStock--;
         
         playerInput.SwitchCurrentActionMap("Player");
        // ResetCamera();
@@ -178,9 +189,10 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
             EndBazuriMode();
         }
     }
-    public void RecoveryShotStock(int count)
+    public void SetBazuriShotStock(int rank)
     {
-        shotStock+=count;
+        shotStock = rank;
+        currentStock = shotStock;
     }
      void OnCameraActivated(ICinemachineCamera newcam,ICinemachineCamera oldcam)
     {

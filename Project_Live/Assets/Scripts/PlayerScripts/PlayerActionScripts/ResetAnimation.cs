@@ -11,8 +11,11 @@ public class ResetAnimation : StateMachineBehaviour//‘¼‚ÌƒXƒe[ƒg‚ÉØ‚è‘Ö‚í‚é‚
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     { 
          TransformResetHelper helper=animator.gameObject.GetComponent<TransformResetHelper>();
-        animator.SetFloat("SpeedMultiply", 1);
-        Debug.Log("ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌSpeedMultiply‚ğ1‚ÉƒŠƒZƒbƒg");
+        if (animator.GetFloat("MotionSpeed") != 1)
+        {
+            animator.SetFloat("MotionSpeed", 1);
+        }
+        // Debug.Log("ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌSpeedMultiply‚ğ1‚ÉƒŠƒZƒbƒg");
         helper.StartCoroutine(helper.SmoothResetTransform(animator,resetDuration));
     }
 

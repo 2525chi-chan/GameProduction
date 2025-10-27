@@ -19,6 +19,14 @@ public class BuzzRank
     [Header("このバズリランクのコメントのスポーン時間")]
     [SerializeField] float commentSpawnTime;
     public float CommentSpawnTime => commentSpawnTime;    //スポーン時間参照用ゲッター
+
+    [Header("このバズリランクのバズリショットのストック数")] 
+    [SerializeField] int bazuriShotStock;
+    public int BazuriShotStock => bazuriShotStock;
+    [Header("次のバズリランクのゲージ画像")]
+    public Image nextRankImage;
+    [Header("このバズリランクのゲージのエフェクト画像(無ければ入れなくていい)")]
+    public Image EffectImage;
     [Header("このバズリランクの色")]
     [SerializeField] public Color rankColor;
     [Header("このバズリランクで表示されるコメント")]
@@ -35,8 +43,8 @@ public class BuzuriRank : MonoBehaviour
     [Header("バズリランクゲージバー")]
     [SerializeField] Slider BuzuriSlider;
     [Header("必要なコンポーネント")]
-    [SerializeField] Image buzuriGage;
-
+  //  [SerializeField] Image buzuriGage;
+    [SerializeField] BazuriShot bazuriShot;
     private int currentIndex = 0;   //現在のクラスのインデックス数
     private float beforeMaxValue = 0;   //前のバズリランクに到達するまでに必要ないいね数
 
@@ -50,15 +58,26 @@ public class BuzuriRank : MonoBehaviour
     {
         goodSystem = this.GetComponent<GoodSystem>();
         currentBuzzRank = buzzRanks[currentIndex];  //最初のバズリランク情報を格納
-        buzuriGage.color = currentBuzzRank.rankColor;
+      //  buzuriGage.color = currentBuzzRank.rankColor;
         goodSystem.addGoodText.color=currentBuzzRank.rankColor;
-        BuzuriSlider.maxValue = buzzRanks[currentIndex + 1].needNum;  //バズリランクゲージの最大値を次のバズリランクに必要ないいね数にする
+        //BuzuriSlider.maxValue = buzzRanks[currentIndex + 1].needNum;  //バズリランクゲージの最大値を次のバズリランクに必要ないいね数にする
+
+        bazuriShot.ShotStock= currentBuzzRank.BazuriShotStock; //バズリショットのストック数を現在のバズリランクに応じた数にする
+        bazuriShot.CurrentStock=bazuriShot.ShotStock;
     }
 
     // Update is called once per frame
     void Update()
     {
-        BuzuriSlider.value = goodSystem.GoodNum - beforeMaxValue; //いいね数から現在のバズリランクまでに必要だったいいね数を引く
+        if(currentIndex + 1 >= buzzRanks.Count)    //最高のバズリランクに到達しているか確認
+        {
+            return; //到達していれば以降の処理を行わない
+        }
+
+        buzzRanks[currentIndex].nextRankImage.fillAmount = goodSystem.GoodNum / buzzRanks[currentIndex+1].needNum; //現在のバズリランクの画像のゲージを更新
+
+
+       // BuzuriSlider.value = goodSystem.GoodNum - beforeMaxValue; //いいね数から現在のバズリランクまでに必要だったいいね数を引く
 
         if (currentIndex + 1 < buzzRanks.Count) //次のバズリランクが設定されていれば実行
         {
@@ -66,11 +85,19 @@ public class BuzuriRank : MonoBehaviour
             {
                 currentIndex++; //次のインデックス数に移動
                 currentBuzzRank = buzzRanks[currentIndex];  //バズリランクを上げる
-                buzuriGage.color = currentBuzzRank.rankColor;    
+               // buzuriGage.color = currentBuzzRank.rankColor;    
                 goodSystem.addGoodText.color = currentBuzzRank.rankColor;   //バズリランクゲージといいね獲得数を現在のバズリランクの色にする
+
+                if (currentBuzzRank.EffectImage != null)
+                {
+                    currentBuzzRank.EffectImage.enabled = true;  //エフェクト画像が設定されていれば表示させる
+                }
+
+
+                bazuriShot.SetBazuriShotStock(currentBuzzRank.BazuriShotStock); //バズリショットのストック数を現在のバズリランクに応じた数にする
                 if (currentIndex + 1 != buzzRanks.Count)    //設定されている最高のバズリランクに到達しているか確認
                 {
-                    BuzuriSlider.maxValue = currentBuzzRank.needNum - buzzRanks[currentIndex - 1].needNum;    //ゲージをリセットさせるための処理
+                   // BuzuriSlider.maxValue = currentBuzzRank.needNum - buzzRanks[currentIndex - 1].needNum;    //ゲージをリセットさせるための処理
                     beforeMaxValue = currentBuzzRank.needNum;   //現在のバズリランクまでに必要だったいいね数代入
                 }
                 Debug.Log("いいね数が" + currentBuzzRank.needNum + "を超えたのでバズリランクをあげ、いいね取得倍率を" + currentBuzzRank.GoodMagnification + "、コメントのスポーン時間を" + currentBuzzRank.CommentSpawnTime + "秒に変更しました。");
