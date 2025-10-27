@@ -102,7 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0c412be842d834abcc2c404e58d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Enemy
   MaxHitCount: 1
   hitIntervalTime: 0.5
   damageToTarget: {fileID: 7835967089649186805}
@@ -118,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRagdoll: 1
 --- !u!114 &2552435777749039969
 MonoBehaviour:
   m_ObjectHideFlags: 0

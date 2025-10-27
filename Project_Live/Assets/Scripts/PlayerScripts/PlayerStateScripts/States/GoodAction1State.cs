@@ -39,6 +39,8 @@ public class GoodAction1State : IPlayerState
     {
         currentStateTime += Time.deltaTime;
 
+
+
         if (currentStateTime < goodAction.GoodAction1Parameters.ActionInterval) return;
 
         if (!isActionActivated)
@@ -52,10 +54,16 @@ public class GoodAction1State : IPlayerState
         {
 
         }
+        var animatorState = anim.Animator.GetCurrentAnimatorStateInfo(0);
+        // if (currentStateTime < goodAction.GoodAction1Parameters.ChangeStateInterval) return;
+        if (animatorState.normalizedTime >= 1.0f && animatorState.IsName("GoodAction1"))
+        {
+            PlayerActionEvents.IdleEvent();
 
-        if (currentStateTime < goodAction.GoodAction1Parameters.ChangeStateInterval) return;
+        }
+       // return;
 
-        PlayerActionEvents.IdleEvent();
+       
     }
 
     public void Exit()

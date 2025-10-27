@@ -6,6 +6,10 @@ public class EnemyIdentifier : MonoBehaviour
     private EnemyMover.EnemyMoveType moveType;
     private bool isRegistered = false;
 
+    public void Awake()
+    {
+        EnemyCountManager.instance.RegisterEnemy(this.gameObject);
+    }
     public void Initialize(GameObject prefab, EnemyMover.EnemyMoveType moveType)
     {
         prefabReference = prefab;
@@ -29,6 +33,7 @@ public class EnemyIdentifier : MonoBehaviour
         {
             EnemyRegistry.Unregister(gameObject, prefabReference, moveType);
             isRegistered = false;
+            EnemyCountManager.instance.UnregisterEnemy(this.gameObject);
         }
     }
 
