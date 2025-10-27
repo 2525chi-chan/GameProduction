@@ -14,19 +14,12 @@ public class AttackController : MonoBehaviour
     [SerializeField] AttackTrigger attackTrigger;
     [SerializeField] EnemyMover mover;
 
-    float attackTimer = 0f; //UŒ‚‘Ò‹@ŠÔ‚ÌŒv‘ª—p•Ï”
+    public float AttackDuration { get { return attackDuration; } }
 
-    void Update()
+    public void InstanceAttack() //UŒ‚ˆ—
     {
         if (!attackTrigger.IsAttackTrigger) return;
 
-        attackTimer += Time.deltaTime;
-
-        if (attackTimer > attackDuration) InstanceAttack(); //ˆê’èŠÔŒo‰ßŒã‚ÉUŒ‚‚·‚é
-    }
-
-    void InstanceAttack() //UŒ‚ˆ—
-    {
         GameObject attackObj = Instantiate(attackPrefab, attackPos.position, attackPos.rotation);
         
         if (mover != null)
@@ -36,8 +29,9 @@ public class AttackController : MonoBehaviour
             if (hitbox != null)
                 hitbox.SetOwnerMoveType(mover.MoveType); //UŒ‚”»’è‚ÉAUŒ‚Ò‚ÌˆÚ“®ƒ^ƒCƒv‚ğ“n‚·
         }
-        
-        attackTimer = 0f;
-        attackTrigger.IsAttackTrigger = false;
+
+        var attackParameters = attackObj.GetComponent<AttackParameter>();
+        if (attackParameters != null)
+            attackParameters.SetOwner(transform.parent.gameObject); //¶¬‚µ‚½UŒ‚‚ÉAUŒ‚Ò‚Ìî•ñ‚ğ“n‚·i‚±‚Ìê‡‚ÍAUŒ‚”»’è‚ğ‚Â“G‚Ìî•ñ‚ğ“n‚µ‚Ä‚¢‚éj
     }
 }

@@ -62,7 +62,7 @@ public class CommentSpawn : MonoBehaviour
 
             if (commentCounter >= commentCount&&!cheeringCommentIsExist)
             {
-                Debug.Log("応援コメントが生成されました。");
+                //Debug.Log("応援コメントが生成されました。");
                 InstantiateComment(raneNum,CheeringCommentPrefab);
                 commentCounter = 0;
             }
@@ -70,7 +70,7 @@ public class CommentSpawn : MonoBehaviour
             {
                 InstantiateComment(raneNum,CommentPrefab);
                 commentCounter++;
-                Debug.Log("応援コメントまであと" + (commentCount - commentCounter) + "コメントです。");
+                //Debug.Log("応援コメントまであと" + (commentCount - commentCounter) + "コメントです。");
             }
             
             beforeRaneNum = raneNum;

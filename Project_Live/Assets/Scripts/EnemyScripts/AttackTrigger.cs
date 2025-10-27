@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttackTrigger : MonoBehaviour
@@ -16,34 +17,57 @@ public class AttackTrigger : MonoBehaviour
 
     float currentTimer = 0f; //経過時間の測定用
     bool isAttackTrigger = false; //攻撃するかどうか
+    bool isInRange = false;
 
     public bool IsAttackTrigger { get { return isAttackTrigger; } set { isAttackTrigger = value; } }
 
-    void OnTriggerStay(Collider other) //攻撃判定を行うエリアにプレイヤーが侵入しているときの処理
+    void OnTriggerEnter(Collider other)
     {
-        if (status.IsDead || isAttackTrigger == true) return; //敵のHPが0、または攻撃の処理を開始している場合は何もしない
+        if (IsValidTarget(other))
+        {
+            isInRange = true;
+            currentTimer = 0f;
+            Debug.Log("攻撃範囲に入った");
+        }        
+    }
 
+    void OnTriggerExit(Collider other)
+    {
+        if (IsValidTarget(other))
+        {
+            currentTimer = 0f;
+            isInRange = false;            
+            isAttackTrigger = false;
+            Debug.Log("攻撃判定範囲を出た");
+            EnemyActionEvents.IdleEvent();
+        }
+    }
+
+    void Update()
+    {
+        if (!isInRange || status.IsDead || isAttackTrigger) return;
+
+        currentTimer += Time.deltaTime;
+
+        if (currentTimer > triggerDuration)
+        {
+            isAttackTrigger = true;
+            EnemyActionEvents.CloseAttackEvent();
+        }
+    }
+
+    bool IsValidTarget(Collider other) //当たり判定を行うタグと対象のタグ確認
+    {
         switch (mover.MoveType)
         {
             case EnemyMover.EnemyMoveType.PlayerChase:
             case EnemyMover.EnemyMoveType.BlockPlayer:
-                if (!other.CompareTag("Player")) return;
-                break;
+                return other.CompareTag("Player");
 
             case EnemyMover.EnemyMoveType.StageDestroy:
-                if (!other.CompareTag("Breakable")) return;
-                break;
+                return other.CompareTag("Breakable");
 
-            default: break;
+            default: return false;
         }
-
-        currentTimer += Time.deltaTime;
-
-        if (currentTimer > triggerDuration) isAttackTrigger = true;//攻撃の処理                                                               
-    }
-
-    void OnTriggerExit(Collider other)　//攻撃判定を行うエリアからプレイヤーが出たときの処理
-    {
-        currentTimer = 0f;
     }
 }

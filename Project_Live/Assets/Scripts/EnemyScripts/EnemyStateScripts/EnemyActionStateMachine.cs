@@ -1,0 +1,89 @@
+using UnityEngine;
+using UnityEngine.InputSystem.XR.Haptics;
+
+public class EnemyActionStateMachine : MonoBehaviour
+{
+    IEnemyState currentState; //現在の状態格納用
+
+    [Tooltip("必要なコンポーネント")]
+    [SerializeField] EnemyAnimationController anim;
+    [SerializeField] EnemyStatus status;
+    [SerializeField] EnemyMover mover;
+    [SerializeField] AttackController attackController;
+    [SerializeField] AttackTrigger attackTrigger;
+    
+    public IEnemyState CurrentState { get { return currentState; } }
+
+    void Awake()
+    {
+        ChangeState(new IdleState_Enemy(anim, status, mover));
+    }
+
+    void OnEnable()
+    {
+        EnemyActionEvents.OnIdleEvent += OnIdleProcess;
+        EnemyActionEvents.OnMoveEvent += OnMoveProcess;
+        EnemyActionEvents.OnKnockbackEvent += OnKnockbackProcess;
+        EnemyActionEvents.OnDownEvent += OnDownProcess;
+        EnemyActionEvents.OnCloseAttackEvent += OnCloseAttackProcess;
+        EnemyActionEvents.OnShotEvent += OnShotProcess;
+    }
+
+    void OnDisable()
+    {
+        EnemyActionEvents.OnIdleEvent -= OnIdleProcess;
+        EnemyActionEvents.OnMoveEvent -= OnMoveProcess;
+        EnemyActionEvents.OnKnockbackEvent -= OnKnockbackProcess;
+        EnemyActionEvents.OnDownEvent -= OnDownProcess;
+        EnemyActionEvents.OnCloseAttackEvent -= OnCloseAttackProcess;
+        EnemyActionEvents.OnShotEvent -= OnShotProcess;
+    }
+
+    void Update()
+    {
+        currentState?.Update();
+    }
+
+    public void ChangeState(IEnemyState newState)
+    {
+        currentState?.Exit();
+        currentState = newState;
+        currentState?.Enter();
+    }
+
+    void OnIdleProcess()
+    {
+        if (currentState is IdleState_Enemy) return;
+        ChangeState(new IdleState_Enemy(anim, status, mover));
+    }
+
+    void OnMoveProcess()
+    {
+        if (currentState is IdleState_Enemy && !(currentState is MoveState_Enemy)) 
+            ChangeState(new MoveState_Enemy(anim, mover));
+    }
+
+    void OnKnockbackProcess()
+    {
+        if (currentState is KnockbackState_Enemy) return;
+        ChangeState(new KnockbackState_Enemy(anim));
+    }
+
+    void OnDownProcess()
+    {
+        if (currentState is DownState_Enemy) return;
+        ChangeState(new DownState_Enemy(anim));
+    }
+
+    void OnCloseAttackProcess()
+    {
+        if ((currentState is IdleState_Enemy || currentState is MoveState_Enemy) && !(currentState is CloseAttackState_Enemy))
+            ChangeState(new CloseAttackState_Enemy(anim, mover, attackController));
+    }
+
+    void OnShotProcess()
+    {
+        if (!(currentState is IdleState_Enemy) || currentState is ShotState_Enemy) return;
+        ChangeState(new ShotState_Enemy(anim));
+    }
+}

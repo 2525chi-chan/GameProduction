@@ -26,11 +26,12 @@ public class EnemyMover : MonoBehaviour
     private Transform lookTarget; //追いかける対象
     GameObject[] breakables; //破壊できる対象
     EnemyMoveType moveType;
-    EnemyMoveState moveState;
+    EnemyMoveState currentMoveState;
+    EnemyMoveState previousMoveState = EnemyMoveState.stop;
 
   public EnemyMoveState MoveState
     {
-        get { return moveState; }   
+        get { return currentMoveState; }   
     }
 
     public EnemyMoveType MoveType { get { return moveType; } }   
@@ -42,11 +43,10 @@ public class EnemyMover : MonoBehaviour
     }
     public void MoveSetState(EnemyMoveState state)
     {
-        moveState = state;
+        currentMoveState = state;
     }
     void Start()
     {
-        //moveState = MoveState.stop;
         MoveSetState(EnemyMoveState.stop);
     }
 
@@ -67,7 +67,8 @@ public class EnemyMover : MonoBehaviour
             float distance = Vector3.Distance(transform.position, lookTarget.position); //プレイヤーとの距離を算出する
 
             MoveTypeProcess(distance);
-            MoveStateProcess();
+            //MoveStateProcess(); //移動処理はMoveState_Enemyに任せる
+            CallStateEvent();
         }
     }
 
@@ -86,9 +87,7 @@ public class EnemyMover : MonoBehaviour
                 breakables = GameObject.FindGameObjectsWithTag("Breakable"); //攻撃できるオブジェクトに設定されているタグ名を()内に記述する
                 //Debug.Log(breakables.Length);
                 if (breakables.Length > 0)
-                {
                     lookTarget = GetNearestTarget(breakables); //一番近いオブジェクトに向かって移動する
-                }
 
                 else return;
                 break;
@@ -100,14 +99,18 @@ public class EnemyMover : MonoBehaviour
         switch (moveType)
         {
             case EnemyMoveType.PlayerChase:
-                if (distance >= stopRange) moveState = EnemyMoveState.move;
-                else moveState = EnemyMoveState.lookOnly;
+                if (distance >= stopRange) currentMoveState = EnemyMoveState.move;
+                    
+                else currentMoveState = EnemyMoveState.lookOnly;
                 break;
 
             case EnemyMoveType.BlockPlayer:
-                if (distance <= detectionRange && distance >= stopRange) moveState = EnemyMoveState.move;
-                else if (distance < stopRange) moveState = EnemyMoveState.lookOnly;
-                else moveState = EnemyMoveState.stop;
+                if (distance <= detectionRange)
+                {
+                    if (distance >= stopRange) currentMoveState = EnemyMoveState.move;
+                    else currentMoveState = EnemyMoveState.lookOnly;
+                }
+                else currentMoveState = EnemyMoveState.stop;
                 break;
 
             case EnemyMoveType.StageDestroy:
@@ -117,30 +120,44 @@ public class EnemyMover : MonoBehaviour
                     lookTarget = (breakables.Length > 0) ? GetNearestTarget(breakables) : null;
                 }
 
-                moveState = (lookTarget != null && distance >= stopRange) ? EnemyMoveState.move : EnemyMoveState.lookOnly;
+                currentMoveState = (lookTarget != null && distance >= stopRange) ? EnemyMoveState.move : EnemyMoveState.lookOnly;
                 break;
         }
     }
 
-    void MoveStateProcess() //移動状態ごとの移動処理を行う
+    public void MoveStateProcess() //移動状態ごとの移動処理を行う
     {
-        switch (moveState)
+        switch (currentMoveState)
         {
             case EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
-                return;
-
+                break;
             case EnemyMoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態
                 LookPlayer();
-                return;
-
+                break;
             case EnemyMoveState.move: //プレイヤーの方向を向いて追従する状態
                 LookPlayer();
                 MoveTowardsPlayer();
-                return;
-
-            default:
-                return;
+                break;
+            default: break;
         }
+    }
+
+    void CallStateEvent() //移動状態ごとに、敵の行動状態の遷移を行う
+    {
+        if (currentMoveState == previousMoveState) return;
+        switch (currentMoveState)
+        {
+            case EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
+                EnemyActionEvents.IdleEvent(); break;                
+
+            case EnemyMoveState.move: //プレイヤーの方向を向いて追従する状態
+                EnemyActionEvents.MoveEvent(); break;
+
+            case EnemyMoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態
+            default: break;
+        }
+
+        previousMoveState = currentMoveState;
     }
 
     void MoveTowardsPlayer()//プレイヤーに向かって移動する
