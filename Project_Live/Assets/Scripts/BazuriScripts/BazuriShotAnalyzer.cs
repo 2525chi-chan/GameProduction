@@ -12,7 +12,12 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
     [SerializeField] float facingRate;
     [Header("³–Êè‡’l(‚Ç‚ê‚­‚ç‚¢‚Ì³–Ê‚ğ‹–—e‚·‚é‚©B1‚Í^³–ÊA0‚Í^‰¡)")]
     [SerializeField] float facingThreshold;
-  public  int Analyzer(Camera camera,LayerMask layer)
+    [Header("ƒ‰ƒOƒh[ƒ‹ó‘Ô‚Ì“G‚É‚©‚¯‚é”{—¦")]
+    [SerializeField] float ragdollRate=1f;
+
+
+    
+  public  int Analyzer(Camera camera,LayerMask layer)//”íÊ‘Ì‚Ìó‘Ô‚É‰‚¶‚ÄƒXƒRƒA‚ğæZ‚·‚é
     {
         List<GameObject> gameObjects=DetectVisibleObjects(camera,layer);
         float sumScore = 0f;
@@ -20,7 +25,20 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
         {
          
             float score=obj.GetComponent<BazuriShotData>().score;
+            if (obj.CompareTag("Enemy") || obj.CompareTag("Player"))
+            {
+                Animator animator = obj.GetComponentInParent<Animator>();
+                if (animator != null)
+                {
+                 
 
+                    score *= MultiMotionScore(animator);
+
+
+                }
+            
+            }
+           
             score *= CameraDistance(obj.transform,camera);
             score *= IsFacingCamera(obj.transform, camera, facingThreshold) ? 1f : facingRate;
           
@@ -29,7 +47,24 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
             Debug.Log(sumScore);
         return (int)sumScore;
     }
-    public bool IsFacingCamera(Transform obj,Camera camera, float threshold)
+
+    public float MultiMotionScore(Animator animator)
+    {
+        float scoreRate = 1f;
+        if (!animator.enabled)//ƒ‰ƒOƒh[ƒ‹ó‘Ô‚¾‚Á‚½ê‡‚ÌæZ
+        {
+
+            scoreRate *= ragdollRate;
+
+            return scoreRate;
+        }
+
+        animator.TryGetComponent<BazuriMotionRate>(out var motionRate);
+        scoreRate *= motionRate.GetCurrentMotionRate();
+
+        return scoreRate;
+    }
+    public bool IsFacingCamera(Transform obj,Camera camera, float threshold)//³–Ê‚ğŒü‚¢‚Ä‚¢‚ê‚Î”{—¦‚ğ‚©‚¯‚é
     {
 
         Vector3 toCamera=(camera.transform.position - obj.transform.position).normalized;
@@ -37,7 +72,7 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
 
         return dot >= threshold;
     }
-    public float CameraDistance(Transform obj, Camera camera)
+    public float CameraDistance(Transform obj, Camera camera)//ƒJƒƒ‰‚Æ‚Ì‹——£‚ª‰“‚¢’öƒXƒRƒA‚ğŒ¸Š‚³‚¹‚é
     {
    float distance=Vector3.Distance(camera.transform.position,obj.transform.position);
             float scoreRate;
@@ -52,7 +87,7 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
 
         return scoreRate;
     }
-    public List<GameObject> DetectVisibleObjects(Camera camera, LayerMask layer)
+    public List<GameObject> DetectVisibleObjects(Camera camera, LayerMask layer)//ƒJƒƒ‰‚Ì’†‚É‰f‚Á‚½ƒIƒuƒWƒFƒNƒg‚ğŒŸo‚·‚é
     {
 
         List<GameObject> viewObjects = new List<GameObject>();
