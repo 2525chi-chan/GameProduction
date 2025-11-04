@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2108013824495171527, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2118160177108144318, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: enableRagdoll
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2481424434144342157, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: getGoodNum
       value: 500
@@ -87,5 +95,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7510787986585253425, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3338779308280709536}
   m_SourcePrefab: {fileID: 100100000, guid: 07419985e8993174696f9559c2e48540, type: 3}
+--- !u!114 &4581805128912596912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2481424434144342157, guid: 07419985e8993174696f9559c2e48540, type: 3}
+  m_PrefabInstance: {fileID: 2160070983493361469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8485257770116802828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82797d7eea1a4e479d5e2d73f4b4949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &8485257770116802828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7510787986585253425, guid: 07419985e8993174696f9559c2e48540, type: 3}
+  m_PrefabInstance: {fileID: 2160070983493361469}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-3338779308280709536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8485257770116802828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 897db6e9cdc132c4186c3a5307aad823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathHandler: {fileID: 4581805128912596912}
+  gameClearManager: {fileID: 0}

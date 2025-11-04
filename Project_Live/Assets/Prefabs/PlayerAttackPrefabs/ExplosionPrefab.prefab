@@ -126,10 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b4942550ff06747ab6ed31589685dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baceDamage: 50
+  baceDamage: 100
   hitEffect: {fileID: 1044492289889190018, guid: 993441711f651c545bcc0c39bb7e345f, type: 3}
-  baceForwardKnockbackForce: 22
-  baceUpwardKnockbackForce: 20
+  baceForwardKnockbackForce: 120
+  baceUpwardKnockbackForce: 50
   baceDownwardKnockbackForce: 0
   damageToTarget: {fileID: 1480980070649777115}
 --- !u!114 &3117325585535943531
@@ -180,7 +180,7 @@ VisualEffect:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6079668942156640290}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Asset: {fileID: 8926484042661614526, guid: 07eaf7d354ddf36429683db26eadbd41, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0

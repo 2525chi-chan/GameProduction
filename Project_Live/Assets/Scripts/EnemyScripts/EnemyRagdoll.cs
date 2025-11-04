@@ -11,6 +11,7 @@ public class EnemyRagdoll : MonoBehaviour//ラグドール制御
     public Rigidbody baseJointRigid;//本体にくっつけるRigidbody
     public float restoreDuration = 0.2f;//ラグドール解除時に元の位置に戻るまでの時間
     public float restoreAnimationSpeed = 0.5f;
+    public bool enableRagdoll = true;//ラグドールを有効にするかどうか
     List <Rigidbody> rigidbodies;
     GameObject enemy;
    
@@ -46,7 +47,8 @@ public class EnemyRagdoll : MonoBehaviour//ラグドール制御
 
     public void SwitchRagdoll(bool isRagdol)//ラグドール状態の切り替え。trueでラグドール状態、falseで通常状態
     {
-        if(animator!=null)animator.enabled = !isRagdol;
+       if (!enableRagdoll) return;//ラグドール無効時は処理しない
+        if (animator!=null)animator.enabled = !isRagdol;
         status.IsRagdoll = isRagdol;
 
         if (animator.enabled)

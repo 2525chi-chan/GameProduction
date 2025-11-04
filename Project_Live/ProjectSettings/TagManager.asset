@@ -17,6 +17,8 @@ TagManager:
   - CommentSpawn
   - PowerBuffImage
   - AgilityBuffImage
+  - EnemySpawnManager
+  - GameManager
   layers:
   - Default
   - TransparentFX

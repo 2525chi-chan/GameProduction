@@ -1,14 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-
-//特定のオブジェクトとのみ当たり判定を行うようにする
 
 public class AttackTrigger : MonoBehaviour
 {
-    public EnemyActionEvents actionEvents = new EnemyActionEvents();
-
     [Header("攻撃を始める判定を行う領域")]
     [SerializeField] SphereCollider triggerRange;
     
@@ -18,56 +13,44 @@ public class AttackTrigger : MonoBehaviour
     [Header("必要なコンポーネント")]
     [SerializeField] EnemyStatus status;
     [SerializeField] EnemyMover mover;
+    [SerializeField] Animator animator;
 
     float currentTimer = 0f; //経過時間の測定用
     bool isAttackTrigger = false; //攻撃するかどうか
-    bool isInRange = false;
 
     public bool IsAttackTrigger { get { return isAttackTrigger; } set { isAttackTrigger = value; } }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other) //攻撃判定を行うエリアにプレイヤーが侵入しているときの処理
     {
-        if (!IsValidTarget(other)) return;
-        //Debug.Log(other.name + "は有効なターゲットです。攻撃処理を開始します。");
-       isInRange = true;
-        currentTimer = 0f;
-    }
+        if (status.IsDead || isAttackTrigger == true) return; //敵のHPが0、または攻撃の処理を開始している場合は何もしない
 
-    void OnTriggerExit(Collider other)
-    {
-        if (!IsValidTarget(other)) return;
-        //Debug.Log(other.name + "がトリガー範囲内から出ました");
-        currentTimer = 0f;
-        isInRange = false;
-        isAttackTrigger = false;
-        actionEvents.IdleEvent();
-    }
-
-    void Update()
-    {
-        if (!isInRange || status.IsDead || isAttackTrigger) return;
-
-        currentTimer += Time.deltaTime;
-
-        if (currentTimer > triggerDuration && !isAttackTrigger)
-        {
-            isAttackTrigger = true;
-            actionEvents.CloseAttackEvent();
-        }
-    }
-
-    bool IsValidTarget(Collider other) //当たり判定を行うタグと対象のタグ確認
-    {
         switch (mover.MoveType)
         {
             case EnemyMover.EnemyMoveType.PlayerChase:
             case EnemyMover.EnemyMoveType.BlockPlayer:
-                return other.CompareTag("Player");
+                if (!other.CompareTag("Player")) return;
+                break;
 
             case EnemyMover.EnemyMoveType.StageDestroy:
-                return other.CompareTag("Breakable");
+                if (!other.CompareTag("Breakable")) return;
+                break;
 
-            default: return false;
+            default: break;
         }
+
+        currentTimer += Time.deltaTime;
+
+        if (currentTimer > triggerDuration)
+        {  isAttackTrigger = true;//攻撃の処理
+            if(animator!=null)
+            animator.SetTrigger("Attack");
+        }
+                                                                          
     }
+
+    void OnTriggerExit(Collider other)　//攻撃判定を行うエリアからプレイヤーが出たときの処理
+    {
+        currentTimer = 0f;
+    }
+
 }

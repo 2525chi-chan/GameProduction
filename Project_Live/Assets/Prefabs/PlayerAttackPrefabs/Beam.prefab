@@ -105,8 +105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baceDamage: 100
   hitEffect: {fileID: 1044492289889190018, guid: 993441711f651c545bcc0c39bb7e345f, type: 3}
-  baceForwardKnockbackForce: 55
-  baceUpwardKnockbackForce: 120
+  baceForwardKnockbackForce: 80
+  baceUpwardKnockbackForce: 80
   baceDownwardKnockbackForce: 0
   damageToTarget: {fileID: 6502001243641348044}
 --- !u!114 &-583937156790667385
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07b002810127054ab6c1324ff116738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 12
   maxLength: 100
   target: {fileID: 9042841553751921143}
   beamEffect: {fileID: 6515805834365067631, guid: 0dc9b00554b12a44fa874e2868cb4963, type: 3}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b50e7d229de66489b057bbe57c1976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyDelay: 2
+  destroyDelay: 3
 --- !u!114 &6502001243641348044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,7 +274,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc0c412be842d834abcc2c404e58d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTag: Enemy
   MaxHitCount: 1
   hitIntervalTime: 0.5
   damageToTarget: {fileID: 6502001243641348044}
