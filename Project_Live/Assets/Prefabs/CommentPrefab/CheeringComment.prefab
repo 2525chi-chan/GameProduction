@@ -340,7 +340,7 @@ MonoBehaviour:
   - "\u3084\u3063\u3061\u307E\u3048\u30FC\uFF01"
   pressEffect: {fileID: 5410154455633384482}
   trailEffect: {fileID: 5054387600023684386}
-  trailFlag: 0
+  trailFlag: 1
 --- !u!114 &4734199638609302664
 MonoBehaviour:
   m_ObjectHideFlags: 0
