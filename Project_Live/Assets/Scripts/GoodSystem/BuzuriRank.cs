@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 //作成者　寺村
@@ -29,17 +30,43 @@ public class BuzzRank
     public Image EffectImage;
     [Header("このバズリランクの色")]
     [SerializeField] public Color rankColor;
+    //[Header("このバズリランクで表示されるコメント")]
+    //[SerializeField] List<string> commentContent = new List<string>();
+
+    public Color conectCommentColor => rankColor;
+
+
     [Header("このバズリランクで表示されるコメント")]
-    [SerializeField] List<string> commentContent = new List<string>();
-    public List<string> CommentContent => commentContent;
-    public int comentNum=>CommentContent.Count;
+    public List<CommentContent> commentContents=new List<CommentContent>();  //関連コメント対応版コメント内容List
+
+    
+
+
+    //public List<string> CommentContent => commentContent;
+    //public int comentNum=>CommentContent.Count;
+
+   // public List<CommentContent> CommentContents => commentContents; //コメント内容取得用のList
 
 }
+
+[System.Serializable]
+public class CommentContent //コメント内容クラス
+{
+    [Header("コメントの内容")]
+    [SerializeField] string mainComment;
+    public string MainComment => mainComment;   //通常コメント文取得用プロパティ
+    [Header("関連コメントの内容")]
+    [SerializeField] List<string> conectComment=new List<string>();
+    public List<string>ConectComment => conectComment;  //関連コメント文取得用プロパティ
+}
+
 
 public class BuzuriRank : MonoBehaviour
 {
     [Header("バズリランク設定")]
     [SerializeField] List<BuzzRank> buzzRanks;
+    [Header("関連コメントの色を変えるか")]
+    public bool changeConectCommentCol = true;
     [Header("バズリランクゲージバー")]
     [SerializeField] Slider BuzuriSlider;
     [Header("必要なコンポーネント")]
@@ -64,6 +91,7 @@ public class BuzuriRank : MonoBehaviour
 
         bazuriShot.ShotStock= currentBuzzRank.BazuriShotStock; //バズリショットのストック数を現在のバズリランクに応じた数にする
         bazuriShot.CurrentStock=bazuriShot.ShotStock;
+
     }
 
     // Update is called once per frame

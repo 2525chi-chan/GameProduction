@@ -22,5 +22,10 @@ public class GetCommetText : MonoBehaviour
     {
         return text.preferredHeight;
     }
+
+    public void SetCommentTextColor(Color conectCommentColor)
+    {
+        text.color = conectCommentColor;
+    }
     
 }

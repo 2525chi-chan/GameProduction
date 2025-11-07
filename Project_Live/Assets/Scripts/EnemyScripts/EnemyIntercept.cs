@@ -1,3 +1,5 @@
+//§ìÒ@›‘º
+
 using UnityEngine;
 
 public class EnemyIntercept : MonoBehaviour

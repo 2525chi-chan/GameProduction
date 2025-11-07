@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 
 
 //作成者　寺村
@@ -33,6 +34,8 @@ public class CommentSpawn : MonoBehaviour
     bool first = true;
     float commentCounter;
     RectTransform canvasRect;
+    string nextText = null; //関連コメントの内容保存用string
+    bool conectComment = false; //関連コメントのフラグ
 
     // Start is called before the first frame update
     void Start()
@@ -66,12 +69,12 @@ public class CommentSpawn : MonoBehaviour
             if (commentCounter >= commentCount&&!cheeringCommentIsExist&&!interceptEnemyIsExist)
             {
                 Debug.Log("応援コメントが生成されました。");
-                InstantiateComment(raneNum,CheeringCommentPrefab);
+                InstantiateComment(raneNum,CheeringCommentPrefab,ref nextText,ref conectComment);
                 commentCounter = 0;
             }
             else
             {
-                InstantiateComment(raneNum,CommentPrefab);
+                InstantiateComment(raneNum,CommentPrefab,ref nextText,ref conectComment);
                 commentCounter++;
                 Debug.Log("応援コメントまであと" + (commentCount - commentCounter) + "コメントです。");
             }
@@ -110,13 +113,31 @@ public class CommentSpawn : MonoBehaviour
     }
 
 
-    void InstantiateComment(int raneNum, GameObject CommentType)
+    void InstantiateComment(int raneNum, GameObject CommentType,ref string nextText,ref bool conectComment)
     {
         string selectedText = null;
 
         if (CommentType == CommentPrefab)
         {
-            selectedText = buzuriRank.currentBuzzRank.CommentContent[Random.Range(0, buzuriRank.currentBuzzRank.comentNum)];
+            if(conectComment&&nextText!=null)
+            {
+                selectedText= nextText;
+
+                //conectComment= false;
+            }
+            //selectedText = buzuriRank.currentBuzzRank.CommentContent[Random.Range(0, buzuriRank.currentBuzzRank.comentNum)];
+            else
+            {
+                int selectedCommentNum = Random.Range(0, buzuriRank.currentBuzzRank.commentContents.Count);
+                selectedText = buzuriRank.currentBuzzRank.commentContents[selectedCommentNum].MainComment;
+                
+                if (buzuriRank.currentBuzzRank.commentContents[selectedCommentNum].ConectComment.Count>0)
+                {
+                    nextText = buzuriRank.currentBuzzRank.commentContents[selectedCommentNum].ConectComment
+                                            [Random.Range(0, buzuriRank.currentBuzzRank.commentContents[selectedCommentNum].ConectComment.Count)];
+                    conectComment = true;
+                }
+            }
         }
         else if (CommentType == CheeringCommentPrefab)
         {
@@ -136,6 +157,15 @@ public class CommentSpawn : MonoBehaviour
 
         // テキストを設定
         commentText.SetCommentText(selectedText);
+
+        if(conectComment&&selectedText==nextText)
+        {
+            if (buzuriRank.changeConectCommentCol)
+            {
+                commentText.SetCommentTextColor(buzuriRank.currentBuzzRank.conectCommentColor);
+            }
+            conectComment = false;
+        }
 
         rectTransform.sizeDelta = new Vector2(commentText.GetTextBoxSizeWidth(), commentText.GetTextBoxSizeHeight());
         rectTransform.anchoredPosition = DecideSpawnPos(rectTransform,raneNum);
