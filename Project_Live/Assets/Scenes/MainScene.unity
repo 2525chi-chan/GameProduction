@@ -9221,11 +9221,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseCamera: {fileID: 963194227}
   cameraZoomTime:
-    zoomInTime: 0.3
-    zoomOutTime: 0.3
+    zoomInTime: 0.8
+    zoomOutTime: 0.8
   UIZoomTime:
-    zoomInTime: 0.3
-    zoomOutTime: 0.3
+    zoomInTime: 0.8
+    zoomOutTime: 0.8
   overlayZoomRectTransform: {fileID: 2005010319}
   outGameRectTransform: {fileID: 1177540499}
   overlayZoomScale: 1.5
