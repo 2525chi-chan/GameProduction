@@ -46,6 +46,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] BazuriShotAnalyzer analyzer;
     [SerializeField] GoodSystem goodSystem;
     [SerializeField]CameraFlash cameraFlash;
+    [SerializeField] ZoomCamera zoomCamera;
     [SerializeField] Transform player;
     [SerializeField] GameObject effect;
     private Camera analyzerCamera;
@@ -135,11 +136,11 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
          ResetCamera();
 
         StartCoroutine(SlowTimeScaleDown(Time.timeScale, 0, timeScaleDownSpeed));
+        StartCoroutine(zoomCamera.SetZoom(true));
 
-        
-      
 
-       
+
+
         while (elapsed < cameraTime)//操作時間中にショットボタンが押されればバズリショット中断
         {
             if (playerInput.actions["Shot"].WasPressedThisFrame())
@@ -153,7 +154,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
             yield return null;
         }
        
-
+        StartCoroutine(zoomCamera.SetZoom(false));
         EndBazuriMode();
     }
 

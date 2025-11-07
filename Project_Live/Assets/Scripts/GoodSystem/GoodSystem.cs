@@ -16,6 +16,8 @@ public class GoodSystem : MonoBehaviour
     [Header("加算までの待機時間")]
     [SerializeField] float getDuration;
 
+    [Header("待機時間を持つかどうか")]
+    [SerializeField] bool enableWait=true;
     private int goodNum;    //いいね数
     public float GoodNum => goodNum; //いいね数のゲッター
 
@@ -57,7 +59,11 @@ public class GoodSystem : MonoBehaviour
 
         addGoodText.enabled = true;
 
-        yield return new WaitForSeconds(getDuration);   //一定時間この関数の処理を止めるコルーチン
+        if (enableWait)
+        {
+            yield return new WaitForSeconds(getDuration);
+        }
+         //一定時間この関数の処理を止めるコルーチン
 
         addGoodNum *= buzuriRank.currentBuzzRank.GoodMagnification; //最終獲得いいね数に現在のバズリランクのいいね取得倍率をかける
 
