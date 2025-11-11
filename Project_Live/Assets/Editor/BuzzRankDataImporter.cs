@@ -114,61 +114,89 @@ public class BuzzRankDataImporter : EditorWindow
         }
     }
 
-    private void ApplyBuzzComments(List<List<object>> rows, IList buzzRanks)
+    private void ApplyBuzzComments(List<List<object>> rows, IList buzzRanks)//コメントをスプレッドシートに反映させるメソッド
     {
         if (rows.Count < 2) return;
 
-
-        foreach(var r in buzzRanks.Cast<object>())
+        // 既存データをクリア
+        foreach (var r in buzzRanks.Cast<object>())
         {
-            var commentField = r.GetType().GetField("commentContent", BindingFlags.NonPublic | BindingFlags.Instance);
-
-
+            var commentField = r.GetType().GetField("commentContents", BindingFlags.NonPublic | BindingFlags.Instance);
             if (commentField != null)
             {
-                var list = commentField?.GetValue(r) as List<string>;
-
+                var list = commentField.GetValue(r) as IList;
                 list?.Clear();
             }
-           
         }
+
+        var lastCommentContentByRank = new Dictionary<string, CommentContent>();
+
         for (int i = 1; i < rows.Count; i++)
         {
             var row = rows[i];
-            if (row.Count < 2) continue;
-
+            if (row.Count < 3) continue;
 
             string rankNamesRaw = row[0].ToString().Trim();
-            string comment = row[1].ToString().Trim();
+            string commentType = row[1].ToString().Trim();
+            string commentText = row[2].ToString().Trim();
 
 
-            List<string> targets = rankNamesRaw.ToUpper() == "ALL"
-           ? buzzRanks.Cast<object>().Select(r =>
-               r.GetType().GetField("name", BindingFlags.NonPublic | BindingFlags.Instance)
-                ?.GetValue(r)?.ToString()
-             ).ToList()
-           : rankNamesRaw.Split(',').Select(s => s.Trim()).ToList();
 
+            List<string> targets = rankNamesRaw.ToUpper() == "ALL"//対応するバズリランクを取得
+                ? buzzRanks.Cast<object>().Select(r =>
+                    r.GetType().GetField("name", BindingFlags.NonPublic | BindingFlags.Instance)
+                     ?.GetValue(r)?.ToString()
+                  ).ToList()
+                : rankNamesRaw.Split(',').Select(s => s.Trim()).ToList();
 
             foreach (var rankName in targets)
             {
                 var rank = buzzRanks.Cast<object>().FirstOrDefault(r =>
-            {
-                var nameField = r.GetType().GetField("name", BindingFlags.NonPublic | BindingFlags.Instance);
-                return nameField?.GetValue(r)?.ToString() == rankName;
-            });
+                {
+                    var nameField = r.GetType().GetField("name", BindingFlags.NonPublic | BindingFlags.Instance);
+                    return nameField?.GetValue(r)?.ToString() == rankName;
+                });
+                if (rank == null) { Debug.Log("bbb"); continue; }
 
-                if (rank == null) continue;
+                var commentField = rank.GetType().GetField("commentContents", BindingFlags.Public | BindingFlags.Instance);
+                if (commentField == null) {Debug.Log("aaa"); continue;
+            }
 
-                var commentField = rank.GetType().GetField("commentContent", BindingFlags.NonPublic | BindingFlags.Instance);
-                if (commentField == null) continue;
+                var commentList = commentField.GetValue(rank) as IList;
+                if (commentList == null)
+                {
+                    var listType = typeof(List<>).MakeGenericType(typeof(CommentContent));
+                    commentList = (IList)Activator.CreateInstance(listType);
+                    commentField.SetValue(rank, commentList);
+                }
 
-                var commentList = commentField.GetValue(rank) as List<string> ?? new List<string>();
-                commentList.Add(comment);
-                commentField.SetValue(rank, commentList);
+                if (commentType.Equals("Main", StringComparison.OrdinalIgnoreCase))//タイプがメインの場合
+                {
+                  
+                    var newCommentContent = Activator.CreateInstance(typeof(CommentContent));
+
+                   
+                    var mainCommentField = typeof(CommentContent).GetField("mainComment", BindingFlags.NonPublic | BindingFlags.Instance);
+                    mainCommentField.SetValue(newCommentContent, commentText);
+
+                   
+
+                    commentList.Add(newCommentContent);
+                    lastCommentContentByRank[rankName] = (CommentContent)newCommentContent;
+                }
+                else if (commentType.Equals("Connect", StringComparison.OrdinalIgnoreCase))//タイプが関連コメントの場合。
+                {
+                    if (lastCommentContentByRank.TryGetValue(rankName, out var lastCommentContent))
+                    {
+                        var conectCommentField = typeof(CommentContent).GetField("conectComment", BindingFlags.NonPublic | BindingFlags.Instance);
+                        var connectList = conectCommentField.GetValue(lastCommentContent) as IList;
+                        connectList?.Add(commentText);
+                    }
+                }
             }
         }
     }
+
 
     private object ConvertValue(string raw, Type type)
     {

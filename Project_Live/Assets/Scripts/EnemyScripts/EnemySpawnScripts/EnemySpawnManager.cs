@@ -37,10 +37,9 @@ public class EnemySpawnManager : BaseSpawnManager
     }
     void Start()
     {
-        if (spawnOnStart)
-        {
+        
             SetUpEnemySpawns();
-        }
+        
            
     }
 
@@ -59,8 +58,14 @@ public class EnemySpawnManager : BaseSpawnManager
             spawners[key] = new EnemySpawn(param.enemyPrefab, spawnArea, param.moveType);
             trackers[key] = new EnemyCountTracker(param.enemyPrefab, param.moveType);
 
-            spawners[key].SpawnEnemies(param.maxSpawnCount, param.moveType);
+            if (spawnOnStart)
+            {
+
+                spawners[key].SpawnEnemies(param.maxSpawnCount, param.moveType);
             trackers[key].ForceSync();
+            }
+
+            
             //Debug.Log($"{key} Ç {EnemyRegistry.GetCount(param.enemyPrefab, param.moveType)} ëÃê∂ê¨ÇµÇ‹ÇµÇΩ");
         }
     }

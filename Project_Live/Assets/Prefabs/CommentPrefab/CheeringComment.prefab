@@ -474,6 +474,10 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7679748502590731134, guid: 699e1c58df2f0954cb95f47310110e43, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 16b2c1beee2789a4e8ab1690edcd8ab4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -512,7 +516,7 @@ PrefabInstance:
     - target: {fileID: 2277749507956974843, guid: a5f8a0fa57942714fa17d04d58aa53ad, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 9b060d5af4f4b9a48a5b4a6d76668d9b, type: 2}
+      objectReference: {fileID: 2100000, guid: 16b2c1beee2789a4e8ab1690edcd8ab4, type: 2}
     - target: {fileID: 5983677702666643484, guid: a5f8a0fa57942714fa17d04d58aa53ad, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
