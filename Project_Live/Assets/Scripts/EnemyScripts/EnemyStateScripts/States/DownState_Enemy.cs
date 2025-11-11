@@ -12,7 +12,8 @@ public class DownState_Enemy : IEnemyState
     public void Enter()
     {
         Debug.Log("ƒ_ƒEƒ“ó‘Ô‚ÉˆÚs");
-        anim.PlayDown();
+        //anim.PlayDown();
+        anim.PlayDamage();
     }
 
     public void Update()

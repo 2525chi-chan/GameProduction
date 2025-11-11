@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: attackDuration
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 752392178674883388, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 533688930206133662}
     - target: {fileID: 2205885403803759370, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: leftJoint
       value: 

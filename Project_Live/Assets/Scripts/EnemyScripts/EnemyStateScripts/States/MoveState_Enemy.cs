@@ -14,16 +14,16 @@ public class MoveState_Enemy : IEnemyState
     public void Enter()
     {
         Debug.Log("ˆÚ“®ó‘Ô‚ÉˆÚs");
-        anim.PlayMove();
     }
 
     public void Update()
     {
+
         mover.MoveStateProcess(); //“G‚ÌˆÚ“®ˆ—
     }
 
     public void Exit()
     {
-        Debug.Log("ˆÚ“®ó‘Ô‚ğI—¹");
+        //Debug.Log("ˆÚ“®ó‘Ô‚ğI—¹");
     }
 }

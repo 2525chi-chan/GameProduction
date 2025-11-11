@@ -6,7 +6,10 @@ public class AttackState_Enemy : IEnemyState
     EnemyMover mover;
     AttackController attackController;
 
-    float timer = 0f; //攻撃待機時間の計測用変数
+    float durationTimer = 0f; //攻撃待機時間の計測用変数
+    float coolTimer = 0f;
+    bool isAnimPlayed = false;
+    bool isAttacked = false;
 
     public AttackState_Enemy(EnemyAnimationController anim, EnemyMover mover, AttackController attackController)
     {
@@ -18,20 +21,40 @@ public class AttackState_Enemy : IEnemyState
     public void Enter()
     {
         Debug.Log("近接攻撃状態に移行");
-        anim.PlayCloseAttack(); //近接攻撃アニメーションの再生
-
     }
 
     public void Update()
     {
         mover.MoveStateProcess(); //移動処理（プレイヤーの注視、回転動作など）
 
-        timer += Time.deltaTime;
+        durationTimer += Time.deltaTime;
+        Debug.Log("攻撃状態");
 
-        if (timer > attackController.AttackDuration)
+        if (!isAttacked) //攻撃判定発生前の処理
         {
-            timer = 0f;
-            attackController.InstanceAttack();
+            if (!isAnimPlayed)
+            {
+                isAnimPlayed = true;
+                anim.PlayCloseAttack(); //近接攻撃アニメーションの再生
+            }
+
+            if (durationTimer > attackController.AttackDuration && !isAttacked)
+            {
+                durationTimer = 0f;
+                attackController.InstanceAttack();
+                isAttacked = true;
+            }
+        }        
+
+        if (isAttacked) //攻撃判定発生後のクールタイム時間
+        {
+            coolTimer += Time.deltaTime;
+            if (coolTimer > attackController.AttackCoolTime)
+            {
+                coolTimer = 0f;
+                isAnimPlayed = false;
+                isAttacked = false;
+            }
         }
     }
 

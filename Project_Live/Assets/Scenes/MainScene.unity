@@ -10373,24 +10373,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnArea: {fileID: 141125266}
-  enableRespawn: 0
+  enableRespawn: 1
   checkInterval: 0.1
   spawnParameters:
   - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
     maxSpawnCount: 2
     moveType: 0
   - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 1
+    maxSpawnCount: 4
     moveType: 1
   - enemyPrefab: {fileID: 5295425210205854736, guid: eb6abe8a273b04a45be62c64f6e42f3b, type: 3}
-    maxSpawnCount: 1
+    maxSpawnCount: 2
     moveType: 2
   - enemyPrefab: {fileID: 8137719913462244462, guid: 62556fa3e350d9c4db59422a58a75a34, type: 3}
-    maxSpawnCount: 1
+    maxSpawnCount: 0
     moveType: 0
-  - enemyPrefab: {fileID: 8008517291889422472, guid: 1f440bc309aa2054aa8763491fad532d, type: 3}
+  - enemyPrefab: {fileID: 7764904506935383429, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
     maxSpawnCount: 1
-    moveType: 0
+    moveType: 1
   spawnOnStart: 1
 --- !u!1 &850832793 stripped
 GameObject:
@@ -13694,6 +13694,8 @@ MonoBehaviour:
   agility: 10
   deathEffect: {fileID: 2970488489590598586, guid: 8bcb93189acc69c4494bebb4c3eb3997, type: 3}
   target: {fileID: 1113225795}
+  addRatio: 0
+  goodSystem: {fileID: 0}
 --- !u!114 &1524185698
 MonoBehaviour:
   m_ObjectHideFlags: 0

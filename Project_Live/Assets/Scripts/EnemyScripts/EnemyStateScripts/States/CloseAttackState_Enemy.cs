@@ -24,14 +24,14 @@ public class CloseAttackState_Enemy : IEnemyState
         coolTimer = 0f;
         isPlayedAnim = false;
         isAttacked = false;
-        //Debug.Log("近接攻撃状態に移行");
+        Debug.Log("近接攻撃状態に移行");
     }
 
     public void Update()
     {
         mover.MoveStateProcess(); //移動処理（プレイヤーの注視、回転動作など）
 
-        if (!isAttacked)durationTimer += Time.deltaTime;
+        if (!isAttacked) durationTimer += Time.deltaTime;
         else coolTimer += Time.deltaTime;
 
         if (!isPlayedAnim)
