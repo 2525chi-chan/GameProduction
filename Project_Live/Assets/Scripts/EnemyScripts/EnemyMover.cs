@@ -8,7 +8,8 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
    public  enum EnemyMoveState { stop, lookOnly, move }
 public class EnemyMover : MonoBehaviour
 {
-  public enum EnemyMoveType { PlayerChase, BlockPlayer, StageDestroy }
+    public EnemyActionEvents actionEvents = new EnemyActionEvents();
+    public enum EnemyMoveType { PlayerChase, BlockPlayer, StageDestroy }
 
 
     [Header("移動するか判断するプレイヤーとの距離")]
@@ -26,12 +27,11 @@ public class EnemyMover : MonoBehaviour
     private Transform lookTarget; //追いかける対象
     GameObject[] breakables; //破壊できる対象
     EnemyMoveType moveType;
-    EnemyMoveState moveState;
+    EnemyMoveState currentMoveState;
+    float moveTypeTimer = 0f; //移動タイプ更新時間の計測用
+    float setMoveTimeDuration = 0.25f; //移動タイプ更新の時間
 
-  public EnemyMoveState MoveState
-    {
-        get { return moveState; }   
-    }
+    public EnemyMoveState MoveState { get { return currentMoveState; } }
 
     public EnemyMoveType MoveType { get { return moveType; } }   
 
@@ -42,11 +42,10 @@ public class EnemyMover : MonoBehaviour
     }
     public void MoveSetState(EnemyMoveState state)
     {
-        moveState = state;
+        currentMoveState = state;
     }
     void Start()
     {
-        //moveState = MoveState.stop;
         MoveSetState(EnemyMoveState.stop);
     }
 
@@ -57,17 +56,18 @@ public class EnemyMover : MonoBehaviour
         if(enemyStatus.IsRagdoll) return; //ラグドール状態のときは移動しない
 
         if (moveType == EnemyMoveType.StageDestroy && lookTarget == null)
-        {
             InitTarget();
-            //Debug.Log("ターゲットの再設定");
-        }
 
-        if (lookTarget != null)
+        if (lookTarget == null) return;
+        
+        float distance = Vector3.Distance(transform.position, lookTarget.position); //プレイヤーとの距離を算出する
+
+        moveTypeTimer += Time.deltaTime;
+        if (moveTypeTimer >= setMoveTimeDuration) //一定間隔ごとに、移動タイプの更新
         {
-            float distance = Vector3.Distance(transform.position, lookTarget.position); //プレイヤーとの距離を算出する
-
-            MoveTypeProcess(distance);
-            MoveStateProcess();
+            moveTypeTimer = 0f;
+            UpdateMoveType(distance);
+            CallStateEvent();
         }
     }
 
@@ -84,30 +84,28 @@ public class EnemyMover : MonoBehaviour
 
             case EnemyMoveType.StageDestroy:
                 breakables = GameObject.FindGameObjectsWithTag("Breakable"); //攻撃できるオブジェクトに設定されているタグ名を()内に記述する
-                //Debug.Log(breakables.Length);
                 if (breakables.Length > 0)
-                {
                     lookTarget = GetNearestTarget(breakables); //一番近いオブジェクトに向かって移動する
-                }
 
                 else return;
                 break;
         }
     }
 
-    void MoveTypeProcess(float distance) //移動タイプに沿った、移動状態の遷移を行う
+    void UpdateMoveType(float distance) //移動タイプに沿った、移動状態の遷移を行う
     {
         switch (moveType)
         {
             case EnemyMoveType.PlayerChase:
-                if (distance >= stopRange) moveState = EnemyMoveState.move;
-                else moveState = EnemyMoveState.lookOnly;
+                if (distance <= stopRange) currentMoveState = EnemyMoveState.lookOnly;                    
+                else currentMoveState = EnemyMoveState.move;
                 break;
 
             case EnemyMoveType.BlockPlayer:
-                if (distance <= detectionRange && distance >= stopRange) moveState = EnemyMoveState.move;
-                else if (distance < stopRange) moveState = EnemyMoveState.lookOnly;
-                else moveState = EnemyMoveState.stop;
+                if (distance > detectionRange) 
+                    currentMoveState = EnemyMoveState.stop;
+                else if (distance <= stopRange) currentMoveState = EnemyMoveState.lookOnly;
+                else currentMoveState = EnemyMoveState.move;
                 break;
 
             case EnemyMoveType.StageDestroy:
@@ -117,38 +115,49 @@ public class EnemyMover : MonoBehaviour
                     lookTarget = (breakables.Length > 0) ? GetNearestTarget(breakables) : null;
                 }
 
-                moveState = (lookTarget != null && distance >= stopRange) ? EnemyMoveState.move : EnemyMoveState.lookOnly;
+                currentMoveState = (lookTarget != null && distance >= stopRange) ? EnemyMoveState.move : EnemyMoveState.lookOnly;
                 break;
         }
     }
 
-    void MoveStateProcess() //移動状態ごとの移動処理を行う
+    public void MoveStateProcess() //移動状態ごとの移動処理を行う
     {
-        switch (moveState)
+        if (enemyStatus.IsDead || enemyStatus.IsRagdoll) return;
+        if (lookTarget == null) currentMoveState = EnemyMoveState.stop;
+
+        switch (currentMoveState)
         {
             case EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
-                return;
-
+                break;
             case EnemyMoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態
                 LookPlayer();
-                return;
-
+                break;
             case EnemyMoveState.move: //プレイヤーの方向を向いて追従する状態
                 LookPlayer();
                 MoveTowardsPlayer();
-                return;
+                break;
+            default: break;
+        }
+    }
 
-            default:
-                return;
+    void CallStateEvent() //移動状態ごとに、敵の行動状態の遷移を行う
+    {
+        switch (currentMoveState)
+        {
+            case EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
+                actionEvents.IdleEvent(); break;                
+
+            case EnemyMoveState.move: //プレイヤーの方向を向いて追従する状態
+                actionEvents.MoveEvent(); break;
+
+            case EnemyMoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態
+            default: break;
         }
     }
 
     void MoveTowardsPlayer()//プレイヤーに向かって移動する
     {
-        //Vector3 direction = (lookTarget.position - transform.position).normalized;
-
-        //transform.position += direction * moveSpeed * Time.deltaTime;
-
+        if (lookTarget == null) return;
         Vector3 targetPos = lookTarget.transform.position;
         targetPos.y = transform.position.y;
 
@@ -159,6 +168,7 @@ public class EnemyMover : MonoBehaviour
 
     void LookPlayer()//Y軸だけ変える
     {
+        if (lookTarget == null) return;
         Vector3 playerPos = lookTarget.position;
         playerPos.y = lookTarget.transform.position.y;
 

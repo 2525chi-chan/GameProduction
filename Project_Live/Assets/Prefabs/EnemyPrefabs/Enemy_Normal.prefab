@@ -64,7 +64,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 5255598490899312179, guid: 4b98bf51e5c42e74fb4c5683938d47dc, type: 3}
-  attackDuration: 0.5
+  attackDuration: 0.7
+  attackCoolTime: 0.2
   attackPos: {fileID: 1276372281413812872}
   attackTrigger: {fileID: 2434253285504405187}
   mover: {fileID: 8259107007558549480}
@@ -140,6 +141,8 @@ GameObject:
   - component: {fileID: 2205885403803759370}
   - component: {fileID: 6637680128984497869}
   - component: {fileID: -8836497061533814310}
+  - component: {fileID: 752392178674883388}
+  - component: {fileID: 3486750648663708265}
   m_Layer: 6
   m_Name: Enemy_Normal
   m_TagString: Enemy
@@ -359,6 +362,38 @@ MonoBehaviour:
     motionRate: 1
   - motionName: Attack
     motionRate: 1.1
+  - motionName: Enemy_Damage_Normal
+    motionRate: 1
+--- !u!114 &752392178674883388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7764904506935383429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20b55347f21f1894c861c282bfd09fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6637680128984497869}
+--- !u!114 &3486750648663708265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7764904506935383429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 784fc19480847d44ba6cc5a171191b2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 752392178674883388}
+  status: {fileID: 4098828232468043532}
+  mover: {fileID: 8259107007558549480}
+  attackController: {fileID: 446971775148853601}
+  attackTrigger: {fileID: 2434253285504405187}
 --- !u!1001 &2010973385887092898
 PrefabInstance:
   m_ObjectHideFlags: 0
