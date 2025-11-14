@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyStatus : CharacterStatus
 {   
+    public EnemyActionEvents actionEvents = new EnemyActionEvents();
     bool isDead = false;
     public bool IsDead { get { return isDead; } }
 
@@ -28,7 +29,7 @@ public class EnemyStatus : CharacterStatus
     {
         pos = this.transform;
     }
-    private void Update()
+    void Update()
     {
         if (deathHandler == null) return;
 
@@ -36,6 +37,7 @@ public class EnemyStatus : CharacterStatus
         {
             isDead = true;
             deathHandler.StartDeathProcess(); //死亡時の処理を開始する
+            actionEvents.DownEvent(); //ダウン状態に移行する
         }
         if (IsRagdoll&&deathHandler.IsGrounded()&&!isDead)
         {
@@ -47,7 +49,7 @@ public class EnemyStatus : CharacterStatus
                 this.GetComponent<EnemyRagdoll>().SwitchRagdoll(false);
                 ragdollCount = 0;
                 Debug.Log("かいじょ");
-                
+                actionEvents.IdleEvent();
             }
            
         }

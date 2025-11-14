@@ -40,7 +40,7 @@ public class GoodSystem : MonoBehaviour
     void Update()
     {
         goodText.text = goodNum.ToString();     //‚¢‚¢‚Ë”‚ğstring‚É•ÏŠ·‚µ‚Ä‰æ–Ê‚É•\¦
-        Debug.Log("‚¢‚¢‚Ë”:" + goodNum);
+        //Debug.Log("‚¢‚¢‚Ë”:" + goodNum);
     }
 
     public void AddGood(float value)    //‘¼‚ÌƒNƒ‰ƒX‚©‚çŒÄ‚Î‚ê‚é‚¢‚¢‚Ë‰ÁZ‚Ì‚½‚ß‚ÌŠÖ”

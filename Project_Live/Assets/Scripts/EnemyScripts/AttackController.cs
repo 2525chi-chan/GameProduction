@@ -7,26 +7,22 @@ public class AttackController : MonoBehaviour
     [Header("攻撃判定を持つオブジェクト")]
     [SerializeField] GameObject attackPrefab;
     [Header("攻撃をするまでの時間")]
-    [SerializeField] float attackDuration = 1.0f;
+    [SerializeField] float attackDuration = 0.7f;
+    [Header("攻撃後に発生するクールタイム")]
+    [SerializeField] float attackCoolTime = 0.2f;
     [Header("攻撃を生成する位置")]
     [SerializeField] Transform attackPos;
     [Header("必要なコンポーネント")]
     [SerializeField] AttackTrigger attackTrigger;
     [SerializeField] EnemyMover mover;
    
-    float attackTimer = 0f; //攻撃待機時間の計測用変数
+    public float AttackDuration {  get { return attackDuration; } }
+    public float AttackCoolTime { get { return attackCoolTime; } }
 
-    void Update()
+    public void InstanceAttack() //攻撃処理
     {
         if (!attackTrigger.IsAttackTrigger) return;
 
-        attackTimer += Time.deltaTime;
-
-        if (attackTimer > attackDuration) InstanceAttack(); //一定時間経過後に攻撃する
-    }
-
-    void InstanceAttack() //攻撃処理
-    {
         GameObject attackObj = Instantiate(attackPrefab, attackPos.position, attackPos.rotation);
         
         if (mover != null)
@@ -36,8 +32,5 @@ public class AttackController : MonoBehaviour
             if (hitbox != null)
                 hitbox.SetOwnerMoveType(mover.MoveType); //攻撃判定に、攻撃者の移動タイプを渡す
         }
-        
-        attackTimer = 0f;
-        attackTrigger.IsAttackTrigger = false;
     }
 }

@@ -44,7 +44,7 @@ public class DamageToTarget : MonoBehaviour
         }
 
         playerStatus.Hp -= damage;
-        Debug.Log(damage + "ダメージを与えた");
+        //Debug.Log(damage + "ダメージを与えた");
 
         if (hitEffect != null) Instantiate(hitEffect, player.bounds.center, player.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
     }
@@ -64,9 +64,11 @@ public class DamageToTarget : MonoBehaviour
         //
 
         enemyStatus.Hp -= damage;
-        Debug.Log(damage + "ダメージを与えた");
+        //Debug.Log(damage + "ダメージを与えた");
 
         if (hitEffect != null) Instantiate(hitEffect, enemy.bounds.center, enemy.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+
+        enemyStatus.actionEvents.KnockbackEvent(); //のけぞり状態への遷移
     }
 
     public void AddDamageToObject(Collider obj) //ダメージを与える
@@ -84,7 +86,7 @@ public class DamageToTarget : MonoBehaviour
         //
 
         objStatus.Hp -= damage;
-        Debug.Log(damage + "ダメージを与えた");
+        //Debug.Log(damage + "ダメージを与えた");
 
         if (hitEffect != null) Instantiate(hitEffect, obj.bounds.center, obj.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
     }

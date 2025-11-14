@@ -6,7 +6,7 @@ public class EnemyIdentifier : MonoBehaviour
     private EnemyMover.EnemyMoveType moveType;
     private bool isRegistered = false;
 
-    public void Awake()
+    public void Start()
     {
         EnemyCountManager.instance.RegisterEnemy(this.gameObject);
     }
