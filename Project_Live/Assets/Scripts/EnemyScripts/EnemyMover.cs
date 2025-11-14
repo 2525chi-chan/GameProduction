@@ -29,7 +29,7 @@ public class EnemyMover : MonoBehaviour
     EnemyMoveType moveType;
     EnemyMoveState currentMoveState;
     float moveTypeTimer = 0f; //移動タイプ更新時間の計測用
-    float setMoveTimeDuration = 0.5f; //移動タイプ更新の時間
+    float setMoveTimeDuration = 0.25f; //移動タイプ更新の時間
 
     public EnemyMoveState MoveState { get { return currentMoveState; } }
 
