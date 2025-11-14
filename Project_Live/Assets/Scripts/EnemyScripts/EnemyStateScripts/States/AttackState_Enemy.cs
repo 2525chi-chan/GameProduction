@@ -6,10 +6,10 @@ public class AttackState_Enemy : IEnemyState
     EnemyMover mover;
     AttackController attackController;
 
-    float durationTimer = 0f; //攻撃待機時間の計測用変数
-    float coolTimer = 0f;
-    bool isAnimPlayed = false;
-    bool isAttacked = false;
+    float durationTimer;
+    float coolTimer;
+    bool isPlayedAnim;
+    bool isAttacked;
 
     public AttackState_Enemy(EnemyAnimationController anim, EnemyMover mover, AttackController attackController)
     {
@@ -20,46 +20,43 @@ public class AttackState_Enemy : IEnemyState
 
     public void Enter()
     {
-        Debug.Log("近接攻撃状態に移行");
+        durationTimer = 0f;
+        coolTimer = 0f;
+        isPlayedAnim = false;
+        isAttacked = false;
+        //Debug.Log("攻撃状態に移行");
     }
 
     public void Update()
     {
         mover.MoveStateProcess(); //移動処理（プレイヤーの注視、回転動作など）
 
-        durationTimer += Time.deltaTime;
-        Debug.Log("攻撃状態");
+        if (!isAttacked) durationTimer += Time.deltaTime;
+        else coolTimer += Time.deltaTime;
 
-        if (!isAttacked) //攻撃判定発生前の処理
+        if (!isPlayedAnim)
         {
-            if (!isAnimPlayed)
-            {
-                isAnimPlayed = true;
-                anim.PlayCloseAttack(); //近接攻撃アニメーションの再生
-            }
+            anim.PlayAttack();
+            isPlayedAnim = true;
+        }
 
-            if (durationTimer > attackController.AttackDuration && !isAttacked)
-            {
-                durationTimer = 0f;
-                attackController.InstanceAttack();
-                isAttacked = true;
-            }
-        }        
-
-        if (isAttacked) //攻撃判定発生後のクールタイム時間
+        if (durationTimer >= attackController.AttackDuration && isPlayedAnim)
         {
-            coolTimer += Time.deltaTime;
-            if (coolTimer > attackController.AttackCoolTime)
-            {
-                coolTimer = 0f;
-                isAnimPlayed = false;
-                isAttacked = false;
-            }
+            durationTimer = 0f;
+            attackController.InstanceAttack();
+            isAttacked = true;
+        }
+
+        if (coolTimer >= attackController.AttackCoolTime && isPlayedAnim)
+        {
+            coolTimer = 0f;
+            isPlayedAnim = false;
+            isAttacked = false;
         }
     }
 
     public void Exit()
     {
-        Debug.Log("近接攻撃状態終了");
+        //Debug.Log("攻撃状態終了");
     }
 }

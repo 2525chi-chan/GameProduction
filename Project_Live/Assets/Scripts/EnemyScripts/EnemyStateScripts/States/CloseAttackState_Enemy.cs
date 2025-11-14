@@ -24,7 +24,7 @@ public class CloseAttackState_Enemy : IEnemyState
         coolTimer = 0f;
         isPlayedAnim = false;
         isAttacked = false;
-        Debug.Log("‹ßÚUŒ‚ó‘Ô‚ÉˆÚs");
+        //Debug.Log("‹ßÚUŒ‚ó‘Ô‚ÉˆÚs");
     }
 
     public void Update()
@@ -36,7 +36,7 @@ public class CloseAttackState_Enemy : IEnemyState
 
         if (!isPlayedAnim)
         {
-            anim.PlayCloseAttack();
+            anim.PlayAttack();
             isPlayedAnim = true;
         }
 

@@ -8,8 +8,7 @@ public class EnemyActionEvents
     public event System.Action OnMoveEvent;
     public event System.Action OnKnockbackEvent;
     public event System.Action OnDownEvent;
-    public event System.Action OnCloseAttackEvent;
-    public event System.Action OnShotEvent;
+    public event System.Action OnAttackEvent;
 
     public void IdleEvent()
     {
@@ -31,13 +30,8 @@ public class EnemyActionEvents
         OnDownEvent?.Invoke();
     }
 
-    public void CloseAttackEvent()
+    public void AttackEvent()
     {
-        OnCloseAttackEvent?.Invoke();
-    }
-
-    public void ShotEvent()
-    {
-        OnShotEvent?.Invoke();
+        OnAttackEvent?.Invoke();
     }
 }

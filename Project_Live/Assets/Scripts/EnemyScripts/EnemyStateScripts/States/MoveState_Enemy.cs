@@ -13,12 +13,11 @@ public class MoveState_Enemy : IEnemyState
 
     public void Enter()
     {
-        Debug.Log("ˆÚ“®ó‘Ô‚ÉˆÚs");
+        //Debug.Log("ˆÚ“®ó‘Ô‚ÉˆÚs");
     }
 
     public void Update()
     {
-
         mover.MoveStateProcess(); //“G‚ÌˆÚ“®ˆ—
     }
 

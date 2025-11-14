@@ -42,7 +42,7 @@ public class AttackTrigger : MonoBehaviour
         if (currentTimer > triggerDuration && !isAttackTrigger)
         {
             isAttackTrigger = true;
-            actionEvents.CloseAttackEvent();
+            actionEvents.AttackEvent();
         }
     }
 

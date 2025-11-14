@@ -9,8 +9,6 @@ public class EnemyStatus : CharacterStatus
     bool isDead = false;
     public bool IsDead { get { return isDead; } }
 
-    float previousHp;
-
     bool isRagdoll = false;
     public bool IsRagdoll
     {
@@ -30,7 +28,6 @@ public class EnemyStatus : CharacterStatus
     private void Start()
     {
         pos = this.transform;
-        previousHp = Hp;
     }
     void Update()
     {
@@ -60,9 +57,5 @@ public class EnemyStatus : CharacterStatus
         {
             ragdollCount = 0;
         }
-
-        if (Hp != previousHp && Hp > 0) actionEvents.KnockbackEvent();
-
-        previousHp = Hp;
     }
 }

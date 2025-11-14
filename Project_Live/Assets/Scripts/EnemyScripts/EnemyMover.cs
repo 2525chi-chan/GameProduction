@@ -28,7 +28,8 @@ public class EnemyMover : MonoBehaviour
     GameObject[] breakables; //破壊できる対象
     EnemyMoveType moveType;
     EnemyMoveState currentMoveState;
-    EnemyMoveState previousMoveState = EnemyMoveState.stop;
+    float moveTypeTimer = 0f; //移動タイプ更新時間の計測用
+    float setMoveTimeDuration = 0.5f; //移動タイプ更新の時間
 
     public EnemyMoveState MoveState { get { return currentMoveState; } }
 
@@ -57,11 +58,16 @@ public class EnemyMover : MonoBehaviour
         if (moveType == EnemyMoveType.StageDestroy && lookTarget == null)
             InitTarget();
 
-        if (lookTarget != null)
-        {
-            float distance = Vector3.Distance(transform.position, lookTarget.position); //プレイヤーとの距離を算出する
+        if (lookTarget == null) return;
+        
+        float distance = Vector3.Distance(transform.position, lookTarget.position); //プレイヤーとの距離を算出する
 
-            MoveTypeProcess(distance);
+        moveTypeTimer += Time.deltaTime;
+        if (moveTypeTimer >= setMoveTimeDuration) //一定間隔ごとに、移動タイプの更新
+        {
+            moveTypeTimer = 0f;
+            UpdateMoveType(distance);
+            CallStateEvent();
         }
     }
 
@@ -86,7 +92,7 @@ public class EnemyMover : MonoBehaviour
         }
     }
 
-    void MoveTypeProcess(float distance) //移動タイプに沿った、移動状態の遷移を行う
+    void UpdateMoveType(float distance) //移動タイプに沿った、移動状態の遷移を行う
     {
         switch (moveType)
         {
@@ -112,8 +118,6 @@ public class EnemyMover : MonoBehaviour
                 currentMoveState = (lookTarget != null && distance >= stopRange) ? EnemyMoveState.move : EnemyMoveState.lookOnly;
                 break;
         }
-
-        CallStateEvent();
     }
 
     public void MoveStateProcess() //移動状態ごとの移動処理を行う
@@ -138,7 +142,6 @@ public class EnemyMover : MonoBehaviour
 
     void CallStateEvent() //移動状態ごとに、敵の行動状態の遷移を行う
     {
-        //if (currentMoveState == previousMoveState) return;
         switch (currentMoveState)
         {
             case EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
@@ -150,8 +153,6 @@ public class EnemyMover : MonoBehaviour
             case EnemyMoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態
             default: break;
         }
-
-        //previousMoveState = currentMoveState;
     }
 
     void MoveTowardsPlayer()//プレイヤーに向かって移動する

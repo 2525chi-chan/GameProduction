@@ -11,7 +11,7 @@ public class DownState_Enemy : IEnemyState
 
     public void Enter()
     {
-        Debug.Log("ダウン状態に移行");
+        //Debug.Log("ダウン状態に移行");
         //anim.PlayDown();
         anim.PlayDamage();
     }
@@ -23,6 +23,6 @@ public class DownState_Enemy : IEnemyState
 
     public void Exit()
     {
-        Debug.Log("ダウン状態終了");
+        //Debug.Log("ダウン状態終了");
     }
 }

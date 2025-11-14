@@ -16,7 +16,7 @@ class IdleState_Enemy : IEnemyState
 
     public void Enter()
     {
-        Debug.Log("待機状態に移行");
+        //Debug.Log("待機状態に移行");
     }
 
     public void Update()

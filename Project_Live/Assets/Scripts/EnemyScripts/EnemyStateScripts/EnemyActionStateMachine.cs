@@ -30,8 +30,7 @@ public class EnemyActionStateMachine : MonoBehaviour
         actionEvents.OnMoveEvent += OnMoveProcess;
         actionEvents.OnKnockbackEvent += OnKnockbackProcess;
         actionEvents.OnDownEvent += OnDownProcess;
-        actionEvents.OnCloseAttackEvent += OnCloseAttackProcess;
-        actionEvents.OnShotEvent += OnShotProcess;
+        actionEvents.OnAttackEvent += OnAttackProcess;
     }
 
     void OnDisable()
@@ -40,8 +39,7 @@ public class EnemyActionStateMachine : MonoBehaviour
         actionEvents.OnMoveEvent -= OnMoveProcess;
         actionEvents.OnKnockbackEvent -= OnKnockbackProcess;
         actionEvents.OnDownEvent -= OnDownProcess;
-        actionEvents.OnCloseAttackEvent -= OnCloseAttackProcess;
-        actionEvents.OnShotEvent -= OnShotProcess;
+        actionEvents.OnAttackEvent -= OnAttackProcess;
     }
 
     void Update()
@@ -80,15 +78,10 @@ public class EnemyActionStateMachine : MonoBehaviour
         ChangeState(new DownState_Enemy(anim));
     }
 
-    void OnCloseAttackProcess()
+    void OnAttackProcess()
     {
-        if ((currentState is IdleState_Enemy || currentState is MoveState_Enemy) && !(currentState is CloseAttackState_Enemy))
-            ChangeState(new CloseAttackState_Enemy(anim, mover, attackController));
-    }
-
-    void OnShotProcess()
-    {
-        if (!(currentState is IdleState_Enemy) || currentState is ShotState_Enemy) return;
-        ChangeState(new ShotState_Enemy(anim));
+        if (currentState is AttackState_Enemy) return;
+        //if ((currentState is IdleState_Enemy || currentState is MoveState_Enemy) && !(currentState is AttackState_Enemy))
+            ChangeState(new AttackState_Enemy(anim, mover, attackController));
     }
 }

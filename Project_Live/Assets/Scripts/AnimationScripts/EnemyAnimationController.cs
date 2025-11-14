@@ -24,13 +24,8 @@ public class EnemyAnimationController : MonoBehaviour
         animator.SetTrigger("Down");
     }
 
-    public void PlayCloseAttack() //近接攻撃アニメーション
+    public void PlayAttack() //近接攻撃アニメーション
     {
         animator.SetTrigger("Attack");
-    }
-
-    public void PlayShot() //遠距離攻撃アニメーション
-    {
-        animator.SetTrigger("Idle");
     }
 }
