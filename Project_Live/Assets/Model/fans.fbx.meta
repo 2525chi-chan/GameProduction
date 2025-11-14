@@ -3,7 +3,12 @@ guid: d1145726dc7540542a2eee74707989cb
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fancolor
+    second: {fileID: 2100000, guid: 258cf37e23ad2c0439e4d25d305737be, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
