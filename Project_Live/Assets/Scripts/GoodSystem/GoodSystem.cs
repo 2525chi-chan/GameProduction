@@ -32,6 +32,8 @@ public class GoodSystem : MonoBehaviour
 
     private float displayGoodNum;   //ディスプレイ用のいいね数
 
+    public float DisplayGoodNum => displayGoodNum;
+
     bool changing;  //ディスプレイいいね数の変更が終わったか
 
     float diff; //ディスプレイ用とオリジナルの差分
