@@ -1,4 +1,4 @@
-Shader "Custom/SwampSurfaceNoise"
+Shader "Custom/EnemyBody"
 {
     Properties
     {
