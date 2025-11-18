@@ -9,6 +9,15 @@ public class SpawnParameter
     public GameObject enemyPrefab;
     [Header("この敵の最大同時出現数")]
     public int maxSpawnCount;
+
+    [Header("ランクごとの最大同時出現数")]
+    [Tooltip("0～4個目の要素が、プチバズ～神バズの順番に対応しているものとして設定してください。")]
+    public List<int> maxSpawnCount_bazuriRank;
+
+    [Header("ランクごとの敵数のゆらぎ ±値")]
+    [Tooltip("同じランクでも出現数を変化させたい場合に使用してください。")]
+    public List<int> fluctuation_bazuriRank;
+
     [Header("この敵の移動タイプ")]
     public EnemyMover.EnemyMoveType moveType;
 }
@@ -21,6 +30,9 @@ public class EnemySpawnManager : BaseSpawnManager
     //[SerializeField] int  spawnEndCount;
     [Header("ゲーム開始時に敵を生成するか")]
     [SerializeField] bool spawnOnStart = true;
+    [Header("必要なコンポーネント")]
+    [SerializeField] BuzuriRank bazuriRank;
+
     private int defeatedEnemyCount = 0;
     public int DefeatedEnemyCount
     {
@@ -60,9 +72,11 @@ public class EnemySpawnManager : BaseSpawnManager
 
             if (spawnOnStart)
             {
+                int maxSpawn = GetMaxSpawnCount(param);
 
-                spawners[key].SpawnEnemies(param.maxSpawnCount, param.moveType);
-            trackers[key].ForceSync();
+                //spawners[key].SpawnEnemies(param.maxSpawnCount, param.moveType);
+                spawners[key].SpawnEnemies(maxSpawn, param.moveType);
+                trackers[key].ForceSync();
             }
 
             
@@ -81,8 +95,12 @@ public class EnemySpawnManager : BaseSpawnManager
         foreach (var param in spawnParameters)
         {
             var key = (param.enemyPrefab, param.moveType);
+
+            int maxSpawn = GetMaxSpawnCount(param);
             int currentCount = EnemyRegistry.GetCount(param.enemyPrefab, param.moveType);
-            int toSpawn = param.maxSpawnCount - currentCount;
+
+            //int toSpawn = param.maxSpawnCount - currentCount;
+            int toSpawn = maxSpawn - currentCount;
 
             if (toSpawn > 0)
             {
@@ -90,5 +108,28 @@ public class EnemySpawnManager : BaseSpawnManager
                 //Debug.Log($"{key} を {toSpawn} 体再生成しました");
             }
         }
+    }
+
+    int GetMaxSpawnCount(SpawnParameter param) //現在のランクに合わせた敵の生成数を取り出す
+    {
+        int rankIndex = bazuriRank.CurrentIndex;
+
+        if (rankIndex < 0 || rankIndex >= param.maxSpawnCount_bazuriRank.Count)
+            return 0;
+
+        int baseCount = param.maxSpawnCount_bazuriRank[rankIndex];
+
+        //ゆらぎが設定されていなければ固定値
+        if (param.fluctuation_bazuriRank == null
+            || rankIndex >= param.fluctuation_bazuriRank.Count)
+            return baseCount;
+
+        int fluct = param.fluctuation_bazuriRank[rankIndex];
+
+        int min = Mathf.Max(0, baseCount - fluct);
+        int max = baseCount + fluct;
+
+        //return param.maxSpawnCount_bazuriRank[rankIndex];
+        return Random.Range(min, max + 1);
     }
 }

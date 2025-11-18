@@ -80,6 +80,8 @@ public class BuzuriRank : MonoBehaviour
 
     GoodSystem goodSystem;
 
+    public int CurrentIndex { get { return currentIndex; } }
+
     // Start is called before the first frame update
     void Start()
     {
