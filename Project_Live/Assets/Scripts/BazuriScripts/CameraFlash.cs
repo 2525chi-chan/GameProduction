@@ -6,7 +6,7 @@ public class CameraFlash : MonoBehaviour//バズリショットをした際のカメラフラッシ
     [Header("フラッシュ素材(画面を覆う白パネル)")]
     [SerializeField] Image flashPanel;
     [Header("フラッシュの速度")]
-    [SerializeField]float flashSpeed = 5f;
+    [SerializeField] float flashSpeed = 5f;
     [Header("パネルの色")]
     [SerializeField] Color flashColor;
 
@@ -16,8 +16,9 @@ public class CameraFlash : MonoBehaviour//バズリショットをした際のカメラフラッシ
     {
         if (isFlashing)
         {
-            flashPanel.color=  Color.Lerp(flashPanel.color, Color.clear, flashSpeed * Time.deltaTime);
-            if (flashPanel.color.a<=0.01f) {
+            flashPanel.color = Color.Lerp(flashPanel.color, Color.clear, flashSpeed * Time.unscaledDeltaTime);
+            if (flashPanel.color.a <= 0.01f)
+            {
 
                 ResetAlpha();
             }
@@ -28,14 +29,14 @@ public class CameraFlash : MonoBehaviour//バズリショットをした際のカメラフラッシ
         if (!isFlashing)
         {
             isFlashing = true;
-           
+
             flashPanel.color = new Color(flashColor.r, flashColor.g, flashColor.b, 1f);
-           
+
         }
     }
     public void ResetAlpha()//連発時にフラッシュが起こらない現象を防ぐために、フラッシュの色をリセットする。
     {
-               flashPanel.color = Color.clear;
+        flashPanel.color = Color.clear;
         isFlashing = false;
     }
 }

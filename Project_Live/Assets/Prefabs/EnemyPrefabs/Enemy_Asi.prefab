@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8836497061533814310, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: bazuriMotion.Array.data[1].motionName
+      value: Enemy_Attack_Asi
+      objectReference: {fileID: 0}
+    - target: {fileID: -8836497061533814310, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: bazuriMotion.Array.data[2].motionName
+      value: Enemy_Damage_Asi
+      objectReference: {fileID: 0}
     - target: {fileID: 446971775148853601, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: attackDuration
       value: 0.3
@@ -213,6 +221,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -4229681162934988174, guid: 48868123d4672434daec8a930f85332f, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 76eb2078a355d5542918957c494f6acd, type: 2}
     - target: {fileID: 919132149155446097, guid: 48868123d4672434daec8a930f85332f, type: 3}
       propertyPath: m_Name
       value: sukurappa_hayaino

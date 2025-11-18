@@ -8,7 +8,11 @@ public class MatchCameraRect : MonoBehaviour//矩形の制御を管理するスクリプト
     // Update is called once per frame
     void Update()
     {
-        bazuriCamera.rect=baseCamera.rect;//bazuriCameraの矩形をbaseCameraの矩形に合わせる
+        if (baseCamera != null && bazuriCamera != null)
+        {
+ bazuriCamera.rect=baseCamera.rect;//bazuriCameraの矩形をbaseCameraの矩形に合わせる
+        }
+           
         
     }
 }
