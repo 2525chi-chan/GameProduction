@@ -14,6 +14,8 @@ public class BuzzRank
 
     [Header("このバズリランクに必要ないいね数")]
     [SerializeField] public float needNum;
+
+    public float NeddNum { get { return needNum; }}
     [Header("このバズリランクのいいね取得倍率")]
     [SerializeField] float goodMagnification;
     public float GoodMagnification => goodMagnification;
@@ -65,6 +67,10 @@ public class BuzuriRank : MonoBehaviour
 {
     [Header("バズリランク設定")]
     [SerializeField] List<BuzzRank> buzzRanks;
+    public List<BuzzRank> BuzzRanks
+    {
+        get { return buzzRanks; }
+    }
     [Header("関連コメントの色を変えるか")]
     public bool changeConectCommentCol = true;
     [Header("バズリランクゲージバー")]

@@ -14,7 +14,7 @@ public class DestroyEffect : MonoBehaviour
     void Start()
     {
         vfx = GetComponent<VisualEffect>();
-        BazuriShot = GameObject.FindWithTag("BazuriShot").GetComponent<BazuriShot>();   
+      //  BazuriShot = GameObject.FindWithTag("BazuriShot").GetComponent<BazuriShot>();   
         if (isDestroy)
         {
             Destroy(this.gameObject, destroyTime);
@@ -23,21 +23,5 @@ public class DestroyEffect : MonoBehaviour
 
     }
     // Update is called once per frame
-    void Update()
-    {
-        if (BazuriShot.IsBazuriMode)
-        {
-
-           // vfx.playRate = 0;
-            //vfx.pause = true;
-        }
-        else
-        {
-           // vfx.playRate= 1;
-            //vfx.pause = false;  
-        }
-     
-        Debug.Log(vfx.playRate);
-
-    }
+   
 }
