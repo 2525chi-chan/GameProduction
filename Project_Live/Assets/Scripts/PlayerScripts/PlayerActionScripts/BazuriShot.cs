@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.SceneView;
@@ -50,7 +51,8 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] Transform player;
     [SerializeField] GameObject effect;
     private Camera analyzerCamera;
-    private Coroutine bazuriCoroutine;
+    private Coroutine bazuriCoroutine;  
+    private Coroutine slowTimeCoroutine = null;
     private int currentStock;
     public int CurrentStock
     {
@@ -68,6 +70,8 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         get { return isBazuriMode; }
         set {isBazuriMode=value;}
     }
+  
+
     private void Start()
     {
         if (bazuriCamera != null&&mainCamera!=null)
@@ -112,6 +116,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
             {
 
                 Time.timeScale = 1f;
+                slowTimeCoroutine = null;
                 yield break;
 
             }
@@ -119,7 +124,17 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         } 
         Time.timeScale = target;
     }
+    public void StartSlowTimeScaleDown(float start,float target,float speed)//時間を遅くする処理。単一のコルーチンでしか動かないようにする
+    {
 
+        if(slowTimeCoroutine != null)
+        {
+            StopCoroutine(slowTimeCoroutine);
+            slowTimeCoroutine = null;
+        }
+        slowTimeCoroutine = StartCoroutine(SlowTimeScaleDown(start,target, speed));
+
+    }
     private IEnumerator BazuriModeRoutine()//バズリショットモードに切り替え
     {
         cameraFlash.ResetAlpha();
@@ -134,8 +149,8 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         float elapsed = 0f;
         playerInput.SwitchCurrentActionMap("Bazuri");
          ResetCamera();
-
-        StartCoroutine(SlowTimeScaleDown(Time.timeScale, 0, timeScaleDownSpeed));
+        StartSlowTimeScaleDown(Time.timeScale, 0, timeScaleDownSpeed);
+     //   StartCoroutine(SlowTimeScaleDown(Time.timeScale, 0, timeScaleDownSpeed));
         StartCoroutine(zoomCamera.SetZoom(true));
 
 
@@ -160,6 +175,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
 
     private void EndBazuriMode()//プレイヤーモードに切り替え
     {
+      
         isBazuriMode = false;
         Time.timeScale = 1f;
        
@@ -171,7 +187,13 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         currentStock--;
         
         playerInput.SwitchCurrentActionMap("Player");
-       // ResetCamera();
+
+        if(slowTimeCoroutine != null)
+        {
+            StopCoroutine(slowTimeCoroutine);
+            slowTimeCoroutine = null;
+        }
+        // ResetCamera();
     }
     private void ResetCamera()//カメラ位置、回転の初期化
     {

@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8836497061533814310, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: bazuriMotion.Array.data[1].motionName
+      value: Enemy_Damage_Kataino
+      objectReference: {fileID: 0}
+    - target: {fileID: -8836497061533814310, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: bazuriMotion.Array.data[2].motionName
+      value: Enemy_Attack_Kataino
+      objectReference: {fileID: 0}
     - target: {fileID: 1668865627258727923, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -225,6 +233,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8986517677769462588, guid: 470c1cb5fc466614f82711a4aad881b3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 76eb2078a355d5542918957c494f6acd, type: 2}
     m_RemovedComponents:
     - {fileID: 5866666021909216657, guid: 470c1cb5fc466614f82711a4aad881b3, type: 3}
     m_RemovedGameObjects: []

@@ -5,7 +5,8 @@ public class EnemyCountManager : MonoBehaviour//敵の数を管理するクラス
 {
     [SerializeField] BossEventManager bossManager;
     [SerializeField] int bossSpawnCount;//ボスを呼ぶためのカウント
-    List<GameObject> enemies = new List<GameObject>();
+    [SerializeField] bool isbossSpawn = false;//ボスが湧くかどうか
+    List<GameObject> enemies = new ();
 
     public static EnemyCountManager instance;
 
@@ -25,7 +26,7 @@ public class EnemyCountManager : MonoBehaviour//敵の数を管理するクラス
         //    bossSpawned = true;
         //    StartCoroutine(bossManager.BossEvent());
         //}
-        if (!bossSpawned && deadCount > bossSpawnCount)
+        if (!bossSpawned && deadCount > bossSpawnCount&&isbossSpawn)
         { Debug.Log("aa!!!");
             bossSpawned = true;
             StartCoroutine(bossManager.BossEvent());
