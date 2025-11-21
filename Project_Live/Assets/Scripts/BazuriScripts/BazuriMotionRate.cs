@@ -75,6 +75,11 @@ public class BazuriMotionRate : MonoBehaviour
   #endif
     public float GetCurrentMotionRate()//今のモーションのスコア倍率を返す
     {
+        
+        if (animator == null)
+        {
+            return 1f;
+        }
         var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         foreach (var bazuri in BazuriMotion)

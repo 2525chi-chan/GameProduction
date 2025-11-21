@@ -38,8 +38,10 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] float slowSpeed;
     [Header("バズリショットの最大ストック")]
     [SerializeField] int shotStock;
+    [Header("バズリショットのクールタイム")]
+    [SerializeField] float coolTime;
     [Header("デフォルトのレイヤー(カメラ判定に用いるレイヤー)")]
-    [SerializeField] LayerMask layer;
+    [SerializeField] List<LayerMask> layers;
     [Header("時間が遅くなる速度")]
     [SerializeField]float timeScaleDownSpeed;
     [Header("必要なコンポーネント")]
@@ -50,6 +52,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] ZoomCamera zoomCamera;
     [SerializeField] Transform player;
     [SerializeField] GameObject effect;
+    private float countCoolTime;
     private Camera analyzerCamera;
     private Coroutine bazuriCoroutine;  
     private Coroutine slowTimeCoroutine = null;
@@ -81,7 +84,16 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
             analyzerCamera =bazuriCamera.GetComponent<Camera>();
             cinemachineBrain.m_CameraActivatedEvent.AddListener(OnCameraActivated);
         }
+
+        countCoolTime = coolTime;
      
+    }
+    public void Update()
+    {
+        if (!isBazuriMode)
+        {
+            countCoolTime += Time.deltaTime;
+        }
     }
 
     public void TryBazuriShot()
@@ -91,9 +103,10 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         {
             StopCoroutine(bazuriCoroutine);
         }
-        if (currentStock > 0)
+        if (currentStock > 0&&countCoolTime>coolTime)
         {
             bazuriCoroutine = StartCoroutine(BazuriModeRoutine());
+            countCoolTime = 0f;
         }
         
 
@@ -161,7 +174,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
             if (playerInput.actions["Shot"].WasPressedThisFrame())
             {
                 cameraFlash.StartFlash();
-               goodSystem.AddGood(analyzer.Analyzer(analyzerCamera, layer));
+               goodSystem.AddGood(analyzer.Analyzer(analyzerCamera, layers));
                 break;
             }
 

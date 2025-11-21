@@ -7,14 +7,43 @@ public class AppearFans : MonoBehaviour
     [SerializeField]GoodSystem goodSystem;
     [SerializeField] BuzuriRank BuzuriRank;
     [SerializeField] int loadLimit;
+    [SerializeField] int appearLimit=5;
     private List<(GameObject, MeshRenderer[])> fanObjects = new();
+
+    private Queue<(GameObject, MeshRenderer[])> fanQueue;
     private float loadCount = 0;
     private int goodLimit = 0;//ファンが最大数出るまでの数(現状神バズ到達時に最大になる)
     private int parFanAppear;//いいね何個でファンが一体出現するか
     private BuzzRank maxRank;
-    private int apperedFan = 0;
+    private int appearedFan = 0;
+
+    private int appeareCount = 0;
+
+    private bool loaded = false;
     GameObject[] Fans;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
+     void Shuffle<T>(IList<T>list)
+    {
+      System.Random rand = new System.Random();
+        int num = list.Count;
+
+        while (num > 0)
+        {
+            num--;
+          int k=  rand.Next(num+1);
+
+            T value = list[k];  
+            list[k] = list[num];
+
+            list[num] = value;
+
+        }
+
+
+
+    }
     void Start()
     {
         maxRank = BuzuriRank.BuzzRanks.Last();
@@ -22,27 +51,12 @@ public class AppearFans : MonoBehaviour
        
         Fans = GameObject.FindGameObjectsWithTag("Fan");
        parFanAppear = goodLimit / Fans.Length;
-       // Test();
+   
        StartCoroutine(FanLoad(Fans));
         Debug.Log(parFanAppear);
     }
 
-    public void Test()
-    {
-        for (int i = 0; i < Fans.Length; i++) {
-
-            MeshRenderer[] renderers = Fans[i].GetComponentsInChildren<MeshRenderer>();
-
-
-           
-            foreach (var rend in renderers)
-            {
-
-                rend.enabled = true;
-            }
-
-        }
-    }
+  
     IEnumerator FanLoad(GameObject[] Fans)
     {
 
@@ -58,25 +72,37 @@ public class AppearFans : MonoBehaviour
             {
                 yield return null;
             }
-
+            
         }
-
+        Shuffle(fanObjects);
+        fanQueue = new Queue<(GameObject, MeshRenderer[])>(fanObjects);
+        loaded = true;
     }
    private void Update()
     {
-        while (goodSystem.DisplayGoodNum > parFanAppear * apperedFan+1)
+        appeareCount = 0;
+        while (goodSystem.DisplayGoodNum > parFanAppear * appearedFan&&fanQueue.Count>0
+            &&appeareCount<appearLimit&&loaded)
         {
-            var random = Random.Range(0, fanObjects.Count);
-            var appearFan = fanObjects[random];
-            fanObjects.Remove(appearFan);
+          
+            var appearFan = fanQueue.Dequeue();
+         
+            FanMove swing = appearFan.Item1.GetComponent<FanMove>();
             var renderers = appearFan.Item2;
+
+            if (swing != null)
+            {
+                swing.SwingStart();
+            }
             foreach(var rend in renderers)
             {
 
                 rend.enabled = true;
             }
            
-            apperedFan++;
+            appearedFan++;
+
+            appeareCount++;
         }
     }
    
