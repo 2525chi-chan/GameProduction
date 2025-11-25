@@ -334,7 +334,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 2c0caefff6ba5764d80ee9763824afe0, type: 3}
   m_Controller: {fileID: 9100000, guid: e8c9d8e484a053a479d90642b03cbc0c, type: 2}
-  m_CullingMode: 0
+  m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
@@ -360,8 +360,8 @@ MonoBehaviour:
   bazuriMotion:
   - motionName: Idle
     motionRate: 1
-  - motionName: Attack
-    motionRate: 1.1
+  - motionName: Enemy_Attack_Normal
+    motionRate: 1
   - motionName: Enemy_Damage_Normal
     motionRate: 1
 --- !u!114 &752392178674883388

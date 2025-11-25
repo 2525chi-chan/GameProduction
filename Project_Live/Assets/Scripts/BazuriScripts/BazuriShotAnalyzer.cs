@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒŠƒvƒg
@@ -17,9 +18,9 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
 
 
     
-  public  int Analyzer(Camera camera,LayerMask layer)//”íÊ‘Ì‚Ìó‘Ô‚É‰‚¶‚ÄƒXƒRƒA‚ğæZ‚·‚é
+  public  int Analyzer(Camera camera,List<LayerMask> layers)//”íÊ‘Ì‚Ìó‘Ô‚É‰‚¶‚ÄƒXƒRƒA‚ğæZ‚·‚é
     {
-        List<GameObject> gameObjects=DetectVisibleObjects(camera,layer);
+        List<GameObject> gameObjects=DetectVisibleObjects(camera,layers);
         float sumScore = 0f;
         foreach (GameObject obj in gameObjects)
         {
@@ -60,7 +61,12 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
         }
 
         animator.TryGetComponent<BazuriMotionRate>(out var motionRate);
-        scoreRate *= motionRate.GetCurrentMotionRate();
+
+        if(motionRate != null)
+        { 
+            scoreRate *= motionRate.GetCurrentMotionRate();
+        }
+           
 
         return scoreRate;
     }
@@ -87,7 +93,7 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
 
         return scoreRate;
     }
-    public List<GameObject> DetectVisibleObjects(Camera camera, LayerMask layer)//ƒJƒƒ‰‚Ì’†‚É‰f‚Á‚½ƒIƒuƒWƒFƒNƒg‚ğŒŸo‚·‚é
+    public List<GameObject> DetectVisibleObjects(Camera camera,List< LayerMask> layers)//ƒJƒƒ‰‚Ì’†‚É‰f‚Á‚½ƒIƒuƒWƒFƒNƒg‚ğŒŸo‚·‚é
     {
 
         List<GameObject> viewObjects = new List<GameObject>();
@@ -97,9 +103,9 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
 
         foreach (var obj in allObjects)
         {
-            if((layer.value&(1<<obj.gameObject.layer))==0) {//UIƒŒƒCƒ„[‚Í’e‚­
+            bool isInLayer = layers.Any(layer => (layer.value & (1 << obj.gameObject.layer)) != 0);
+            if (!isInLayer)
                 continue;
-            }
 
             Vector3 cameraView=camera.WorldToViewportPoint(obj.position);
             if (cameraView.x >= 0 && cameraView.x <= 1//ƒJƒƒ‰“à‚Éû‚Ü‚Á‚Ä‚¢‚é‚©‚ÂƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì‘ÎÛ‚Å‚ ‚ê‚Î’Ç‰Á‚·‚é
