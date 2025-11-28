@@ -11,28 +11,31 @@ using Unity.VisualScripting;
 
 public class CommentSpawn : MonoBehaviour
 {
-    //[Header("コメントの種類")]
-    //[SerializeField] List<string> commentContent=new List<string>();
-
     [Header("応援コメントが流れるまでのコメント数")]
-    [SerializeField] float commentCount = 50;
+    [SerializeField] float cheeringCommentCount = 50;
+    [Header("アンチコメントが流れるまでのコメント数")]
+    [SerializeField] float antiCommentCount = 20;
 
     [Header("必要なコンポーネント")]
     public GameObject Canvas;
     [SerializeField] GameObject CommentPrefab;
     [SerializeField] GameObject CheeringCommentPrefab;
     [SerializeField] BuzuriRank buzuriRank;
+    [SerializeField] GameObject AntiCommentPrefab;
 
     [HideInInspector] public bool cheeringCommentIsExist ;
+    [HideInInspector] public bool antiCommentIsExist;
     [HideInInspector] public bool interceptEnemyIsExist;
     [HideInInspector] public float interceptEnemyCount;     //妨害敵用のカウンター　＊あとで敵スポーン系スクリプトのほうに統合したい
 
     CheeringComment cheeringComment;
+    AntiComment antiComment;
     float spawnTime;
     int raneNum;
     int beforeRaneNum;
     bool first = true;
-    float commentCounter;
+    float cheeringCommentCounter;
+    float antiCommentCounter;
     RectTransform canvasRect;
     string nextText = null; //関連コメントの内容保存用string
     bool conectComment = false; //関連コメントのフラグ
@@ -41,9 +44,14 @@ public class CommentSpawn : MonoBehaviour
     void Start()
     {
         cheeringComment=CheeringCommentPrefab.GetComponent<CheeringComment>();
+        antiComment = AntiCommentPrefab.gameObject.GetComponent<AntiComment>();
         canvasRect=Canvas.GetComponent<RectTransform>();
+        cheeringCommentIsExist = false;
+        antiCommentIsExist = false;
         interceptEnemyIsExist = false;
         interceptEnemyCount = 0;
+        cheeringCommentCounter = 0;
+        antiCommentCounter = 0;
     }
 
     // Update is called once per frame
@@ -66,17 +74,25 @@ public class CommentSpawn : MonoBehaviour
                 }
             }
 
-            if (commentCounter >= commentCount&&!cheeringCommentIsExist&&!interceptEnemyIsExist)
+            if (cheeringCommentCounter >= cheeringCommentCount&&!cheeringCommentIsExist&&!interceptEnemyIsExist)
             {
                 Debug.Log("応援コメントが生成されました。");
                 InstantiateComment(raneNum,CheeringCommentPrefab,ref nextText,ref conectComment);
-                commentCounter = 0;
+                cheeringCommentCounter = 0;
+            }
+            else if(antiCommentCounter>=antiCommentCount&&!antiCommentIsExist)
+            {
+                Debug.Log("アンチコメントが生成されました。");
+                InstantiateComment(raneNum, AntiCommentPrefab,ref nextText, ref conectComment);
+                antiCommentCounter = 0;
             }
             else
             {
                 InstantiateComment(raneNum,CommentPrefab,ref nextText,ref conectComment);
-                commentCounter++;
-                Debug.Log("応援コメントまであと" + (commentCount - commentCounter) + "コメントです。");
+                antiCommentCounter++;
+                cheeringCommentCounter++;
+                Debug.Log("アンチコメントまであと" + (antiCommentCount - antiCommentCounter) + "コメントです。");
+                Debug.Log("応援コメントまであと" + (cheeringCommentCount - cheeringCommentCounter) + "コメントです。");
             }
             
             beforeRaneNum = raneNum;
@@ -143,11 +159,15 @@ public class CommentSpawn : MonoBehaviour
         {
             selectedText = cheeringComment.cheeringCommentContent[Random.Range(0, cheeringComment.cheeringCommentContent.Count)];
         }
+        else if(CommentType==AntiCommentPrefab)
+        {
+            selectedText = antiComment.antiCommentContent[Random.Range(0,antiComment.antiCommentContent.Count)];
+        }
 
 
         GameObject newTextObj = Instantiate(CommentType, canvasRect);
 
-        if(CommentType==CheeringCommentPrefab)
+        if(CommentType==CheeringCommentPrefab||CommentType==AntiCommentPrefab)
         {
             EventSystem.current.SetSelectedGameObject(newTextObj);
         }

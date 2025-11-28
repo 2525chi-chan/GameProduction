@@ -13,6 +13,9 @@ public class GoodSystem : MonoBehaviour
     [Header("いいね獲得数のテキスト")]
     public TextMeshProUGUI addGoodText;
 
+    [Header("いいね減少数のテキスト")]
+    [SerializeField] TextMeshProUGUI decreaseGoodText;
+
     [Header("加算までの待機時間（待機時間がある場合）")]
     [SerializeField] float getDuration;
 
@@ -27,6 +30,12 @@ public class GoodSystem : MonoBehaviour
 
     private float addGoodNum;   //最終獲得いいね取得数
     public float AddGoodNum => addGoodNum;  //最終獲得いいね数のゲッター
+
+    private int decreaseGoodNum;
+
+    bool decreasing;
+    
+    public bool Decreasing=>decreasing;
 
     private bool isTracking = false;    //獲得待機中か確認用フラグ
 
@@ -48,7 +57,9 @@ public class GoodSystem : MonoBehaviour
         displayGoodNum = goodNum;
         goodText.text=displayGoodNum.ToString();
         addGoodText.enabled = false;
+        decreaseGoodText.enabled = false;
         changing= false;
+        decreasing = false;
     }
 
     // Update is called once per frame
@@ -82,22 +93,61 @@ public class GoodSystem : MonoBehaviour
         }
     }
 
+    public IEnumerator DecreaseGood(int value)
+    {
+        decreasing=true;
+        decreaseGoodNum -= value;
+        decreaseGoodText.text = decreaseGoodNum.ToString();
+
+        decreaseGoodText.enabled = true;
+
+        yield return new WaitForSeconds(getDuration);
+        
+        decreaseGoodText.enabled=false;
+
+        goodNum += decreaseGoodNum;
+
+        if(goodNum<0)
+        {
+            goodNum = 0;
+        }
+        
+        decreaseGoodNum = 0;
+        decreasing = false;
+    }
+
     void ChangeDisplayGoodNum() //いいね数が加算されたときに表示を変更する関数
     {
-        if (diff <= 0)
+        if (diff == 0)
             return;
+        if (diff > 0)   //加算の場合
+        {
+            // 1フレームあたりに加算すべき値
+            float increment = (diff / duration) * Time.deltaTime;
 
-        // 1フレームあたりに加算すべき値
-        float increment = (diff / duration) * Time.deltaTime;
+            // 加算
+            displayGoodNum += increment;
 
-        // 加算
-        displayGoodNum += increment;
+            // Clampで超過防止
+            displayGoodNum = Mathf.Clamp(displayGoodNum, displayGoodNum, goodNum);
 
-        // Clampで超過防止
-        displayGoodNum = Mathf.Clamp(displayGoodNum, displayGoodNum, goodNum);
+            // 表示は整数で
+            goodText.text = ((int)displayGoodNum).ToString();
+        }
+        else if(diff < 0)   //減算の場合
+        {
+            // 1フレームあたりに加算すべき値
+            float increment = (diff / duration) * Time.deltaTime;
 
-        // 表示は整数で
-        goodText.text = ((int)displayGoodNum).ToString();
+            // 加算
+            displayGoodNum += increment;
+
+            // Clampで超過防止
+            displayGoodNum = Mathf.Clamp(displayGoodNum,goodNum ,displayGoodNum );
+
+            // 表示は整数で
+            goodText.text = ((int)displayGoodNum).ToString();
+        }
     }
 
     private IEnumerator TrackAndApplyGoodNum()  //最終獲得いいね数を取得し、現在のいいね数に加算する関数
