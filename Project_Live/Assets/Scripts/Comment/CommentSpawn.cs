@@ -80,7 +80,7 @@ public class CommentSpawn : MonoBehaviour
                 InstantiateComment(raneNum,CheeringCommentPrefab,ref nextText,ref conectComment);
                 cheeringCommentCounter = 0;
             }
-            else if(antiCommentCounter>=antiCommentCount&&!antiCommentIsExist)
+            else if(antiCommentCounter>=antiCommentCount/*&&!antiCommentIsExist*/)
             {
                 Debug.Log("アンチコメントが生成されました。");
                 InstantiateComment(raneNum, AntiCommentPrefab,ref nextText, ref conectComment);
@@ -167,10 +167,10 @@ public class CommentSpawn : MonoBehaviour
 
         GameObject newTextObj = Instantiate(CommentType, canvasRect);
 
-        if(CommentType==CheeringCommentPrefab||CommentType==AntiCommentPrefab)
-        {
-            EventSystem.current.SetSelectedGameObject(newTextObj);
-        }
+        //if(CommentType==CheeringCommentPrefab||CommentType==AntiCommentPrefab)
+        //{
+        //    EventSystem.current.SetSelectedGameObject(newTextObj);
+        //}
 
         GetCommetText commentText = newTextObj.GetComponent<GetCommetText>();
         RectTransform rectTransform = newTextObj.GetComponent<RectTransform>();
