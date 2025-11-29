@@ -27,10 +27,13 @@ public class CheeringComment  :AnimationCheeringComment
     [Header("軌跡エフェクトの有無")]
     [SerializeField] bool trailFlag;
 
+    bool Pressed;
+
     PlayerStatus playerStatus;
     PlayerBuffManager playerBuffManager;
     CommentSpawn commentSpawn;
     CommentMove commentMove;
+    CommentReplyArea commentReplyArea;
     
     Button thisComment;
 
@@ -42,7 +45,8 @@ public class CheeringComment  :AnimationCheeringComment
         playerBuffManager=GameObject.FindGameObjectWithTag("PlayerBuffManager").GetComponent<PlayerBuffManager>();
         playerStatus=GameObject.FindGameObjectWithTag("PlayerStatus").GetComponent<PlayerStatus>();
         commentSpawn = GameObject.FindGameObjectWithTag("CommentSpawn").GetComponent<CommentSpawn>();
-        thisComment=this.gameObject.GetComponent<Button>();
+        commentReplyArea = GameObject.FindGameObjectWithTag("CommentReplyArea").GetComponent<CommentReplyArea>();
+        thisComment =this.gameObject.GetComponent<Button>();
         commentMove=this.gameObject.GetComponent<CommentMove>();
 
         animator = this.gameObject.GetComponent<Animator>();
@@ -52,9 +56,68 @@ public class CheeringComment  :AnimationCheeringComment
         AgilityBuffImage = GameObject.FindGameObjectWithTag("AgilityBuffImage");
 
         trailEffect.SetActive(false);
+        Pressed = false;
         commentSpawn.cheeringCommentIsExist=true;
 
         SetCommentAction();
+    }
+
+    void Update()
+    {
+        if (IsInsideReplyArea() && !Pressed)
+        {
+            RegisterReplyList();
+        }
+        else
+        {
+            UnregisterReplyList();
+            if (commentReplyArea.canReplyComment.Count == 0)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+            }
+        }
+    }
+
+    bool IsInsideReplyArea()    //返信エリアにいるか判定する関数
+    {
+        Canvas canvas = commentReplyArea.GetComponentInParent<Canvas>();
+        Camera cam = canvas.worldCamera;
+
+        Vector3[] commentCorners = new Vector3[4];
+        rectTransform.GetWorldCorners(commentCorners);
+
+        Vector3[] areaCorners = new Vector3[4];
+        commentReplyArea.replyAreaRect.GetWorldCorners(areaCorners);
+
+        foreach (Vector3 corner in commentCorners)
+        {
+            Vector3 screenPoint = RectTransformUtility.WorldToScreenPoint(cam, corner);
+            if (RectTransformUtility.RectangleContainsScreenPoint(commentReplyArea.replyAreaRect, screenPoint, cam))
+            {
+                return true;  // 1つでも入っていたらOK
+            }
+        }
+
+        Vector2 commentCenter = RectTransformUtility.WorldToScreenPoint(cam, rectTransform.position);
+        if (RectTransformUtility.RectangleContainsScreenPoint(commentReplyArea.replyAreaRect, commentCenter, cam))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    void RegisterReplyList()    //返信可能なコメントのリストへ登録する関数
+    {
+        if (!commentReplyArea.canReplyComment.Contains(this.gameObject))
+        {
+            commentReplyArea.canReplyComment.Add(this.gameObject);
+        }
+    }
+
+    void UnregisterReplyList()      //返信可能なコメントのリストから削除する関数
+    {
+        commentReplyArea.canReplyComment.Remove(this.gameObject);
     }
 
     private void SetCommentAction()
@@ -125,7 +188,9 @@ public class CheeringComment  :AnimationCheeringComment
 
     void AnimationBeforeMethod()
     {
+        Pressed = true;
         pressEffect.Play();
+        UnregisterReplyList();
         EventSystem.current.SetSelectedGameObject(null);
         commentMove.enabled = false;
         if (trailFlag)
