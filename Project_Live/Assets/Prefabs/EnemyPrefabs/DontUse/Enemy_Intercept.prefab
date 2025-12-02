@@ -65,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 5255598490899312179, guid: 4b98bf51e5c42e74fb4c5683938d47dc, type: 3}
   attackDuration: 1
+  attackCoolTime: 0.2
   attackPos: {fileID: 1276372281413812872}
   attackTrigger: {fileID: 2434253285504405187}
   mover: {fileID: 8259107007558549480}
@@ -367,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag: 1
-  score: 10
+  score: 50
 --- !u!114 &4750362542482719141
 MonoBehaviour:
   m_ObjectHideFlags: 0

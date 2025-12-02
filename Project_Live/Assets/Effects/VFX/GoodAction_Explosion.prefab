@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7082489164373479086}
   - component: {fileID: 547580007365153305}
   - component: {fileID: 2527019231564403176}
+  - component: {fileID: -5985938859622298937}
   m_Layer: 0
   m_Name: GoodAction_Explosion
   m_TagString: Untagged
@@ -114,3 +115,17 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &-5985938859622298937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3583984894416044948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b1f968a7f2380c49bc240cd8499728c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tag: 2
+  score: 15

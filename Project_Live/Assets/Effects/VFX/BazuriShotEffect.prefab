@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyTime: 1
   isDestroy: 1
-  BazuriShot: {fileID: 0}
+  vfx: {fileID: 0}
 --- !u!114 &-8238036698381971559
 MonoBehaviour:
   m_ObjectHideFlags: 0

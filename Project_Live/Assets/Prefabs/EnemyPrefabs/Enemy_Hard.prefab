@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: bazuriMotion.Array.data[2].motionName
       value: Enemy_Attack_Kataino
       objectReference: {fileID: 0}
+    - target: {fileID: -4404924394619826991, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: score
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1668865627258727923, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_IsActive
       value: 0

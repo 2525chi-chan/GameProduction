@@ -248,6 +248,10 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7502254991317555293, guid: 6b263ed4d473b0c48aa653016ab60e60, type: 3}
+      propertyPath: score
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8118188747280141417, guid: 6b263ed4d473b0c48aa653016ab60e60, type: 3}
       propertyPath: m_Layer
       value: 7

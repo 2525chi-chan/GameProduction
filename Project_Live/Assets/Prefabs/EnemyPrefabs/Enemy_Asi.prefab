@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: bazuriMotion.Array.data[2].motionName
       value: Enemy_Damage_Asi
       objectReference: {fileID: 0}
+    - target: {fileID: -4404924394619826991, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: score
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 446971775148853601, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: attackDuration
       value: 0.3
