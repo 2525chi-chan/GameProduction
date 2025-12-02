@@ -17,6 +17,10 @@ class ComboStep
     [SerializeField] public float baceForwardKnockbackForce = 1f;
     [Header("上方向への基本の吹き飛ばし力")]
     [SerializeField] public float baceUpwardKnockbackForce = 1f;
+    [Header("攻撃判定の中心に引き寄せる力を有効にするか")]
+    [SerializeField] public bool enableSuction = false;
+    [Header("引き寄せる力")]
+    [SerializeField] public float suctionForce = 10f;
     [Header("当たり判定の持続時間")]
     [SerializeField] public float attackDuration = 0.2f;
     [Header("攻撃判定消滅後、次の段に移行可能な猶予時間")]
@@ -106,6 +110,8 @@ public class CloseAttack : MonoBehaviour
         damageToTarget.ForwardKnockbackForce = GetCurrentForwardForce(); //前方向へ吹き飛ばす力の代入
         damageToTarget.UpwardKnockbackForce = GetCurrentUpwardForce(); //上方向へ吹き飛ばす力の代入
         damageToTarget.HitEffect = comboSteps[currentComboIndex].hitEffect; //開始された攻撃の命中時エフェクトの設定
+        damageToTarget.EnableSuction = comboSteps[currentComboIndex].enableSuction; //引き寄せる力が有効かどうかの設定
+        damageToTarget.SuctionForce = comboSteps[currentComboIndex].suctionForce; //引き寄せる力の代入
 
         if (step.hitbox != null) step.hitbox.SetActive(true); //攻撃判定の有効化
 
