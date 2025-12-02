@@ -45,7 +45,7 @@
                     "name": "ShotAttack",
                     "type": "Button",
                     "id": "1023eb3b-30dc-4f39-a230-3157fe189199",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -54,7 +54,7 @@
                     "name": "Dodge",
                     "type": "Button",
                     "id": "e2cb5fed-4f67-438a-b187-b83cbade9d47",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -799,7 +799,7 @@
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "GetComment",
                     "isComposite": false,
                     "isPartOfComposite": false
