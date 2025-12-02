@@ -14,6 +14,12 @@ public class AttackParameter : MonoBehaviour
     [SerializeField] float baceUpwardKnockbackForce = 1f;
     [Header("基本となる下方向への吹き飛ばし力")]
     [SerializeField] float baceDownwardKnockbackForce = 0f;
+    [Header("常に攻撃者の正面方向に吹き飛ぶ力を加えるか")]
+    [SerializeField] bool enableForward = false;
+    [Header("攻撃判定の中心に引き寄せる力を有効にするか")]
+    [SerializeField] bool enableSuction = false;
+    [Header("引き寄せる力")]
+    [SerializeField] float suctionForce = 10f;
     //[Header("取得するコンポーネントのオブジェクト名")]
     //[SerializeField] string objectName = "PlayerStatus";
     [Header("必要なコンポーネント")]
@@ -34,6 +40,9 @@ public class AttackParameter : MonoBehaviour
         damageToTarget.ForwardKnockbackForce = GetForwardForce();
         damageToTarget.UpwardKnockbackForce = GetUpwardForce();
         damageToTarget.DownwardKnockbackForce = GetDownwardForce();
+        damageToTarget.EnableSuction = enableSuction;
+        damageToTarget.SuctionForce = suctionForce;
+
     }
 
     float GetDamage() //ダメージ量を取得する

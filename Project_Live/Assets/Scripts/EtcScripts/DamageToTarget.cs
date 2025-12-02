@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 //ì¬ÒFŒKŒ´
 
 public class DamageToTarget : MonoBehaviour
 {
+//    [Header("UŒ‚‘ÎÛ‚ğ“–‚½‚è”»’è‚Ì’†‰›‚Éˆø‚«Šñ‚¹‚é‚©")]
+//    [SerializeField] bool enableSuctionMode = false;
+//    [Header("UŒ‚‘ÎÛ‚ğˆø‚«Šñ‚¹‚é—Í")]
+//    [SerializeField] float suctionForce = 10f;
     GameObject hitEffect;
 
     float damage;
     float forwardKnockbackForce;
     float upwardKnockbackForce;
     float downwardKnockbackForce;
-    
+    bool enableForward;
+    bool enableSuction;
+    float suctionForce;
 
     public bool isRagdoll = false;
     public GameObject HitEffect { get { return hitEffect; } set { hitEffect = value; } }
@@ -21,6 +28,9 @@ public class DamageToTarget : MonoBehaviour
     public float ForwardKnockbackForce { get { return forwardKnockbackForce; } set { forwardKnockbackForce = value; } }
     public float UpwardKnockbackForce { get { return upwardKnockbackForce; } set { upwardKnockbackForce = value; } }
     public float DownwardKnockbackForce { get { return downwardKnockbackForce; } set { downwardKnockbackForce = value; } }
+    public bool EnableForward { get { return enableForward; } set { enableForward = value; } }
+    public bool EnableSuction { get { return enableSuction; } set { enableSuction = value; } }
+    public float SuctionForce { get { return suctionForce; } set { suctionForce = value; } }
 
     public void AddDamageToPlayer(Collider player) //ƒ_ƒ[ƒW‚ğ—^‚¦‚é
     {
@@ -93,6 +103,12 @@ public class DamageToTarget : MonoBehaviour
 
     public void ApplyKnockback(Collider target) //‚«”ò‚Ô—Í‚ğ‰Á‚¦‚é
     {
+        if (enableSuction)
+        {
+            ApplySuction(target);
+            return;
+        }
+
         Rigidbody rb = target.GetComponent<Rigidbody>();
 
         if (rb != null && !rb.isKinematic)
@@ -116,5 +132,55 @@ public class DamageToTarget : MonoBehaviour
 
         }
       
+    }
+
+    public void ApplyForward(Collider target)
+    {
+        Rigidbody rb = target.GetComponent<Rigidbody>();
+
+        if (rb != null && !rb.isKinematic)
+        {
+            Vector3 forwardDirection = (target.transform.position - transform.position).normalized;
+
+            Vector3 knockback =
+                Vector3.forward * forwardKnockbackForce
+                + Vector3.up * upwardKnockbackForce
+                - Vector3.up * downwardKnockbackForce;
+            if (isRagdoll)
+            {
+
+                EnemyRagdoll enemyRagdoll = target.GetComponent<EnemyRagdoll>();
+                if (enemyRagdoll != null)
+                {
+                    enemyRagdoll.SwitchRagdoll(true);
+                }
+            }
+            rb.AddForce(knockback, ForceMode.Impulse);
+
+        }
+    }
+
+    void ApplySuction(Collider target) //ˆø‚«Šñ‚¹‚é—Í‚ğ‰Á‚¦‚é
+    {
+        Rigidbody rb = target.GetComponent<Rigidbody>();
+        if (rb == null || rb.isKinematic) return;
+
+        Vector3 center = transform.position;
+
+        Vector3 direction = (center - target.transform.position).normalized;
+        direction.y = 0f;
+
+        Vector3 pullForce = direction * suctionForce
+                + Vector3.up * upwardKnockbackForce
+                - Vector3.up * downwardKnockbackForce;
+
+        if (isRagdoll)
+        {
+            EnemyRagdoll enemyRagdoll = target.GetComponent<EnemyRagdoll>();
+            if (enemyRagdoll != null)
+                enemyRagdoll.SwitchRagdoll(true);
+        }
+
+        rb.AddForce(pullForce, ForceMode.Impulse);
     }
 }
