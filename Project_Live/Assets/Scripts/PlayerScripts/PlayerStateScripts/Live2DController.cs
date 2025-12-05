@@ -22,10 +22,14 @@ public class MotionData
 public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
 {
     [SerializeField] CubismMotionController motionController;
+    public CubismMotionController MotionController { get { return motionController; } }
     [SerializeField]CubismExpressionController expressionController;
+   
     [SerializeField]List<ExpressionData> expressions = new ();
     [SerializeField]List<MotionData> motions = new ();
-
+    public List<MotionData> Motions { get { return motions; } }
+    private string currentPlayingMotion = "";
+    public string CurrentPlayingMotion { get { return currentPlayingMotion; } }
     private int currentMotionIndex = -1;
     private void OnValidate()
     {
@@ -42,18 +46,13 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
             }
         }
     }
-
+  
     public void PlayMotion(string name)//モーション再生
     {
 
         var priority = CubismMotionPriority.PriorityForce;
-        if (motionController.IsPlayingAnimation()&&!motions[currentMotionIndex].isBreak)
-        {
-            
-                return;
-            
-
-        }
+        if (motionController.IsPlayingAnimation()&&!motions[currentMotionIndex].isBreak)return;
+        
             foreach (var mot in motions)
             {
                 if (mot.motionName == name)
@@ -61,7 +60,8 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
                     Debug.Log("PlayMotion:" + name);
                     motionController.PlayAnimation(mot.animationClip, layerIndex: 0, priority: priority, isLoop: false);
                     currentMotionIndex = motions.IndexOf(mot);
-                    return;
+                currentPlayingMotion = name;
+                return;
                 }
             }
         

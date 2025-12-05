@@ -43,7 +43,7 @@ public class CloseAttack : MonoBehaviour
     [SerializeField] PlayerStatus playerStatus;
     [SerializeField] DamageToTarget damageToTarget;
     [SerializeField] MovePlayer movePlayer;
-   
+    [SerializeField] Live2DController live2DController;
     public enum AttackState { None, Windup, Attacking, Recovering }
 
     AttackState attackState = AttackState.None;
@@ -90,6 +90,8 @@ public class CloseAttack : MonoBehaviour
             case AttackState.Attacking: //çUåÇíÜ
                 if (stateTimer >= comboSteps[currentComboIndex].attackDuration)
                     EndAttack();
+                
+                  
                 break;
 
             case AttackState.Recovering: //çUåÇå„
@@ -119,6 +121,15 @@ public class CloseAttack : MonoBehaviour
         
         stateTimer = 0f;
         attackState = AttackState.Attacking;
+
+        if (currentComboIndex == comboSteps.Count - 1)//ç≈èIíiÇÃèÍçá
+        {
+            live2DController.PlayMotion("Attack_High");
+        }
+        else
+        {
+            live2DController.PlayMotion("Attack_Low");
+        }
 
         //Debug.Log(currentComboIndex + 1 + "íiñ⁄î≠ê∂");
     }

@@ -35,13 +35,18 @@ public class DamageToTarget : MonoBehaviour
     public void AddDamageToPlayer(Collider player) //ダメージを与える
     {
         PlayerStatus playerStatus = player.GetComponent<PlayerStatus>();
-
+        Live2DController controller= player.GetComponentInChildren<Live2DController>();
         // なければ子オブジェクトから探す
         if (playerStatus == null)  playerStatus = player.GetComponentInChildren<PlayerStatus>();
 
         if (playerStatus == null)
         {
             Debug.LogWarning($"PlayerStatus が {player.name} および、その子に見つかりませんでした");
+            return;
+        }
+        else if(controller == null)
+        {
+            Debug.LogWarning($"Live2DController が {player.name} および、その子に見つかりませんでした");
             return;
         }
         //
@@ -53,10 +58,24 @@ public class DamageToTarget : MonoBehaviour
             return;
         }
 
+      DamageReaction( playerStatus, controller);
+
         playerStatus.Hp -= damage;
         //Debug.Log(damage + "ダメージを与えた");
 
         if (hitEffect != null) Instantiate(hitEffect, player.bounds.center, player.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+    }
+    public void DamageReaction(PlayerStatus playerStatus, Live2DController controller)
+    {
+        if (damage < playerStatus.BigDamageThreshold)
+        {
+            controller.PlayMotion("Damage_Low");
+        }
+        else
+        {
+            controller.PlayMotion("Damage_High");
+
+        }
     }
 
     public void AddDamageToEnemy(Collider enemy)
