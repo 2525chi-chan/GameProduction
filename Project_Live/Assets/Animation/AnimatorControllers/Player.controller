@@ -378,6 +378,19 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-4786123228133815742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eae9f04ceeab56c47a6b631e5c7d92e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  live2DTalkPlayer: {fileID: 0}
 --- !u!1107 &-4763823138288065484
 AnimatorStateMachine:
   serializedVersion: 6
@@ -987,6 +1000,7 @@ AnimatorStateMachine:
     second: []
   m_StateMachineBehaviours:
   - {fileID: -9101876619641054470}
+  - {fileID: -4786123228133815742}
   m_AnyStatePosition: {x: 280, y: 0, z: 0}
   m_EntryPosition: {x: 10, y: 120, z: 0}
   m_ExitPosition: {x: 10, y: 210, z: 0}

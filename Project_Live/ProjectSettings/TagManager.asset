@@ -21,6 +21,7 @@ TagManager:
   - GameManager
   - Fan
   - CommentReplyArea
+  - Live2DPlayer
   layers:
   - Default
   - TransparentFX
