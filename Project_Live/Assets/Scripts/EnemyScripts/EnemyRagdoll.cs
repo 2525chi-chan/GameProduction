@@ -80,7 +80,7 @@ public class EnemyRagdoll : MonoBehaviour//ラグドール制御
             moveState = mover.MoveState;//止まる前の状態を保持
             mover.MoveSetState(EnemyMoveState.stop);
             actionEvents.KnockbackEvent();
-            Debug.Log("とまる");
+         //   Debug.Log("とまる");
         }
         else//通常状態に戻す
         {
