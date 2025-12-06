@@ -51,6 +51,7 @@ public class GoodAction : MonoBehaviour
     [SerializeField] ThrowBomb throwBomb;
     [SerializeField] ExplosionAttack explosionAttack;
 
+    [SerializeField]Live2DTalkPlayer live2DTalkPlayer;
     float currentGoodNum = 0;
     int currentGoodPoint1 = 0;
     int currentGoodPoint2 = 0;
@@ -107,6 +108,7 @@ public class GoodAction : MonoBehaviour
         //wideAttack.InstantiateWideRangeAttack();
         //Debug.Log("イイネアクション1発動！");
         currentGoodPoint1 = 0;
+        live2DTalkPlayer.PlayTalk("GoodAction_1");
     }
 
     public void GoodAction2()
@@ -116,6 +118,7 @@ public class GoodAction : MonoBehaviour
         longRangeAttack.ShotBeam();
         //Debug.Log("イイネアクション2発動！");
         currentGoodPoint2 = 0;
+        live2DTalkPlayer.PlayTalk("GoodAction_2");
     }
 
     public void GoodAction3()
@@ -126,6 +129,7 @@ public class GoodAction : MonoBehaviour
         //continuosHitAttack.GenerateAttack();
         //Debug.Log("イイネアクション3発動！");
         currentGoodPoint3 = 0;
+        live2DTalkPlayer.PlayTalk("GoodAction_3");
     }
 
     public void GoodAction4()
@@ -135,5 +139,6 @@ public class GoodAction : MonoBehaviour
         explosionAttack.TriggerExplosions();
         //Debug.Log("イイネアクション4発動！");
         currentGoodPoint4 = 0;
+        live2DTalkPlayer.PlayTalk("GoodAction_4");
     }
 }

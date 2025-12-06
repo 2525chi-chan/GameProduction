@@ -17,9 +17,9 @@ public class EnableShowText : StateMachineBehaviour
     [SerializeField]Live2DTalkPlayer live2DTalkPlayer;
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        live2DTalkPlayer=GameObject.FindWithTag("Live2DPlayer").GetComponent<Live2DTalkPlayer>();
+       // live2DTalkPlayer=GameObject.FindWithTag("Live2DPlayer").GetComponent<Live2DTalkPlayer>();
 
-        live2DTalkPlayer.EnableShow = true;
+       // live2DTalkPlayer.EnableShow = true;
     }
 
     // OnStateMove is called before OnStateMove is called on any state inside this state machine

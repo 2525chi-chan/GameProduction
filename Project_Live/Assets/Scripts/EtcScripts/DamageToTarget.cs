@@ -36,6 +36,7 @@ public class DamageToTarget : MonoBehaviour
     {
         PlayerStatus playerStatus = player.GetComponent<PlayerStatus>();
         Live2DController controller= player.GetComponentInChildren<Live2DController>();
+        Live2DTalkPlayer talkPlayer = controller.GetComponentInChildren<Live2DTalkPlayer>();
         // なければ子オブジェクトから探す
         if (playerStatus == null)  playerStatus = player.GetComponentInChildren<PlayerStatus>();
 
@@ -58,22 +59,24 @@ public class DamageToTarget : MonoBehaviour
             return;
         }
 
-      DamageReaction( playerStatus, controller);
+      DamageReaction( playerStatus, controller,talkPlayer);
 
         playerStatus.Hp -= damage;
         //Debug.Log(damage + "ダメージを与えた");
 
         if (hitEffect != null) Instantiate(hitEffect, player.bounds.center, player.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
     }
-    public void DamageReaction(PlayerStatus playerStatus, Live2DController controller)
+    public void DamageReaction(PlayerStatus playerStatus, Live2DController controller,Live2DTalkPlayer talkPlayer)
     {
         if (damage < playerStatus.BigDamageThreshold)
         {
             controller.PlayMotion("Damage_Low");
+            talkPlayer.PlayTalk("Damage_Low");
         }
         else
         {
             controller.PlayMotion("Damage_High");
+            talkPlayer.PlayTalk("Damage_High");
 
         }
     }

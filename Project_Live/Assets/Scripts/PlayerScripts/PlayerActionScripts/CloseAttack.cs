@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 //作成者：桑原
@@ -44,6 +45,7 @@ public class CloseAttack : MonoBehaviour
     [SerializeField] DamageToTarget damageToTarget;
     [SerializeField] MovePlayer movePlayer;
     [SerializeField] Live2DController live2DController;
+    [SerializeField]Live2DTalkPlayer live2DTalkPlayer;
     public enum AttackState { None, Windup, Attacking, Recovering }
 
     AttackState attackState = AttackState.None;
@@ -122,6 +124,15 @@ public class CloseAttack : MonoBehaviour
         stateTimer = 0f;
         attackState = AttackState.Attacking;
 
+        Live2DPlay();
+
+        //Debug.Log(currentComboIndex + 1 + "段目発生");
+    }
+
+    public void Live2DPlay()//Live2Dの攻撃モーションとセリフ再生
+    {
+        live2DTalkPlayer.PlayTalk("Attack_" + (currentComboIndex + 1).ToString());
+        Debug.Log("Attack_" + currentComboIndex + 1);
         if (currentComboIndex == comboSteps.Count - 1)//最終段の場合
         {
             live2DController.PlayMotion("Attack_High");
@@ -130,10 +141,7 @@ public class CloseAttack : MonoBehaviour
         {
             live2DController.PlayMotion("Attack_Low");
         }
-
-        //Debug.Log(currentComboIndex + 1 + "段目発生");
     }
-
     void EndAttack() //発生した攻撃の終了処理
     {
         ComboStep step = comboSteps[currentComboIndex];

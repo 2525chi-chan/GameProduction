@@ -2,19 +2,28 @@ using Live2D.Cubism.Framework.Motion;
 using UnityEngine;
 using Live2D.Cubism.Framework.Expression;
 using System.Collections.Generic;
-public class IdleLive2DPlayer : MonoBehaviour//待機中にLive2Dを動かす
+public class IdleLive2DManager : MonoBehaviour//待機中にLive2Dを動かす
 {
-    [Header("何もしていない時に再生するモーション")]
-    [SerializeField]float waitTime = 5f;//一定時間経過したら特別なIdleを再生する
+    [Header("待機時間(下限)")]
+    [SerializeField]float waitTime_Min = 5f;//一定時間経過したら特別なIdleを再生する
+    [Header("待機時間(上限)")]
+    [SerializeField] float waitTime_Max = 15f;
     [Header("デフォルトのモーション(呼吸)")]
     [SerializeField] string defaultAnimation;
     Live2DController live2DController;
+    Live2DTalkPlayer talkPlayer;
     CubismMotionController controller;
     List<MotionData> idleMotions = new List<MotionData>();
+    List<TalkData>idleTalks=new List<TalkData>();
     bool isPlayingDefault = false;
+
+    float waitTime;
     void Start()
     {
-       live2DController = GetComponent<Live2DController>();
+        waitTime = Random.Range(waitTime_Min, waitTime_Max);
+
+        talkPlayer = GetComponent<Live2DTalkPlayer>();
+        live2DController = GetComponent<Live2DController>();
         controller =live2DController.MotionController;
         controller.AnimationEndHandler+=OnMotionEnd;
 
@@ -23,6 +32,9 @@ public class IdleLive2DPlayer : MonoBehaviour//待機中にLive2Dを動かす
             if (mot.motionName.Contains("Idle"))
             {
                 idleMotions.Add(mot);
+                idleTalks.Add(talkPlayer.TalkDatas.Find(t => t.motionName == mot.motionName));
+                Debug.Log(idleTalks.Count);
+               
             }
         }
         SetDefault();
@@ -51,10 +63,14 @@ public class IdleLive2DPlayer : MonoBehaviour//待機中にLive2Dを動かす
             if (countTime >= waitTime)
             {
                 var rand = Random.Range(0, idleMotions.Count);
-                countTime = 0f;
+               
                 live2DController.PlayMotion(idleMotions[rand].motionName);
-
-                isPlayingDefault = false;
+                talkPlayer.PlayTalk(idleTalks[rand].motionName);
+               
+                
+                isPlayingDefault = false; 
+                countTime = 0f;
+                waitTime = Random.Range(waitTime_Min, waitTime_Max);
             }
         }
            
