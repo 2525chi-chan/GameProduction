@@ -7,7 +7,8 @@ using System.Collections;
 public class TalkEntry
 {
     public string texts;
-    public float delayBefore=0f;
+    public float delayBefore = 0f;//セリフ再生前の待機時間
+    public float delayEnd = 0f;//セリフ再生後の待機時間
     public AudioClip audioClip;
 }
 
@@ -22,16 +23,17 @@ public class TalkData//特定のアクションに対するセリフデータ
 public class Live2DTalkPlayer : MonoBehaviour
 {
 
-    [SerializeField]TMP_Text talkText;
-    [SerializeField]float textSpeed=0.05f;
-    [SerializeField]List<TalkData> talkDatas=new ();
-    
+    [SerializeField] TMP_Text talkText;
+    [SerializeField] float textSpeed = 0.05f;
+    [SerializeField] List<TalkData> talkDatas = new();
+
     public List<TalkData> TalkDatas { get { return talkDatas; } }
     Live2DController live2DController;
 
     Coroutine showTextCoroutine;
-    int cuttentTalkIndex = -1; 
-    float waitTime;
+    int cuttentTalkIndex = -1;
+    float waitStartTime;
+    float waitEndTime;
     //private void OnValidate()
     //{
     //    live2DController = GetComponent<Live2DController>();
@@ -68,21 +70,29 @@ public class Live2DTalkPlayer : MonoBehaviour
     public void PlayTalk(string motionName)//セリフ再生
     {
 
-     
 
-        if (cuttentTalkIndex>=0&&!talkDatas[cuttentTalkIndex].isBreak&&showTextCoroutine!=null) return;
 
-      
+        if (cuttentTalkIndex >= 0 && !talkDatas[cuttentTalkIndex].isBreak && showTextCoroutine != null) return;//現在再生中のセリフが中断不可の場合、コルーチンが終了するまで新たなセリフ再生を拒否
+        else
+        {
 
+            if (showTextCoroutine != null)
+            {
+                StopCoroutine(showTextCoroutine);
+                showTextCoroutine = null;
+            }
+            talkText.text = "";
+        }
 
         foreach (var data in talkDatas)
         {
-            if(data.motionName==motionName)
+            if (data.motionName == motionName)
             {
-                var rand= Random.Range(0, data.talkEntries.Count);
-                waitTime = data.talkEntries[rand].delayBefore;
-                    cuttentTalkIndex = rand;
-               showTextCoroutine=     StartCoroutine(ShowText(data.talkEntries[rand].texts));
+                var rand = Random.Range(0, data.talkEntries.Count);
+                waitStartTime = data.talkEntries[rand].delayBefore;
+                waitEndTime=data.talkEntries[rand].delayEnd;
+                cuttentTalkIndex = talkDatas.IndexOf(data);
+                showTextCoroutine = StartCoroutine(ShowText(data.talkEntries[rand].texts));
                 break;
             }
         }
@@ -91,7 +101,7 @@ public class Live2DTalkPlayer : MonoBehaviour
 
     public IEnumerator ShowText(string text)
     {
-     yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(waitStartTime);
         Queue<char> chars = new Queue<char>(text.ToCharArray());
         talkText.text = "";
         while (chars.Count > 0)
@@ -100,7 +110,8 @@ public class Live2DTalkPlayer : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
         showTextCoroutine = null;
-        yield return null;
-      
+
+        yield return new WaitForSeconds(waitEndTime);
+
     }
 }

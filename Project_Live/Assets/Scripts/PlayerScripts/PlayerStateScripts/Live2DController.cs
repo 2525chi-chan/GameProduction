@@ -17,6 +17,7 @@ public class MotionData
     public string motionName;
     public AnimationClip animationClip;
     public bool isBreak=true;//中断可能か
+    public bool isForcePlay=false;//強制再生か
 }
 
 public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
@@ -46,25 +47,24 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
             }
         }
     }
-  
+
     public void PlayMotion(string name)//モーション再生
     {
+        MotionData data = motions.Find(mot => mot.motionName == name);
 
         var priority = CubismMotionPriority.PriorityForce;
-        if (motionController.IsPlayingAnimation()&&!motions[currentMotionIndex].isBreak)return;
-        
-            foreach (var mot in motions)
-            {
-                if (mot.motionName == name)
-                {
-                    Debug.Log("PlayMotion:" + name);
-                    motionController.PlayAnimation(mot.animationClip, layerIndex: 0, priority: priority, isLoop: false);
-                    currentMotionIndex = motions.IndexOf(mot);
-                currentPlayingMotion = name;
-                return;
-                }
-            }
-        
+        if (motionController.IsPlayingAnimation() && !motions[currentMotionIndex].isBreak && !data.isForcePlay) return;
+
+        if (!motions.Contains(data)) return;
+
+        // Debug.Log("PlayMotion:" + name);
+        motionController.PlayAnimation(data.animationClip, layerIndex: 0, priority: priority, isLoop: false);
+        currentMotionIndex = motions.IndexOf(data);
+        currentPlayingMotion = name;
+        return;
+
+
+
     }
   
     public void SetExpression(string name)//表情設定

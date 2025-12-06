@@ -15,9 +15,14 @@ public class IdleLive2DManager : MonoBehaviour//待機中にLive2Dを動かす
     CubismMotionController controller;
     List<MotionData> idleMotions = new List<MotionData>();
     List<TalkData>idleTalks=new List<TalkData>();
-    bool isPlayingDefault = false;
+  
 
     float waitTime;
+
+
+    MotionData pendingMotion;
+    TalkData pendingTalk;
+    bool hasPending = false;
     void Start()
     {
         waitTime = Random.Range(waitTime_Min, waitTime_Max);
@@ -47,32 +52,36 @@ public class IdleLive2DManager : MonoBehaviour//待機中にLive2Dを動かす
         if (!controller.IsPlayingAnimation())
         {
           //  live2DController.PlayMotion(defaultAnimation);
-            Debug.Log("PlayDefault");
+       //     Debug.Log("PlayDefault");
            // isPlayingDefault = true;
+         
             SetDefault();
             return;
         }
 
-        if (!isPlayingDefault)
-        {
-            countTime = 0f;
-        }
-        else
-        {
+      
+      
+
+            if (hasPending) return;
+           
             countTime += Time.deltaTime;
-            if (countTime >= waitTime)
+            if (countTime >= waitTime)//待機時間を超えたらIdleモーションをセット
             {
                 var rand = Random.Range(0, idleMotions.Count);
                
-                live2DController.PlayMotion(idleMotions[rand].motionName);
-                talkPlayer.PlayTalk(idleTalks[rand].motionName);
+
+                pendingMotion = idleMotions[rand];
+                pendingTalk = idleTalks[rand];
+                hasPending = true;
+               // live2DController.PlayMotion(idleMotions[rand].motionName);
+               // talkPlayer.PlayTalk(idleTalks[rand].motionName);
                
                 
-                isPlayingDefault = false; 
+               
                 countTime = 0f;
                 waitTime = Random.Range(waitTime_Min, waitTime_Max);
             }
-        }
+        
            
         
 
@@ -80,7 +89,7 @@ public class IdleLive2DManager : MonoBehaviour//待機中にLive2Dを動かす
     public void SetDefault()
     {
         live2DController.PlayMotion(defaultAnimation);
-        isPlayingDefault = true;
+       
     }
   
      void OnMotionEnd(int instanceld)//呼吸をループさせる
@@ -89,13 +98,18 @@ public class IdleLive2DManager : MonoBehaviour//待機中にLive2Dを動かす
         {
             live2DController.PlayMotion(defaultAnimation);
         }
-        else
+      
+        if (hasPending)
         {
-            isPlayingDefault = false;
+          //  Debug.Log("sasasa");
+
+            live2DController.PlayMotion(pendingMotion.motionName);
+            talkPlayer.PlayTalk(pendingTalk.motionName);
+            hasPending = false;
+            
         }
 
-
-            Debug.Log("saaa");
+           // Debug.Log("saaa");
     }
 
    

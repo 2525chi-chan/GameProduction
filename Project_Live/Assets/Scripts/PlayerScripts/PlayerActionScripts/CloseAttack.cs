@@ -132,7 +132,7 @@ public class CloseAttack : MonoBehaviour
     public void Live2DPlay()//Live2Dの攻撃モーションとセリフ再生
     {
         live2DTalkPlayer.PlayTalk("Attack_" + (currentComboIndex + 1).ToString());
-        Debug.Log("Attack_" + currentComboIndex + 1);
+        //Debug.Log("Attack_" + currentComboIndex + 1);
         if (currentComboIndex == comboSteps.Count - 1)//最終段の場合
         {
             live2DController.PlayMotion("Attack_High");
