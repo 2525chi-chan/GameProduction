@@ -16,6 +16,10 @@ public static class PlayerActionEvents
     public static event System.Action OnGoodAction2Event;
     public static event System.Action OnGoodAction3Event;
     public static event System.Action OnGoodAction4Event;
+    public static event System.Action OnEmote1Event;
+    public static event System.Action OnEmote2Event;
+    public static event System.Action OnEmote3Event;
+    public static event System.Action OnEmote4Event;
 
     public static void IdleEvent()
     {
@@ -60,5 +64,25 @@ public static class PlayerActionEvents
     public static void GoodAction4Event()
     {
         OnGoodAction4Event?.Invoke();
+    }
+
+    public static void Emote1Event()
+    {
+        OnEmote1Event?.Invoke();
+    }
+
+    public static void Emote2Event()
+    {
+        OnEmote2Event?.Invoke();
+    }
+
+    public static void Emote3Event()
+    {
+        OnEmote3Event?.Invoke();
+    }
+
+    public static void Emote4Event()
+    {
+        OnEmote4Event?.Invoke();
     }
 }

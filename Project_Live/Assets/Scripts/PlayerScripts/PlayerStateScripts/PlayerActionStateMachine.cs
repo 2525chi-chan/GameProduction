@@ -18,6 +18,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
     [SerializeField] ShotAttack shotAttack;
     [SerializeField] Dodge dodge;
     [SerializeField] GoodAction goodAction;
+    [SerializeField] Emote emote;
 
     public IPlayerState CurrentState { get { return currentState; } }    
 
@@ -38,6 +39,10 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
         PlayerActionEvents.OnGoodAction2Event += OnGoodAction2Input;
         PlayerActionEvents.OnGoodAction3Event += OnGoodAction3Input;
         PlayerActionEvents.OnGoodAction4Event += OnGoodAction4Input;
+        PlayerActionEvents.OnEmote1Event += OnEmote1Input;
+        PlayerActionEvents.OnEmote2Event += OnEmote2Input;
+        PlayerActionEvents.OnEmote3Event += OnEmote3Input;
+        PlayerActionEvents.OnEmote4Event += OnEmote4Input;
     }
 
     void OnDisable()
@@ -51,6 +56,10 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
         PlayerActionEvents.OnGoodAction2Event -= OnGoodAction2Input;
         PlayerActionEvents.OnGoodAction3Event -= OnGoodAction3Input;
         PlayerActionEvents.OnGoodAction4Event -= OnGoodAction4Input;
+        PlayerActionEvents.OnEmote1Event -= OnEmote1Input;
+        PlayerActionEvents.OnEmote2Event -= OnEmote2Input;
+        PlayerActionEvents.OnEmote3Event -= OnEmote3Input;
+        PlayerActionEvents.OnEmote4Event -= OnEmote4Input;
     }
 
     void Update()
@@ -146,5 +155,33 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
         {
             ChangeState(new GoodAction4State(anim, playerStatus, goodAction));
         }
+    }
+
+    void OnEmote1Input()
+    {
+        if (!(currentState is IdleState)) return;
+
+        ChangeState(new Emote1State(anim));
+    }
+
+    void OnEmote2Input()
+    {
+        if (!(currentState is IdleState)) return;
+
+        ChangeState(new Emote2State(anim));
+    }
+
+    void OnEmote3Input()
+    {
+        if (!(currentState is IdleState)) return;
+
+        ChangeState(new Emote3State(anim));
+    }
+
+    void OnEmote4Input()
+    {
+        if (!(currentState is IdleState)) return;
+
+        ChangeState(new Emote4State(anim));
     }
 }

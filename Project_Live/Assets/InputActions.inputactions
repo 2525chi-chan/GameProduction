@@ -90,7 +90,7 @@
                     "name": "GoodAction3",
                     "type": "Button",
                     "id": "d6b8f602-e72c-410f-9904-3358e5c03351",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -126,6 +126,42 @@
                     "name": "GetComment",
                     "type": "Button",
                     "id": "24acb68e-528d-4d92-9d9b-5fa51a20ff53",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Emote1",
+                    "type": "Button",
+                    "id": "4682ee0a-9e45-424a-96d4-9846f52ad25d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Emote2",
+                    "type": "Button",
+                    "id": "775e981f-652b-4758-85f4-4cf5fca4874f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Emote3",
+                    "type": "Button",
+                    "id": "d0454566-ce69-4f6d-a101-ebcb677d5263",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Emote4",
+                    "type": "Button",
+                    "id": "26a3134a-ba1c-46bb-bc7d-1d352d19f6a3",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -801,6 +837,94 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "GetComment",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0f3ad9e1-fdbf-4f6c-8f88-05b17e537719",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Emote1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92dadaa7-fcae-4dc7-9c68-bfbecb2b660e",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Emote1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8f9ab23-6894-43a3-86c2-7b051c9909d5",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Emote2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72f970fb-fb48-43a2-b2d0-9cd0facf4ed7",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Emote2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e280205a-0611-4987-b2cf-f6616af9ba3e",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Emote3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b7416910-2a59-4d69-8c1b-daa22c8f3545",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Emote3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "57fbd788-06f7-40af-9a1d-aa1b9031eb6b",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Emote4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f395f38d-4427-425a-b05e-5dd9830cff25",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Emote4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

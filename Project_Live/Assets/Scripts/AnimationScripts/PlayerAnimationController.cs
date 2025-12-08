@@ -81,6 +81,30 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetInteger("GoodActionNo", 3);
     }
 
+    public void PlayEmote1() //エモート1の再生
+    {
+        ResetAllParameters();
+        animator.SetInteger("EmoteNo", 0);
+    }
+
+    public void PlayEmote2() //エモート2の再生
+    {
+        ResetAllParameters();
+        animator.SetInteger("EmoteNo", 1);
+    }
+
+    public void PlayEmote3() //エモート3の再生
+    {
+        ResetAllParameters();
+        animator.SetInteger("EmoteNo", 2);
+    }
+
+    public void PlayEmote4() //エモート4の再生
+    {
+        ResetAllParameters();
+        animator.SetInteger("EmoteNo", 3);
+    }
+
     public void ResetAllParameters() //アニメーションの遷移用パラメータのリセット
     {
         animator.SetInteger("TransitionNo", -1);
@@ -88,5 +112,6 @@ public class PlayerAnimationController : MonoBehaviour
         animator.ResetTrigger("Shot");
         animator.ResetTrigger("Dodge");
         animator.SetInteger("GoodActionNo", -1);
+        animator.SetInteger("EmoteNo", -1);
     }
 }
