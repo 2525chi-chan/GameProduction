@@ -21,6 +21,7 @@ TagManager:
   - GameManager
   - Fan
   - CommentReplyArea
+  - ActionPoint_EnemyBoss
   layers:
   - Default
   - TransparentFX

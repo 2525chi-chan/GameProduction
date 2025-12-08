@@ -53,7 +53,7 @@ public class AppearFans : MonoBehaviour
        parFanAppear = goodLimit / Fans.Length;
    
        StartCoroutine(FanLoad(Fans));
-        Debug.Log(parFanAppear);
+        //Debug.Log(parFanAppear);
     }
 
   

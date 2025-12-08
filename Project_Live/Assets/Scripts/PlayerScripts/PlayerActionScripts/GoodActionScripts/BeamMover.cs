@@ -19,18 +19,28 @@ public class BeamMover : MonoBehaviour
     Vector3 initialScale;
      VisualEffect vfx;
     Transform endPos;
+    bool useMeshStretch = false;
+
     void Start()
     {
         if (target == null) return;
-     GameObject effect= Instantiate(beamEffect, target.position, Quaternion.identity);
-         vfx= effect.GetComponent<VisualEffect>();
+
+        if (beamEffect != null)
+        {
+            GameObject effect = Instantiate(beamEffect, target.position, Quaternion.identity);
+            vfx = effect.GetComponent<VisualEffect>();
+
+            vfx.SetVector3("StartPos", target.position);
+
+            Quaternion forwardDir = target.rotation;
+            vfx.SetFloat("BeamDir", forwardDir.eulerAngles.y);
+        }
+
+        else useMeshStretch = true;
+
         initialScale = target.localScale;
-        previewLength = initialScale.y;
-       
-        vfx.SetVector3("StartPos", target.position); 
+        previewLength = initialScale.y;       
         
-        Quaternion forwardDir = target.rotation;
-        vfx.SetFloat("BeamDir", forwardDir.eulerAngles.y);
     }
 
 
@@ -41,15 +51,27 @@ public class BeamMover : MonoBehaviour
         previewLength = initialScale.y;
 
         currentLength += speed * Time.deltaTime;
-        //currentLength = Mathf.Min(currentLength, maxLength);
+        //currentLength = Mathf.Min(currentLength, maxLength);        
 
+        StretchTargetMesh();
+
+        if (!useMeshStretch && vfx != null)
+        {
+            UpdateVFX();
+        }
+    }
+
+    void StretchTargetMesh() //êLèkèàóù
+    {
         target.localScale = new Vector3(initialScale.x, currentLength, initialScale.z);
 
         float delta = currentLength - previewLength;
 
         target.localPosition = new Vector3(0, 0, (currentLength + delta) / 2);
+    }
 
-
+    void UpdateVFX() //VFXçXêVèàóù
+    {
         Vector3 beamEnd = target.position + target.up * currentLength;
 
         float beamScale = Vector3.Distance(vfx.GetVector3("StartPos"), beamEnd);
@@ -57,9 +79,8 @@ public class BeamMover : MonoBehaviour
         vfx.SetVector3("EndPos", target.position);
         vfx.SetFloat("BeamScale", beamScale);
         vfx.SetVector3("EndPoint", beamEnd);
-      
-        vfx.SetVector3("Up", transform.up);
-        vfx.SetVector3("Right",transform.right);
 
+        vfx.SetVector3("Up", transform.up);
+        vfx.SetVector3("Right", transform.right);
     }
 }

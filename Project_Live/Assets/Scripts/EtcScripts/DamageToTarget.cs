@@ -100,7 +100,7 @@ public class DamageToTarget : MonoBehaviour
 
         if (hitEffect != null) Instantiate(hitEffect, enemy.bounds.center, enemy.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
 
-        enemyStatus.actionEvents.KnockbackEvent(); //のけぞり状態への遷移
+        enemyStatus.CurrentDamageCount++;
     }
 
     public void AddDamageToObject(Collider obj) //ダメージを与える

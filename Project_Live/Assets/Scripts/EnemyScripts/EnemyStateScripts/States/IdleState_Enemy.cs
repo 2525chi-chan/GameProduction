@@ -3,12 +3,14 @@ using UnityEngine;
 
 class IdleState_Enemy : IEnemyState
 {
+    EnemyActionStateMachine stateMachine;
     EnemyAnimationController anim;
     EnemyStatus status;
     EnemyMover mover;
 
-    public IdleState_Enemy(EnemyAnimationController anim, EnemyStatus status, EnemyMover mover)
+    public IdleState_Enemy(EnemyActionStateMachine stateMachine, EnemyAnimationController anim, EnemyStatus status, EnemyMover mover)
     {
+        this.stateMachine = stateMachine;
         this.anim = anim;
         this.status = status;
         this.mover = mover;
@@ -22,6 +24,8 @@ class IdleState_Enemy : IEnemyState
     public void Update()
     {
         //mover.MoveStateProcess();
+        if (stateMachine.IsBossBehaviour)
+            stateMachine.actionEvents.BossAttackStartEvent();
     }
 
     public void Exit()

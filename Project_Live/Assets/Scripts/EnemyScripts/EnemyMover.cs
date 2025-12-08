@@ -5,7 +5,7 @@ using UnityEngine;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;  
 
 
-   public  enum EnemyMoveState { stop, lookOnly, move }
+public  enum EnemyMoveState { stop, lookOnly, move }
 public class EnemyMover : MonoBehaviour
 {
     public EnemyActionEvents actionEvents = new EnemyActionEvents();
@@ -20,6 +20,8 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] float moveSpeed = 3f;
     [Header("回転速度")]
     [SerializeField] float rotateSpeed;
+    [Header("対象との距離を更新する時間間隔")]
+    [SerializeField] float distanceCheckInterval = 0.25f;
 
     [Header("必要なコンポーネント")]
     [SerializeField] EnemyStatus enemyStatus;
@@ -29,11 +31,14 @@ public class EnemyMover : MonoBehaviour
     EnemyMoveType moveType;
     EnemyMoveState currentMoveState;
     float moveTypeTimer = 0f; //移動タイプ更新時間の計測用
-    float setMoveTimeDuration = 0.25f; //移動タイプ更新の時間
+    bool isActiveMove = true;
+    bool isActiveRotate = true;
 
     public EnemyMoveState MoveState { get { return currentMoveState; } }
-
     public EnemyMoveType MoveType { get { return moveType; } }   
+    
+    public bool IsActiveMove { get { return isActiveMove; } set { isActiveMove = value; } }
+    public bool IsActiveRotate { get { return isActiveRotate; } set { isActiveRotate = value; } }
 
     public void SetMoveType(EnemyMoveType moveType)
     {
@@ -63,7 +68,7 @@ public class EnemyMover : MonoBehaviour
         float distance = Vector3.Distance(transform.position, lookTarget.position); //プレイヤーとの距離を算出する
 
         moveTypeTimer += Time.deltaTime;
-        if (moveTypeTimer >= setMoveTimeDuration) //一定間隔ごとに、移動タイプの更新
+        if (moveTypeTimer >= distanceCheckInterval) //一定間隔ごとに、移動タイプの更新
         {
             moveTypeTimer = 0f;
             UpdateMoveType(distance);
@@ -85,7 +90,7 @@ public class EnemyMover : MonoBehaviour
             case EnemyMoveType.StageDestroy:
                 breakables = GameObject.FindGameObjectsWithTag("Breakable"); //攻撃できるオブジェクトに設定されているタグ名を()内に記述する
                 if (breakables.Length > 0)
-                    lookTarget = GetNearestTarget(breakables); //一番近いオブジェクトに向かって移動する
+                    lookTarget =  GetNearestTarget(breakables); //一番近いオブジェクトに向かって移動する
 
                 else return;
                 break;
@@ -130,11 +135,11 @@ public class EnemyMover : MonoBehaviour
             case EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
                 break;
             case EnemyMoveState.lookOnly: //プレイヤーの方向を向く処理のみ行う状態
-                LookPlayer();
+                LookPlayer(lookTarget);
                 break;
             case EnemyMoveState.move: //プレイヤーの方向を向いて追従する状態
-                LookPlayer();
-                MoveTowardsPlayer();
+                LookPlayer(lookTarget);
+                MoveTowardsPlayer(lookTarget);
                 break;
             default: break;
         }
@@ -155,10 +160,12 @@ public class EnemyMover : MonoBehaviour
         }
     }
 
-    void MoveTowardsPlayer()//プレイヤーに向かって移動する
+    public void MoveTowardsPlayer(Transform target)//プレイヤーに向かって移動する
     {
-        if (lookTarget == null) return;
-        Vector3 targetPos = lookTarget.transform.position;
+        if (!isActiveMove || lookTarget == null) return;
+
+        Vector3 targetPos = target.position;
+
         targetPos.y = transform.position.y;
 
         Vector3 direction = (targetPos - transform.position).normalized;
@@ -166,10 +173,12 @@ public class EnemyMover : MonoBehaviour
         transform.position += direction * moveSpeed * Time.deltaTime;
     }
 
-    void LookPlayer()//Y軸だけ変える
+    public void LookPlayer(Transform target)//Y軸だけ変える
     {
-        if (lookTarget == null) return;
-        Vector3 playerPos = lookTarget.position;
+        if (!isActiveRotate || lookTarget == null) return;
+
+        Vector3 playerPos = target.position;
+
         playerPos.y = lookTarget.transform.position.y;
 
         Vector3 direction = (playerPos - transform.position).normalized;
@@ -200,5 +209,9 @@ public class EnemyMover : MonoBehaviour
         return nearest;
     }
 
-    
+    public void ToggleActive(bool isActiveMove, bool isActiveRotate)
+    {
+        this.IsActiveMove = isActiveMove;
+        this.IsActiveRotate = isActiveRotate;
+    }
 }
