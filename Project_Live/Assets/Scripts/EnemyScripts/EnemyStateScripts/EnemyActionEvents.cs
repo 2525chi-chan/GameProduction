@@ -9,6 +9,8 @@ public class EnemyActionEvents
     public event System.Action OnKnockbackEvent;
     public event System.Action OnDownEvent;
     public event System.Action OnAttackEvent;
+    public event System.Action OnBossAttackStartEvent;
+    public event System.Action OnBossAttackFinishEvent;
 
     public void IdleEvent()
     {
@@ -33,5 +35,15 @@ public class EnemyActionEvents
     public void AttackEvent()
     {
         OnAttackEvent?.Invoke();
+    }
+
+    public void BossAttackStartEvent()
+    {
+        OnBossAttackStartEvent?.Invoke();
+    }
+
+    public void BossAttackFinishEvent()
+    {
+        OnBossAttackFinishEvent?.Invoke();
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 
 public class EnemyStatus : CharacterStatus
-{   
+{
+    EnemyActionStateMachine stateMachine;
     public EnemyActionEvents actionEvents = new EnemyActionEvents();
     bool isDead = false;
     public bool IsDead { get { return isDead; } }
@@ -21,13 +22,26 @@ public class EnemyStatus : CharacterStatus
     [SerializeField] EnemyDeathHandler deathHandler;
     [Header("地面についてからラグドール状態を解除するまでの時間")]
     [SerializeField]float returnRagdollTime = 1f;
+    [Header("のけぞるまでの被ダメージ回数")]
+    [SerializeField] int knockbackThresholdCount = 1;
+    [Header("のけぞりから回復する時間")]
+    [SerializeField] float knockbackRecoveryTime = 1.0f;
 
     float ragdollCount;
 
     Transform pos;
+
+    int currentDamageCount = 0;
+
+    public int CurrentDamageCount { get { return currentDamageCount; } set { currentDamageCount = value; } }
+    public int KnockbackThresholdCount { get { return knockbackThresholdCount; } set { knockbackThresholdCount = value; } }
+    public float KnockbackRecoveryTime { get { return knockbackRecoveryTime; } }
+
     private void Start()
     {
         pos = this.transform;
+        if (stateMachine == null)
+            stateMachine = GetComponentInParent<EnemyActionStateMachine>();
     }
     void Update()
     {
@@ -56,6 +70,12 @@ public class EnemyStatus : CharacterStatus
         else
         {
             ragdollCount = 0;
+        }
+
+        if (currentDamageCount >= knockbackThresholdCount)
+        {
+            currentDamageCount = 0;
+            actionEvents.KnockbackEvent(); //のけぞり状態への遷移
         }
     }
 }
