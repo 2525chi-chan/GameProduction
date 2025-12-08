@@ -32,6 +32,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4080971998366544874, guid: 61d8eddfc0747684888b5949fa1c324d, type: 3}
+      propertyPath: 'existSeconds.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4734199638609302664, guid: 61d8eddfc0747684888b5949fa1c324d, type: 3}
       propertyPath: normalColor.b
       value: 0
@@ -187,10 +191,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed330f554dedc9468c8dbd82538fb55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commentContents:
+  - "\u4E0B\u624B\u304F\u305D\uFF5E"
+  pressEffect: {fileID: 127665776651069535}
+  trailEffect: {fileID: 0}
+  trailFlag: 0
+  animationDuration: 0.5
+  moveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   decreaseType: 2
   fixedValueDecrease: 140000000a00000032000000
   decreaseRate: 30
   changeDecreaseTypeNum: 1000
-  antiCommentContent:
-  - "\u4E0B\u624B\u304F\u305D\uFF5E"
-  pressEffect: {fileID: 127665776651069535}

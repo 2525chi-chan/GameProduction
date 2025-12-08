@@ -278,7 +278,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1a16a633c360f4b9fdec3e9d7c5830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  existSeconds: 3
+  existSeconds:
+  - 1
+  - 3
 --- !u!114 &6758250313627035204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,6 +306,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4602dd4cfcca3145b8557e44a71fb6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commentContents:
+  - "\u3084\u3063\u3061\u307E\u3048\uFF5E\uFF01"
+  - "\u8CA0\u3051\u308B\u306A\uFF5E\uFF01"
+  - "\u304C\u3093\u3070\u308C\uFF5E\uFF01"
+  pressEffect: {fileID: 5410154455633384482}
+  trailEffect: {fileID: 5054387600023684386}
+  trailFlag: 1
   animationDuration: 1
   moveCurve:
     serializedVersion: 2
@@ -334,13 +343,6 @@ MonoBehaviour:
   attackMagnification: 1.5
   agilityMagnification: 3
   buffTime: 30
-  cheeringCommentContent:
-  - "\u304C\u3093\u3070\u308C\u30FC\uFF01"
-  - "\u8CA0\u3051\u308B\u306A\u30FC\uFF01"
-  - "\u3084\u3063\u3061\u307E\u3048\u30FC\uFF01"
-  pressEffect: {fileID: 5410154455633384482}
-  trailEffect: {fileID: 5054387600023684386}
-  trailFlag: 1
 --- !u!114 &4734199638609302664
 MonoBehaviour:
   m_ObjectHideFlags: 0
