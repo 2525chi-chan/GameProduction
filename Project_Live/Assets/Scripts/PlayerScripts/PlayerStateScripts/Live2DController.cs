@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.IO.LowLevel.Unsafe;
+using Live2D.Cubism.Framework.MotionFade;
 
 [System.Serializable]
 public class ExpressionData
@@ -34,22 +35,32 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
     private int currentMotionIndex = -1;
     private void OnValidate()
     {
+        if (motionController == null) return; 
+        
+            
+        
         if (expressions.Count > 0)
         {
             var index = 0;
             foreach(var exp in expressions)
             {
 
-                exp.index = index;
-                exp.expressionName = expressionController.ExpressionsList.CubismExpressionObjects[index].name;
-                exp.expressionName = exp.expressionName.Replace(".exp3","").Replace(".exp","");
-                index++;
+                if (exp != null && expressionController.ExpressionsList != null)
+                {
+                    exp.index = index;
+                    exp.expressionName = expressionController.ExpressionsList.CubismExpressionObjects[index].name;
+                    exp.expressionName = exp.expressionName.Replace(".exp3", "").Replace(".exp", "");
+                    index++;
+                }
+             
             }
         }
     }
 
     public void PlayMotion(string name)//モーション再生
     {
+     if(motionController==null) return;
+
         MotionData data = motions.Find(mot => mot.motionName == name);
 
         var priority = CubismMotionPriority.PriorityForce;
@@ -69,8 +80,8 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
   
     public void SetExpression(string name)//表情設定
     {
-
-        foreach(var exp in expressions)
+        if(motionController==null) return;
+        foreach (var exp in expressions)
         {
             if(exp.expressionName == name)
             {

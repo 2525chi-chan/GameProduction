@@ -25,6 +25,8 @@ public class IdleLive2DManager : MonoBehaviour//‘Ò‹@’†‚ÉLive2D‚ð“®‚©‚·
     bool hasPending = false;
     void Start()
     {
+        if(controller==null) return;
+
         waitTime = Random.Range(waitTime_Min, waitTime_Max);
 
         talkPlayer = GetComponent<Live2DTalkPlayer>();
@@ -49,6 +51,8 @@ public class IdleLive2DManager : MonoBehaviour//‘Ò‹@’†‚ÉLive2D‚ð“®‚©‚·
     // Update is called once per frame
     void Update()
     {
+        if(controller==null) return;
+
         if (!controller.IsPlayingAnimation())
         {
           //  live2DController.PlayMotion(defaultAnimation);

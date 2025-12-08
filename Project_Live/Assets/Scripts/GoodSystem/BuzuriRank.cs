@@ -27,7 +27,7 @@ public class BuzzRank
     [SerializeField] int bazuriShotStock;
     public int BazuriShotStock => bazuriShotStock;
     [Header("次のバズリランクのゲージ画像")]
-    public Image nextRankImage;
+    public List<Image> nextRankImages;
     [Header("このバズリランクのゲージのエフェクト画像(無ければ入れなくていい)")]
     public Image EffectImage;
     [Header("このバズリランクの色")]
@@ -100,6 +100,13 @@ public class BuzuriRank : MonoBehaviour
         bazuriShot.ShotStock= currentBuzzRank.BazuriShotStock; //バズリショットのストック数を現在のバズリランクに応じた数にする
         bazuriShot.CurrentStock=bazuriShot.ShotStock;
 
+
+        foreach(var rank in buzzRanks)
+        {
+           foreach(var img in rank.nextRankImages)
+
+                img.fillAmount = 0; //全てのバズリランクのゲージ画像をリセット
+        }
     }
 
     // Update is called once per frame
@@ -109,8 +116,11 @@ public class BuzuriRank : MonoBehaviour
         {
             return; //到達していれば以降の処理を行わない
         }
-
-        buzzRanks[currentIndex].nextRankImage.fillAmount = goodSystem.GoodNum / buzzRanks[currentIndex+1].needNum; //現在のバズリランクの画像のゲージを更新
+        foreach (var img in buzzRanks[currentIndex].nextRankImages)
+        {
+            img.fillAmount = goodSystem.GoodNum / buzzRanks[currentIndex + 1].needNum; //現在のバズリランクの画像のゲージを更新
+        }
+           
 
 
        // BuzuriSlider.value = goodSystem.GoodNum - beforeMaxValue; //いいね数から現在のバズリランクまでに必要だったいいね数を引く

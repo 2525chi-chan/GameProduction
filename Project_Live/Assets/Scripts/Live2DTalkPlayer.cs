@@ -70,7 +70,7 @@ public class Live2DTalkPlayer : MonoBehaviour
     public void PlayTalk(string motionName)//セリフ再生
     {
 
-
+        if (live2DController == null) return; 
 
         if (cuttentTalkIndex >= 0 && !talkDatas[cuttentTalkIndex].isBreak && showTextCoroutine != null) return;//現在再生中のセリフが中断不可の場合、コルーチンが終了するまで新たなセリフ再生を拒否
         else
