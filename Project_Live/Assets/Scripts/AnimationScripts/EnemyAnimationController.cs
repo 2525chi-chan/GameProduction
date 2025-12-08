@@ -28,4 +28,19 @@ public class EnemyAnimationController : MonoBehaviour
     {
         animator.SetTrigger("Attack");
     }
+
+    public void PlayNormalAttack() //近接攻撃アニメーション
+    {
+        animator.SetTrigger("NormalAttack");
+    }
+
+    public void PlayLongRangeAttack() //遠距離攻撃アニメーション
+    {
+        animator.SetTrigger("LongRangeAttack");
+    }
+
+    public void PlayAreaAttack() //広範囲攻撃アニメーション
+    {
+        animator.SetTrigger("AreaAttack");
+    }
 }

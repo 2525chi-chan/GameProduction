@@ -76,13 +76,13 @@ public class CommentSpawn : MonoBehaviour
 
             if (cheeringCommentCounter >= cheeringCommentCount&&!cheeringCommentIsExist&&!interceptEnemyIsExist)
             {
-                Debug.Log("応援コメントが生成されました。");
+                //Debug.Log("応援コメントが生成されました。");
                 InstantiateComment(raneNum,CheeringCommentPrefab,ref nextText,ref conectComment);
                 cheeringCommentCounter = 0;
             }
             else if(antiCommentCounter>=antiCommentCount/*&&!antiCommentIsExist*/)
             {
-                Debug.Log("アンチコメントが生成されました。");
+                //Debug.Log("アンチコメントが生成されました。");
                 InstantiateComment(raneNum, AntiCommentPrefab,ref nextText, ref conectComment);
                 antiCommentCounter = 0;
             }
@@ -91,8 +91,8 @@ public class CommentSpawn : MonoBehaviour
                 InstantiateComment(raneNum,CommentPrefab,ref nextText,ref conectComment);
                 antiCommentCounter++;
                 cheeringCommentCounter++;
-                Debug.Log("アンチコメントまであと" + (antiCommentCount - antiCommentCounter) + "コメントです。");
-                Debug.Log("応援コメントまであと" + (cheeringCommentCount - cheeringCommentCounter) + "コメントです。");
+                //Debug.Log("アンチコメントまであと" + (antiCommentCount - antiCommentCounter) + "コメントです。");
+                //Debug.Log("応援コメントまであと" + (cheeringCommentCount - cheeringCommentCounter) + "コメントです。");
             }
             
             beforeRaneNum = raneNum;

@@ -8,6 +8,7 @@ public class EnemyIdentifier : MonoBehaviour
 
     public void Start()
     {
+        if (EnemyCountManager.instance == null) return;
         EnemyCountManager.instance.RegisterEnemy(this.gameObject);
     }
     public void Initialize(GameObject prefab, EnemyMover.EnemyMoveType moveType)

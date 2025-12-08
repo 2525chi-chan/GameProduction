@@ -6,6 +6,8 @@ public class ExplosionController : MonoBehaviour
     [SerializeField] float maxScale = 5f;
     [Header("çLÇ™ÇÈë¨ìx")]
     [SerializeField] float expandSpeed = 10f;
+    [Header("çLÇ™ÇËÇ´Ç¡ÇΩå„ÅAè¡ñ≈Ç∑ÇÈÇ©")]
+    [SerializeField] bool destroyOnMaxScale = true;
 
     Vector3 initialScale;
 
@@ -28,6 +30,14 @@ public class ExplosionController : MonoBehaviour
             transform.localScale = new Vector3(next, next, next);
         }
 
-        else Destroy(gameObject);
+        else
+        {
+            if (!destroyOnMaxScale) return;
+            else
+            {
+                Debug.Log("è¡ñ≈");
+                Destroy(gameObject);
+            }
+        }
     }
 }

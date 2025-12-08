@@ -14,8 +14,6 @@ public class AttackParameter : MonoBehaviour
     [SerializeField] float baceUpwardKnockbackForce = 1f;
     [Header("Šî–{‚Æ‚È‚é‰º•ûŒü‚Ö‚Ì‚«”ò‚Î‚µ—Í")]
     [SerializeField] float baceDownwardKnockbackForce = 0f;
-    [Header("í‚ÉUŒ‚Ò‚Ì³–Ê•ûŒü‚É‚«”ò‚Ô—Í‚ğ‰Á‚¦‚é‚©")]
-    [SerializeField] bool enableForward = false;
     [Header("UŒ‚”»’è‚Ì’†S‚Éˆø‚«Šñ‚¹‚é—Í‚ğ—LŒø‚É‚·‚é‚©")]
     [SerializeField] bool enableSuction = false;
     [Header("ˆø‚«Šñ‚¹‚é—Í")]
