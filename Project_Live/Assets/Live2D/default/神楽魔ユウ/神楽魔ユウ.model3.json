@@ -1,0 +1,18 @@
+{
+	"Version": 3,
+	"FileReferences": {
+		"Moc": "神楽魔ユウ.moc3",
+		"Textures": [
+			"神楽魔ユウ.2048/texture_00.png"
+		],
+		"Physics": "神楽魔ユウ.physics3.json",
+		"DisplayInfo": "神楽魔ユウ.cdi3.json"
+	},
+	"Groups": [
+		{
+			"Target": "Parameter",
+			"Name": "EyeBlink",
+			"Ids": []
+		}
+	]
+}

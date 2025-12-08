@@ -17,7 +17,9 @@ public class PlayerStatus : CharacterStatus
     [SerializeField] GameObject target;
     [Header("いいねポイント1つ獲得による、パラメータの上昇量の倍率")]
     [SerializeField] float addRatio = 0f;
-
+    [Header("大ダメージの閾値")]
+    [SerializeField] float bigDamageThreshold = 50f;
+    public float BigDamageThreshold { get { return bigDamageThreshold; } }
     [Header("必要なコンポーネント")]
     [SerializeField] GoodSystem goodSystem;    
 
