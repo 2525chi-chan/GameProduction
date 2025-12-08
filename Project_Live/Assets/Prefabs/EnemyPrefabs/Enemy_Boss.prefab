@@ -318,6 +318,72 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1.4, z: 1}
   m_Center: {x: 0, y: 0.2, z: 1}
+--- !u!1001 &1154768582725906191
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4566678235380803533}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_Name
+      value: sukurappa_boss_ok_moderu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+--- !u!4 &1696791173686216932 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+  m_PrefabInstance: {fileID: 1154768582725906191}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2160070983493361469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -332,7 +398,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 479530961942844014, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: bazuriMotion.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 479530961942844014, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: bazuriMotion.Array.data[1].motionName
@@ -344,10 +410,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 479530961942844014, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: bazuriMotion.Array.data[3].motionName
-      value: EnemyBoss_LongRangeAttack
+      value: Enemy_LongRangeAttack_Boss
       objectReference: {fileID: 0}
     - target: {fileID: 479530961942844014, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: bazuriMotion.Array.data[3].motionRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 479530961942844014, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: bazuriMotion.Array.data[4].motionName
+      value: Enemy_AreaAttack_Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 479530961942844014, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: bazuriMotion.Array.data[4].motionRate
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 687043929126418568, guid: 07419985e8993174696f9559c2e48540, type: 3}
@@ -424,6 +498,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2493310521481197808, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2713603162529110155, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3269215006843740249, guid: 07419985e8993174696f9559c2e48540, type: 3}
@@ -503,6 +581,10 @@ PrefabInstance:
       value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6909665920932896121, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 13db8a270438bbd4d845a9093c017efa, type: 3}
+    - target: {fileID: 6909665920932896121, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -564,6 +646,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2493310521481197808, guid: 07419985e8993174696f9559c2e48540, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1545126348718326067}
+    - targetCorrespondingSourceObject: {fileID: 2493310521481197808, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1696791173686216932}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7510787986585253425, guid: 07419985e8993174696f9559c2e48540, type: 3}
       insertIndex: -1

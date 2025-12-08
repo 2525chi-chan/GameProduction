@@ -1,9 +1,11 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using static UnityEditor.SceneView;
 //作成者:福島
 
@@ -44,6 +46,14 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [SerializeField] List<LayerMask> layers;
     [Header("時間が遅くなる速度")]
     [SerializeField]float timeScaleDownSpeed;
+
+    [Header("バズリショット描画用")]
+    [SerializeField] RenderTexture bazuriTexture;
+    [SerializeField] RawImage rawImage;
+    [SerializeField]TMP_Text bazuriText;
+    [SerializeField] float fleezeTime = 0.2f;
+    [SerializeField] float countSpeed=5;
+    [SerializeField]float countAfterTime = 0.5f; //カウント後の待機時間   
     [Header("必要なコンポーネント")]
     [SerializeField] BazuriCameraMove cameraMove;
     [SerializeField] BazuriShotAnalyzer analyzer;
@@ -56,7 +66,10 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     private Camera analyzerCamera;
     private Coroutine bazuriCoroutine;  
     private Coroutine slowTimeCoroutine = null;
+    private Coroutine fleezeCoroutine=null;
+    private Coroutine countCoroutine = null;
     private int currentStock;
+    bool shotTaken = false; //バズリショットのトークンを持っているかどうか
     public int CurrentStock
     {
         get { return currentStock; }
@@ -84,6 +97,8 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
             analyzerCamera =bazuriCamera.GetComponent<Camera>();
             cinemachineBrain.m_CameraActivatedEvent.AddListener(OnCameraActivated);
         }
+
+        rawImage.enabled = false;
 
         countCoolTime = coolTime;
      
@@ -137,6 +152,33 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         } 
         Time.timeScale = target;
     }
+    public IEnumerator FleezeScreen()
+    {
+        if (bazuriCamera == null) yield return null;
+
+
+        var cam = analyzerCamera;
+        var originalTarget = cam.targetTexture;
+
+        cam.targetTexture = bazuriTexture;
+        cam.Render();
+        cam.targetTexture = originalTarget;
+
+
+        rawImage.texture = bazuriTexture;
+        rawImage.enabled = true;
+        float t = 0f;
+        while (t < fleezeTime)
+        {
+            t += Time.unscaledDeltaTime;
+
+
+            yield return null;
+        }
+        rawImage.enabled = false;
+        fleezeCoroutine = null;
+
+    }
     public void StartSlowTimeScaleDown(float start,float target,float speed)//時間を遅くする処理。単一のコルーチンでしか動かないようにする
     {
 
@@ -166,7 +208,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
      //   StartCoroutine(SlowTimeScaleDown(Time.timeScale, 0, timeScaleDownSpeed));
         StartCoroutine(zoomCamera.SetZoom(true));
 
-
+         shotTaken = false; //ショットが撮られたかどうかのフラグ
 
 
         while (elapsed < cameraTime)//操作時間中にショットボタンが押されればバズリショット中断
@@ -174,21 +216,80 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
             if (playerInput.actions["Shot"].WasPressedThisFrame())
             {
                 cameraFlash.StartFlash();
-               goodSystem.AddGood(analyzer.Analyzer(analyzerCamera, layers));
+                shotTaken = true;
+                if (fleezeCoroutine != null)
+                {
+                    StopCoroutine(fleezeCoroutine);
+                }
+                fleezeCoroutine = StartCoroutine(FleezeScreen());
+              
+               int score=(analyzer.Analyzer(analyzerCamera, layers));
+                if(countCoroutine != null)
+                {
+                    StopCoroutine(countCoroutine);
+                }
+                countCoroutine =StartCoroutine(CountGood(score));
+                goodSystem.AddGood(analyzer.Analyzer(analyzerCamera, layers));
                 break;
             }
 
             elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
-       
+
+        if (shotTaken)
+        {
+            if (fleezeCoroutine != null)
+                yield return fleezeCoroutine;   // ここで終わるまで待つ
+
+            if (countCoroutine != null)
+                yield return countCoroutine;
+
+        }
+    
         StartCoroutine(zoomCamera.SetZoom(false));
         EndBazuriMode();
+    }
+    public IEnumerator CountGood(int targetScore)
+    {
+        // すでに同じ or 超えてたら即終了
+        if (targetScore <= 0)
+        {
+            bazuriText.text = targetScore.ToString();
+            countCoroutine = null;
+            yield break;
+        }
+
+        bazuriText.text = "0";
+
+        float duration = countSpeed;          // ここは「何秒かけてカウントするか」の秒数にする想定
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+
+            float t = Mathf.Clamp01(elapsed / duration);
+            int count = Mathf.RoundToInt(Mathf.Lerp(0, targetScore, t));
+
+            bazuriText.text = count.ToString();
+            yield return null;
+        }
+
+        bazuriText.text = targetScore.ToString();
+        //  yield return new WaitForSeconds(countAfterTime);
+        // 最終的に必ずぴったり targetScore で終わらせる
+        yield return new WaitForSecondsRealtime(countAfterTime); //カウント後の待機時間
+
+        bazuriText.text = "";
+        //  bazuriText.text = ("");
+        countCoroutine = null;
     }
 
     private void EndBazuriMode()//プレイヤーモードに切り替え
     {
       
+   
         isBazuriMode = false;
         Time.timeScale = 1f;
        
