@@ -34,11 +34,13 @@ public class EnemyDeathHandler : MonoBehaviour
     Rigidbody rb;
     GoodSystem goodSystem;
     EnemySpawnManager spawnManager;
+    RequestManager requestManager;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         goodSystem = GameObject.FindWithTag("GoodSystem").GetComponent<GoodSystem>();
         spawnManager = GameObject.FindWithTag("EnemySpawnManager").GetComponent<EnemySpawnManager>();
+        requestManager = GameObject.FindGameObjectWithTag("RequestManager").GetComponent<RequestManager>();
     }
 
     private void Update()
@@ -81,6 +83,27 @@ public class EnemyDeathHandler : MonoBehaviour
         if (deathEffect != null)
             Instantiate(deathEffect, transform.position, Quaternion.identity);
         spawnManager.DefeatedEnemyCount++;
+        if(requestManager.requestEnemyIsReceipt&&!requestManager.isIntercepting&&!requestManager.isAnimating)
+        {
+            switch(requestManager.currentRequestEnemy.enemyType)
+            {
+                case RequestEnemySO.EnemyType.All:
+                    requestManager.currentRequestEnemy.enemyCounter++;
+                    //Debug.Log("Žc‚è" + (requestManager.currentRequestEnemy.defeatEnemyNum - requestManager.currentRequestEnemy.enemyCounter )+ "‘Ì");
+                    break;
+                case RequestEnemySO.EnemyType.Selected:
+                    if (requestManager.currentRequestEnemy.targetEnemy == this.gameObject)
+                    {
+                        requestManager.currentRequestEnemy.enemyCounter++;
+                    }
+                    break;
+            }
+
+            if(requestManager.currentRequestEnemy.enemyCounter>=requestManager.currentRequestEnemy.defeatEnemyNum)
+            {
+                requestManager.SuccessEnemyRequest();
+            }
+        }
         Destroy(gameObject);
     }
 

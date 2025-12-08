@@ -47,6 +47,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [Header("必要なコンポーネント")]
     [SerializeField] BazuriCameraMove cameraMove;
     [SerializeField] BazuriShotAnalyzer analyzer;
+    [SerializeField]RequestManager requestManager;
     [SerializeField] GoodSystem goodSystem;
     [SerializeField]CameraFlash cameraFlash;
     [SerializeField] ZoomCamera zoomCamera;
@@ -175,6 +176,12 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
             {
                 cameraFlash.StartFlash();
                goodSystem.AddGood(analyzer.Analyzer(analyzerCamera, layers));
+
+                if(requestManager.requestBazuriShotIsReceipt&&!requestManager.isIntercepting)
+                {
+                    requestManager.CheckBazuriShot(analyzer.Analyzer(analyzerCamera, layers));
+                }
+
                 break;
             }
 

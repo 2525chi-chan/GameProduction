@@ -9,10 +9,11 @@ using UnityEngine.UI;
 public class CommentMove : MonoBehaviour
 {
     [Header("ÉRÉÅÉìÉgÇ™âÊñ Ç…Ç¢ÇÈïbêî")]
-    [SerializeField] float existSeconds;
+    [SerializeField] float[] existSeconds;
 
     CommentSpawn commentSpawn;
 
+    float defineSeconds;
     RectTransform rectTransform;
     float perFrameMoveSpeed;
 
@@ -20,7 +21,8 @@ public class CommentMove : MonoBehaviour
     { 
         commentSpawn=GameObject.FindGameObjectWithTag("CommentSpawn").GetComponent<CommentSpawn>();
         rectTransform = GetComponent<RectTransform>();
-        perFrameMoveSpeed = ((commentSpawn.Canvas.GetComponent<RectTransform>().rect.width + rectTransform.sizeDelta.x) / existSeconds) / Application.targetFrameRate;  
+        defineSeconds = existSeconds[Random.Range(0, existSeconds.Length)];
+        perFrameMoveSpeed = ((commentSpawn.Canvas.GetComponent<RectTransform>().rect.width + rectTransform.sizeDelta.x) / defineSeconds) / Application.targetFrameRate;  
     }
 
     void Update()

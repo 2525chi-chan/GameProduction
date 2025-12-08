@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AntiComment : MonoBehaviour
+public class AntiComment : ReplyCommentBase
 {
     public enum DecreaseType
     { 
@@ -24,96 +24,30 @@ public class AntiComment : MonoBehaviour
     [SerializeField, Range(0, 100)] int decreaseRate;
     [Header("何いいね以上で減少方法を固定値→割合に変更するか")]
     [SerializeField] int changeDecreaseTypeNum;
-    [Header("アンチコメントの内容")]
-    public List<string> antiCommentContent = new List<string>();
-    [Header("決定時のエフェクト")]
-    [SerializeField] ParticleSystem pressEffect;
 
-    bool Pressed;
-    
-    RectTransform thisRect;
-    Button operationDetail;
     GoodSystem goodSystem;
-    CommentMove commentMove;
-    CommentSpawn commentSpawn;
-    CommentReplyArea commentReplyArea;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //返信コメント共通の準備部分
+        InitializeAnything();
+
         goodSystem = GameObject.FindGameObjectWithTag("GoodSystem").GetComponent<GoodSystem>();
-        commentSpawn = GameObject.FindGameObjectWithTag("CommentSpawn").GetComponent<CommentSpawn>();
-        commentReplyArea = GameObject.FindGameObjectWithTag("CommentReplyArea").GetComponent<CommentReplyArea>();
-        commentMove=this.GetComponent<CommentMove>();
-        thisRect = this.GetComponent<RectTransform>();
-        operationDetail=this.GetComponent<Button>();
-        operationDetail.onClick.RemoveAllListeners();
-        operationDetail.onClick.AddListener(DecreaseGoodNum);
-        Pressed = false;
+        thisButton.onClick.RemoveAllListeners();
+        thisButton.onClick.AddListener(DecreaseGoodNum);
         commentSpawn.antiCommentIsExist = true;
     }
 
     void Update()
     {
-        if(IsInsideReplyArea()&&!Pressed)
-        {
-            RegisterReplyList();
-        }
-        else
-        {
-            UnregisterReplyList();
-            if (commentReplyArea.canReplyComment.Count == 0)
-            {
-                EventSystem.current.SetSelectedGameObject(null);
-            }
-        }
+        //返信コメント共通のエリア判定部
+        CheckInArea();
 
-        if (Pressed && !goodSystem.Decreasing)
+        if (Pressed && !goodSystem.Decreasing)  //いいねの減少が終わってからこのコメントを削除する
         {
             Destroy(this.gameObject);
         }
-    }
-
-    bool IsInsideReplyArea()    //返信エリアにいるか判定する関数
-    {
-        Canvas canvas = commentReplyArea.GetComponentInParent<Canvas>();
-        Camera cam = canvas.worldCamera;
-
-        Vector3[] commentCorners = new Vector3[4];
-        thisRect.GetWorldCorners(commentCorners);
-
-        Vector3[] areaCorners = new Vector3[4];
-        commentReplyArea.replyAreaRect.GetWorldCorners(areaCorners);
-
-        foreach (Vector3 corner in commentCorners)
-        {
-            Vector3 screenPoint = RectTransformUtility.WorldToScreenPoint(cam, corner);
-            if (RectTransformUtility.RectangleContainsScreenPoint(commentReplyArea.replyAreaRect, screenPoint, cam))
-            {
-                return true;  // 1つでも入っていたらOK
-            }
-        }
-
-        Vector2 commentCenter = RectTransformUtility.WorldToScreenPoint(cam, thisRect.position);
-        if (RectTransformUtility.RectangleContainsScreenPoint(commentReplyArea.replyAreaRect, commentCenter, cam))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    void RegisterReplyList()    //返信可能なコメントのリストへ登録する関数
-    {
-        if(!commentReplyArea.canReplyComment.Contains(this.gameObject))
-        {
-            commentReplyArea.canReplyComment.Add(this.gameObject);
-        }
-    }
-
-    void UnregisterReplyList()      //返信可能なコメントのリストから削除する関数
-    {
-        commentReplyArea.canReplyComment.Remove(this.gameObject);
     }
 
     public void DecreaseGoodNum ()  //コメントが拾われたら行われる関数
@@ -136,8 +70,6 @@ public class AntiComment : MonoBehaviour
         }
 
         StartCoroutine(goodSystem.DecreaseGood(decreaseValue));
-
-        //goodSystem.DecreaseGood(decreaseValue);
     }
 
     void PressMethod()  //押された瞬間のエフェクトやコメント移動の停止関数

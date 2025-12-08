@@ -23,6 +23,8 @@ TagManager:
   - CommentReplyArea
   - ActionPoint_EnemyBoss
   - Live2DPlayer
+  - Denkou
+  - RequestManager
   layers:
   - Default
   - TransparentFX
