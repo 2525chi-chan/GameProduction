@@ -6,6 +6,8 @@ public class LongRangeAttackState_EnemyBoss : IEnemyState
     EnemyMover mover;
     LongRangeAttack_Boss longRangeAttack;
 
+    bool isPlayed;
+
     public LongRangeAttackState_EnemyBoss(EnemyAnimationController anim, EnemyMover mover, LongRangeAttack_Boss longRangeAttack)
     {
         this.anim = anim;
@@ -15,6 +17,8 @@ public class LongRangeAttackState_EnemyBoss : IEnemyState
 
     public void Enter()
     {
+        isPlayed = false;
+        anim.PlayIdle();
         longRangeAttack.IsActive = true;
         longRangeAttack.SetStartState();
         longRangeAttack.SetTargetPosition();
@@ -25,10 +29,12 @@ public class LongRangeAttackState_EnemyBoss : IEnemyState
     public void Update()
     {
         longRangeAttack.StateProcess();
-        
-        if ((longRangeAttack.CurrentAttackState != longRangeAttack.PreviousAttackState)
-            && longRangeAttack.CurrentAttackState == LongRangeAttack_Boss.AttackState.Attack)
+
+        if (!isPlayed && longRangeAttack.CurrentAttackState == LongRangeAttack_Boss.AttackState.Attack)
+        {
+            isPlayed = true;
             anim.PlayLongRangeAttack();
+        }
     }
 
     public void Exit()

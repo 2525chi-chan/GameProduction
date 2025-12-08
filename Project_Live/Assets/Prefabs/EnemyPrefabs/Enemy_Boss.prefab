@@ -330,6 +330,26 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 479530961942844014, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: bazuriMotion.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 479530961942844014, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: bazuriMotion.Array.data[1].motionName
+      value: Enemy_Attack_Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 479530961942844014, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: bazuriMotion.Array.data[2].motionName
+      value: Enemy_Damage_Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 479530961942844014, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: bazuriMotion.Array.data[3].motionName
+      value: EnemyBoss_LongRangeAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 479530961942844014, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: bazuriMotion.Array.data[3].motionRate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 687043929126418568, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -486,6 +506,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6909665920932896121, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f6a99a384ff4fdf4b9541ccdbce8c3cb, type: 2}
     - target: {fileID: 7510787986585253425, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: m_Name
       value: Enemy_Boss

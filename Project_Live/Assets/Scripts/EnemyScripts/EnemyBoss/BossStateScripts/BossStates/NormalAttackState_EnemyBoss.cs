@@ -6,6 +6,8 @@ public class NormalAttackState_EnemyBoss : IEnemyState
     EnemyMover mover;
     NormalAttack_Boss normalAttack;
 
+    bool isPlayed;
+
     public NormalAttackState_EnemyBoss(EnemyAnimationController anim, EnemyMover mover, NormalAttack_Boss normalAttack)
     {
         this.anim = anim;
@@ -15,6 +17,8 @@ public class NormalAttackState_EnemyBoss : IEnemyState
 
     public void Enter()
     {
+        isPlayed = false;
+        anim.PlayIdle();
         normalAttack.IsActive = true;
         normalAttack.SetStartState();
         mover.SetMoveType(EnemyMover.EnemyMoveType.PlayerChase);
@@ -26,9 +30,11 @@ public class NormalAttackState_EnemyBoss : IEnemyState
         normalAttack.StateProcess();
         mover.MoveStateProcess();
 
-        if ((normalAttack.CurrentAttackState != normalAttack.PreviousAttackState)
-            && normalAttack.CurrentAttackState == NormalAttack_Boss.AttackState.Attack)
+        if (!isPlayed && normalAttack.CurrentAttackState == NormalAttack_Boss.AttackState.Attack)
+        {
+            isPlayed = true;
             anim.PlayNormalAttack();
+        }
     }
 
     public void Exit()
