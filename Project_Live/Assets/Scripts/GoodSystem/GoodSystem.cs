@@ -80,7 +80,7 @@ public class GoodSystem : MonoBehaviour
             }
         }
         
-        Debug.Log("‚¢‚¢‚Ë”:" + goodNum);
+        //Debug.Log("‚¢‚¢‚Ë”:" + goodNum);
     }
 
     public void AddGood(float value)    //‘¼‚ÌƒNƒ‰ƒX‚©‚çŒÄ‚Î‚ê‚é‚¢‚¢‚Ë‰ÁZ‚Ì‚½‚ß‚ÌŠÖ”
