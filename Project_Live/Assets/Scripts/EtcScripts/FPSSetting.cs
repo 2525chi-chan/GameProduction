@@ -8,14 +8,8 @@ public class FPSSetting : MonoBehaviour
     [SerializeField] int maxFPS = 60;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Application.targetFrameRate = maxFPS;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-      
     }
 }

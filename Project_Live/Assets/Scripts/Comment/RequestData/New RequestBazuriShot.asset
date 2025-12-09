@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: New RequestBazuriShot
+  m_EditorClassIdentifier: Assembly-CSharp::RequestBazuriShotSO
+  getGoodNum: 200
+  cheeringIncreasePercent: 30
+  decreaseGoodNum: 0
+  antiIncreasePercent: 0
+  timeLimit: 0
+  commentText:
+  - "\u30A8\u30E2\u3044\u4E00\u679A\u3088\u308D\u3057\u304F\uFF5E"
+  - "\u304B\u3063\u3053\u3044\u3044\u77AC\u9593\u304A\u306A\u3057\u3083\u3059"
+  requestNum: 1000

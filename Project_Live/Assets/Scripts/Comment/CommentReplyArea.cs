@@ -5,8 +5,21 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
+//制作者　寺村
+
 public class CommentReplyArea : MonoBehaviour
 {
+
+    enum CommentGetType
+    { 
+        Selected,
+        All
+    }
+
+    [Header("コメントを全取得するか、選択のみにするか")]
+    [SerializeField] CommentGetType commentGetType;
+
+    InputAction getCommentAction;
 
     [HideInInspector]
     public List<GameObject> canReplyComment;
@@ -22,11 +35,23 @@ public class CommentReplyArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canReplyComment.Count > 0)
+        if (canReplyComment.Count > 0&&commentGetType==CommentGetType.Selected)
         {
             EventSystem.current.SetSelectedGameObject(SetReplyComment(canReplyComment));
         }
     }
+
+    //public void CommentGetAll(InputAction.CallbackContext context)
+    //{
+    //    if (canReplyComment.Count == 0||commentGetType!=CommentGetType.All)
+    //        return;
+
+    //    foreach(var comment in canReplyComment)
+    //    {
+    //        Button button = comment.GetComponent<Button>();
+    //        button.onClick.Invoke();
+    //    }
+    //}
 
     GameObject SetReplyComment(List<GameObject> canReplyComment)
     {

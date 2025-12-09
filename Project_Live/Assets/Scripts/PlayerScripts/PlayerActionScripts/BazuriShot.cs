@@ -7,21 +7,21 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnityEditor.SceneView;
-//ì¬Ò:•Ÿ“‡
+//ï¿½ì¬ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½
 
 
-public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
+public class BazuriShot : MonoBehaviour// ï¿½oï¿½Yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½[ï¿½hï¿½ÌØ‚ï¿½Ö‚ï¿½ï¿½ÌŠÇ—ï¿½
 {
-    [Header("ƒƒCƒ“‚ÌƒJƒƒ‰")]
+    [Header("ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ÌƒJï¿½ï¿½ï¿½ï¿½")]
     [SerializeField]CinemachineBrain cinemachineBrain;
     [SerializeField] PlayerInput playerInput;
-    [Header("ƒvƒŒƒCƒ„[‚ª‘€ì‚·‚éƒJƒƒ‰")]
+    [Header("ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ì‚·ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] CinemachineFreeLook mainCamera;
-    [Header("ƒoƒYƒŠƒVƒ‡ƒbƒg‚ÌÛ‚É‘€ì‚·‚éƒJƒƒ‰")]
+    [Header("ï¿½oï¿½Yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½gï¿½ÌÛ‚É‘ï¿½ï¿½ì‚·ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] CinemachineVirtualCamera bazuriCamera;
 
-    const int highPriority = 10; //•\¦‚³‚¹‚é•û
-   const int lowPriority = 0; //•\¦‚³‚¹‚È‚¢•û  
+    const int highPriority = 10; //ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+   const int lowPriority = 0; //ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½  
     public CinemachineVirtualCamera BazuriCamera
     {
         get
@@ -34,30 +34,34 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
         }
     }
 
-    [Header("ƒJƒƒ‰‚Ì‘€ìŠÔ")]
+    [Header("ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Ì‘ï¿½ï¿½ìï¿½ï¿½")]
     [SerializeField] float cameraTime;
-    [Header("ƒXƒ[‚ÌƒQ[ƒ€‘¬“x(1–¢–‚¶‚á‚È‚¢‚ÆƒXƒ[‚É‚È‚ç‚È‚¢)")]
+    [Header("ï¿½Xï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ÌƒQï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½x(1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ÆƒXï¿½ï¿½ï¿½[ï¿½É‚È‚ï¿½È‚ï¿½)")]
     [SerializeField] float slowSpeed;
-    [Header("ƒoƒYƒŠƒVƒ‡ƒbƒg‚ÌÅ‘åƒXƒgƒbƒN")]
+    [Header("ï¿½oï¿½Yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½gï¿½ÌÅ‘ï¿½Xï¿½gï¿½bï¿½N")]
     [SerializeField] int shotStock;
-    [Header("ƒoƒYƒŠƒVƒ‡ƒbƒg‚ÌƒN[ƒ‹ƒ^ƒCƒ€")]
+    [Header("ï¿½oï¿½Yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½gï¿½ÌƒNï¿½[ï¿½ï¿½ï¿½^ï¿½Cï¿½ï¿½")]
     [SerializeField] float coolTime;
-    [Header("ƒfƒtƒHƒ‹ƒg‚ÌƒŒƒCƒ„[(ƒJƒƒ‰”»’è‚É—p‚¢‚éƒŒƒCƒ„[)")]
+    [Header("ï¿½fï¿½tï¿½Hï¿½ï¿½ï¿½gï¿½Ìƒï¿½ï¿½Cï¿½ï¿½ï¿½[(ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É—pï¿½ï¿½ï¿½éƒŒï¿½Cï¿½ï¿½ï¿½[)")]
     [SerializeField] List<LayerMask> layers;
-    [Header("ŠÔ‚ª’x‚­‚È‚é‘¬“x")]
+    [Header("ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½xï¿½ï¿½ï¿½È‚é‘¬ï¿½x")]
     [SerializeField]float timeScaleDownSpeed;
 
-    [Header("ƒoƒYƒŠƒVƒ‡ƒbƒg•`‰æ—p")]
+    [Header("ï¿½oï¿½Yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½gï¿½`ï¿½ï¿½p")]
     [SerializeField] RenderTexture bazuriTexture;
     [SerializeField] RawImage rawImage;
     [SerializeField]TMP_Text bazuriText;
     [SerializeField] float fleezeTime = 0.2f;
     [SerializeField] float countSpeed=5;
-    [SerializeField]float countAfterTime = 0.5f; //ƒJƒEƒ“ƒgŒã‚Ì‘Ò‹@ŠÔ   
-    [Header("•K—v‚ÈƒRƒ“ƒ|[ƒlƒ“ƒg")]
+    [SerializeField]float countAfterTime = 0.5f; //ï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½Ì‘Ò‹@ï¿½ï¿½ï¿½ï¿½   
+    [Header("ï¿½Kï¿½vï¿½ÈƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½g")]
     [SerializeField] BazuriCameraMove cameraMove;
     [SerializeField] BazuriShotAnalyzer analyzer;
+    [SerializeField]RequestManager requestManager;
+
     [SerializeField]Live2DTalkPlayer talkPlayer;
+
+
     [SerializeField] GoodSystem goodSystem;
     [SerializeField]CameraFlash cameraFlash;
     [SerializeField] ZoomCamera zoomCamera;
@@ -70,7 +74,7 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
     private Coroutine fleezeCoroutine=null;
     private Coroutine countCoroutine = null;
     private int currentStock;
-    bool shotTaken = false; //ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ìƒg[ƒNƒ“‚ğ‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©
+    bool shotTaken = false; //ï¿½oï¿½Yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½gï¿½Ìƒgï¿½[ï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½Ç‚ï¿½ï¿½ï¿½
     public int CurrentStock
     {
         get { return currentStock; }
@@ -134,7 +138,7 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
         float duration = 1.0f / speed;
         while (t < duration)
         {
-            if (isBazuriMode)//“r’†‚ÅƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ª‰ğœ‚³‚ê‚½‚ç‹­§I—¹
+            if (isBazuriMode)//ï¿½rï¿½ï¿½ï¿½Åƒoï¿½Yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ç‹­ï¿½ï¿½ï¿½Iï¿½ï¿½
             {
                 t += Time.unscaledDeltaTime;
                 Time.timeScale = Mathf.Lerp(start, target, t / duration);
@@ -181,7 +185,7 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
         fleezeCoroutine = null;
 
     }
-    public void StartSlowTimeScaleDown(float start,float target,float speed)//ŠÔ‚ğ’x‚­‚·‚éˆ—B’Pˆê‚ÌƒRƒ‹[ƒ`ƒ“‚Å‚µ‚©“®‚©‚È‚¢‚æ‚¤‚É‚·‚é
+    public void StartSlowTimeScaleDown(float start,float target,float speed)//ï¿½ï¿½ï¿½Ô‚ï¿½xï¿½ï¿½ï¿½ï¿½ï¿½éˆï¿½ï¿½ï¿½Bï¿½Pï¿½ï¿½ÌƒRï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½æ‚¤ï¿½É‚ï¿½ï¿½ï¿½
     {
 
         if(slowTimeCoroutine != null)
@@ -192,7 +196,7 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
         slowTimeCoroutine = StartCoroutine(SlowTimeScaleDown(start,target, speed));
 
     }
-    private IEnumerator BazuriModeRoutine()//ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÉØ‚è‘Ö‚¦
+    private IEnumerator BazuriModeRoutine()//ï¿½oï¿½Yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½[ï¿½hï¿½ÉØ‚ï¿½Ö‚ï¿½
     {
         cameraFlash.ResetAlpha();
       
@@ -210,14 +214,20 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
      //   StartCoroutine(SlowTimeScaleDown(Time.timeScale, 0, timeScaleDownSpeed));
         StartCoroutine(zoomCamera.SetZoom(true));
 
-         shotTaken = false; //ƒVƒ‡ƒbƒg‚ªB‚ç‚ê‚½‚©‚Ç‚¤‚©‚Ìƒtƒ‰ƒO
+         shotTaken = false; //ï¿½Vï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½Bï¿½ï¿½ê‚½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½Ìƒtï¿½ï¿½ï¿½O
 
 
-        while (elapsed < cameraTime)//‘€ìŠÔ’†‚ÉƒVƒ‡ƒbƒgƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚ê‚ÎƒoƒYƒŠƒVƒ‡ƒbƒg’†’f
+        while (elapsed < cameraTime)//ï¿½ï¿½ï¿½ìï¿½Ô’ï¿½ï¿½ÉƒVï¿½ï¿½ï¿½bï¿½gï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îƒoï¿½Yï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½gï¿½ï¿½ï¿½f
         {
             if (playerInput.actions["Shot"].WasPressedThisFrame())
             {
                 cameraFlash.StartFlash();
+
+                if(requestManager.requestBazuriShotIsReceipt&&!requestManager.isIntercepting)
+                {
+                    requestManager.CheckBazuriShot(analyzer.Analyzer(analyzerCamera, layers));
+                }
+
                 talkPlayer.PlayTalk("BazuriShot_After");
                 shotTaken = true;
                 if (fleezeCoroutine != null)
@@ -233,6 +243,9 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
                 }
                 countCoroutine =StartCoroutine(CountGood(score));
                 goodSystem.AddGood(analyzer.Analyzer(analyzerCamera, layers));
+
+              
+
                 break;
             }
 
@@ -243,7 +256,7 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
         if (shotTaken)
         {
             if (fleezeCoroutine != null)
-                yield return fleezeCoroutine;   // ‚±‚±‚ÅI‚í‚é‚Ü‚Å‘Ò‚Â
+                yield return fleezeCoroutine;   // ï¿½ï¿½ï¿½ï¿½ï¿½ÅIï¿½ï¿½ï¿½Ü‚Å‘Ò‚ï¿½
 
             if (countCoroutine != null)
                 yield return countCoroutine;
@@ -255,7 +268,7 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
     }
     public IEnumerator CountGood(int targetScore)
     {
-        // ‚·‚Å‚É“¯‚¶ or ’´‚¦‚Ä‚½‚ç‘¦I—¹
+        // ï¿½ï¿½ï¿½Å‚É“ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ç‘¦ï¿½Iï¿½ï¿½
         if (targetScore <= 0)
         {
             bazuriText.text = targetScore.ToString();
@@ -265,7 +278,7 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
 
         bazuriText.text = "0";
 
-        float duration = countSpeed;          // ‚±‚±‚Íu‰½•b‚©‚¯‚ÄƒJƒEƒ“ƒg‚·‚é‚©v‚Ì•b”‚É‚·‚é‘z’è
+        float duration = countSpeed;          // ï¿½ï¿½ï¿½ï¿½ï¿½Íuï¿½ï¿½ï¿½bï¿½ï¿½ï¿½ï¿½ï¿½ÄƒJï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½ï¿½é‚©ï¿½vï¿½Ì•bï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½zï¿½ï¿½
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -281,15 +294,15 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
 
         bazuriText.text = targetScore.ToString();
         //  yield return new WaitForSeconds(countAfterTime);
-        // ÅI“I‚É•K‚¸‚Ò‚Á‚½‚è targetScore ‚ÅI‚í‚ç‚¹‚é
-        yield return new WaitForSecondsRealtime(countAfterTime); //ƒJƒEƒ“ƒgŒã‚Ì‘Ò‹@ŠÔ
+        // ï¿½ÅIï¿½Iï¿½É•Kï¿½ï¿½ï¿½Ò‚ï¿½ï¿½ï¿½ï¿½ï¿½ targetScore ï¿½ÅIï¿½ï¿½ç‚¹ï¿½ï¿½
+        yield return new WaitForSecondsRealtime(countAfterTime); //ï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½ï¿½Ì‘Ò‹@ï¿½ï¿½ï¿½ï¿½
 
         bazuriText.text = "";
         //  bazuriText.text = ("");
         countCoroutine = null;
     }
 
-    private void EndBazuriMode()//ƒvƒŒƒCƒ„[ƒ‚[ƒh‚ÉØ‚è‘Ö‚¦
+    private void EndBazuriMode()//ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½[ï¿½hï¿½ÉØ‚ï¿½Ö‚ï¿½
     {
       
    
@@ -312,7 +325,7 @@ public class BazuriShot : MonoBehaviour// ƒoƒYƒŠƒVƒ‡ƒbƒgƒ‚[ƒh‚ÌØ‚è‘Ö‚¦‚ÌŠÇ—
         }
         // ResetCamera();
     }
-    private void ResetCamera()//ƒJƒƒ‰ˆÊ’uA‰ñ“]‚Ì‰Šú‰»
+    private void ResetCamera()//ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½Aï¿½ï¿½]ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
     {
         if (bazuriCamera != null)
         {
