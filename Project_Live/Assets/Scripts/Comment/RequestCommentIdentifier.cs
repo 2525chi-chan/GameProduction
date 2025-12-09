@@ -95,6 +95,7 @@ public class RequestCommentIdentifier :ReplyCommentBase
                     requestManager.requestEnemyIsReceipt = true;
                     break;
                 case RequestBaseSO.RequestType.Emote:
+                    requestManager.currentRequestEmote = (RequestEmoteSO)thisRequest;
                     requestManager.requestEmoteIsReceipt = true;
                     break;
                 case RequestBaseSO.RequestType.BazuriShot:

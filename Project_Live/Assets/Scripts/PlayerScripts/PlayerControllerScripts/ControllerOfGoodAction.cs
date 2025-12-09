@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 public class ControllerOfGoodAction : MonoBehaviour
 {
     [SerializeField] GoodAction goodAction;
-
     public void CallGoodAction1(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
