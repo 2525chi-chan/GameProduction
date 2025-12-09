@@ -343,6 +343,7 @@ MonoBehaviour:
   attackMagnification: 1.5
   agilityMagnification: 3
   buffTime: 30
+  commentSound: {fileID: 8300000, guid: 4624094ba53c86a4ea9228ac11e318ca, type: 3}
 --- !u!114 &4734199638609302664
 MonoBehaviour:
   m_ObjectHideFlags: 0

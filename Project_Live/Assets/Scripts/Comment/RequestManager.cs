@@ -33,6 +33,7 @@ public class RequestManager : MonoBehaviour
 
     [System.NonSerialized] public RequestBazuriShotSO currentRequestBazuriShot;
     [System.NonSerialized] public RequestEnemySO currentRequestEnemy;
+    [System.NonSerialized] public RequestEmoteSO currentRequestEmote;
 
 
     Animator ClearTextAnimator;
@@ -88,7 +89,6 @@ public class RequestManager : MonoBehaviour
             {
                 nextDisplayIndex++;
             }
-            //upadateTime = 0;
         }
 
         if(isAnimating)
@@ -185,8 +185,10 @@ public class RequestManager : MonoBehaviour
                 requestEnemyIsReceipt = false;
                 requestEnemyIsExist = false;
                 break;
-            case RequestBaseSO.RequestType.Emote: 
+            case RequestBaseSO.RequestType.Emote:
+                currentRequestEmote = null;
                 requestEmoteIsReceipt = false;
+                requestEmoteIsExist = false;
                 break;
             case RequestBaseSO.RequestType.BazuriShot:
                 currentRequestBazuriShot = null; 
@@ -225,5 +227,10 @@ public class RequestManager : MonoBehaviour
     public void SuccessEnemyRequest()
     {
         SuccessRequest(currentRequestEnemy);
+    }
+
+    public void SuccessEmoteRequest()
+    {
+        SuccessRequest(currentRequestEmote);
     }
 }

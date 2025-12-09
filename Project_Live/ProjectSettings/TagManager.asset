@@ -25,6 +25,7 @@ TagManager:
   - Live2DPlayer
   - Denkou
   - RequestManager
+  - SE
   layers:
   - Default
   - TransparentFX

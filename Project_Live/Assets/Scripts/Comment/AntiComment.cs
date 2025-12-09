@@ -24,7 +24,10 @@ public class AntiComment : ReplyCommentBase
     [SerializeField, Range(0, 100)] int decreaseRate;
     [Header("何いいね以上で減少方法を固定値→割合に変更するか")]
     [SerializeField] int changeDecreaseTypeNum;
+    [Header("このコメントを受け取ったときのサウンド")]
+    [SerializeField] AudioClip commentSound;
 
+    AudioSource SE;
     GoodSystem goodSystem;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,6 +37,7 @@ public class AntiComment : ReplyCommentBase
         InitializeAnything();
 
         goodSystem = GameObject.FindGameObjectWithTag("GoodSystem").GetComponent<GoodSystem>();
+        SE = GameObject.FindGameObjectWithTag("SE").GetComponent<AudioSource>();
         thisButton.onClick.RemoveAllListeners();
         thisButton.onClick.AddListener(DecreaseGoodNum);
         commentSpawn.antiCommentIsExist = true;
@@ -76,6 +80,7 @@ public class AntiComment : ReplyCommentBase
     {
         Pressed = true;
         pressEffect.Play();
+        SE.PlayOneShot(commentSound);
         UnregisterReplyList();
         EventSystem.current.SetSelectedGameObject(null);
         commentMove.enabled = false;
