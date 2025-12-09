@@ -25,14 +25,14 @@ public class IdleLive2DManager : MonoBehaviour//待機中にLive2Dを動かす
     bool hasPending = false;
     void Start()
     {
-        if(controller==null) return;
+      //  if(controller==null) return;
 
         waitTime = Random.Range(waitTime_Min, waitTime_Max);
 
         talkPlayer = GetComponent<Live2DTalkPlayer>();
         live2DController = GetComponent<Live2DController>();
-        controller =live2DController.MotionController;
-        controller.AnimationEndHandler+=OnMotionEnd;
+       // controller =live2DController.MotionController;
+      //  controller.AnimationEndHandler+=OnMotionEnd;
 
         foreach (var mot in live2DController.Motions)
         {
@@ -44,29 +44,29 @@ public class IdleLive2DManager : MonoBehaviour//待機中にLive2Dを動かす
                
             }
         }
-        SetDefault();
+        //SetDefault();
     }
 
     float countTime;
     // Update is called once per frame
     void Update()
     {
-        if(controller==null) return;
+      //  if(controller==null) return;
 
-        if (!controller.IsPlayingAnimation())
-        {
-          //  live2DController.PlayMotion(defaultAnimation);
-       //     Debug.Log("PlayDefault");
-           // isPlayingDefault = true;
+       // if (!controller.IsPlayingAnimation())
+       // {
+       //   //  live2DController.PlayMotion(defaultAnimation);
+       ////     Debug.Log("PlayDefault");
+       //    // isPlayingDefault = true;
          
-            SetDefault();
-            return;
-        }
+       //     SetDefault();
+       //   //  return;
+       // }
 
       
       
 
-            if (hasPending) return;
+         //   if (hasPending) return;
            
             countTime += Time.deltaTime;
             if (countTime >= waitTime)//待機時間を超えたらIdleモーションをセット
@@ -78,7 +78,7 @@ public class IdleLive2DManager : MonoBehaviour//待機中にLive2Dを動かす
                 pendingTalk = idleTalks[rand];
                 hasPending = true;
                // live2DController.PlayMotion(idleMotions[rand].motionName);
-               // talkPlayer.PlayTalk(idleTalks[rand].motionName);
+                talkPlayer.PlayTalk(idleTalks[rand].motionName);
                
                 
                

@@ -35,7 +35,7 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
     private int currentMotionIndex = -1;
     private void OnValidate()
     {
-        if (motionController == null) return; 
+        if (motionController == null||expressionController==null) return; 
         
             
         
@@ -59,7 +59,7 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
 
     public void PlayMotion(string name)//モーション再生
     {
-     if(motionController==null) return;
+     if(motionController==null||expressionController==null) return;
 
         MotionData data = motions.Find(mot => mot.motionName == name);
 
@@ -80,7 +80,7 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
   
     public void SetExpression(string name)//表情設定
     {
-        if(motionController==null) return;
+        if(motionController == null || expressionController == null) return;
         foreach (var exp in expressions)
         {
             if(exp.expressionName == name)

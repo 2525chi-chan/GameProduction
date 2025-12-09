@@ -57,6 +57,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
     [Header("必要なコンポーネント")]
     [SerializeField] BazuriCameraMove cameraMove;
     [SerializeField] BazuriShotAnalyzer analyzer;
+    [SerializeField]Live2DTalkPlayer talkPlayer;
     [SerializeField] GoodSystem goodSystem;
     [SerializeField]CameraFlash cameraFlash;
     [SerializeField] ZoomCamera zoomCamera;
@@ -120,6 +121,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
         }
         if (currentStock > 0&&countCoolTime>coolTime)
         {
+           talkPlayer.PlayTalk("BazuriShot_Before");
             bazuriCoroutine = StartCoroutine(BazuriModeRoutine());
             countCoolTime = 0f;
         }
@@ -216,6 +218,7 @@ public class BazuriShot : MonoBehaviour// バズリショットモードの切り替えの管理
             if (playerInput.actions["Shot"].WasPressedThisFrame())
             {
                 cameraFlash.StartFlash();
+                talkPlayer.PlayTalk("BazuriShot_After");
                 shotTaken = true;
                 if (fleezeCoroutine != null)
                 {

@@ -26,7 +26,8 @@ public class Live2DTalkPlayer : MonoBehaviour
     [SerializeField] TMP_Text talkText;
     [SerializeField] float textSpeed = 0.05f;
     [SerializeField] List<TalkData> talkDatas = new();
-
+    [SerializeField] AudioSource Main_Audio;
+    [SerializeField]AudioSource Sub_Audio;
     public List<TalkData> TalkDatas { get { return talkDatas; } }
     Live2DController live2DController;
 
@@ -67,11 +68,18 @@ public class Live2DTalkPlayer : MonoBehaviour
     //    }
     //}
 
+    private void Start()
+    {
+        live2DController = GetComponent<Live2DController>();
+    }
     public void PlayTalk(string motionName)//セリフ再生
     {
 
-        if (live2DController == null) return; 
-
+        if (live2DController == null)
+        {
+            Debug.Log("???");
+            return;
+        }
         if (cuttentTalkIndex >= 0 && !talkDatas[cuttentTalkIndex].isBreak && showTextCoroutine != null) return;//現在再生中のセリフが中断不可の場合、コルーチンが終了するまで新たなセリフ再生を拒否
         else
         {
@@ -92,6 +100,20 @@ public class Live2DTalkPlayer : MonoBehaviour
                 waitStartTime = data.talkEntries[rand].delayBefore;
                 waitEndTime=data.talkEntries[rand].delayEnd;
                 cuttentTalkIndex = talkDatas.IndexOf(data);
+                if (data.talkEntries[rand].audioClip != null)
+                {
+                    if (Main_Audio.isPlaying)
+                    {
+                        Sub_Audio.PlayOneShot(data.talkEntries[rand].audioClip);
+                    }
+                    else
+                    {
+                        Main_Audio.PlayOneShot(data.talkEntries[rand].audioClip);
+
+                    }
+
+                }
+                    
                 showTextCoroutine = StartCoroutine(ShowText(data.talkEntries[rand].texts));
                 break;
             }
