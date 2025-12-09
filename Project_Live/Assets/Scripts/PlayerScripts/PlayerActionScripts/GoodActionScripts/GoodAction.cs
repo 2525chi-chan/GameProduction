@@ -21,6 +21,8 @@ public class GoodActionParameters
     [SerializeField] public GameObject goodActionUsedEffect;
     [Header("アクション発動中、ダメージを無効化するかどうか")]
     [SerializeField] bool isInvincible = false;
+    [Header("このいいねアクションのサウンド")]
+    [SerializeField] AudioClip actionSound;
     
   
     public int GoodCost { get { return goodCost; } }
@@ -28,6 +30,8 @@ public class GoodActionParameters
     public float ChangeStateInterval { get { return changeStateInterval;} }
     public GameObject GoodActionUsedEffect { get { return goodActionUsedEffect; } }
     public bool IsInvincible { get { return isInvincible; } } 
+
+    public AudioClip ActionSound { get { return actionSound; } }
    
 }
 
@@ -50,6 +54,7 @@ public class GoodAction : MonoBehaviour
     [SerializeField] ContinuosHitAttack continuosHitAttack;
     [SerializeField] ThrowBomb throwBomb;
     [SerializeField] ExplosionAttack explosionAttack;
+    [SerializeField] AudioSource SE;
 
     [SerializeField]Live2DTalkPlayer live2DTalkPlayer;
     float currentGoodNum = 0;
@@ -108,6 +113,7 @@ public class GoodAction : MonoBehaviour
         //wideAttack.InstantiateWideRangeAttack();
         //Debug.Log("イイネアクション1発動！");
         currentGoodPoint1 = 0;
+        SE.PlayOneShot(goodAction1.ActionSound);
         live2DTalkPlayer.PlayTalk("GoodAction_1");
     }
 
@@ -118,6 +124,7 @@ public class GoodAction : MonoBehaviour
         longRangeAttack.ShotBeam();
         //Debug.Log("イイネアクション2発動！");
         currentGoodPoint2 = 0;
+        SE.PlayOneShot(goodAction2.ActionSound);
         live2DTalkPlayer.PlayTalk("GoodAction_2");
     }
 
@@ -129,6 +136,7 @@ public class GoodAction : MonoBehaviour
         //continuosHitAttack.GenerateAttack();
         //Debug.Log("イイネアクション3発動！");
         currentGoodPoint3 = 0;
+        SE.PlayOneShot(goodAction3.ActionSound);
         live2DTalkPlayer.PlayTalk("GoodAction_3");
     }
 
@@ -139,6 +147,7 @@ public class GoodAction : MonoBehaviour
         explosionAttack.TriggerExplosions();
         //Debug.Log("イイネアクション4発動！");
         currentGoodPoint4 = 0;
+        SE.PlayOneShot(goodAction4.ActionSound);
         live2DTalkPlayer.PlayTalk("GoodAction_4");
     }
 }

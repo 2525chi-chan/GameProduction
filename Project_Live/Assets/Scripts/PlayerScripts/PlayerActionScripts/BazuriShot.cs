@@ -46,6 +46,10 @@ public class BazuriShot : MonoBehaviour// �o�Y���V���b�g��
     [SerializeField] List<LayerMask> layers;
     [Header("���Ԃ��x���Ȃ鑬�x")]
     [SerializeField]float timeScaleDownSpeed;
+    [Header("シャッター音")]
+    [SerializeField] AudioClip shutter;
+    [Header("シャッター後音声")]
+    [SerializeField] AudioClip shutterAfter;
 
     [Header("�o�Y���V���b�g�`��p")]
     [SerializeField] RenderTexture bazuriTexture;
@@ -61,7 +65,7 @@ public class BazuriShot : MonoBehaviour// �o�Y���V���b�g��
 
     [SerializeField]Live2DTalkPlayer talkPlayer;
 
-
+    [SerializeField] AudioSource SE;
     [SerializeField] GoodSystem goodSystem;
     [SerializeField]CameraFlash cameraFlash;
     [SerializeField] ZoomCamera zoomCamera;
@@ -221,6 +225,7 @@ public class BazuriShot : MonoBehaviour// �o�Y���V���b�g��
         {
             if (playerInput.actions["Shot"].WasPressedThisFrame())
             {
+                SE.PlayOneShot(shutter);
                 cameraFlash.StartFlash();
 
                 if(requestManager.requestBazuriShotIsReceipt&&!requestManager.isIntercepting)
@@ -235,6 +240,8 @@ public class BazuriShot : MonoBehaviour// �o�Y���V���b�g��
                     StopCoroutine(fleezeCoroutine);
                 }
                 fleezeCoroutine = StartCoroutine(FleezeScreen());
+
+                
               
                int score=(analyzer.Analyzer(analyzerCamera, layers));
                 if(countCoroutine != null)
@@ -242,6 +249,7 @@ public class BazuriShot : MonoBehaviour// �o�Y���V���b�g��
                     StopCoroutine(countCoroutine);
                 }
                 countCoroutine =StartCoroutine(CountGood(score));
+                
                 goodSystem.AddGood(analyzer.Analyzer(analyzerCamera, layers));
 
               
@@ -291,6 +299,8 @@ public class BazuriShot : MonoBehaviour// �o�Y���V���b�g��
             bazuriText.text = count.ToString();
             yield return null;
         }
+        
+        SE.PlayOneShot(shutterAfter);
 
         bazuriText.text = targetScore.ToString();
         //  yield return new WaitForSeconds(countAfterTime);

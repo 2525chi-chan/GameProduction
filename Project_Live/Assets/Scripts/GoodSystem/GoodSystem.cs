@@ -25,6 +25,11 @@ public class GoodSystem : MonoBehaviour
     [Header("‚¢‚¢‚Ë”‰ÁZ‹““®‚ÌŠ®—¹‚Ü‚Å‚ÌŠÔ")]
     [SerializeField] int duration = 1;
 
+    [Header("‚¢‚¢‚Ë‰ÁZ‰¹º")]
+    [SerializeField] AudioClip goodSound;
+
+    [SerializeField] AudioSource SE;
+
     private int goodNum;    //‚¢‚¢‚Ë”
     public float GoodNum => goodNum; //‚¢‚¢‚Ë”‚ÌƒQƒbƒ^[
 
@@ -102,6 +107,8 @@ public class GoodSystem : MonoBehaviour
         decreaseGoodText.enabled = true;
 
         yield return new WaitForSeconds(getDuration);
+
+        SE.PlayOneShot(goodSound);
         
         decreaseGoodText.enabled=false;
 

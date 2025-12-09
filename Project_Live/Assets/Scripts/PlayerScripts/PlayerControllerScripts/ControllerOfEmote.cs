@@ -7,9 +7,22 @@ using UnityEngine.InputSystem;
 
 public class ControllerOfEmote : MonoBehaviour
 {
+    [Header("必要なコンポーネント")]
+    [SerializeField]RequestManager requestManager;
+
+    void CheckRequest()
+    {
+        if(requestManager.requestEmoteIsReceipt&&!requestManager.isIntercepting)
+        {
+            requestManager.SuccessEmoteRequest();
+        }
+    }
+
     public void CallEmote1(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
+
+        CheckRequest();
 
         PlayerActionEvents.Emote1Event(); //エモート1の呼び出し
     }
@@ -18,6 +31,8 @@ public class ControllerOfEmote : MonoBehaviour
     {
         if (!context.performed) return;
 
+        CheckRequest();
+
         PlayerActionEvents.Emote2Event(); //エモート2の呼び出し
     }
 
@@ -25,12 +40,16 @@ public class ControllerOfEmote : MonoBehaviour
     {
         if (!context.performed) return;
 
+        CheckRequest();
+
         PlayerActionEvents.Emote3Event(); //エモート3の呼び出し
     }
 
     public void CallEmote4(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
+
+        CheckRequest();
 
         PlayerActionEvents.Emote4Event(); //エモート4の呼び出し
     }

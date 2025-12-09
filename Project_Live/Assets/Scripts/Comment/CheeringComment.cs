@@ -18,6 +18,10 @@ public class CheeringComment  :ReplyCommentBase
     [SerializeField] float agilityMagnification;
     [Header("バフの持続時間")]
     [SerializeField] float buffTime;
+    [Header("このコメントのサウンド")]
+    [SerializeField] AudioClip commentSound;
+
+    AudioSource SE;
 
     PlayerStatus playerStatus;
     PlayerBuffManager playerBuffManager;
@@ -29,7 +33,8 @@ public class CheeringComment  :ReplyCommentBase
     {
         //返信コメント共通の準備部分
         InitializeAnything();
-        
+
+        SE = GameObject.FindGameObjectWithTag("SE").GetComponent<AudioSource>();
         PowerBuffImage = GameObject.FindGameObjectWithTag("PowerBuffImage");
         AgilityBuffImage = GameObject.FindGameObjectWithTag("AgilityBuffImage");
         playerBuffManager = GameObject.FindGameObjectWithTag("PlayerBuffManager").GetComponent<PlayerBuffManager>();
@@ -81,6 +86,7 @@ public class CheeringComment  :ReplyCommentBase
 
     public void AddHP()     //HP回復効果
     {
+        SE.PlayOneShot(commentSound);
         playerBuffManager.AddHP(addHPnum);
         DestroyComment();
     }
@@ -88,6 +94,7 @@ public class CheeringComment  :ReplyCommentBase
     public void BuffAtack()     //攻撃バフ効果
     {
         AnimationBeforeMethod();
+        SE.PlayOneShot(commentSound);
 
         // コルーチン完了後にBuffAttackを実行するコールバックを渡す
         OnButtonClickedAnimation(PowerBuffImage, () =>
@@ -101,6 +108,7 @@ public class CheeringComment  :ReplyCommentBase
     public void BuffAgility()   //速度バフ効果
     {
         AnimationBeforeMethod();
+        SE.PlayOneShot(commentSound);
 
         OnButtonClickedAnimation(AgilityBuffImage, () =>
         {

@@ -225,3 +225,4 @@ MonoBehaviour:
   fixedValueDecrease: 140000000a00000032000000
   decreaseRate: 30
   changeDecreaseTypeNum: 1000
+  commentSound: {fileID: 8300000, guid: 0f64b7c5ca38562418a6ecf8da25ffe1, type: 3}
