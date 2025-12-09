@@ -7,6 +7,7 @@ public class BossEventManager : MonoBehaviour//ボス登場イベントの管理
     [SerializeField] FadeManager fadeManager;//フェード
     [SerializeField]BossSpawnManager bossSpawnManager;//ボス生成マネージャー
     [SerializeField] PlayerInput playerInput;
+    [SerializeField]PlayerStatus playerStatus;
     [SerializeField]float fadeWaitTime = 1f;
 
     GameObject player;

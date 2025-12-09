@@ -102,15 +102,10 @@ public class Live2DTalkPlayer : MonoBehaviour
                 cuttentTalkIndex = talkDatas.IndexOf(data);
                 if (data.talkEntries[rand].audioClip != null)
                 {
-                    if (Main_Audio.isPlaying)
-                    {
-                        Sub_Audio.PlayOneShot(data.talkEntries[rand].audioClip);
-                    }
-                    else
-                    {
+                    
                         Main_Audio.PlayOneShot(data.talkEntries[rand].audioClip);
 
-                    }
+                    
 
                 }
                     
