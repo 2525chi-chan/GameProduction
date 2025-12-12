@@ -214,6 +214,8 @@ MonoBehaviour:
   agility: 10
   deathHandler: {fileID: 2420152649761166137}
   returnRagdollTime: 2
+  knockbackThresholdCount: 1
+  knockbackRecoveryTime: 1
 --- !u!114 &2420152649761166137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +279,7 @@ MonoBehaviour:
   stopRange: 2
   moveSpeed: 3
   rotateSpeed: 100
+  distanceCheckInterval: 0.25
   enemyStatus: {fileID: 4098828232468043532}
 --- !u!54 &2213797413019997299
 Rigidbody:
@@ -389,11 +392,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784fc19480847d44ba6cc5a171191b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialDelayTime: 0
+  isBossBehaviour: 0
+  useSequentialOrder: 1
+  attackQueue:
+    enableNormalAttack: 1
+    enableLongRangeAttack: 1
+    enableAreaAttack: 1
+    attackOrder: 
   anim: {fileID: 752392178674883388}
   status: {fileID: 4098828232468043532}
   mover: {fileID: 8259107007558549480}
   attackController: {fileID: 446971775148853601}
   attackTrigger: {fileID: 2434253285504405187}
+  normalAttack: {fileID: 0}
+  longRangeAttack: {fileID: 0}
+  wideAreaAttack: {fileID: 0}
 --- !u!1001 &186588567180424778
 PrefabInstance:
   m_ObjectHideFlags: 0
