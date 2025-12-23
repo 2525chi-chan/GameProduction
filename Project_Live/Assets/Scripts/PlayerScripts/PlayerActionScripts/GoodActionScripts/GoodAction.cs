@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //作成者：桑原大悟
 
@@ -25,7 +26,7 @@ public class GoodActionParameters
     [SerializeField] AudioClip actionSound;
     
   
-    public int GoodCost { get { return goodCost; } }
+    public int GoodCost { get { return goodCost; } set { goodCost = value; } }
     public float ActionInterval { get { return actionInterval;} }
     public float ChangeStateInterval { get { return changeStateInterval;} }
     public GameObject GoodActionUsedEffect { get { return goodActionUsedEffect; } }
@@ -62,6 +63,7 @@ public class GoodAction : MonoBehaviour
     int currentGoodPoint2 = 0;
     int currentGoodPoint3 = 0;
     int currentGoodPoint4 = 0;
+    bool isPointInfinity = false;
 
     public GoodActionParameters GoodAction1Parameters { get { return goodAction1; } }
     public GoodActionParameters GoodAction2Parameters { get { return goodAction2; } }
@@ -70,10 +72,10 @@ public class GoodAction : MonoBehaviour
 
     public float CurrentGoodNum { get { return currentGoodNum; } }
 
-    public int GoodCost1 { get { return goodAction1.GoodCost; } }
-    public int GoodCost2 { get { return goodAction2.GoodCost; } }
-    public int GoodCost3 { get { return goodAction3.GoodCost; } }
-    public int GoodCost4 {  get { return goodAction4.GoodCost; } }
+    public int GoodCost1 { get { return goodAction1.GoodCost; } set { goodAction1.GoodCost = value; } }
+    public int GoodCost2 { get { return goodAction2.GoodCost; } set { goodAction2.GoodCost = value; } }
+    public int GoodCost3 { get { return goodAction3.GoodCost; } set { goodAction3.GoodCost = value; } }
+    public int GoodCost4 {  get { return goodAction4.GoodCost; } set { goodAction4.GoodCost = value; } }
 
     public int CurrentGoodPoint1 { get { return currentGoodPoint1; } }
     public int CurrentGoodPoint2 { get {  return currentGoodPoint2; } }
@@ -87,6 +89,9 @@ public class GoodAction : MonoBehaviour
 
     void Update()
     {
+        if (Keyboard.current.iKey.wasPressedThisFrame)
+            GoodPointInfinity();
+
         float delta = goodSystem.GoodNum - currentGoodNum;
 
         if (delta <= 0) return; //いいねが増えていない場合は何もしない
@@ -149,5 +154,19 @@ public class GoodAction : MonoBehaviour
         currentGoodPoint4 = 0;
         SE.PlayOneShot(goodAction4.ActionSound);
         live2DTalkPlayer.PlayTalk("GoodAction_4");
+    }
+
+    public void GoodPointInfinity() //イイネアクション発動に必要なポイントを瞬時に補充する
+    {
+        isPointInfinity = true;
+        currentGoodPoint1 = goodAction1.GoodCost;
+        currentGoodPoint2 = goodAction2.GoodCost;
+        currentGoodPoint3 = goodAction3.GoodCost;
+        currentGoodPoint4 = goodAction4.GoodCost;
+        goodAction1.GoodCost = 0;
+        goodAction2.GoodCost = 0;
+        goodAction3.GoodCost = 0;
+        goodAction4.GoodCost = 0;
+        Debug.Log("イイネアクションを無制限に発動可能にしました");
     }
 }

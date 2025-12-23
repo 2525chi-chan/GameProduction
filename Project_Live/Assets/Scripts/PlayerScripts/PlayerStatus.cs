@@ -54,10 +54,7 @@ public class PlayerStatus : CharacterStatus
         if (Hp <= 0) Hp = 0;
 
         if (Keyboard.current.uKey.wasPressedThisFrame)
-        {
-            currentState = currentState == PlayerState.Normal ? PlayerState.Invincible : PlayerState.Normal;
-            Debug.Log(currentState + "状態に切り替わりました。");
-        }
+            ToggleInvincible();
 
         //if (prev_goodNum != goodSystem.GoodNum)
         //{
@@ -66,6 +63,12 @@ public class PlayerStatus : CharacterStatus
         //}
 
         //prev_goodNum = goodSystem.GoodNum;
+    }
+
+    public void ToggleInvincible() //プレイヤーの通常状態と無敵状態を切り替える
+    {
+        currentState = currentState == PlayerState.Normal ? PlayerState.Invincible : PlayerState.Normal;
+        Debug.Log(currentState + "状態に切り替わりました。");
     }
 
     void Die() //死亡時の処理

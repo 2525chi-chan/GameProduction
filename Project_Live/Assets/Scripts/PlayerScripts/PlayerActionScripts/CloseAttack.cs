@@ -98,7 +98,10 @@ public class CloseAttack : MonoBehaviour
 
             case AttackState.Recovering: //攻撃後
                 if (Time.time - lastAttackTime > GetCurrentComboResetTime())
+                {
                     ResetCombo();
+                    PlayerActionEvents.IdleEvent();
+                }
                 break;
 
             case AttackState.None:
@@ -161,7 +164,7 @@ public class CloseAttack : MonoBehaviour
         currentComboIndex++;
     }
 
-    void ResetCombo() //コンボ段階の初期化
+    public void ResetCombo() //コンボ段階の初期化
     {
         //各当たり判定の無効化
         foreach (var step in comboSteps)
@@ -174,7 +177,7 @@ public class CloseAttack : MonoBehaviour
 
         //Debug.Log(currentComboIndex + "コンボのリセット");
         currentComboIndex = 0;
-        PlayerActionEvents.IdleEvent();
+        //PlayerActionEvents.IdleEvent();
     }
 
     float GetCurrentComboResetTime() //次のコンボ段階までの猶予時間の取得

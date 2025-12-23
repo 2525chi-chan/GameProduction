@@ -9,6 +9,7 @@ public class BossEventManager : MonoBehaviour//ボス登場イベントの管理
     [SerializeField] PlayerInput playerInput;
     [SerializeField]PlayerStatus playerStatus;
     [SerializeField]float fadeWaitTime = 1f;
+    [SerializeField] float playerInvincibilityTime = 1f;
 
     GameObject player;
     public void Start()
@@ -19,6 +20,7 @@ public class BossEventManager : MonoBehaviour//ボス登場イベントの管理
     {
         //ボス登場イベント
         playerInput.SwitchCurrentActionMap("Movie");
+        playerStatus.ToggleInvincible(); //プレイヤーを無敵状態に切り替える
         yield return StartCoroutine(fadeManager.FadeIn());
         player.transform.position = new(0, 2, 0);//プレイヤーの位置リセット
         yield return StartCoroutine(fadeManager.FadeOut());
@@ -35,5 +37,8 @@ public class BossEventManager : MonoBehaviour//ボス登場イベントの管理
 
 
         playerInput.SwitchCurrentActionMap("Player");
+
+        yield return new WaitForSeconds(playerInvincibilityTime);
+        playerStatus.ToggleInvincible(); //プレイヤーの無敵状態を解除する
     }
 }

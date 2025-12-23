@@ -18,7 +18,6 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
     [SerializeField] ShotAttack shotAttack;
     [SerializeField] Dodge dodge;
     [SerializeField] GoodAction goodAction;
-    [SerializeField] Emote emote;
 
     public IPlayerState CurrentState { get { return currentState; } }    
 
@@ -106,7 +105,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
     {
         if (dodge.IntervalTimer < dodge.DodgeInterval) return;
 
-        if ((currentState is IdleState || currentState is MoveState)
+        if ((currentState is IdleState || currentState is MoveState || currentState is CloseAttackState)
             && !(currentState is DodgeState))
         {
             ChangeState(new DodgeState(anim, movePlayer, dodge));
