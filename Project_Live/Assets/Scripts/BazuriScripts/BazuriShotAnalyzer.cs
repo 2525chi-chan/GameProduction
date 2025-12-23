@@ -26,17 +26,20 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
         {
          
             float score=obj.GetComponent<BazuriShotData>().score;
+
             if (obj.CompareTag("Enemy") || obj.CompareTag("Player"))
             {
-                Animator animator = obj.GetComponentInParent<Animator>();
+                Animator animator = obj.GetComponent<Animator>();
+
+                if(animator == null)   animator= obj.GetComponentInParent<Animator>();
+
+                
                 if (animator != null)
                 {
-                 
-
+               //  Debug.Log(obj.name);
                     score *= MultiMotionScore(animator);
-
-
                 }
+               
             
             }
            
@@ -64,11 +67,15 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
 
         if(motionRate != null)
         { 
-            scoreRate *= motionRate.GetCurrentMotionRate();
+            scoreRate *= motionRate.GetCurrentMotionRate(animator);
         }
-           
+        else
+        {
+            Debug.Log(animator.gameObject.name+"‚ÉBazuriMotionRate‚ªƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+        }
 
-        return scoreRate;
+
+            return scoreRate;
     }
     public bool IsFacingCamera(Transform obj,Camera camera, float threshold)//³–Ê‚ğŒü‚¢‚Ä‚¢‚ê‚Î”{—¦‚ğ‚©‚¯‚é
     {
@@ -98,7 +105,9 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
 
         List<GameObject> viewObjects = new List<GameObject>();
        
-        var allObjects = Resources.FindObjectsOfTypeAll<Transform>();
+        var planes=GeometryUtility.CalculateFrustumPlanes(camera);
+
+        var allObjects = FindObjectsByType<Transform>(FindObjectsSortMode.None);
 
 
         foreach (var obj in allObjects)
@@ -107,17 +116,53 @@ public  class BazuriShotAnalyzer :MonoBehaviour//ƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì•]‰¿‚ğs‚¤ƒXƒNƒ
             if (!isInLayer)
                 continue;
 
-            Vector3 cameraView=camera.WorldToViewportPoint(obj.position);
-            if (cameraView.x >= 0 && cameraView.x <= 1//ƒJƒƒ‰“à‚Éû‚Ü‚Á‚Ä‚¢‚é‚©‚ÂƒoƒYƒŠƒVƒ‡ƒbƒg‚Ì‘ÎÛ‚Å‚ ‚ê‚Î’Ç‰Á‚·‚é
-                && cameraView.y >= 0 && cameraView.y <= 1
-                && cameraView.z >= 0 && obj.gameObject.GetComponent<BazuriShotData>())
+            bool isBazuriTarget = obj.gameObject.GetComponent<BazuriShotData>() != null && obj.gameObject.activeSelf;
+            if (!isBazuriTarget)
+                continue;
+
+
+
+            var renderers = obj.gameObject.GetComponentsInChildren<Renderer>();
+            if (renderers.Length == 0)
+            {
+                renderers = GetAllRenderer(obj);
+
+                if (renderers.Length == 0)
+                {
+                    Debug.Log(obj.gameObject.name);
+                    continue;
+                }
+
+            }
+            
+
+            var bounds = renderers[0].bounds;
+            for (int i = 1; i < renderers.Length; i++)
+            {
+                bounds.Encapsulate(renderers[i].bounds);
+            }
+
+            if (GeometryUtility.TestPlanesAABB(planes, bounds))
             {
                 viewObjects.Add(obj.gameObject);
             }
-          
+
 
         }
         return viewObjects;
     }
-    
+    Renderer[] GetAllRenderer(Transform center)
+    {
+        Transform root = center.parent;
+
+        while(root.parent != null)
+        {
+            root = root.parent;
+        }
+
+        var childrenRenderers = root.GetComponentsInChildren<Renderer>();
+
+        return childrenRenderers;
+
+    } 
 }

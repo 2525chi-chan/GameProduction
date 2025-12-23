@@ -14,7 +14,7 @@ public class BazuriMotionRate : MonoBehaviour
 {
   
     [SerializeField] List<Bazuri> bazuriMotion;
-    Animator animator;
+    [SerializeField]Animator animator;
  
     List<string> nameList=new List<string>();
     public List<Bazuri> BazuriMotion
@@ -22,13 +22,7 @@ public class BazuriMotionRate : MonoBehaviour
         get { return bazuriMotion; }
         set { bazuriMotion = value; }
     }
-    private void Reset()
-    {
-        if (animator == null)
-        {
-            animator = GetComponent<Animator>();
-        }
-    }
+ 
 
 #if UNITY_EDITOR
     private void OnValidate()//スクリプト/インスペクター更新時に自動で呼び出される
@@ -38,7 +32,8 @@ public class BazuriMotionRate : MonoBehaviour
             animator = GetComponent<Animator>();
            
         }
-         var ac = animator.runtimeAnimatorController as AnimatorController;
+        if (animator == null) return; 
+            var ac = animator.runtimeAnimatorController as AnimatorController;
         if (ac == null) return;
 
         nameList.Clear();
@@ -73,23 +68,28 @@ public class BazuriMotionRate : MonoBehaviour
         }
     }
   #endif
-    public float GetCurrentMotionRate()//今のモーションのスコア倍率を返す
+    public float GetCurrentMotionRate(Animator animator)//今のモーションのスコア倍率を返す
     {
         
         if (animator == null)
         {
+            Debug.Log("ddddd");
             return 1f;
         }
         var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
+       
         foreach (var bazuri in BazuriMotion)
         {
             if (stateInfo.IsName(bazuri.motionName))
             {
+         
                 return bazuri.motionRate;
             }
             
+            
         }
+         Debug.Log(animator.gameObject.name);
         return 1f;
     }
 
