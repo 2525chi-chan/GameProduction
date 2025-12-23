@@ -18,7 +18,6 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
     [SerializeField] ShotAttack shotAttack;
     [SerializeField] Dodge dodge;
     [SerializeField] GoodAction goodAction;
-    [SerializeField] Emote emote;
 
     public IPlayerState CurrentState { get { return currentState; } }    
 
