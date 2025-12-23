@@ -129,6 +129,8 @@ MonoBehaviour:
   baceForwardKnockbackForce: 1
   baceUpwardKnockbackForce: 1
   baceDownwardKnockbackForce: 0
+  enableSuction: 0
+  suctionForce: 10
   damageToTarget: {fileID: 5492397270312447590}
 --- !u!114 &1647647762713440664
 MonoBehaviour:
