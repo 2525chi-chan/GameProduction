@@ -105,7 +105,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
     {
         if (dodge.IntervalTimer < dodge.DodgeInterval) return;
 
-        if ((currentState is IdleState || currentState is MoveState || currentState is CloseAttackState)
+        if ((currentState is IdleState || currentState is MoveState)
             && !(currentState is DodgeState))
         {
             ChangeState(new DodgeState(anim, movePlayer, dodge));

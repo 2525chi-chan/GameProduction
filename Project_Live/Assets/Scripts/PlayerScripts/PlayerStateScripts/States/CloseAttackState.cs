@@ -47,7 +47,6 @@ public class CloseAttackState : IPlayerState
 
     public void Exit()
     {
-        closeAttack.ResetCombo();
         //Debug.Log("‹ßÚUŒ‚ó‘Ô‚ğI—¹");
     }
 
