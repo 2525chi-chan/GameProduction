@@ -7,21 +7,21 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static UnityEditor.SceneView;
-//�쐬��:����
 
 
-public class BazuriShot : MonoBehaviour// �o�Y���V���b�g���[�h�̐؂�ւ��̊Ǘ�
+
+public class BazuriShot : MonoBehaviour// バズリショットの制御
 {
-    [Header("���C���̃J����")]
+    [Header("必要なコンポーネント")]
     [SerializeField]CinemachineBrain cinemachineBrain;
     [SerializeField] PlayerInput playerInput;
-    [Header("�v���C���[�����삷��J����")]
+    [Header("メインカメラ")]
     [SerializeField] CinemachineFreeLook mainCamera;
-    [Header("�o�Y���V���b�g�̍ۂɑ��삷��J����")]
+    [Header("バズリショットに活用するカメラ")]
     [SerializeField] CinemachineVirtualCamera bazuriCamera;
 
-    const int highPriority = 10; //�\���������
-   const int lowPriority = 0; //�\�������Ȃ���  
+    const int highPriority = 10; //使用中カメラ
+   const int lowPriority = 0; //非使用のカメラ  
     public CinemachineVirtualCamera BazuriCamera
     {
         get
@@ -34,43 +34,45 @@ public class BazuriShot : MonoBehaviour// �o�Y���V���b�g��
         }
     }
 
-    [Header("�J�����̑��쎞��")]
+    [Header("バズリショット時間")]
     [SerializeField] float cameraTime;
-    [Header("�X���[���̃Q�[�����x(1��������Ȃ��ƃX���[�ɂȂ�Ȃ�)")]
+    [Header("時間中のタイムスケール(1未満にしてください)")]
     [SerializeField] float slowSpeed;
-    [Header("�o�Y���V���b�g�̍ő�X�g�b�N")]
+    [Header("バズリショットの回数")]
     [SerializeField] int shotStock;
-    [Header("�o�Y���V���b�g�̃N�[���^�C��")]
+    [Header("使用後のクールタイム")]
     [SerializeField] float coolTime;
-    [Header("�f�t�H���g�̃��C���[(�J��������ɗp���郌�C���[)")]
+    [Header("判定に用いるオブジェクトのレイヤー")]
     [SerializeField] List<LayerMask> layers;
-    [Header("���Ԃ��x���Ȃ鑬�x")]
+    [Header("スローになる時間")]
     [SerializeField]float timeScaleDownSpeed;
     [Header("シャッター音")]
     [SerializeField] AudioClip shutter;
     [Header("シャッター後音声")]
     [SerializeField] AudioClip shutterAfter;
 
-    [Header("�o�Y���V���b�g�`��p")]
+    [Header("結果出力用のコンポーネント")]
     [SerializeField] RenderTexture bazuriTexture;
     [SerializeField] RawImage rawImage;
     [SerializeField]TMP_Text bazuriText;
+    [Header("撮影後のフリーズ時間")]
     [SerializeField] float fleezeTime = 0.2f;
+    [Header("得点カウント速度")]
     [SerializeField] float countSpeed=5;
+    [Header("得点カウント後の待機時間")]
     [SerializeField]float countAfterTime = 0.5f; //�J�E���g��̑ҋ@����   
-    [Header("�K�v�ȃR���|�[�l���g")]
+    [Header("必要なコンポーネント")]
     [SerializeField] BazuriCameraMove cameraMove;
     [SerializeField] BazuriShotAnalyzer analyzer;
     [SerializeField]RequestManager requestManager;
-
     [SerializeField]Live2DTalkPlayer talkPlayer;
-
     [SerializeField] AudioSource SE;
     [SerializeField] GoodSystem goodSystem;
     [SerializeField]CameraFlash cameraFlash;
     [SerializeField] ZoomCamera zoomCamera;
     [SerializeField] Transform player;
     [SerializeField] GameObject effect;
+
     private float countCoolTime;
     private Camera analyzerCamera;
     private Coroutine bazuriCoroutine;  
@@ -78,7 +80,7 @@ public class BazuriShot : MonoBehaviour// �o�Y���V���b�g��
     private Coroutine fleezeCoroutine=null;
     private Coroutine countCoroutine = null;
     private int currentStock;
-    bool shotTaken = false; //�o�Y���V���b�g�̃g�[�N��������Ă��邩�ǂ���
+    bool shotTaken = false; //正常に撮影が行われたかどうか
     public int CurrentStock
     {
         get { return currentStock; }

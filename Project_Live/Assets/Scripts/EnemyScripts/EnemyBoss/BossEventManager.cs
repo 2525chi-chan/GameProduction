@@ -18,11 +18,14 @@ public class BossEventManager : MonoBehaviour//ボス登場イベントの管理
     }
     public IEnumerator BossEvent()
     {
+        playerStatus.CurrentState = PlayerStatus.PlayerState.Invincible;
         //ボス登場イベント
         playerInput.SwitchCurrentActionMap("Movie");
         playerStatus.ToggleInvincible(); //プレイヤーを無敵状態に切り替える
         yield return StartCoroutine(fadeManager.FadeIn());
         player.transform.position = new(0, 2, 0);//プレイヤーの位置リセット
+
+        yield return new WaitForSeconds(fadeWaitTime);
         yield return StartCoroutine(fadeManager.FadeOut());
         bossSpawnManager.SpawnBoss();
 
@@ -31,10 +34,10 @@ public class BossEventManager : MonoBehaviour//ボス登場イベントの管理
 
         //ゲーム切り替え
         yield return StartCoroutine(fadeManager.FadeIn());
- yield return new WaitForSeconds(fadeWaitTime);
+        yield return new WaitForSeconds(fadeWaitTime);
         yield return StartCoroutine(fadeManager.FadeOut());
-       
 
+        playerStatus.CurrentState = PlayerStatus.PlayerState.Normal;
 
         playerInput.SwitchCurrentActionMap("Player");
 
