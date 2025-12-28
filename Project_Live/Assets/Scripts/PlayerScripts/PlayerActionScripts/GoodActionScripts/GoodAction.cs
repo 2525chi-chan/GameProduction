@@ -63,7 +63,6 @@ public class GoodAction : MonoBehaviour
     int currentGoodPoint2 = 0;
     int currentGoodPoint3 = 0;
     int currentGoodPoint4 = 0;
-    bool isPointInfinity = false;
 
     public GoodActionParameters GoodAction1Parameters { get { return goodAction1; } }
     public GoodActionParameters GoodAction2Parameters { get { return goodAction2; } }
@@ -158,7 +157,6 @@ public class GoodAction : MonoBehaviour
 
     public void GoodPointInfinity() //イイネアクション発動に必要なポイントを瞬時に補充する
     {
-        isPointInfinity = true;
         currentGoodPoint1 = goodAction1.GoodCost;
         currentGoodPoint2 = goodAction2.GoodCost;
         currentGoodPoint3 = goodAction3.GoodCost;
