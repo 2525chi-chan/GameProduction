@@ -48,6 +48,18 @@ PrefabInstance:
       propertyPath: selectedColor.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5436835106294436230, guid: 61d8eddfc0747684888b5949fa1c324d, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 45ab324cde7fa2747b93f1720280028d, type: 2}
+    - target: {fileID: 5436835106294436230, guid: 61d8eddfc0747684888b5949fa1c324d, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 5b8b6877b235ef8408492a16f64fc1df, type: 2}
+    - target: {fileID: 5436835106294436230, guid: 61d8eddfc0747684888b5949fa1c324d, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5886287236747954287, guid: 61d8eddfc0747684888b5949fa1c324d, type: 3}
       propertyPath: m_Name
       value: RequestComment

@@ -4,7 +4,7 @@ using UnityEngine;
 public class FanMove : MonoBehaviour
 {
     [SerializeField] GameObject hontai;
-      
+    [SerializeField] Renderer quadRenderer;
 
 
     [SerializeField] GameObject rightShoulder;
@@ -59,7 +59,7 @@ public class FanMove : MonoBehaviour
     {
         isSwingHand = true;
        
-        
+        quadRenderer.enabled = true;
     }
    
     public void SetSpeed(float speed)
