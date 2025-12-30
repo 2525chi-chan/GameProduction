@@ -8,8 +8,10 @@ public class ObjectStatusManager : MonoBehaviour
     [SerializeField] string targetTag = "Breakable";
     [Header("必要なコンポーネント")]
     [SerializeField] GameOverManager gameOverManager;
-
+    [SerializeField]ObjectStatusEffector objectStatusEffector;
     List<ObjectStatus> objectStatuses = new List<ObjectStatus>();
+
+    public List<ObjectStatus> ObjectStatuses { get { return objectStatuses; } }
     bool isGameOverCalled = false;
 
     void Start()
@@ -34,6 +36,8 @@ public class ObjectStatusManager : MonoBehaviour
 
             if (status != null)
                 objectStatuses.Add(status);
+            objectStatusEffector.MaxHpSum += (int)status.MaxHp;
+            
         }
     }
 
