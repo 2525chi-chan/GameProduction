@@ -9,12 +9,16 @@ public class GoodPointDisplay : MonoBehaviour
 {
     [Header("いいねアクション1に使用するポイント蓄積量表示用画像")]
     [SerializeField] Image goodPointImage1;
+    [SerializeField] Image enableImage1;
     [Header("いいねアクション2に使用するポイント蓄積量表示用画像")]
     [SerializeField] Image goodPointImage2;
+    [SerializeField] Image enableImage2;
     [Header("いいねアクション3に使用するポイント蓄積量表示用画像")]
     [SerializeField] Image goodPointImage3;
+    [SerializeField] Image enableImage3;
     [Header("いいねアクション4に使用するポイント蓄積量表示用画像")]
     [SerializeField] Image goodPointImage4;
+    [SerializeField] Image enableImage4;
 
     //[Header("通常時のテキストの色")]
     //[SerializeField] Color normalColor = Color.blue;
@@ -45,28 +49,30 @@ public class GoodPointDisplay : MonoBehaviour
         switch (index)
         {
             case 1:
-                UpdateDisplay(goodPointImage1, current, goodAction.GoodCost1, 1);
+                UpdateDisplay(goodPointImage1,enableImage1, current, goodAction.GoodCost1, 1);
                 break;
             
             case 2:
-                UpdateDisplay(goodPointImage2, current, goodAction.GoodCost2, 2);
+                UpdateDisplay(goodPointImage2, enableImage2, current, goodAction.GoodCost2, 2);
                 break;
             
             case 3:
-                UpdateDisplay(goodPointImage3, current, goodAction.GoodCost3, 3);
+                UpdateDisplay(goodPointImage3, enableImage3, current, goodAction.GoodCost3, 3);
                 break;
             
             case 4:
-                UpdateDisplay(goodPointImage4, current, goodAction.GoodCost4, 4);
+                UpdateDisplay(goodPointImage4, enableImage4, current, goodAction.GoodCost4, 4);
                 break;
 
             default: break;
         }
     }
 
-    void UpdateDisplay(Image goodActionImage, int currentPoint, int cost, int index) //表示の更新
+    void UpdateDisplay(Image goodActionImage, Image enableImage,int currentPoint, int cost, int index) //表示の更新
     {
        goodActionImage.fillAmount = (float)currentPoint / cost;
+
+         enableImage.enabled = (currentPoint >= cost);
         //textObj.text = "GP" + index + ":"+ currentPoint;
         //textObj.color = (currentPoint >= cost) ? highlightColor : normalColor;
     }

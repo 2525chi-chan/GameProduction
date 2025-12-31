@@ -76,6 +76,7 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
 
     [Header("必要なコンポーネント")]
     [SerializeField] BazuriCameraMove cameraMove;
+    [SerializeField]CameraBillboard cameraBillboard;
     [SerializeField] BazuriShotAnalyzer analyzer;
     [SerializeField]RequestManager requestManager;
     [SerializeField]Live2DTalkPlayer talkPlayer;
@@ -224,9 +225,10 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
     private IEnumerator BazuriModeRoutine()//�o�Y���V���b�g���[�h�ɐ؂�ւ�
     {
         cameraFlash.ResetAlpha();
-      
+      cameraBillboard.isEnabled = false;
         isBazuriMode = true;
          BazuriEffect();
+        StartCoroutine(effector.BlinkText());
         StartCoroutine(effector.EffectCoroutine());
         StartSlowTimeScaleDown(Time.timeScale, 0, timeScaleDownSpeed);
         
@@ -279,7 +281,7 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
                 countCoroutine =StartCoroutine(CountGood(score));
                 
                 goodSystem.AddGood(analyzer.Analyzer(analyzerCamera, layers));
-
+                effector.ResetText();
               
 
                 break;
@@ -342,7 +344,8 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
 
     private void EndBazuriMode()//�v���C���[���[�h�ɐ؂�ւ�
     {
-
+        cameraBillboard.isEnabled = true;
+        effector.ResetText();
         effector.ResetEffect();
         isBazuriMode = false;
         Time.timeScale = 1f;
