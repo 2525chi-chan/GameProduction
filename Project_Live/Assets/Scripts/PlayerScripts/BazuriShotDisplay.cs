@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class BazuriShotDisplay : MonoBehaviour
 {
     [SerializeField] Image bazuriCounter;
+    [SerializeField]Image bazuriCool;
     [SerializeField]TMP_Text bazuriText;
     [SerializeField] BazuriShot bazuriShot;
 
@@ -17,6 +18,10 @@ public class BazuriShotDisplay : MonoBehaviour
     void Update()
     {
         bazuriText.text= bazuriShot.CurrentStock.ToString();
-        bazuriCounter.fillAmount=(float)bazuriShot.CurrentStock / (float)bazuriShot.ShotStock;
+        bazuriCounter.enabled = bazuriShot.CountCoolTime > bazuriShot.CoolTime ;
+
+       bazuriCool.fillAmount = bazuriShot.CountCoolTime / bazuriShot.CoolTime;
+
+        // bazuriCounter.fillAmount=(float)bazuriShot.CurrentStock / (float)bazuriShot.ShotStock;
     }
 }

@@ -19,6 +19,8 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
     [SerializeField] CinemachineFreeLook mainCamera;
     [Header("バズリショットに活用するカメラ")]
     [SerializeField] CinemachineVirtualCamera bazuriCamera;
+    [Header("ズームアウト用カメラ(演出用)")]
+    [SerializeField]CinemachineVirtualCamera zoomOutCamera;
 
     const int highPriority = 10; //使用中カメラ
    const int lowPriority = 0; //非使用のカメラ  
@@ -42,6 +44,10 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
     [SerializeField] int shotStock;
     [Header("使用後のクールタイム")]
     [SerializeField] float coolTime;
+    public float CoolTime
+    {
+        get { return coolTime; }
+    }
     [Header("判定に用いるオブジェクトのレイヤー")]
     [SerializeField] List<LayerMask> layers;
     [Header("スローになる時間")]
@@ -61,6 +67,13 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
     [SerializeField] float countSpeed=5;
     [Header("得点カウント後の待機時間")]
     [SerializeField]float countAfterTime = 0.5f; //�J�E���g��̑ҋ@����   
+
+    [Header("ズームカメラの有効時間")]
+    [SerializeField] float zoomStartDuration = 0.7f;
+    [SerializeField]float zoomEndDuration = 0.5f;
+
+
+
     [Header("必要なコンポーネント")]
     [SerializeField] BazuriCameraMove cameraMove;
     [SerializeField] BazuriShotAnalyzer analyzer;
@@ -70,10 +83,16 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
     [SerializeField] GoodSystem goodSystem;
     [SerializeField]CameraFlash cameraFlash;
     [SerializeField] ZoomCamera zoomCamera;
+    [SerializeField] BazuriShotEffector effector;
     [SerializeField] Transform player;
     [SerializeField] GameObject effect;
 
     private float countCoolTime;
+    public float CountCoolTime
+    {
+        get { return countCoolTime; }
+       // set { countCoolTime = value; }
+    }
     private Camera analyzerCamera;
     private Coroutine bazuriCoroutine;  
     private Coroutine slowTimeCoroutine = null;
@@ -208,17 +227,24 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
       
         isBazuriMode = true;
          BazuriEffect();
-
-
+        StartCoroutine(effector.EffectCoroutine());
+        StartSlowTimeScaleDown(Time.timeScale, 0, timeScaleDownSpeed);
+        
         mainCamera.Priority=lowPriority;
-        bazuriCamera.Priority = highPriority;
+        zoomOutCamera.Priority = highPriority;
 
+        yield return new WaitForSecondsRealtime(zoomStartDuration);
+
+        zoomOutCamera.Priority = lowPriority;
+        bazuriCamera.Priority = highPriority;
+        ResetCamera();
+        
+    
+        StartCoroutine(zoomCamera.SetZoom(true));
+        yield return new WaitForSecondsRealtime(zoomEndDuration);
         float elapsed = 0f;
         playerInput.SwitchCurrentActionMap("Bazuri");
-         ResetCamera();
-        StartSlowTimeScaleDown(Time.timeScale, 0, timeScaleDownSpeed);
-     //   StartCoroutine(SlowTimeScaleDown(Time.timeScale, 0, timeScaleDownSpeed));
-        StartCoroutine(zoomCamera.SetZoom(true));
+      
 
          shotTaken = false; //�V���b�g���B��ꂽ���ǂ����̃t���O
 
@@ -316,8 +342,8 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
 
     private void EndBazuriMode()//�v���C���[���[�h�ɐ؂�ւ�
     {
-      
-   
+
+        effector.ResetEffect();
         isBazuriMode = false;
         Time.timeScale = 1f;
        
