@@ -12,14 +12,17 @@ public class CommentSelectedColor : MonoBehaviour, ISelectHandler, IDeselectHand
 
     [Header("必要なコンポーネント")]
     [SerializeField]TextMeshProUGUI targetText;
+    [SerializeField]Outline outline;
 
     public void OnSelect(BaseEventData eventData)
     {
-        targetText.color = selectedColor;
+     outline.effectColor = selectedColor;
+        //  targetText.color = selectedColor;
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        targetText.color = normalColor;
+        outline.effectColor = normalColor;
+      //  targetText.color = normalColor;
     }
 }
