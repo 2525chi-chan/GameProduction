@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8836497061533814310, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 533688930206133662}
+    - target: {fileID: -8836497061533814310, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: bazuriMotion.Array.data[1].motionName
       value: Enemy_Attack_Asi
       objectReference: {fileID: 0}
@@ -18,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4404924394619826991, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: score
-      value: 25
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 446971775148853601, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: attackDuration
@@ -84,10 +88,26 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: getGoodNum
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: knockbackForce_Up
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: knockbackForce_Back
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2434253285504405187, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 533688930206133662}
+    - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: hp
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: agility
       value: 20

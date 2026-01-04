@@ -129,6 +129,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4404924394619826991, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: score
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2405998444838165316, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -169,9 +173,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: getGoodNum
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: knockbackForce_Up
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: knockbackForce_Back
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: hp
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 7764904506935383429, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_Name
-      value: Enemy_Normal Variant
+      value: Enemy_Intercept
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1912f7e83dd51714eb71b105fb4d2321, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 200
   attackPower: 10
   agility: 10
   deathHandler: {fileID: 2420152649761166137}
@@ -234,9 +234,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   deathEffect: {fileID: 7533723596493378062, guid: 0c9e22b293126624aaba4f8eba475c9c, type: 3}
-  knockbackForce_Back: 0
-  knockbackForce_Up: 0
-  getGoodNum: 10
+  knockbackForce_Back: 4
+  knockbackForce_Up: 1
+  getGoodNum: 100
 --- !u!114 &-4404924394619826991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tag: 1
-  score: 10
+  score: 20
 --- !u!114 &4750362542482719141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -367,6 +367,7 @@ MonoBehaviour:
     motionRate: 1
   - motionName: Enemy_Damage_Normal
     motionRate: 1
+  animator: {fileID: 6637680128984497869}
 --- !u!114 &752392178674883388
 MonoBehaviour:
   m_ObjectHideFlags: 0

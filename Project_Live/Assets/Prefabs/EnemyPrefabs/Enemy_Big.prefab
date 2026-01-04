@@ -142,17 +142,29 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: getGoodNum
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: knockbackForce_Up
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: knockbackForce_Back
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2434253285504405187, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 9125027621926303576}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: hp
-      value: 110
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: agility
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: getGoodNum
@@ -160,7 +172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: attackPower
-      value: 1000
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: deathEffect

@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4404924394619826991, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: score
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 446971775148853601, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: attackPos
@@ -84,6 +84,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: getGoodNum
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: knockbackForce_Up
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2420152649761166137, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: knockbackForce_Back
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2483896200833738841, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_ConnectedBody
       value: 
@@ -94,11 +106,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: hp
-      value: 89
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: agility
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: getGoodNum
@@ -106,7 +118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: attackPower
-      value: 1000
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: knockbackForce_Up

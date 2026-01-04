@@ -80,6 +80,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2481424434144342157, guid: 07419985e8993174696f9559c2e48540, type: 3}
+      propertyPath: getGoodNum
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 2493310521481197808, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: m_LocalScale.x
       value: 2
@@ -138,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4258189648188175544, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: hp
-      value: 200
+      value: 1200
       objectReference: {fileID: 0}
     - target: {fileID: 4694799180225474405, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: score
