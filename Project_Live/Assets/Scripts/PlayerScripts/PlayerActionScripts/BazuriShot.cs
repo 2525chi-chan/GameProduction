@@ -56,7 +56,10 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
     [SerializeField] AudioClip shutter;
     [Header("シャッター後音声")]
     [SerializeField] AudioClip shutterAfter;
-
+    [Header("残り時間UI")]
+    [SerializeField] Image countTimeUI;
+    [Header("画像グラデーション")]
+    [SerializeField] Gradient UIGradient;
     [Header("結果出力用のコンポーネント")]
     [SerializeField] RenderTexture bazuriTexture;
     [SerializeField] RawImage rawImage;
@@ -250,7 +253,7 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
 
          shotTaken = false; //�V���b�g���B��ꂽ���ǂ����̃t���O
 
-
+        countTimeUI.fillAmount = 1;
         while (elapsed < cameraTime)//���쎞�Ԓ��ɃV���b�g�{�^�����������΃o�Y���V���b�g���f
         {
             if (playerInput.actions["Shot"].WasPressedThisFrame())
@@ -287,6 +290,9 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
                 break;
             }
 
+           
+            countTimeUI.fillAmount =1-( elapsed / cameraTime);
+            countTimeUI.color=UIGradient.Evaluate(elapsed/cameraTime);
             elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
@@ -356,7 +362,8 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
             bazuriCamera.Priority = lowPriority;
         }
         currentStock--;
-        
+        countTimeUI.fillAmount = 1;
+        countTimeUI.color = Color.white;
         playerInput.SwitchCurrentActionMap("Player");
 
         if(slowTimeCoroutine != null)

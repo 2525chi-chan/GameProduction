@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 //using UnityEngine.Rendering.PostProcessing;
@@ -19,6 +20,8 @@ public class BazuriShotEffector : MonoBehaviour
     [SerializeField] float effectPower_Vignette;
     [SerializeField] float effectTime;//‘JˆÚ‚·‚é‘¬“x
 
+    [SerializeField] float scaleZeroTime=0.3f;
+   // [SerializeField] Animator textAnime;
     private ChromaticAberration chromatic;
     private Vignette vignette;
 
@@ -75,11 +78,46 @@ public class BazuriShotEffector : MonoBehaviour
         bazuriStartText.enabled = true;
         yield return new WaitForSecondsRealtime(blinkEndWaitTime);
 
-        bazuriStartText.characterSpacing = 0;
-        bazuriStartText.enabled = false;
+      
+
+
+        // bazuriStartText.enabled = false;
+        StartCoroutine(ZeroScaleCoroutine(bazuriStartText,true));
+        
         bazuriGuideText.enabled = true;
+        StartCoroutine(ZeroScaleCoroutine(bazuriGuideText, false));
+        
+
     }
 
+    public IEnumerator ZeroScaleCoroutine(TMP_Text text, bool isZeroScale)
+    {
+        var count = 0f;
+
+
+        var target = isZeroScale ? 0 : 1;
+        var start = isZeroScale ? 1 : 0;
+
+        text.transform.localScale = new Vector3(1, start, 1);
+        while (count < scaleZeroTime)
+        {
+            count += Time.unscaledDeltaTime;
+
+            var t = count / scaleZeroTime;
+
+            text.transform.localScale = new Vector3(1, Mathf.Lerp(start, target, t), 1);
+            yield return null;
+        }
+        text.characterSpacing = 0;
+        text.transform.localScale = new Vector3(1, target, 1);
+        if (isZeroScale)
+        {
+            text.enabled = false;
+        }
+       
+
+    }
+    
     public void ResetEffect()
     {
         chromatic.intensity.value = 0;
@@ -90,5 +128,7 @@ public class BazuriShotEffector : MonoBehaviour
                bazuriStartText.characterSpacing = 0;
         bazuriStartText.enabled = false;
         bazuriGuideText.enabled = false;
+        bazuriStartText.gameObject.transform.localScale=new Vector3(1, 1, 1);
+        bazuriGuideText.gameObject.transform.localScale=new Vector3(1, 1, 1);
     }
 }
