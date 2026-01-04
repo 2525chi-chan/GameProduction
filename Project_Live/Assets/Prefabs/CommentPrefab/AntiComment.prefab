@@ -383,6 +383,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   decreaseType: 2
   fixedValueDecrease: 140000000a00000032000000
-  decreaseRate: 30
-  changeDecreaseTypeNum: 1000
+  decreaseRate: 10
+  changeDecreaseTypeNum: 10000
   commentSound: {fileID: 8300000, guid: 0f64b7c5ca38562418a6ecf8da25ffe1, type: 3}

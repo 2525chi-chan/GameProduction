@@ -72,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxScale: 20
   expandSpeed: 200
+  destroyOnMaxScale: 1
 --- !u!114 &5306086179325700631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,11 +85,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b4942550ff06747ab6ed31589685dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baceDamage: 200
+  baceDamage: 2000
   hitEffect: {fileID: 1376598843723980918, guid: 416ceb4e2c39a5d458d3cb632268b888, type: 3}
   baceForwardKnockbackForce: 50
   baceUpwardKnockbackForce: 120
   baceDownwardKnockbackForce: 0
+  enableSuction: 0
+  suctionForce: 10
   damageToTarget: {fileID: 7835967089649186805}
 --- !u!114 &-4735040421111715085
 MonoBehaviour:

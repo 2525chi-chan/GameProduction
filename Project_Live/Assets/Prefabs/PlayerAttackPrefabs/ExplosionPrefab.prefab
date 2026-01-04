@@ -126,11 +126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b4942550ff06747ab6ed31589685dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baceDamage: 100
+  baceDamage: 1000
   hitEffect: {fileID: 1044492289889190018, guid: 993441711f651c545bcc0c39bb7e345f, type: 3}
   baceForwardKnockbackForce: 120
   baceUpwardKnockbackForce: 50
   baceDownwardKnockbackForce: 0
+  enableSuction: 0
+  suctionForce: 10
   damageToTarget: {fileID: 1480980070649777115}
 --- !u!114 &3117325585535943531
 MonoBehaviour:
