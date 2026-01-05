@@ -6,6 +6,9 @@ using System;
 
 public class RequestManager : MonoBehaviour
 {
+    [Header("リクエストクリア時のスタンプ音")]
+    [SerializeField] AudioClip clearStamp;
+
     [Header("必要なコンポーネント")]
     [SerializeField] GameObject denkou;
     [SerializeField] GameObject requestText;
@@ -16,6 +19,7 @@ public class RequestManager : MonoBehaviour
     [SerializeField] GameObject InterceptText;
     [SerializeField] GameObject ClearTextAnimation;
     [SerializeField] GameObject ClearStampAnimation;
+    [SerializeField] AudioSource SE;
 
     [System.NonSerialized] public List<RequestBaseSO> currentRequests;
     [System.NonSerialized] public bool requestEnemyIsExist;
@@ -35,7 +39,7 @@ public class RequestManager : MonoBehaviour
     [System.NonSerialized] public RequestEnemySO currentRequestEnemy;
     [System.NonSerialized] public RequestEmoteSO currentRequestEmote;
 
-
+    
     Animator ClearTextAnimator;
     Animator ClearStampAnimator;
     int nextDisplayIndex;
@@ -142,6 +146,7 @@ public class RequestManager : MonoBehaviour
 
         ClearStampAnimation.SetActive(true);
         ClearStampAnimator.Play("ClearStamp", 0, 0f);
+        SE.PlayOneShot(clearStamp);
 
         while(ClearStampAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime<1.0f)
         {

@@ -4,36 +4,32 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-//ì¬ÒFŒKŒ´
+//ï¿½ì¬ï¿½ÒFï¿½Kï¿½ï¿½
 
 [System.Serializable]
 class ComboStep
 {
-    [Header("UŒ‚”»’è—pƒIƒuƒWƒFƒNƒg")]
+    [Header("ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½g")]
     [SerializeField] public GameObject hitbox;
-    [Header("–½’†‚É”­¶‚·‚éƒGƒtƒFƒNƒg")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É”ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Gï¿½tï¿½Fï¿½Nï¿½g")]
     [SerializeField] public GameObject hitEffect;
-    [Header("UŒ‚‚É”­¶‚·‚éƒGƒtƒFƒNƒg")]
-    [SerializeField] public GameObject attackParticle;
-    [Header("UŒ‚ƒGƒtƒFƒNƒg‚Ì”­¶ˆÊ’u")]
-    [SerializeField] public Transform attackParticlePos;
-    [Header("Šî–{ƒ_ƒ[ƒW")]
+    [Header("ï¿½ï¿½{ï¿½_ï¿½ï¿½ï¿½[ï¿½W")]
     [SerializeField] public float baseDamage = 10f;
-    [Header("‘O•ûŒü‚Ö‚ÌŠî–{‚Ì‚«”ò‚Î‚µ—Í")]
+    [Header("ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Ö‚ÌŠï¿½{ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½ï¿½ï¿½")]
     [SerializeField] public float baceForwardKnockbackForce = 1f;
-    [Header("ã•ûŒü‚Ö‚ÌŠî–{‚Ì‚«”ò‚Î‚µ—Í")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö‚ÌŠï¿½{ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½ï¿½ï¿½")]
     [SerializeField] public float baceUpwardKnockbackForce = 1f;
-    [Header("UŒ‚”»’è‚Ì’†S‚Éˆø‚«Šñ‚¹‚é—Í‚ğ—LŒø‚É‚·‚é‚©")]
+    [Header("ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì’ï¿½ï¿½Sï¿½Éˆï¿½ï¿½ï¿½ï¿½ñ‚¹‚ï¿½Í‚ï¿½Lï¿½ï¿½ï¿½É‚ï¿½ï¿½é‚©")]
     [SerializeField] public bool enableSuction = false;
-    [Header("ˆø‚«Šñ‚¹‚é—Í")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ñ‚¹‚ï¿½ï¿½")]
     [SerializeField] public float suctionForce = 10f;
-    [Header("“–‚½‚è”»’è‚Ì‘±ŠÔ")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½è”»ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] public float attackDuration = 0.2f;
-    [Header("UŒ‚”»’èÁ–ÅŒãAŸ‚Ì’i‚ÉˆÚs‰Â”\‚È—P—\ŠÔ")]
+    [Header("ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅŒï¿½Aï¿½ï¿½ï¿½Ì’iï¿½ÉˆÚsï¿½Â”\ï¿½È—Pï¿½\ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] public float comboResetTime = 1f;
-    [Header("“ü—Íó‚¯•tŒã‚©‚çUŒ‚‚Ü‚Å‚ÌŠÔ")]
+    [Header("ï¿½ï¿½ï¿½Íó‚¯•tï¿½ã‚©ï¿½ï¿½Uï¿½ï¿½ï¿½Ü‚Å‚Ìï¿½ï¿½ï¿½")]
     [SerializeField] public float windupTime = 0.2f;
-    [Header("UŒ‚‚ÉˆÚ“®‚·‚é‹——£")]
+    [Header("ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½ÉˆÚ“ï¿½ï¿½ï¿½ï¿½é‹—ï¿½ï¿½")]
     [SerializeField] public float attackMoveDistance = 1f;
    
 
@@ -41,13 +37,13 @@ class ComboStep
 
 public class CloseAttack : MonoBehaviour
 {
-    [Header("ˆÚ“®‚ğ§Œä‚·‚éƒIƒuƒWƒFƒNƒg")]
+    [Header("ï¿½Ú“ï¿½ï¿½ğ§Œä‚·ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½g")]
     [SerializeField] Transform target;
-    [Header("ƒRƒ“ƒ{İ’è")]
+    [Header("ï¿½Rï¿½ï¿½ï¿½{ï¿½İ’ï¿½")]
     [SerializeField] List<ComboStep> comboSteps = new List<ComboStep>();
-    [Header("UŒ‚—LŒø‚É‚·‚éƒgƒŒƒCƒ‹ƒŒƒ“ƒ_ƒ‰[")]
+    [Header("ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½[")]
     [SerializeField] public List<TrailRenderer> renderers = new List<TrailRenderer>();
-    [Header("•K—v‚ÈƒRƒ“ƒ|[ƒlƒ“ƒg")]
+    [Header("ï¿½Kï¿½vï¿½ÈƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½g")]
     [SerializeField] PlayerStatus playerStatus;
     [SerializeField] DamageToTarget damageToTarget;
     [SerializeField] MovePlayer movePlayer;
@@ -57,10 +53,10 @@ public class CloseAttack : MonoBehaviour
 
     AttackState attackState = AttackState.None;
 
-    int currentComboIndex = 0; //Œ»İ‚ÌƒRƒ“ƒ{’iŠK‚ğ¦‚·•Ï”
-    float lastAttackTime = 0f; //ÅŒã‚ÉUŒ‚‚µ‚½ŠÔ
-    bool isAttackBuffered = false; //UŒ‚“ü—Í‚ª‚ ‚Á‚½‚©‚Ç‚¤‚©
-    float stateTimer = 0f; //Šeó‘Ô‚ÌŒo‰ßŠÔ‚ÌŒv‘ª—p
+    int currentComboIndex = 0; //ï¿½ï¿½ï¿½İ‚ÌƒRï¿½ï¿½ï¿½{ï¿½iï¿½Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïï¿½
+    float lastAttackTime = 0f; //ï¿½ÅŒï¿½ÉUï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    bool isAttackBuffered = false; //ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½
+    float stateTimer = 0f; //ï¿½eï¿½ï¿½Ô‚ÌŒoï¿½ßï¿½ï¿½Ô‚ÌŒvï¿½ï¿½ï¿½p
 
     float movedDistance = 0f;
     float totalMoveDistance = 0f;
@@ -68,7 +64,7 @@ public class CloseAttack : MonoBehaviour
     public AttackState CurrentAttackState { get { return attackState; } private set { attackState = value; } }
     public int CurrentComboIndex { get { return currentComboIndex; } }
 
-    public void TryAttack() //UŒ‚ˆ—i‹ßÚUŒ‚ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚éj
+    public void TryAttack() //ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½iï¿½ßÚUï¿½ï¿½ï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ÉŒÄ‚Î‚ï¿½ï¿½j
     {
         if (isAttackBuffered || currentComboIndex >= comboSteps.Count) return;
 
@@ -79,7 +75,7 @@ public class CloseAttack : MonoBehaviour
         totalMoveDistance = step.attackMoveDistance;
         movedDistance = 0f;
         
-        //Debug.Log(currentComboIndex + 1 + "’i–Ú");
+        //Debug.Log(currentComboIndex + 1 + "ï¿½iï¿½ï¿½");
     }
 
     public void CloseAttackProcess()
@@ -90,20 +86,20 @@ public class CloseAttack : MonoBehaviour
 
         switch (attackState)
         {
-            case AttackState.Windup: //UŒ‚‘Ò‹@
-                movePlayer.MoveSpeedMultiplier = 0f; //ˆÚ“®‚ğ§ŒÀ
+            case AttackState.Windup: //ï¿½Uï¿½ï¿½ï¿½Ò‹@
+                movePlayer.MoveSpeedMultiplier = 0f; //ï¿½Ú“ï¿½ï¿½ğ§Œï¿½
                 if (stateTimer >= comboSteps[currentComboIndex].windupTime)
                     BeginAttack();
                 break;
 
-            case AttackState.Attacking: //UŒ‚’†
+            case AttackState.Attacking: //ï¿½Uï¿½ï¿½ï¿½ï¿½
                 if (stateTimer >= comboSteps[currentComboIndex].attackDuration)
                     EndAttack();
                 
                   
                 break;
 
-            case AttackState.Recovering: //UŒ‚Œã
+            case AttackState.Recovering: //ï¿½Uï¿½ï¿½ï¿½ï¿½
                 if (Time.time - lastAttackTime > GetCurrentComboResetTime())
                     ResetCombo();
                 break;
@@ -113,20 +109,21 @@ public class CloseAttack : MonoBehaviour
         }
     }
 
-    void BeginAttack() //UŒ‚ŠJn‚Ìˆ—
+    void BeginAttack() //ï¿½Uï¿½ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½
     {
         ComboStep step = comboSteps[currentComboIndex];
 
-        damageToTarget.Damage = GetCurrentDamage(); //—^‚¦‚éƒ_ƒ[ƒW‚Ì‘ã“ü
-        damageToTarget.ForwardKnockbackForce = GetCurrentForwardForce(); //‘O•ûŒü‚Ö‚«”ò‚Î‚·—Í‚Ì‘ã“ü
-        damageToTarget.UpwardKnockbackForce = GetCurrentUpwardForce(); //ã•ûŒü‚Ö‚«”ò‚Î‚·—Í‚Ì‘ã“ü
-        damageToTarget.HitEffect = comboSteps[currentComboIndex].hitEffect; //ŠJn‚³‚ê‚½UŒ‚‚Ì–½’†ƒGƒtƒFƒNƒg‚Ìİ’è
-        damageToTarget.EnableSuction = comboSteps[currentComboIndex].enableSuction; //ˆø‚«Šñ‚¹‚é—Í‚ª—LŒø‚©‚Ç‚¤‚©‚Ìİ’è
-        damageToTarget.SuctionForce = comboSteps[currentComboIndex].suctionForce; //ˆø‚«Šñ‚¹‚é—Í‚Ì‘ã“ü
+        damageToTarget.Damage = GetCurrentDamage(); //ï¿½^ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½[ï¿½Wï¿½Ì‘ï¿½ï¿½
+        damageToTarget.ForwardKnockbackForce = GetCurrentForwardForce(); //ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Öï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½ï¿½Í‚Ì‘ï¿½ï¿½
+        damageToTarget.UpwardKnockbackForce = GetCurrentUpwardForce(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½ï¿½Í‚Ì‘ï¿½ï¿½
+        damageToTarget.HitEffect = comboSteps[currentComboIndex].hitEffect; //ï¿½Jï¿½nï¿½ï¿½ï¿½ê‚½ï¿½Uï¿½ï¿½ï¿½Ì–ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Gï¿½tï¿½Fï¿½Nï¿½gï¿½Ìİ’ï¿½
+        damageToTarget.HitSound = comboSteps[currentComboIndex].hitSound; //ï¿½Jï¿½nï¿½ï¿½ï¿½ê‚½ï¿½Uï¿½ï¿½ï¿½Ì–ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‰ï¿½ï¿½İ’ï¿½
+        damageToTarget.EnableSuction = comboSteps[currentComboIndex].enableSuction; //ï¿½ï¿½ï¿½ï¿½ï¿½ñ‚¹‚ï¿½Í‚ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½ï¿½Ìİ’ï¿½
+        damageToTarget.SuctionForce = comboSteps[currentComboIndex].suctionForce; //ï¿½ï¿½ï¿½ï¿½ï¿½ñ‚¹‚ï¿½Í‚Ì‘ï¿½ï¿½
 
-        if (step.hitbox != null) step.hitbox.SetActive(true); //UŒ‚”»’è‚Ì—LŒø‰»
+        if (step.hitbox != null) step.hitbox.SetActive(true); //ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì—Lï¿½ï¿½ï¿½ï¿½
 
-        movePlayer.RotationSpeedMultiplier = 0f; //ƒvƒŒƒCƒ„[‚Ì‰ñ“]ƒXƒs[ƒh‚Ì§Œä
+        movePlayer.RotationSpeedMultiplier = 0f; //ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Ì‰ï¿½]ï¿½Xï¿½sï¿½[ï¿½hï¿½Ìï¿½ï¿½ï¿½
         
         foreach(var trail in renderers)
         {
@@ -143,16 +140,16 @@ public class CloseAttack : MonoBehaviour
         
         Live2DPlay();
 
-        //Debug.Log(currentComboIndex + 1 + "’i–Ú”­¶");
+        //Debug.Log(currentComboIndex + 1 + "ï¿½iï¿½Ú”ï¿½ï¿½ï¿½");
     }
 
-    public void Live2DPlay()//Live2D‚ÌUŒ‚ƒ‚[ƒVƒ‡ƒ“‚ÆƒZƒŠƒtÄ¶
+    public void Live2DPlay()//Live2Dï¿½ÌUï¿½ï¿½ï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ÆƒZï¿½ï¿½ï¿½tï¿½Äï¿½
     {
         if(live2DController == null || live2DTalkPlayer == null) return;
 
         live2DTalkPlayer.PlayTalk("Attack_" + (currentComboIndex + 1).ToString());
         //Debug.Log("Attack_" + currentComboIndex + 1);
-        if (currentComboIndex == comboSteps.Count - 1)//ÅI’i‚Ìê‡
+        if (currentComboIndex == comboSteps.Count - 1)//ï¿½ÅIï¿½iï¿½Ìê‡
         {
             live2DController.PlayMotion("Attack_High");
         }
@@ -161,11 +158,11 @@ public class CloseAttack : MonoBehaviour
             live2DController.PlayMotion("Attack_Low");
         }
     }
-    void EndAttack() //”­¶‚µ‚½UŒ‚‚ÌI—¹ˆ—
+    void EndAttack() //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½ï¿½ï¿½ÌIï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         ComboStep step = comboSteps[currentComboIndex];
 
-        if (step.hitbox != null) step.hitbox.SetActive(false); //UŒ‚”»’è‚Ì–³Œø‰»
+        if (step.hitbox != null) step.hitbox.SetActive(false); //ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì–ï¿½ï¿½ï¿½ï¿½ï¿½
 
         movePlayer.RotationSpeedMultiplier = 1f;
 
@@ -175,13 +172,13 @@ public class CloseAttack : MonoBehaviour
         attackState = AttackState.Recovering;
 
     //    foreach (var trail in renderers) { trail.enabled = false; }
-        //Debug.Log(currentComboIndex + 1 + "’i–ÚI—¹");
+        //Debug.Log(currentComboIndex + 1 + "ï¿½iï¿½ÚIï¿½ï¿½");
         currentComboIndex++;
     }
 
-    void ResetCombo() //ƒRƒ“ƒ{’iŠK‚Ì‰Šú‰»
+    void ResetCombo() //ï¿½Rï¿½ï¿½ï¿½{ï¿½iï¿½Kï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½
     {
-        //Še“–‚½‚è”»’è‚Ì–³Œø‰»
+        //ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½è”»ï¿½ï¿½Ì–ï¿½ï¿½ï¿½ï¿½ï¿½
         foreach (var step in comboSteps)
         {
             if (step.hitbox != null) step.hitbox.SetActive(false);
@@ -198,23 +195,23 @@ public class CloseAttack : MonoBehaviour
         stateTimer = 0f;
         attackState = AttackState.None;        
 
-        //Debug.Log(currentComboIndex + "ƒRƒ“ƒ{‚ÌƒŠƒZƒbƒg");
+        //Debug.Log(currentComboIndex + "ï¿½Rï¿½ï¿½ï¿½{ï¿½Ìƒï¿½ï¿½Zï¿½bï¿½g");
         currentComboIndex = 0;
         PlayerActionEvents.IdleEvent();
     }
 
-    float GetCurrentComboResetTime() //Ÿ‚ÌƒRƒ“ƒ{’iŠK‚Ü‚Å‚Ì—P—\ŠÔ‚Ìæ“¾
+    float GetCurrentComboResetTime() //ï¿½ï¿½ï¿½ÌƒRï¿½ï¿½ï¿½{ï¿½iï¿½Kï¿½Ü‚Å‚Ì—Pï¿½\ï¿½ï¿½ï¿½Ô‚Ìæ“¾
     {
         return comboSteps[currentComboIndex - 1].comboResetTime;
     }
 
-    void HandleAttackMovement() //UŒ‚‚Ì‘Oiˆ—
+    void HandleAttackMovement() //ï¿½Uï¿½ï¿½ï¿½ï¿½ï¿½Ì‘Oï¿½iï¿½ï¿½ï¿½ï¿½
     {
         if (attackState != AttackState.Windup || currentComboIndex >= comboSteps.Count) return;
 
         ComboStep step = comboSteps[currentComboIndex];
 
-        float duration = step.windupTime; //windupTime‚ÌŠÔ‚É‘Oi‚ğI‚¦‚é
+        float duration = step.windupTime; //windupTimeï¿½ÌŠÔ‚É‘Oï¿½iï¿½ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½
         float movePerSecond = totalMoveDistance / duration;
         float moveDelta = movePerSecond * Time.deltaTime;
 
@@ -225,33 +222,33 @@ public class CloseAttack : MonoBehaviour
         movedDistance += actualMove;
     }
 
-    float GetCurrentDamage() //Œ»İ‚Ì’i‚Ìƒ_ƒ[ƒW—Ê‚ğæ“¾‚·‚é
+    float GetCurrentDamage() //ï¿½ï¿½ï¿½İ‚Ì’iï¿½Ìƒ_ï¿½ï¿½ï¿½[ï¿½Wï¿½Ê‚ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
     {
         if (currentComboIndex >= comboSteps.Count || currentComboIndex < 0) return 0f;
 
         ComboStep step = comboSteps[currentComboIndex];
         float attackPower = playerStatus != null ? playerStatus.AttackPower : 1f;
 
-        return step.baseDamage * attackPower; //ÅI“I‚Èƒ_ƒ[ƒW—Ê‚ğ•Ô‚·
+        return step.baseDamage * attackPower; //ï¿½ÅIï¿½Iï¿½Èƒ_ï¿½ï¿½ï¿½[ï¿½Wï¿½Ê‚ï¿½Ô‚ï¿½
     }
 
-    float GetCurrentForwardForce() //Œ»İ‚ÌUŒ‚‚Ì‘O•ûŒü‚Ö‚Ì‚«”ò‚Î‚µ—Í‚ğæ“¾‚·‚é
+    float GetCurrentForwardForce() //ï¿½ï¿½ï¿½İ‚ÌUï¿½ï¿½ï¿½Ì‘Oï¿½ï¿½ï¿½ï¿½ï¿½Ö‚Ìï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½ï¿½Í‚ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
     {
         if (currentComboIndex >= comboSteps.Count || currentComboIndex < 0) return 0f;
 
         ComboStep step = comboSteps[currentComboIndex];
         float attackPower = playerStatus != null ? playerStatus.AttackPower : 1f;
 
-        return step.baceForwardKnockbackForce * attackPower; //ÅI“I‚È‘O•ûŒü‚Ö‚Ì‚«”ò‚Î‚µ—Í‚ğ•Ô‚·
+        return step.baceForwardKnockbackForce * attackPower; //ï¿½ÅIï¿½Iï¿½È‘Oï¿½ï¿½ï¿½ï¿½ï¿½Ö‚Ìï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½ï¿½Í‚ï¿½Ô‚ï¿½
     }
 
-    float GetCurrentUpwardForce() //Œ»İ‚ÌUŒ‚‚Ìã•ûŒü‚Ö‚Ì‚«”ò‚Î‚µ—Í‚ğæ“¾‚·‚é
+    float GetCurrentUpwardForce() //ï¿½ï¿½ï¿½İ‚ÌUï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½Ö‚Ìï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½ï¿½Í‚ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
     {
         if (currentComboIndex >= comboSteps.Count || currentComboIndex < 0) return 0f;
 
         ComboStep step = comboSteps[currentComboIndex];
         float attackPower = playerStatus != null ? playerStatus.AttackPower : 1f;
 
-        return step.baceUpwardKnockbackForce * attackPower; //ÅI“I‚È‘O•ûŒü‚Ö‚Ì‚«”ò‚Î‚µ—Í‚ğ•Ô‚·
+        return step.baceUpwardKnockbackForce * attackPower; //ï¿½ÅIï¿½Iï¿½È‘Oï¿½ï¿½ï¿½ï¿½ï¿½Ö‚Ìï¿½ï¿½ï¿½ï¿½ï¿½Î‚ï¿½ï¿½Í‚ï¿½Ô‚ï¿½
     }
 }
