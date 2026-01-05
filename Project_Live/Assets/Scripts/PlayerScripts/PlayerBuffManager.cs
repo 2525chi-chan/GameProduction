@@ -37,6 +37,8 @@ public class PlayerBuffManager : MonoBehaviour
 
     PlayerStatus playerStatus;
 
+    float originalHp;
+
     public BuffInfo attackBuff;
     public BuffInfo speedBuff;
 
@@ -49,6 +51,8 @@ public class PlayerBuffManager : MonoBehaviour
 
         PowerImage.SetActive(false);
         PowerTimerText.enabled = false;
+
+        originalHp=playerStatus.Hp;
     }
 
     void Update()
@@ -92,7 +96,9 @@ public class PlayerBuffManager : MonoBehaviour
 
     public void AddHP(float value)
     {
-        playerStatus.Hp += value;
+        int addValue = (int)(originalHp * (value / 100));
+        Debug.Log("プレイヤーの最大HP" + originalHp + "の" + value + "%分(" + addValue + ")プレイヤーのHPを回復しました。");
+        playerStatus.Hp += addValue;
     }
 
 
