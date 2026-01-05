@@ -13,6 +13,10 @@ class ComboStep
     [SerializeField] public GameObject hitbox;
     [Header("命中時に発生するエフェクト")]
     [SerializeField] public GameObject hitEffect;
+    [Header("攻撃時に発生するエフェクト")]
+    [SerializeField] public GameObject attackParticle;
+    [Header("攻撃エフェクトの発生位置")]
+    [SerializeField] public Transform attackParticlePos;
     [Header("基本ダメージ")]
     [SerializeField] public float baseDamage = 10f;
     [Header("前方向への基本の吹き飛ばし力")]
@@ -127,10 +131,16 @@ public class CloseAttack : MonoBehaviour
         foreach(var trail in renderers)
         {
             trail.enabled = true;
+            
         }
         stateTimer = 0f;
         attackState = AttackState.Attacking;
-
+        if (step.attackParticle != null)
+        {
+          GameObject effect  =Instantiate(step.attackParticle,step.attackParticlePos);
+            effect.transform.SetParent(null);
+        }
+        
         Live2DPlay();
 
         //Debug.Log(currentComboIndex + 1 + "段目発生");
@@ -177,7 +187,7 @@ public class CloseAttack : MonoBehaviour
             if (step.hitbox != null) step.hitbox.SetActive(false);
             foreach (var trail in renderers) { 
             trail.enabled = false;
-            
+           
             }        
         
         }
