@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 
 public class CheeringComment  :ReplyCommentBase
 {
-    [Header("加えるHP")]
-    [SerializeField] float addHPnum;
+    [Header("プレイヤーの最大HPの何%分HPを加えるか")]
+    [SerializeField,Range(1,100)] int addHPPercent;
     [Header("HPが何%以下になったら回復にするか")]
     [SerializeField,Range(1,100)] float hpPercent;
     [Header("バフする攻撃倍率")]
@@ -87,7 +87,7 @@ public class CheeringComment  :ReplyCommentBase
     public void AddHP()     //HP回復効果
     {
         SE.PlayOneShot(commentSound);
-        playerBuffManager.AddHP(addHPnum);
+        playerBuffManager.AddHP(addHPPercent);
         DestroyComment();
     }
 

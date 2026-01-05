@@ -13,6 +13,8 @@ class ComboStep
     [SerializeField] public GameObject hitbox;
     [Header("命中時に発生するエフェクト")]
     [SerializeField] public GameObject hitEffect;
+    [Header("命中時の音声")]
+    public AudioClip hitSound;
     [Header("基本ダメージ")]
     [SerializeField] public float baseDamage = 10f;
     [Header("前方向への基本の吹き飛ばし力")]
@@ -117,6 +119,7 @@ public class CloseAttack : MonoBehaviour
         damageToTarget.ForwardKnockbackForce = GetCurrentForwardForce(); //前方向へ吹き飛ばす力の代入
         damageToTarget.UpwardKnockbackForce = GetCurrentUpwardForce(); //上方向へ吹き飛ばす力の代入
         damageToTarget.HitEffect = comboSteps[currentComboIndex].hitEffect; //開始された攻撃の命中時エフェクトの設定
+        damageToTarget.HitSound = comboSteps[currentComboIndex].hitSound; //開始された攻撃の命中時の音設定
         damageToTarget.EnableSuction = comboSteps[currentComboIndex].enableSuction; //引き寄せる力が有効かどうかの設定
         damageToTarget.SuctionForce = comboSteps[currentComboIndex].suctionForce; //引き寄せる力の代入
 

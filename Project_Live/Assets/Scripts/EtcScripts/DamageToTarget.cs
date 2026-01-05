@@ -7,11 +7,16 @@ using UnityEngine;
 
 public class DamageToTarget : MonoBehaviour
 {
-//    [Header("攻撃対象を当たり判定の中央に引き寄せるか")]
-//    [SerializeField] bool enableSuctionMode = false;
-//    [Header("攻撃対象を引き寄せる力")]
-//    [SerializeField] float suctionForce = 10f;
+    //    [Header("攻撃対象を当たり判定の中央に引き寄せるか")]
+    //    [SerializeField] bool enableSuctionMode = false;
+    //    [Header("攻撃対象を引き寄せる力")]
+    //    [SerializeField] float suctionForce = 10f;
+
+    [Header("必要なコンポーネント")]
+    [SerializeField] AudioSource SE;
+
     GameObject hitEffect;
+    AudioClip hitSound;
 
     float damage;
     float forwardKnockbackForce;
@@ -23,7 +28,9 @@ public class DamageToTarget : MonoBehaviour
 
     public bool isRagdoll = false;
     public GameObject HitEffect { get { return hitEffect; } set { hitEffect = value; } }
-    
+
+    public AudioClip HitSound { get { return hitSound; } set { hitSound = value; } }
+
     public float Damage { get { return damage; } set { damage = value; } }
     public float ForwardKnockbackForce { get { return forwardKnockbackForce; } set { forwardKnockbackForce = value; } }
     public float UpwardKnockbackForce { get { return upwardKnockbackForce; } set { upwardKnockbackForce = value; } }
@@ -99,6 +106,7 @@ public class DamageToTarget : MonoBehaviour
         //Debug.Log(damage + "ダメージを与えた");
 
         if (hitEffect != null) Instantiate(hitEffect, enemy.bounds.center, enemy.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+        if (hitSound != null) SE.PlayOneShot(hitSound);
 
         enemyStatus.CurrentDamageCount++;
     }
