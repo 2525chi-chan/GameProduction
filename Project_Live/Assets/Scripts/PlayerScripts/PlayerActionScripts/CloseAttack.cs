@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 //作成者：桑原
 
@@ -30,6 +31,7 @@ class ComboStep
     [SerializeField] public float windupTime = 0.2f;
     [Header("攻撃時に移動する距離")]
     [SerializeField] public float attackMoveDistance = 1f;
+   
 
 }
 
@@ -39,7 +41,8 @@ public class CloseAttack : MonoBehaviour
     [SerializeField] Transform target;
     [Header("コンボ設定")]
     [SerializeField] List<ComboStep> comboSteps = new List<ComboStep>();
-
+    [Header("攻撃時有効にするトレイルレンダラー")]
+    [SerializeField] public List<TrailRenderer> renderers = new List<TrailRenderer>();
     [Header("必要なコンポーネント")]
     [SerializeField] PlayerStatus playerStatus;
     [SerializeField] DamageToTarget damageToTarget;
@@ -121,6 +124,10 @@ public class CloseAttack : MonoBehaviour
 
         movePlayer.RotationSpeedMultiplier = 0f; //プレイヤーの回転スピードの制御
         
+        foreach(var trail in renderers)
+        {
+            trail.enabled = true;
+        }
         stateTimer = 0f;
         attackState = AttackState.Attacking;
 
@@ -157,6 +164,7 @@ public class CloseAttack : MonoBehaviour
         stateTimer = 0f;
         attackState = AttackState.Recovering;
 
+    //    foreach (var trail in renderers) { trail.enabled = false; }
         //Debug.Log(currentComboIndex + 1 + "段目終了");
         currentComboIndex++;
     }
@@ -165,8 +173,16 @@ public class CloseAttack : MonoBehaviour
     {
         //各当たり判定の無効化
         foreach (var step in comboSteps)
-            if (step.hitbox != null)　step.hitbox.SetActive(false);
-
+        {
+            if (step.hitbox != null) step.hitbox.SetActive(false);
+            foreach (var trail in renderers) { 
+            trail.enabled = false;
+            
+            }        
+        
+        }
+           
+      
         movePlayer.MoveSpeedMultiplier = 1f;
         isAttackBuffered = false;
         stateTimer = 0f;
