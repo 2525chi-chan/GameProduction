@@ -43,7 +43,7 @@ MonoBehaviour:
     m_Value: 0
   tintColor:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 1, b: 0.70287347, a: 1}
+    m_Value: {r: 1, g: 0.028878275, b: 0, a: 1}
   bloomMip:
     m_OverrideState: 1
     m_Value: 1

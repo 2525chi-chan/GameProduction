@@ -9,27 +9,33 @@ using UnityEngine.Rendering;
 [System.Serializable]
 class ComboStep
 {
-    [Header("�U������p�I�u�W�F�N�g")]
+    [Header("攻撃判定")]
     [SerializeField] public GameObject hitbox;
-    [Header("�������ɔ�������G�t�F�N�g")]
+    [Header("攻撃命中時に発生させるエフェクト")]
     [SerializeField] public GameObject hitEffect;
-    [Header("��{�_���[�W")]
+    [Header("攻撃時に発生させるエフェクト")]
+    [SerializeField]public GameObject attackEffect;
+    [Header("エフェクトの発生位置")]
+    [SerializeField]public Transform attackEffectPos;
+    [Header("基礎ダメージ")]
     [SerializeField] public float baseDamage = 10f;
-    [Header("�O�����ւ̊�{�̐�����΂���")]
+    [Header("後ろに吹き飛ばす力")]
     [SerializeField] public float baceForwardKnockbackForce = 1f;
-    [Header("������ւ̊�{�̐�����΂���")]
+    [Header("真上に吹き飛ばす力")]
     [SerializeField] public float baceUpwardKnockbackForce = 1f;
-    [Header("�U������̒��S�Ɉ����񂹂�͂�L���ɂ��邩")]
+    [Header("引き寄せるかどうか")]
     [SerializeField] public bool enableSuction = false;
-    [Header("�����񂹂��")]
+    [Header("引き寄せる力")]
     [SerializeField] public float suctionForce = 10f;
-    [Header("�����蔻��̎�������")]
+    [Header("判定の継続時間")]
     [SerializeField] public float attackDuration = 0.2f;
-    [Header("�U��������Ō�A���̒i�Ɉڍs�\�ȗP�\����")]
+    [Header("命中時のSE")]
+    [SerializeField]public  AudioClip hitSound;
+    [Header("次の攻撃の猶予時間")]
     [SerializeField] public float comboResetTime = 1f;
-    [Header("���͎󂯕t�ォ��U���܂ł̎���")]
+    [Header("入力受付から攻撃の発生時間")]
     [SerializeField] public float windupTime = 0.2f;
-    [Header("�U�����Ɉړ����鋗��")]
+    [Header("攻撃時に移動する距離")]
     [SerializeField] public float attackMoveDistance = 1f;
    
 
@@ -132,9 +138,9 @@ public class CloseAttack : MonoBehaviour
         }
         stateTimer = 0f;
         attackState = AttackState.Attacking;
-        if (step.attackParticle != null)
+        if (step.attackEffect != null)
         {
-          GameObject effect  =Instantiate(step.attackParticle,step.attackParticlePos);
+          GameObject effect  =Instantiate(step.attackEffect,step.attackEffectPos);
             effect.transform.SetParent(null);
         }
         

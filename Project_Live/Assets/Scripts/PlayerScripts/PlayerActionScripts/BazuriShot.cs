@@ -11,7 +11,7 @@ using static UnityEditor.SceneView;
 
 
 public class BazuriShot : MonoBehaviour// バズリショットの制御
-{
+{ 
     [Header("必要なコンポーネント")]
     [SerializeField]CinemachineBrain cinemachineBrain;
     [SerializeField] PlayerInput playerInput;
@@ -21,7 +21,8 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
     [SerializeField] CinemachineVirtualCamera bazuriCamera;
     [Header("ズームアウト用カメラ(演出用)")]
     [SerializeField]CinemachineVirtualCamera zoomOutCamera;
-
+    [Header("バズリショット中に無効にするキャンバス")]
+    [SerializeField]Canvas commentCanvas;
     const int highPriority = 10; //使用中カメラ
    const int lowPriority = 0; //非使用のカメラ  
     public CinemachineVirtualCamera BazuriCamera

@@ -167,7 +167,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2483613456639806882}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -755,25 +755,25 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8326055755784227368}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.10705346, y: 0.16110227, z: 0}
-  m_Size: 2.8021064
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 20
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.0536921
+  - screenRelativeHeight: 0.4951451
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 6413827264699708957}
     - renderer: {fileID: 6700549833168690843}
     - renderer: {fileID: 6102193965022386959}
-  - screenRelativeHeight: 0.034002945
+  - screenRelativeHeight: 0.050190855
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 4827139752946394696}
     - renderer: {fileID: 2280332454526618518}
     - renderer: {fileID: 2280332454526618518}
-  - screenRelativeHeight: 0.017653063
+  - screenRelativeHeight: 0.00064470735
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 4827139752946394696}
@@ -956,6 +956,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4846437120654949962, guid: d1145726dc7540542a2eee74707989cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5523591698779652018, guid: d1145726dc7540542a2eee74707989cb, type: 3}
       propertyPath: m_Layer
       value: 11
@@ -1053,7 +1057,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2486147183632666203}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
