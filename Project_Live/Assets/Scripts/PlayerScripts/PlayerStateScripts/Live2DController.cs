@@ -59,7 +59,7 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
 
     public void PlayMotion(string name)//モーション再生
     {
-     if(motionController==null||expressionController==null) return;
+    // if(motionController==null||expressionController==null) return;
 
         MotionData data = motions.Find(mot => mot.motionName == name);
 
@@ -85,7 +85,7 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
         {
             if(exp.expressionName == name)
             {
-                expressionController.CurrentExpressionIndex = exp.index;
+              //  expressionController.CurrentExpressionIndex = exp.index;
                 return;
             }
         }
