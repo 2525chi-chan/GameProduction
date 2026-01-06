@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FinishPhase
@@ -12,6 +13,7 @@ public class FinishPhase
     bool isActive = false;
 
     public bool IsFinished { get; private set; } = false;
+    public bool IsActive { get { return  isActive; } }
 
     public FinishPhase(GameObject hitbox, GameObject effect, float delay, float duration)
     {
@@ -49,9 +51,9 @@ public class FinishPhase
 
     void Activate() //フィニッシュ攻撃を開始するための処理
     {
-        isActive = true;
         if (finishHitbox != null) finishHitbox.SetActive(true);
         if (finishEffect != null) GameObject.Instantiate(finishEffect, finishHitbox.transform.position, finishHitbox.transform.rotation);
+        isActive = true;
         elapsed = 0f;
     }
 

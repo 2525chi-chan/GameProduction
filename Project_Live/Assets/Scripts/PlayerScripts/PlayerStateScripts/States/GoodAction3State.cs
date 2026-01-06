@@ -9,16 +9,18 @@ public class GoodAction3State : IPlayerState
 {
     PlayerAnimationController anim;
     PlayerStatus status;
+    MovePlayer mover;
     GoodAction goodAction;
     GameObject actionUsedEffect;
 
     float currentStateTime = 0f;
     bool isActionActivated = false;
     Transform origin;
-    public GoodAction3State(PlayerAnimationController anim, PlayerStatus status, GoodAction goodAction)
+    public GoodAction3State(PlayerAnimationController anim, PlayerStatus status, MovePlayer mover, GoodAction goodAction)
     {
         this.anim = anim;
         this.status = status;
+        this.mover = mover;
         this.goodAction = goodAction;
         origin = goodAction.transform;
         actionUsedEffect = goodAction?.GoodAction3Parameters.GoodActionUsedEffect;
@@ -40,6 +42,8 @@ public class GoodAction3State : IPlayerState
     {
         currentStateTime += Time.deltaTime;
 
+        if (!isActionActivated && goodAction.GoodAction3Parameters.IsRotateEnable) mover.MoveProcess_AnyGoodActionState();
+
         if (currentStateTime < goodAction.GoodAction3Parameters.ActionInterval) return;
 
         if (!isActionActivated)
@@ -48,6 +52,7 @@ public class GoodAction3State : IPlayerState
             isActionActivated = true;
             //   actionUsedEffect?.SetActive(false);
         }
+
         var animationState = anim.Animator.GetCurrentAnimatorStateInfo(0);
         //  if (currentStateTime < goodAction.GoodAction3Parameters.ChangeStateInterval) return;
         if (animationState.normalizedTime >= 1.0f && animationState.IsName("GoodAction3"))

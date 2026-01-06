@@ -65,6 +65,15 @@ public class MovePlayer : MonoBehaviour
         }
     }
 
+    public void MoveProcess_AnyGoodActionState() //‚¢‚¢‚ËƒAƒNƒVƒ‡ƒ“ó‘Ô‚ÌˆÚ“®ˆ—
+    {
+        if (move.magnitude > 0.1f) //ˆÚ“®‚Ì“ü—Í‚ª‚ ‚Á‚½‚ç
+        {
+            CalculateMoveDirection();
+            RotateTransform();
+        }
+    }
+
     void CalculateMoveDirection() //ˆÚ“®•ûŒü‚ÌŒvZ
     {
         moveDirection = cameraDirectionCalculator.CamForWard * move.z + cameraDirectionCalculator.CamRight * move.x; //ˆÚ“®•ûŒü‚ÌZo
@@ -75,7 +84,7 @@ public class MovePlayer : MonoBehaviour
         target.transform.position += moveDirection * speed * moveSpeedMultiplier * status.Agility * Time.deltaTime;
     }
 
-    void RotateTransform() //‰ñ“]ˆ—
+    public void RotateTransform() //‰ñ“]ˆ—
     {
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
 

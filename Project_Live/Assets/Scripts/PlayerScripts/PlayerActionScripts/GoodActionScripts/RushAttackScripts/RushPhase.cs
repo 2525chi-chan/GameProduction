@@ -1,3 +1,4 @@
+using Cinemachine;
 using UnityEngine;
 
 public class RushPhase
@@ -6,6 +7,7 @@ public class RushPhase
     GameObject rushEffect;
     float rushDuration;
     float rushInterval;
+    Transform followTarget;
 
     float elapsed = 0f;
     float intervalTimer = 0f;
@@ -13,12 +15,13 @@ public class RushPhase
 
     public bool IsFinished { get { return elapsed >= rushDuration; } }
 
-    public RushPhase(GameObject hitbox, GameObject effect, float duration, float interval)
+    public RushPhase(GameObject hitbox, GameObject effect, float duration, float interval, Transform target)
     {
         rushHitbox = hitbox;
         rushEffect = effect;
         rushDuration = duration;
         rushInterval = interval;
+        followTarget = target;
     }
 
     public void Start() //初期設定
@@ -38,6 +41,10 @@ public class RushPhase
         // 一度だけエフェクト生成を行う
         if (rushEffect != null && effectInstance == null)
             effectInstance = GameObject.Instantiate(rushEffect, rushHitbox.transform.position, rushHitbox.transform.rotation);
+
+
+        if (followTarget != null && effectInstance != null)
+            effectInstance.transform.SetParent(followTarget);
 
         // 一定間隔で当たり判定をON/OFF切り替えする
         if (intervalTimer >= rushInterval)
