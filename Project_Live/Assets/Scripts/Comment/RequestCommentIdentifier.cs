@@ -12,6 +12,8 @@ public class RequestCommentIdentifier :ReplyCommentBase
     [SerializeField] List<RequestBazuriShotSO> requestBazuriShotSOs;
     [Header("エモートおねだり一覧")]
     [SerializeField] List<RequestEmoteSO> requestEmoteSOs;
+    [Header("ボイス一覧")]
+    [SerializeField]List<AudioClip> replyVoices;
 
 
     GameObject targetObj;
@@ -50,6 +52,11 @@ public class RequestCommentIdentifier :ReplyCommentBase
                 break;
         }
 
+        if(replyVoices.Count>0)
+        {
+            decideVoice = replyVoices[Random.Range(0, replyVoices.Count)];
+        }
+
         receipt = false;
 
         thisButton.onClick.AddListener(ReceiptRequest);
@@ -83,6 +90,7 @@ public class RequestCommentIdentifier :ReplyCommentBase
     public void ReceiptRequest()
     {
         AnimationBeforeMethod();
+        PlaySound();
         requestManager.addRequest = true;
         OnButtonClickedAnimation(targetObj, () =>
         {

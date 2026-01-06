@@ -23,12 +23,13 @@ public class RushAttack : MonoBehaviour
     [SerializeField] float finishDuration = 0.5f;
 
     RushPhase rushPhase;
-    FinishPhase finishPhase;
+    public FinishPhase finishPhase;
     bool isActive = false;
 
     void Start()
     {
-        rushPhase = new RushPhase(rushHitbox, rushEffect, rushDuration, rushInterval);
+        Transform effectFollowTarget = GameObject.Find("Player").transform;
+        rushPhase = new RushPhase(rushHitbox, rushEffect, rushDuration, rushInterval, effectFollowTarget);
         finishPhase = new FinishPhase(finishHitbox, finishEffect, finishDelay, finishDuration);
 
         SetHitboxesActive(false);
