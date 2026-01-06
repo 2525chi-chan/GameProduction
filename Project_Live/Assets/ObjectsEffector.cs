@@ -4,18 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 public class ObjectEffector : MonoBehaviour
 {
-    [SerializeField]Material effectMaterial;
+   
     [SerializeField]List<Material> matchMaterial=new List<Material>();
-    [SerializeField] Renderer barrier;
+   
     [SerializeField] GameObject startObject;
    // [GradientUsage(true)]
-    [SerializeField] Gradient damageGradient_Base;
-    [GradientUsage(true)]
-    [SerializeField]Gradient damageGradient_Edge;
+ 
     [GradientUsage(true)]
     [SerializeField] Gradient damageGradient_Model;
 
-    ObjectStatus status;
+   [SerializeField] ObjectStatus status;
 
     List<Material> defaultMaterial=new List<Material>();
     List<Renderer> effecterRenderer=new List<Renderer>();
@@ -53,8 +51,8 @@ public class ObjectEffector : MonoBehaviour
         }
 
 
-        barrier.material = new Material(effectMaterial);
-        status = GetComponent<ObjectStatus>();
+     
+        //status = GetComponent<ObjectStatus>();
 
     }
 
@@ -62,18 +60,15 @@ public class ObjectEffector : MonoBehaviour
     void Update()
     {
         var ratio = 1.0f - (float)status.Hp / status.MaxHp;
-        var hp = (float)status.Hp / status.MaxHp;
+       
 
-        barrier.material.SetColor("_BaseColor", damageGradient_Base.Evaluate(ratio));
-        barrier.material.SetColor("_FresnelColor", damageGradient_Edge.Evaluate(ratio));
+        //barrier.material.SetColor("_BaseColor", damageGradient_Base.Evaluate(ratio));
+        //barrier.material.SetColor("_FresnelColor", damageGradient_Edge.Evaluate(ratio));
 
-        barrier.material.SetFloat("_BreakablePower", Mathf.Lerp(-1, 0,hp));
-
-
-        foreach(var rend in effecterRenderer)
+        foreach (var rend in effecterRenderer)
         {
             rend.material.SetColor("_EmissionColor", damageGradient_Model.Evaluate(ratio));
-          
+
         }
     }
 }

@@ -12,9 +12,12 @@ GameObject:
   - component: {fileID: 7117176778536259337}
   - component: {fileID: 4455143039324688460}
   - component: {fileID: 2511273925550910785}
+  - component: {fileID: 8209852725319989734}
+  - component: {fileID: 897831348083726464}
+  - component: {fileID: 7523392814608832947}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.6, z: 0}
-  m_LocalScale: {x: 3.4, y: 3.4, z: 3.4}
+  m_LocalScale: {x: 3.7, y: 3.7, z: 3.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1050565212571764029}
@@ -104,10 +107,130 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8209852725319989734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5589329634632851125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676f06c839b8ff546852eb9822ac3d77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 200
+  attackPower: 10
+  agility: 10
+  destroyEffect: {fileID: 1376598843723980918, guid: 416ceb4e2c39a5d458d3cb632268b888, type: 3}
+  recoveryRate: 5
+  recoveryTime: 0
+--- !u!54 &897831348083726464
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5589329634632851125}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &7523392814608832947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5589329634632851125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 509ac549c140bf24584f8d33649541a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectMaterial: {fileID: -876546973899608171, guid: 488bd4843eedd2c429406bdfc46d5891, type: 3}
+  damageGradient_Base:
+    serializedVersion: 2
+    key0: {r: 0, g: 0.7490196, b: 0.6117647, a: 0.27450982}
+    key1: {r: 0.6679245, g: 0.60462314, b: 0.30623704, a: 0.5529412}
+    key2: {r: 0.7490196, g: 0, b: 0.1882353, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 27525
+    ctime2: 47108
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  damageGradient_Edge:
+    serializedVersion: 2
+    key0: {r: 0, g: 2.7062442, b: 2.2035015, a: 1}
+    key1: {r: 1.1321639, g: 1.046411, b: 0.42509538, a: 1}
+    key2: {r: 2.7062447, g: 0, b: 0.66660357, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 33693
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_ColorSpace: -1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  status: {fileID: 8209852725319989734}
+  barrier: {fileID: 4455143039324688460}
 --- !u!1 &6634170394327405907
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +343,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5, y: 2.35, z: 2.5}
+  m_Size: {x: 1, y: 2.5, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &171185513031823294
 MonoBehaviour:
@@ -238,6 +361,8 @@ MonoBehaviour:
   attackPower: 10
   agility: 10
   destroyEffect: {fileID: 1376598843723980918, guid: 416ceb4e2c39a5d458d3cb632268b888, type: 3}
+  recoveryRate: 50
+  recoveryTime: 0.5
 --- !u!114 &8046584025454644633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,72 +418,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcdcb0f661b6fb64a98f64b95e54c5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectMaterial: {fileID: -876546973899608171, guid: 488bd4843eedd2c429406bdfc46d5891, type: 3}
   matchMaterial:
   - {fileID: 2100000, guid: cc480e4c6ba2c454e992042997a35170, type: 2}
   - {fileID: 2100000, guid: 488a94f731745734c89106fb46fd1f2a, type: 2}
-  barrier: {fileID: 4455143039324688460}
   startObject: {fileID: 423210625096310663}
-  damageGradient_Base:
-    serializedVersion: 2
-    key0: {r: 0, g: 0.4641509, b: 0.41242915, a: 0.24705882}
-    key1: {r: 0.509434, g: 0.50144285, b: 0, a: 0.24705882}
-    key2: {r: 0.4627451, g: 0.08339096, b: 0, a: 0.35686275}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 231
-    ctime1: 31226
-    ctime2: 65535
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 31226
-    atime2: 65535
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 2
-    m_ColorSpace: -1
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 3
-  damageGradient_Edge:
-    serializedVersion: 2
-    key0: {r: 0, g: 1.3531222, b: 1.1017509, a: 1}
-    key1: {r: 0.43160376, g: 0.690566, b: 0, a: 1}
-    key2: {r: 1.7928903, g: 0, b: 0.054160684, a: 1}
-    key3: {r: 0, g: 0, b: 0, a: 0}
-    key4: {r: 0, g: 0, b: 0, a: 0}
-    key5: {r: 0, g: 0, b: 0, a: 0}
-    key6: {r: 0, g: 0, b: 0, a: 0}
-    key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 0
-    ctime1: 20123
-    ctime2: 48496
-    ctime3: 0
-    ctime4: 0
-    ctime5: 0
-    ctime6: 0
-    ctime7: 0
-    atime0: 0
-    atime1: 28913
-    atime2: 65150
-    atime3: 0
-    atime4: 0
-    atime5: 0
-    atime6: 0
-    atime7: 0
-    m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 3
-    m_NumAlphaKeys: 3
   damageGradient_Model:
     serializedVersion: 2
     key0: {r: 7.49816, g: 49.026413, b: 0, a: 1}
@@ -389,6 +452,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 3
     m_NumAlphaKeys: 3
+  status: {fileID: 171185513031823294}
 --- !u!1 &7222170200235374291
 GameObject:
   m_ObjectHideFlags: 0

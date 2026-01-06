@@ -970,6 +970,17 @@
                 },
                 {
                     "name": "",
+                    "id": "c0605d29-c36f-41b7-9c31-df59bcd6c292",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoodActionAwait",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "1c837a93-e401-4115-bc37-fcf4ac7737e6",
                     "path": "<Keyboard>/e",
                     "interactions": "Press(behavior=1)",
@@ -986,6 +997,17 @@
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": ";Gamepad;Keyboard&Mouse",
+                    "action": "GoodActionRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2ddca005-9570-4d22-921d-f236d3a18e6f",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
                     "action": "GoodActionRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
