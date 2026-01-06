@@ -85,7 +85,7 @@ public class Live2DController : MonoBehaviour//Live2D‚Ì“®‚«‚Æ•\î‚Ì§Œä
         {
             if(exp.expressionName == name)
             {
-              //  expressionController.CurrentExpressionIndex = exp.index;
+                expressionController.CurrentExpressionIndex = exp.index;
                 return;
             }
         }
