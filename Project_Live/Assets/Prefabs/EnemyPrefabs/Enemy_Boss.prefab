@@ -558,7 +558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4258189648188175544, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: hp
-      value: 500
+      value: 7500
       objectReference: {fileID: 0}
     - target: {fileID: 4258189648188175544, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: agility
@@ -570,7 +570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4258189648188175544, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: attackPower
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4258189648188175544, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: knockbackThresholdCount
