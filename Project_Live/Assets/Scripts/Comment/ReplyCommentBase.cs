@@ -4,15 +4,33 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
+using TMPro;
 
 //制作者　寺村
 //返信コメント系のベースクラス
 //返信コメント系は必ずこのクラスの派生クラスにする
 
+
+
 public abstract class ReplyCommentBase : MonoBehaviour
 {
+    [System.Serializable]
+    public class CommentContents
+    {
+        [Header("コメントのテキスト内容")]
+        public string commentText;
+        [Header("このコメントでラマユウがしゃべるボイス")]
+        public AudioClip replyVoice;
+    }
+
+    protected AudioClip decideVoice;    //生成されたときにテキストに合わせたボイスが格納される
+    
+    //[Header("コメントの内容")]
+    //public List<string> commentContents = new List<string>();
+
     [Header("コメントの内容")]
-    public List<string> commentContents = new List<string>();
+    public List <CommentContents> commentContents=new List<CommentContents>();
 
     [Header("決定時のエフェクト")]
     [SerializeField] protected ParticleSystem pressEffect;
@@ -25,6 +43,15 @@ public abstract class ReplyCommentBase : MonoBehaviour
     [SerializeField] protected float animationDuration = 0.5f;
     [Header("アニメーションカーブ")]
     [SerializeField] protected AnimationCurve moveCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+
+    [Header("このコメントを受け取った時の効果音")]
+    [SerializeField] protected AudioClip commentSound;
+
+    [Header("必要なコンポーネント")]
+    [SerializeField] TextMeshProUGUI text;
+
+    protected AudioSource SE;
+    protected AudioSource Main_Voice;
 
     protected RectTransform rectTransform;  //このオブジェクトのRectTransform
     protected RectTransform targetPosition; //オブジェクトが向かっていく位置のRectTransform
@@ -47,6 +74,12 @@ public abstract class ReplyCommentBase : MonoBehaviour
         thisButton = this.gameObject.GetComponent<Button>();
         animator = this.gameObject.GetComponent<Animator>();
         rectTransform = this.GetComponent<RectTransform>();
+
+        SE = GameObject.FindGameObjectWithTag("SE").GetComponent<AudioSource>();
+        Main_Voice = GameObject.FindGameObjectWithTag("Main_Voice").GetComponent<AudioSource>();
+        
+        if(commentContents.Count>0)
+        decideVoice = commentContents.Find(c => c.commentText == text.text).replyVoice;
 
         if (trailEffect != null)
             trailEffect.SetActive(false);
@@ -139,7 +172,10 @@ public abstract class ReplyCommentBase : MonoBehaviour
 
     protected IEnumerator AnimateToTarget(Action onComplete = null) //アニメーション関数
     {
-        yield return new WaitForSeconds(0.5f);
+
+        animator.Play("CommentHighlight");
+
+        yield return new WaitForSeconds(2.0f);
 
         animator.Play("ChangeScale");
 
@@ -180,5 +216,11 @@ public abstract class ReplyCommentBase : MonoBehaviour
         {
             trailEffect.SetActive(true);
         }
+    }
+
+    protected void PlaySound()  //音系を鳴らす関数
+    {
+        SE.PlayOneShot(commentSound);
+        Main_Voice.PlayOneShot(decideVoice);
     }
 }

@@ -26,6 +26,7 @@ TagManager:
   - Denkou
   - RequestManager
   - SE
+  - Main_Voice
   layers:
   - Default
   - TransparentFX

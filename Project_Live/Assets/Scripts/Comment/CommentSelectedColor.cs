@@ -13,16 +13,23 @@ public class CommentSelectedColor : MonoBehaviour, ISelectHandler, IDeselectHand
     [Header("必要なコンポーネント")]
     [SerializeField]TextMeshProUGUI targetText;
     [SerializeField]Outline outline;
+    [SerializeField] Animator animator;
 
     public void OnSelect(BaseEventData eventData)
     {
-     outline.effectColor = selectedColor;
+        animator.SetBool("InArea", true);
+        outline.enabled = true;
+        outline.effectColor = selectedColor;
+        //animator.Play("SelectHighlight");
         //  targetText.color = selectedColor;
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        outline.effectColor = normalColor;
+        animator.SetBool("InArea", false);
+        //animator.SetFloat("AnimationSpeed", 0.0f);
+        outline.enabled = false;
+        
       //  targetText.color = normalColor;
     }
 }

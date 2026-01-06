@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8197654381369435470}
   - component: {fileID: 5436835106294436230}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CommentText (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,8 +311,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 300.005, y: -83.520004}
-  m_SizeDelta: {x: 600.01, y: 167.04001}
+  m_AnchoredPosition: {x: 305.005, y: -83.520004}
+  m_SizeDelta: {x: 610.01, y: 167.04001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3417911641840082306
 CanvasRenderer:
@@ -335,15 +335,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.46297613, g: 0.9622642, b: 0.649232, a: 0.6509804}
+  m_Color: {r: 0.46297613, g: 0.9622642, b: 0.649232, a: 0.6431373}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: -2413806693520163455, guid: 90a127f32aecf444ea516cfc5f651440, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 10
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
@@ -404,7 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.8952106, g: 1, b: 0, a: 0.5}
+  m_EffectColor: {r: 0.8952106, g: 1, b: 0, a: 0}
   m_EffectDistance: {x: 12, y: 12}
   m_UseGraphicAlpha: 1
 --- !u!1 &5886287236747954287
@@ -578,9 +578,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commentContents:
-  - "\u3084\u3063\u3061\u307E\u3048\uFF5E\uFF01"
-  - "\u8CA0\u3051\u308B\u306A\uFF5E\uFF01"
-  - "\u304C\u3093\u3070\u308C\uFF5E\uFF01"
+  - commentText: "\u9811\u5F35\u308C\uFF5E\uFF01\uFF01"
+    replyVoice: {fileID: 8300000, guid: dbc2e8291901dcb4981eef5fa10e3422, type: 3}
+  - commentText: "\u7121\u7406\u3059\u3093\u306A\u3088\u30FC"
+    replyVoice: {fileID: 8300000, guid: df1edd60bcbd5b0448421903ca3376a8, type: 3}
+  - commentText: "\u5FAE\u529B\u306A\u304C\u3089\u5FDC\u63F4\u3057\u3066\u307E\u3059"
+    replyVoice: {fileID: 8300000, guid: 53904fbd6dab72a4ea1e8848ab6d3e71, type: 3}
+  - commentText: "\u8CA0\u3051\u3093\u306A\uFF01\uFF01"
+    replyVoice: {fileID: 8300000, guid: 4d8d641aa1152974a90534b2dd357bda, type: 3}
   pressEffect: {fileID: 5410154455633384482}
   trailEffect: {fileID: 5054387600023684386}
   trailFlag: 1
@@ -609,12 +614,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  commentSound: {fileID: 8300000, guid: 4624094ba53c86a4ea9228ac11e318ca, type: 3}
+  text: {fileID: 5436835106294436230}
   addHPPercent: 30
   hpPercent: 50
   attackMagnification: 1.5
   agilityMagnification: 2
   buffTime: 30
-  commentSound: {fileID: 8300000, guid: 4624094ba53c86a4ea9228ac11e318ca, type: 3}
 --- !u!114 &4734199638609302664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,9 +634,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedColor: {r: 1, g: 0, b: 0, a: 0.5019608}
-  normalColor: {r: 0, g: 0.79622644, b: 0.07444045, a: 0.5019608}
+  normalColor: {r: 0, g: 0.79622644, b: 0.07444045, a: 0}
   targetText: {fileID: 5436835106294436230}
   outline: {fileID: 2042856732242805523}
+  animator: {fileID: 6717922308149699637}
 --- !u!114 &3972164296222325064
 MonoBehaviour:
   m_ObjectHideFlags: 0
