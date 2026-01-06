@@ -53,7 +53,7 @@ public class CommentSpawn : MonoBehaviour
     void Start()
     {
         cheeringComment=CheeringCommentPrefab.GetComponent<CheeringComment>();
-        antiComment = AntiCommentPrefab.gameObject.GetComponent<AntiComment>();
+        antiComment=AntiCommentPrefab.GetComponent<AntiComment>();
         //requestManager=GameObject.FindGameObjectWithTag("RequestManager").GetComponent<RequestManager>();
         canvasRect=Canvas.GetComponent<RectTransform>();
         cheeringCommentIsExist = false;
@@ -148,7 +148,7 @@ public class CommentSpawn : MonoBehaviour
     }
 
 
-    void InstantiateComment(int raneNum, GameObject CommentType,ref string nextText,ref bool conectComment)
+    void InstantiateComment(int raneNum,GameObject CommentType,ref string nextText,ref bool conectComment)
     {
         string selectedText = null;
 
@@ -176,11 +176,13 @@ public class CommentSpawn : MonoBehaviour
         }
         else if (CommentType == CheeringCommentPrefab)
         {
-            selectedText = cheeringComment.commentContents[Random.Range(0, cheeringComment.commentContents.Count)];
+            int decideIndex = Random.Range(0, cheeringComment.commentContents.Count);
+            selectedText = cheeringComment.commentContents[decideIndex].commentText;
         }
         else if(CommentType==AntiCommentPrefab)
         {
-            selectedText = antiComment.commentContents[Random.Range(0,antiComment.commentContents.Count)];
+            int decideIndex = Random.Range(0, antiComment.commentContents.Count);
+            selectedText = antiComment.commentContents[decideIndex].commentText;
         }
         
         GameObject newTextObj = Instantiate(CommentType, canvasRect);
