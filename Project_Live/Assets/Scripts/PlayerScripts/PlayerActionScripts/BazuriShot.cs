@@ -201,6 +201,7 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
         cam.targetTexture = originalTarget;
 
 
+
         rawImage.texture = bazuriTexture;
         rawImage.enabled = true;
         float t = 0f;
@@ -228,6 +229,7 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
     }
     private IEnumerator BazuriModeRoutine()//�o�Y���V���b�g���[�h�ɐ؂�ւ�
     {
+        commentCanvas.enabled = false;
         cameraFlash.ResetAlpha();
       cameraBillboard.isEnabled = false;
         isBazuriMode = true;
@@ -250,9 +252,9 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
         yield return new WaitForSecondsRealtime(zoomEndDuration);
         float elapsed = 0f;
         playerInput.SwitchCurrentActionMap("Bazuri");
-      
+    
 
-         shotTaken = false; //�V���b�g���B��ꂽ���ǂ����̃t���O
+        shotTaken = false; //�V���b�g���B��ꂽ���ǂ����̃t���O
 
         countTimeUI.fillAmount = 1;
         while (elapsed < cameraTime)//���쎞�Ԓ��ɃV���b�g�{�^�����������΃o�Y���V���b�g���f
@@ -323,7 +325,7 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
 
         bazuriText.text = "0";
 
-        float duration = countSpeed;          // �����́u���b�����ăJ�E���g���邩�v�̕b���ɂ���z��
+        float duration = countSpeed;
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -355,6 +357,7 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
         effector.ResetText();
         effector.ResetEffect();
         isBazuriMode = false;
+        commentCanvas.enabled = true;
         Time.timeScale = 1f;
        
         if (mainCamera != null && bazuriCamera != null)

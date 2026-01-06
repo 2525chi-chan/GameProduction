@@ -45,7 +45,8 @@ public class ObjectStatusEffector : MonoBehaviour
         objectStatusManager = GetComponent<ObjectStatusManager>();
         foreach(var ui in effectedUI)
         {
-            ui.material = effectMaterial;
+            var inst=new Material(effectMaterial);
+            ui.material = inst;
         }
     }
 
