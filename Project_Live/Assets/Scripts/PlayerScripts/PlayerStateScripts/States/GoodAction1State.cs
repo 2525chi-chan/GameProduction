@@ -8,19 +8,23 @@ public class GoodAction1State : IPlayerState
 {
     PlayerAnimationController anim;
     PlayerStatus status;
+    MovePlayer movePlayer;
     GoodAction goodAction;
+    RushAttack rushAttack;
     GameObject actionUsedEffect;
 
     float currentStateTime = 0f;
     bool isActionActivated = false;
     Transform origin;
-    public GoodAction1State(PlayerAnimationController anim, PlayerStatus status, GoodAction goodAction)
+    public GoodAction1State(PlayerAnimationController anim, PlayerStatus status, MovePlayer mover, GoodAction goodAction, RushAttack rushAttack)
     {
         this.anim = anim;
         this.status = status;
+        this.movePlayer = mover;
         this.goodAction = goodAction;
         origin = goodAction.transform;
         actionUsedEffect = goodAction?.GoodAction1Parameters.GoodActionUsedEffect;
+        this.rushAttack = rushAttack;
     }
 
     public void Enter()
@@ -38,10 +42,9 @@ public class GoodAction1State : IPlayerState
     public void Update()
     {
         currentStateTime += Time.deltaTime;
+        if (!rushAttack.finishPhase.IsActive && goodAction.GoodAction1Parameters.IsRotateEnable) movePlayer.MoveProcess_AnyGoodActionState();
 
-
-
-        if (currentStateTime < goodAction.GoodAction1Parameters.ActionInterval) return;
+        if (currentStateTime < goodAction.GoodAction1Parameters.ActionInterval) return;   
 
         if (!isActionActivated)
         {
@@ -50,10 +53,6 @@ public class GoodAction1State : IPlayerState
          //   actionUsedEffect?.SetActive(false);
         }
 
-        if (isActionActivated)
-        {
-
-        }
         var animatorState = anim.Animator.GetCurrentAnimatorStateInfo(0);
         // if (currentStateTime < goodAction.GoodAction1Parameters.ChangeStateInterval) return;
         if (animatorState.normalizedTime >= 1.0f && animatorState.IsName("GoodAction1"))

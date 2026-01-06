@@ -18,6 +18,8 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
     [SerializeField] ShotAttack shotAttack;
     [SerializeField] Dodge dodge;
     [SerializeField] GoodAction goodAction;
+    
+    RushAttack rushAttack;
 
     public IPlayerState CurrentState { get { return currentState; } }    
 
@@ -25,6 +27,8 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
     {
         anim = animController.GetComponent<PlayerAnimationController>();
         ChangeState(new IdleState(anim));
+
+        rushAttack = GameObject.Find("RushAttack").GetComponent<RushAttack>();
     }
 
     void OnEnable()
@@ -119,7 +123,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
         if ((currentState is IdleState || currentState is MoveState)
             && !(currentState is GoodAction1State))
         {
-            ChangeState(new GoodAction1State(anim, playerStatus, goodAction));
+            ChangeState(new GoodAction1State(anim, playerStatus, movePlayer, goodAction, rushAttack));
         }
     }
 
@@ -130,7 +134,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
         if ((currentState is IdleState || currentState is MoveState)
             && !(currentState is GoodAction2State))
         {
-            ChangeState(new GoodAction2State(anim, playerStatus, goodAction));
+            ChangeState(new GoodAction2State(anim, playerStatus, movePlayer, goodAction));
         }
     }
 
@@ -141,7 +145,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
         if ((currentState is IdleState || currentState is MoveState)
             && !(currentState is GoodAction3State))
         {
-            ChangeState(new GoodAction3State(anim, playerStatus, goodAction));
+            ChangeState(new GoodAction3State(anim, playerStatus, movePlayer, goodAction));
         }
     }
 
@@ -152,7 +156,7 @@ public class PlayerActionStateMachine : MonoBehaviour //プレイヤーの行動状態の管
         if ((currentState is IdleState || currentState is MoveState)
             && !(currentState is GoodAction4State))
         {
-            ChangeState(new GoodAction4State(anim, playerStatus, goodAction));
+            ChangeState(new GoodAction4State(anim, playerStatus, movePlayer, goodAction));
         }
     }
 

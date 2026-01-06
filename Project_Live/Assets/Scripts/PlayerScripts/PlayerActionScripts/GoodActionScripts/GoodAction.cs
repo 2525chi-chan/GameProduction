@@ -22,6 +22,8 @@ public class GoodActionParameters
     [SerializeField] public GameObject goodActionUsedEffect;
     [Header("アクション発動中、ダメージを無効化するかどうか")]
     [SerializeField] bool isInvincible = false;
+    [Header("アクション発動中、向きを変えられるかどうか")]
+    [SerializeField] bool isRotateEnable = true;
     [Header("このいいねアクションのサウンド")]
     [SerializeField] AudioClip actionSound;
     
@@ -31,6 +33,7 @@ public class GoodActionParameters
     public float ChangeStateInterval { get { return changeStateInterval;} }
     public GameObject GoodActionUsedEffect { get { return goodActionUsedEffect; } }
     public bool IsInvincible { get { return isInvincible; } } 
+    public bool IsRotateEnable { get { return isRotateEnable; } }
 
     public AudioClip ActionSound { get { return actionSound; } }
    
