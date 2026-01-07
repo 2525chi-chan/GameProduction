@@ -6,6 +6,9 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
 using TMPro;
+using System.Net;
+using static UnityEngine.UI.GridLayoutGroup;
+using Unity.VisualScripting;
 
 //制作者　寺村
 //返信コメント系のベースクラス
@@ -77,59 +80,17 @@ public abstract class ReplyCommentBase : MonoBehaviour
 
         SE = GameObject.FindGameObjectWithTag("SE").GetComponent<AudioSource>();
         Main_Voice = GameObject.FindGameObjectWithTag("Main_Voice").GetComponent<AudioSource>();
-        
-        if(commentContents.Count>0)
+
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        collider.size = new Vector2(rectTransform.rect.width, rectTransform.rect.height);
+
+        if (commentContents.Count>0)
         decideVoice = commentContents.Find(c => c.commentText == text.text).replyVoice;
 
         if (trailEffect != null)
             trailEffect.SetActive(false);
         Pressed = false;
         isAnimating = false;
-    }
-
-    protected void CheckInArea()    //＊返信コメント系のUpdate関数で必ず呼ぶ、エリア内にいるか判定し、返信できるListに登録する関数
-    {
-        if (IsInsideReplyArea() && !Pressed)
-        {
-            RegisterReplyList();
-        }
-        else
-        {
-            UnregisterReplyList();
-            if (commentReplyArea.canReplyComment.Count == 0)
-            {
-                EventSystem.current.SetSelectedGameObject(null);
-            }
-        }
-    }
-
-    protected bool IsInsideReplyArea()    //返信エリアにいるか判定する関数
-    {
-        Canvas canvas = commentReplyArea.GetComponentInParent<Canvas>();
-        Camera cam = canvas.worldCamera;
-
-        Vector3[] commentCorners = new Vector3[4];
-        rectTransform.GetWorldCorners(commentCorners);
-
-        Vector3[] areaCorners = new Vector3[4];
-        commentReplyArea.replyAreaRect.GetWorldCorners(areaCorners);
-
-        foreach (Vector3 corner in commentCorners)
-        {
-            Vector3 screenPoint = RectTransformUtility.WorldToScreenPoint(cam, corner);
-            if (RectTransformUtility.RectangleContainsScreenPoint(commentReplyArea.replyAreaRect, screenPoint, cam))
-            {
-                return true;  // 1つでも入っていたらOK
-            }
-        }
-
-        Vector2 commentCenter = RectTransformUtility.WorldToScreenPoint(cam, rectTransform.position);
-        if (RectTransformUtility.RectangleContainsScreenPoint(commentReplyArea.replyAreaRect, commentCenter, cam))
-        {
-            return true;
-        }
-
-        return false;
     }
 
     protected void RegisterReplyList()    //返信可能なコメントのリストへ登録する関数
@@ -222,5 +183,25 @@ public abstract class ReplyCommentBase : MonoBehaviour
     {
         SE.PlayOneShot(commentSound);
         Main_Voice.PlayOneShot(decideVoice);
+    }
+
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag=="CommentReplyArea"&&!Pressed)
+        {
+            RegisterReplyList();
+        }
+    }
+
+    protected void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.tag=="CommentReplyArea")
+        {
+            UnregisterReplyList();
+            if (commentReplyArea.canReplyComment.Count == 0)
+            {
+                EventSystem.current.SetSelectedGameObject(null);
+            }
+        }
     }
 }

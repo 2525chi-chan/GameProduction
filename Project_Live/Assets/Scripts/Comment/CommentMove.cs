@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.UI.GridLayoutGroup;
 
 //ì¬ŽÒ@Ž›‘º
 
@@ -99,6 +100,20 @@ public class CommentMove : MonoBehaviour
                 }
             }
         }
+
+        Vector2 endPoint;
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    canvasRect,
+                    RectTransformUtility.WorldToScreenPoint(cam, worldCorners[2]),
+                    cam,
+                    out endPoint);
+
+        if (endPoint.x>=canvasRect.rect.width/2)
+        {
+            return true;
+        }
+
         return false;
     }
 }
