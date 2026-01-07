@@ -349,7 +349,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  commentSound: {fileID: 0}
+  commentSound: {fileID: 8300000, guid: 95576a738bf028f4f8d73e8225fb3a7e, type: 3}
   text: {fileID: 0}
   requestEnemySOs:
   - {fileID: 11400000, guid: 47af2efbd243cdb4fbe13b473dae6241, type: 2}

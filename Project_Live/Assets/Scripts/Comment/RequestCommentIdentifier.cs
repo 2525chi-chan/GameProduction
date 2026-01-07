@@ -62,9 +62,10 @@ public class RequestCommentIdentifier :ReplyCommentBase
         thisButton.onClick.AddListener(ReceiptRequest);
     }
 
-    void Update()
+    private void Start()
     {
-        CheckInArea();
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        collider.size = new Vector2(rectTransform.rect.width,rectTransform.rect.height);
     }
 
     public bool InitializeRequest()

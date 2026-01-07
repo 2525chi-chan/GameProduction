@@ -41,8 +41,6 @@ public class AntiComment : ReplyCommentBase
 
     void Update()
     {
-        //返信コメント共通のエリア判定部
-        CheckInArea();
 
         if (Pressed && !goodSystem.Decreasing)  //いいねの減少が終わってからこのコメントを削除する
         {

@@ -19,6 +19,8 @@ public class CommentSpawn : MonoBehaviour
     [SerializeField] int antiCommentCount = 20;
     [Header("おねだりコメントが流れるまでのコメント数")]
     [SerializeField] int requestCommentCount = 20;
+    [Header("返信コメントが流れるまでのコメント数")]
+    [SerializeField] int replyCommnetCount = 10;
 
     [Header("必要なコンポーネント")]
     public GameObject Canvas;
@@ -26,6 +28,7 @@ public class CommentSpawn : MonoBehaviour
     [SerializeField] GameObject CheeringCommentPrefab;
     [SerializeField] GameObject AntiCommentPrefab;
     [SerializeField] GameObject RequestCommentPrefab;
+    [SerializeField] GameObject ReplyCommentPrefab;
     [SerializeField] BuzuriRank buzuriRank;
     [SerializeField] RequestManager requestManager;
     
@@ -37,6 +40,7 @@ public class CommentSpawn : MonoBehaviour
     CheeringComment cheeringComment;
     AntiComment antiComment;
     RequestCommentIdentifier requestComment;
+    ReplyComment replyComment;
     //RequestManager requestManager;
     float spawnTime;
     int raneNum;
@@ -45,6 +49,7 @@ public class CommentSpawn : MonoBehaviour
     float cheeringCommentCounter;
     float antiCommentCounter;
     float requestCommentCounter;
+    float replyCommentCounter;
     RectTransform canvasRect;
     string nextText = null; //関連コメントの内容保存用string
     bool conectComment = false; //関連コメントのフラグ
@@ -54,6 +59,7 @@ public class CommentSpawn : MonoBehaviour
     {
         cheeringComment=CheeringCommentPrefab.GetComponent<CheeringComment>();
         antiComment=AntiCommentPrefab.GetComponent<AntiComment>();
+        replyComment=ReplyCommentPrefab.GetComponent<ReplyComment>();
         //requestManager=GameObject.FindGameObjectWithTag("RequestManager").GetComponent<RequestManager>();
         canvasRect=Canvas.GetComponent<RectTransform>();
         cheeringCommentIsExist = false;
@@ -63,6 +69,8 @@ public class CommentSpawn : MonoBehaviour
         cheeringCommentCounter = 0;
         antiCommentCounter = 0;
         requestCommentCounter = 0;
+        replyCommentCounter = 0;
+
     }
 
     // Update is called once per frame
@@ -103,12 +111,18 @@ public class CommentSpawn : MonoBehaviour
                 InstantiateComment(raneNum, RequestCommentPrefab, ref nextText, ref conectComment);
                 requestCommentCounter = 0;
             }
+            else if(replyCommentCounter>=replyCommnetCount&&!interceptEnemyIsExist)
+            {
+                InstantiateComment(raneNum, ReplyCommentPrefab,ref nextText,ref conectComment) ;
+                replyCommentCounter = 0;
+            }
             else
             {
                 InstantiateComment(raneNum,CommentPrefab,ref nextText,ref conectComment);
                 antiCommentCounter++;
                 cheeringCommentCounter++;
                 requestCommentCounter++;
+                replyCommentCounter++;
                 Debug.Log("アンチコメントまであと" + (antiCommentCount - antiCommentCounter) + "コメントです。");
                 Debug.Log("応援コメントまであと" + (cheeringCommentCount - cheeringCommentCounter) + "コメントです。");
                 Debug.Log("おねだりコメントまであと" + (requestCommentCount - requestCommentCounter) + "コメントです。");
@@ -183,6 +197,11 @@ public class CommentSpawn : MonoBehaviour
         {
             int decideIndex = Random.Range(0, antiComment.commentContents.Count);
             selectedText = antiComment.commentContents[decideIndex].commentText;
+        }
+        else if(CommentType==ReplyCommentPrefab)
+        {
+            int decideIndex = Random.Range(0, replyComment.commentContents.Count);
+            selectedText = replyComment.commentContents[decideIndex].commentText;
         }
         
         GameObject newTextObj = Instantiate(CommentType, canvasRect);

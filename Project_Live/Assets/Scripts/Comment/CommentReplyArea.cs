@@ -26,10 +26,13 @@ public class CommentReplyArea : MonoBehaviour
 
     public RectTransform replyAreaRect { get; private set; }
 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         replyAreaRect = this.GetComponent<RectTransform>();
+        BoxCollider2D collider = GetComponent<BoxCollider2D>();
+        collider.size = new Vector2(replyAreaRect.rect.width, 842);
     }
 
     // Update is called once per frame
