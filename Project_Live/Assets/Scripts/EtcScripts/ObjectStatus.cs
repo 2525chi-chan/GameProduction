@@ -12,6 +12,7 @@ public class ObjectStatus : CharacterStatus
     public float recoveryTime;
     bool isBroken = false;
 
+    public bool isBarrier = false;
     public bool IsBroken { get { return isBroken; } }
 
     private float count;

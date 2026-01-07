@@ -127,8 +127,9 @@ MonoBehaviour:
   attackPower: 10
   agility: 10
   destroyEffect: {fileID: 1376598843723980918, guid: 416ceb4e2c39a5d458d3cb632268b888, type: 3}
-  recoveryRate: 5
+  recoveryRate: 12
   recoveryTime: 0
+  isBarrier: 1
 --- !u!54 &897831348083726464
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -343,7 +344,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2.5, z: 1}
+  m_Size: {x: 0.75, y: 2.5, z: 0.75}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &171185513031823294
 MonoBehaviour:
@@ -361,8 +362,9 @@ MonoBehaviour:
   attackPower: 10
   agility: 10
   destroyEffect: {fileID: 1376598843723980918, guid: 416ceb4e2c39a5d458d3cb632268b888, type: 3}
-  recoveryRate: 50
-  recoveryTime: 0.5
+  recoveryRate: 20
+  recoveryTime: 0
+  isBarrier: 0
 --- !u!114 &8046584025454644633
 MonoBehaviour:
   m_ObjectHideFlags: 0

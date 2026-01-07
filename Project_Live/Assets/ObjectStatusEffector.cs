@@ -54,8 +54,9 @@ public class ObjectStatusEffector : MonoBehaviour
     void Update()
     {
         currentHpSum = 0;
-        foreach(var obj in objectStatusManager.ObjectStatuses)
+        foreach(var obj in objectStatusManager.ObjectStatuses)//‘Ì—Í‚Ì‡Œv‚ğæ“¾‚·‚é
         {
+         //  if(!obj.isBarrier)
             currentHpSum += (int)obj.Hp;
         }
         var ratio = (float)currentHpSum / maxHpSum;

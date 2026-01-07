@@ -34,9 +34,13 @@ public class ObjectStatusManager : MonoBehaviour
         {
             ObjectStatus status = obj.GetComponent<ObjectStatus>();
 
-            if (status != null)
+            if (status != null && !status.isBarrier)
+            {
                 objectStatuses.Add(status);
-            objectStatusEffector.MaxHpSum += (int)status.MaxHp;
+
+                objectStatusEffector.MaxHpSum += (int)status.MaxHp;
+            }
+               
             
         }
     }

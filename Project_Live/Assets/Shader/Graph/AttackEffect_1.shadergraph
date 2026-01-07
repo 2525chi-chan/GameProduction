@@ -788,7 +788,7 @@
     "m_ShaderOutputName": "Edge1",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 0.0,
+        "x": 0.10999999940395355,
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
@@ -1122,7 +1122,7 @@
     "m_ShaderOutputName": "Edge2",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 0.4000000059604645,
+        "x": -0.12999999523162843,
         "y": 1.0,
         "z": 1.0,
         "w": 1.0
@@ -1959,7 +1959,7 @@
     "m_ShaderOutputName": "Edge1",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 1.0,
+        "x": 0.7900000214576721,
         "y": 0.0,
         "z": 0.0,
         "w": 0.0
@@ -2007,7 +2007,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 1.0,
+    "m_Value": 0.0,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -2279,7 +2279,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 1.0,
+    "m_Value": -0.019999999552965165,
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
@@ -3052,9 +3052,9 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 0.0,
-        "g": 7.129738807678223,
-        "b": 6.457825660705566,
+        "r": 0.34123721718788149,
+        "g": 9.518759727478028,
+        "b": 8.653861999511719,
         "a": 1.0
     },
     "isMainColor": false,
@@ -3248,7 +3248,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "X",
     "m_StageCapability": 3,
-    "m_Value": 1.0,
+    "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -3690,9 +3690,9 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 16.0,
-        "g": 0.0,
-        "b": 12.10479736328125,
+        "r": 0.0,
+        "g": 42.72250747680664,
+        "b": 30.24807357788086,
         "a": 0.0
     },
     "isMainColor": false,
@@ -3794,7 +3794,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.8399999737739563,
+    "m_Value": 0.6499999761581421,
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
@@ -4140,7 +4140,7 @@
     "m_ShaderOutputName": "Edge2",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": 0.30000001192092898,
+        "x": 0.3700000047683716,
         "y": 1.0,
         "z": 1.0,
         "w": 1.0
