@@ -39,11 +39,6 @@ public class CheeringComment  :ReplyCommentBase
         SetCommentAction();
     }
 
-    void Update()
-    {
-        //返信コメント共通のエリア判定部
-        CheckInArea();
-    }
     private void SetCommentAction()     //応援コメントの効果設定関数
     {
         thisButton.onClick.RemoveAllListeners();    // 念のためリスナーをクリア
