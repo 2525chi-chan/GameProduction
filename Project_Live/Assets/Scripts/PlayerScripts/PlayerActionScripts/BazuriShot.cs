@@ -149,11 +149,12 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
     public void TryBazuriShot()
     {
 
-        if (bazuriCoroutine != null)
-        {
-            StopCoroutine(bazuriCoroutine);
-        }
-        if (currentStock > 0&&countCoolTime>coolTime)
+        //if (bazuriCoroutine = null)
+        //{
+        //    StopCoroutine(bazuriCoroutine);
+          
+        //}
+        if (currentStock > 0&&countCoolTime>coolTime&&bazuriCoroutine==null)
         {
            talkPlayer.PlayTalk("BazuriShot_Before");
             bazuriCoroutine = StartCoroutine(BazuriModeRoutine());
@@ -376,6 +377,7 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
             slowTimeCoroutine = null;
         }
         // ResetCamera();
+        bazuriCoroutine = null;
     }
     private void ResetCamera()//�J�����ʒu�A��]�̏�����
     {

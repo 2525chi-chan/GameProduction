@@ -34,6 +34,7 @@ public class EnemyIdentifier : MonoBehaviour
         {
             EnemyRegistry.Unregister(gameObject, prefabReference, moveType);
             isRegistered = false;
+            if (EnemyCountManager.instance == null) return;
             EnemyCountManager.instance.UnregisterEnemy(this.gameObject);
         }
     }

@@ -96,6 +96,14 @@ PrefabInstance:
       propertyPath: agility
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4785225302605469189, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: rootObject
+      value: 
+      objectReference: {fileID: 3455016139451806143}
+    - target: {fileID: 4785225302605469189, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: defaultMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7669845e0036da14a962a1e5822dcdfe, type: 2}
     - target: {fileID: 6637680128984497869, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_Avatar
       value: 
@@ -745,6 +753,11 @@ CharacterJoint:
 --- !u!4 &3378675117958414897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 253cb8bae1dd1a14684acbc6eb7c547d, type: 3}
+  m_PrefabInstance: {fileID: 2984143153107412442}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3455016139451806143 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8747291488475048859, guid: 253cb8bae1dd1a14684acbc6eb7c547d, type: 3}
   m_PrefabInstance: {fileID: 2984143153107412442}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &3944156272983408408 stripped

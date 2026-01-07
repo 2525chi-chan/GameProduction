@@ -112,6 +112,18 @@ PrefabInstance:
       propertyPath: agility
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 4785225302605469189, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: rootObject
+      value: 
+      objectReference: {fileID: 5818911166475025115}
+    - target: {fileID: 4785225302605469189, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: targetMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: bd48303f8be74944496fef3d3b4e8691, type: 2}
+    - target: {fileID: 4785225302605469189, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: defaultMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: de9617807cf37f948898e9013590b6dc, type: 2}
     - target: {fileID: 5049416632878525737, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_ConnectedBody
       value: 
@@ -567,6 +579,11 @@ CharacterJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!1 &5818911166475025115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8645582273692593475, guid: 544a7fda048605e43856abd125ee13a2, type: 3}
+  m_PrefabInstance: {fileID: 6396330117193246822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6533801658152230739 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 173649889961064245, guid: 544a7fda048605e43856abd125ee13a2, type: 3}

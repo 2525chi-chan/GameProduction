@@ -132,6 +132,18 @@ PrefabInstance:
       propertyPath: type
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4785225302605469189, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: rootObject
+      value: 
+      objectReference: {fileID: 8666860882491149633}
+    - target: {fileID: 4785225302605469189, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: targetMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 7697a1d1cd715d44c8e1ee8bc665c337, type: 2}
+    - target: {fileID: 4785225302605469189, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: defaultMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 86e62cb85e6abba469928eb5312d52b1, type: 2}
     - target: {fileID: 5567373102757557537, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_ConnectedBody
       value: 
@@ -1086,6 +1098,11 @@ CharacterJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!1 &8666860882491149633 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4312210159777543707, guid: eae0ca902b476944b85f0d87d9275c22, type: 3}
+  m_PrefabInstance: {fileID: 4350780401770038436}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8995127275713504974
 PrefabInstance:
   m_ObjectHideFlags: 0

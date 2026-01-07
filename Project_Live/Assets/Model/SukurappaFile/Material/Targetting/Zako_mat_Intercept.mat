@@ -108,7 +108,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emissive_Tex:
-        m_Texture: {fileID: 2800000, guid: a44d7390380c88642bba32dd80f45b67, type: 3}
+        m_Texture: {fileID: 2800000, guid: 68708fe0b9186704680aed3f0ae01b0d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightMap:
@@ -164,7 +164,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Outline_Sampler:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3833ff5143dc74947b349ea89cd1304f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
@@ -333,7 +333,7 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _EnvironmentReflections: 1
-    - _Farthest_Distance: 87.82
+    - _Farthest_Distance: 100
     - _FirstShadeOverridden: 0
     - _FirstShadeVisible: 1
     - _GI_Intensity: 0
@@ -375,7 +375,7 @@ Material:
     - _Is_LightColor_Base: 1
     - _Is_LightColor_HighColor: 1
     - _Is_LightColor_MatCap: 1
-    - _Is_LightColor_Outline: 1
+    - _Is_LightColor_Outline: 0
     - _Is_LightColor_RimLight: 1
     - _Is_NormalMapForMatCap: 0
     - _Is_NormalMapToBase: 0
@@ -405,7 +405,8 @@ Material:
     - _Offset_Z: 0
     - _OutlineOverridden: 0
     - _OutlineVisible: 1
-    - _Outline_Width: 21.21
+    - _Outline_ScrollSpeed: 0
+    - _Outline_Width: 10
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -464,6 +465,16 @@ Material:
     - _SupportDecals: 1
     - _Surface: 0
     - _SurfaceType: 0
+    - _TessEdgeLength: 5
+    - _TessExtrusionAmount: 0
+    - _TessPhongStrength: 0.5
+    - _TessellationBackFaceCullEpsilon: -0.25
+    - _TessellationFactor: 4
+    - _TessellationFactorMaxDistance: 50
+    - _TessellationFactorMinDistance: 20
+    - _TessellationFactorTriangleSize: 100
+    - _TessellationMode: 0
+    - _TessellationShapeFactor: 0.75
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
@@ -526,7 +537,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
-    - _Emissive_Color: {r: 0.6675392, g: 0.6675392, b: 0.6675392, a: 1}
+    - _Emissive_Color: {r: 7.999999, g: 0, b: 7.961604, a: 1}
     - _FirstShadeMaskColor: {r: 0, g: 1, b: 1, a: 1}
     - _HighColor: {r: 0, g: 0, b: 0, a: 1}
     - _HighlightMaskColor: {r: 1, g: 1, b: 0, a: 1}
@@ -535,7 +546,8 @@ Material:
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineMaskColor: {r: 0, g: 0, b: 0, a: 1}
     - _Outline_Color: {r: 1, g: 0, b: 0, a: 1}
-    - _RimLightColor: {r: 0.15294118, g: 0.6156863, b: 0.49019608, a: 1}
+    - _Outline_ScrollDir: {r: 1, g: 0, b: 0, a: 0}
+    - _RimLightColor: {r: 0.15294111, g: 0.6156863, b: 0.490196, a: 1}
     - _RimLightMaskColor: {r: 1, g: 0, b: 1, a: 1}
     - _SecondShadeMaskColor: {r: 0, g: 0, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

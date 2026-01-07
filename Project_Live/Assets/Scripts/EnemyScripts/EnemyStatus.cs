@@ -37,6 +37,8 @@ public class EnemyStatus : CharacterStatus
     public int KnockbackThresholdCount { get { return knockbackThresholdCount; } set { knockbackThresholdCount = value; } }
     public float KnockbackRecoveryTime { get { return knockbackRecoveryTime; } }
 
+    public bool isTarget;
+
     private void Start()
     {
         pos = this.transform;
