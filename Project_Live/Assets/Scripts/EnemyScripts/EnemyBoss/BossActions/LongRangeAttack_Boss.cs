@@ -11,8 +11,6 @@ public class LongRangeAttack_Boss : MonoBehaviour
     [SerializeField] Transform attackPosition;
     [Header("照準をプレイヤーに合わせる時間")]
     [SerializeField] float aimRotationDuration = 2f;
-    [Header("攻撃するまでの待ち時間")]
-    [SerializeField] float attackDuration = 3f;
     [Header("攻撃判定の持続時間")]
     [SerializeField] float attackEnabledTime = 0.2f;
     [Header("攻撃後のクールタイム")]
@@ -27,7 +25,6 @@ public class LongRangeAttack_Boss : MonoBehaviour
     [SerializeField] AttackWarningController attackWarningController;
 
     AttackState currentAttackState = AttackState.Move;
-    AttackState previousAttackState;
     float currentTimer = 0f; //経過時間の測定用
     bool hasArrived = false; //目標地点に到達したか
     bool isActive = false;
@@ -37,10 +34,8 @@ public class LongRangeAttack_Boss : MonoBehaviour
     Transform playerPosition; //プレイヤーの位置
 
     public bool IsActive { get { return isActive; } set { isActive = value; } }
-
+    public bool IsAttacked { get; set; }
     public AttackState CurrentAttackState { get { return currentAttackState; } set { currentAttackState = value; } }
-    public AttackState PreviousAttackState { get { return previousAttackState; } }
-
     public void SetStartState()
     {
         currentAttackState = AttackState.Move;
@@ -66,7 +61,7 @@ public class LongRangeAttack_Boss : MonoBehaviour
                     Vector3 targetXZ = new Vector3(targetPosition.position.x, 0f, targetPosition.position.z);
                     float xzDistance = Vector3.Distance(selfXZ, targetXZ);
 
-                    if (xzDistance <= arriveThreshold)
+                    if (xzDistance <= arriveThreshold) //距離差が一定値以下になったら
                     {
                         hasArrived = true;
                         currentTimer = 0f;
@@ -106,15 +101,7 @@ public class LongRangeAttack_Boss : MonoBehaviour
                 }
                 break;
 
-            case AttackState.Attack: //攻撃状態
-                currentTimer += Time.deltaTime;
-
-                if (currentTimer >= attackDuration)
-                {
-                    InstanceAttack();
-                    currentTimer = 0f;
-                    currentAttackState = AttackState.Cooldown;
-                }
+            case AttackState.Attack: //攻撃状態（LongRangeAttackState_EnemyBossのほうで主な処理を担当する）
                 break;
 
             case AttackState.Cooldown: //クールダウン状態
@@ -122,8 +109,9 @@ public class LongRangeAttack_Boss : MonoBehaviour
 
                 if (currentTimer >= attackCoolTime)
                 {
+                    IsAttacked = false;
                     currentTimer = 0f;
-                    stateMachine?.actionEvents?.BossAttackFinishEvent();
+                    stateMachine?.actionEvents?.BossAttackFinishEvent(); //次の攻撃行動の呼び出し
                     currentAttackState = AttackState.Idle;                    
                 }
                 break;
@@ -132,14 +120,12 @@ public class LongRangeAttack_Boss : MonoBehaviour
                 currentTimer = 0f;
                 stateMachine?.actionEvents?.BossAttackStartEvent();
                 isActive = false;
+                IsAttacked = false;
                 break;
         }
-
-        if (previousAttackState != currentAttackState)
-            previousAttackState = currentAttackState;
     }
 
-    public void InstanceAttack() //攻撃の生成
+    public void InstanceLongRangeAttack() //攻撃の生成
     {
         GameObject attackObj = Instantiate(attackPrefab, attackPosition.position, attackPosition.rotation);
         Destroy(attackObj, attackEnabledTime);

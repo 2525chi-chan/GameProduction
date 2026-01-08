@@ -11,8 +11,6 @@ public class MeteorFallAttack_Boss : MonoBehaviour
     [SerializeField] GameObject meteorPrefab;
     [Header("落石範囲（コライダー）")]
     [SerializeField] BoxCollider fallArea;
-    [Header("地上高さ（y座標）")]
-    [SerializeField] float groundY = 0f;
     [Header("隕石生成時の初期高度")]
     [SerializeField] float spawnHeight = 30f;
 
@@ -20,8 +18,8 @@ public class MeteorFallAttack_Boss : MonoBehaviour
     [SerializeField] int meteorCount = 5;
     [Header("隕石同士の距離")]
     [SerializeField] float minDistanceMeteors = 3f;
-    [Header("生成から落下開始までの待機時間")]
-    [SerializeField] float fallDelay = 1.5f;
+    //[Header("生成から落下開始までの待機時間")]
+    //[SerializeField] float fallDelay = 1.5f;
     [Header("地面に着弾するまでの時間")]
     [SerializeField] float timeToGround = 5f;
     [Header("1つ目の隕石落下後、次の隕石が落下するまでの間隔")]
@@ -29,8 +27,6 @@ public class MeteorFallAttack_Boss : MonoBehaviour
 
     [Header("照準をプレイヤーに合わせる時間")]
     [SerializeField] float aimRotationDuration = 2f;
-    [Header("攻撃するまでの待ち時間")]
-    [SerializeField] float attackDuration = 3f;
     [Header("攻撃後のクールタイム")]
     [SerializeField] float attackCoolTime = 1f;
     [Header("ボスの位置")]
@@ -43,21 +39,23 @@ public class MeteorFallAttack_Boss : MonoBehaviour
     [SerializeField] MultiAttackWarningController multiWarningController;
 
     AttackState currentAttackState = AttackState.Move;
-    AttackState previousAttackState;
     float currentTimer = 0f;
     bool hasArrived = false;
     bool isActive = false;
     float arriveThreshold = 0.5f;
+    float groundY = 0f;
     Coroutine meteorCoroutine;
     string actionPointTag = "ActionPoint_EnemyBoss";
     Transform targetPosition;
     Transform playerPosition;
     List<Vector3> meteorPositions = new List<Vector3>();
     List<GameObject> warningInstances = new List<GameObject>();
+    List<GameObject> meteors;
 
+    //public float FallDelay { get { return fallDelay; } }
     public bool IsActive { get { return isActive; } set { isActive = value; } }
+    public bool IsAttacked { get; set; }
     public AttackState CurrentAttackState { get { return currentAttackState; } set { currentAttackState = value; } }
-    public AttackState PreviousAttackState { get { return previousAttackState; } }
 
     public void SetStartState()
     {
@@ -71,8 +69,6 @@ public class MeteorFallAttack_Boss : MonoBehaviour
         if (stateMachine == null)
             stateMachine = GetComponentInParent<EnemyActionStateMachine>();
 
-        Debug.Log($"[Meteor StateProcess] Active:{isActive}, Dead:{status.IsDead}, State:{currentAttackState}, targetPos:{targetPosition != null}, playerPos:{playerPosition != null}");
-
         if (status.IsDead || !isActive) return;
 
         switch (currentAttackState)
@@ -82,8 +78,6 @@ public class MeteorFallAttack_Boss : MonoBehaviour
 
                 if (!hasArrived)
                 {
-                    Debug.Log("移動状態");
-
                     Vector3 selfXZ = new Vector3(bossPos.position.x, 0f, bossPos.position.z);
                     Vector3 targetXZ = new Vector3(targetPosition.position.x, 0f, targetPosition.position.z);
                     float xzDistance = Vector3.Distance(selfXZ, targetXZ);
@@ -138,33 +132,28 @@ public class MeteorFallAttack_Boss : MonoBehaviour
                     }
 
                     if (!overlaps)
-                    {
                         meteorPositions.Add(pos);
-                    }
 
                     attempt++;
                 }
 
-                warningInstances = multiWarningController.CreateMultiWarnings(meteorPositions);           
+                warningInstances = multiWarningController.CreateMultiWarnings(meteorPositions);
+                PreGenerateMeteors();
+                                
                 currentAttackState = AttackState.Attack;
-                currentTimer = 0f;
-                 
+                currentTimer = 0f;                 
                 break;
 
             case AttackState.Attack:
-                currentTimer += Time.deltaTime;
-                if (currentTimer >= attackDuration)
-                {
-                    InstanceMeteorAttack();
-                    currentTimer = 0f;
-                    currentAttackState = AttackState.Cooldown;
-                }
+                //InstanceMeteorAttack();
                 break;
 
             case AttackState.Cooldown:
                 currentTimer += Time.deltaTime;
+
                 if (currentTimer >= attackCoolTime)
                 {
+                    IsAttacked = false;
                     currentTimer = 0f;
                     stateMachine?.actionEvents?.BossAttackFinishEvent();
                     currentAttackState = AttackState.Idle;
@@ -175,55 +164,62 @@ public class MeteorFallAttack_Boss : MonoBehaviour
                 currentTimer = 0f;
                 stateMachine?.actionEvents?.BossAttackStartEvent();
                 isActive = false;
+                IsAttacked = false;
                 break;
         }
-
-        if (previousAttackState != currentAttackState)
-            previousAttackState = currentAttackState;
     }
 
-    public void InstanceMeteorAttack()
+    void PreGenerateMeteors() //隕石の生成処理
     {
-        if (meteorCoroutine != null)
-            StopCoroutine(meteorCoroutine);
-        meteorCoroutine = StartCoroutine(MeteorFallCoroutine());
-    }
-
-    IEnumerator MeteorFallCoroutine()
-    {
-        List<GameObject> meteors = new List<GameObject>();
+        meteors = new List<GameObject>();
 
         for (int i = 0; i < meteorCount; i++)
         {
             Vector3 groundPosXZ = meteorPositions[i];
-
             Vector3 spawnPos = new Vector3(groundPosXZ.x, spawnHeight, groundPosXZ.z);
             GameObject meteorObj = Instantiate(meteorPrefab, spawnPos, Quaternion.identity);
             meteors.Add(meteorObj);
-            meteorObj.SetActive(false); // 最初は非表示
+            meteorObj.SetActive(false);
 
-            var hitbox = meteorObj.GetComponentInChildren<HitboxTrigger>();
-            if (hitbox != null)
-                hitbox.SetOwnerMoveType(mover.MoveType);
+            var hitbox = meteorObj.GetComponent<HitboxTrigger>();
+            if (hitbox != null) hitbox.SetOwnerMoveType(EnemyMover.EnemyMoveType.PlayerChase);
 
             var meteor = meteorObj.GetComponent<Meteor>();
             if (meteor != null && i < warningInstances.Count)
                 meteor.SetLinkedWarning(warningInstances[i]);
         }
+    }
 
-        yield return new WaitForSeconds(fallDelay);
+    public void StartFirstMeteorFall() //1つ目の隕石を落下後、続けて隕石を落としていく処理
+    {
+        if (meteors == null || meteors.Count == 0) return;
 
-        for (int i = 0; i < meteorCount; i++)
+        GameObject firstMeteor = meteors[0];
+        firstMeteor.SetActive(true);
+
+        Rigidbody rb = firstMeteor.GetComponent<Rigidbody>();
+
+        if (rb != null)
         {
+            rb.isKinematic = false;
+            float fallVelocity = (spawnHeight - groundY) / timeToGround;
+            rb.linearVelocity = new Vector3(0, -fallVelocity, 0);
+        }
+
+        StartCoroutine(SequentialMeteorFall(1)); //2個目以降の隕石の落下
+    }
+
+    IEnumerator SequentialMeteorFall(int startIndex) //2個目以降の隕石の落下処理
+    {
+        for (int i = startIndex; i < meteorCount; i++)
+        {
+            yield return new WaitForSeconds(meteorInterval);
             if (meteors[i] != null)
                 StartCoroutine(FallMeteor(meteors[i]));
-
-            if (i < meteorCount - 1)
-                yield return new WaitForSeconds(meteorInterval);
         }
     }
 
-    IEnumerator FallMeteor(GameObject meteor)
+    IEnumerator FallMeteor(GameObject meteor) //生成された隕石の有効化、地面に落下させる処理
     {
         // 出現
         meteor.SetActive(true);
@@ -240,17 +236,12 @@ public class MeteorFallAttack_Boss : MonoBehaviour
             yield return null;
 
         var m = meteor.GetComponent<Meteor>();
-        if (m != null)
-            m.DestroyLinkedWarning();
+        if (m != null) m.DestroyLinkedWarning(); //生成された隕石プレハブと対応する予告プレハブを結び付ける
 
-        else
-        {
-            Destroy(meteor);
-            Debug.Log("meteorコンポーネントが取得できませんでした。");
-        }
+        else Destroy(meteor);
     }
 
-    Vector3 GetRandomGroundPosition()
+    Vector3 GetRandomGroundPosition() //ランダムな位置の取得（y軸における高さは一定）
     {
         if (fallArea == null) return Vector3.zero;
         Bounds bounds = fallArea.bounds;

@@ -28,12 +28,26 @@ public class AreaAttackState_EnemyBoss : IEnemyState
     public void Update()
     {
         wideAreaAttack.StateProcess();
-        //mover.MoveStateProcess();
 
         if (!isPlayed && wideAreaAttack.CurrentAttackState == WideAreaAttack_Boss.AttackState.Attack)
         {
             isPlayed = true;
-            anim.PlayNormalAttack();
+            anim.PlayAreaAttack();
+        }
+
+        var animatorState = anim.Animator.GetCurrentAnimatorStateInfo(0);
+
+        if (animatorState.normalizedTime >= 0.44f && animatorState.IsName("Enemy_AreaAttack_Boss") && !wideAreaAttack.IsAttacked)
+        {
+            wideAreaAttack.InstanceWideAreaAttack();
+            wideAreaAttack.IsAttacked = true;
+        }
+
+        if (animatorState.IsName("Idle") && wideAreaAttack.IsAttacked)
+        {
+            wideAreaAttack.CurrentAttackState = WideAreaAttack_Boss.AttackState.Cooldown;
+            wideAreaAttack.IsAttacked = false;
+            isPlayed = false;
         }
     }
 

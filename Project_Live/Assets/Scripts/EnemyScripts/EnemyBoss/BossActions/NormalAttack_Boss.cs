@@ -10,8 +10,6 @@ public class NormalAttack_Boss : MonoBehaviour
     [SerializeField] GameObject attackPrefab;
     [Header("攻撃を生成する位置")]
     [SerializeField] Transform attackPosition;
-    [Header("攻撃するまでの待ち時間")]
-    [SerializeField] float attackDuration = 3f;
     [Header("攻撃判定の持続時間")]
     [SerializeField] float attackEnabledTime = 0.2f;
     [Header("攻撃後のクールタイム")]
@@ -30,20 +28,16 @@ public class NormalAttack_Boss : MonoBehaviour
     [SerializeField] AttackWarningController attackWarningController;
 
     AttackState currentAttackState = AttackState.Search;
-    AttackState previousAttackState;
-
     GameObject attackObj;
-
     float currentTimer = 0f; //経過時間の測定用
     bool isActive = false; //このクラスの処理が有効か
 
     public bool IsActive { get { return isActive; } set { isActive = value; } }
+    public bool IsAttacked { get; set; }
     public AttackState CurrentAttackState { get { return currentAttackState; } set { currentAttackState = value; } }
-    public AttackState PreviousAttackState { get { return previousAttackState; } }
     public void SetStartState()
     {
         currentAttackState = AttackState.Search;
-        previousAttackState = currentAttackState;
     }
 
     void OnTriggerStay(Collider other) //攻撃判定を行うエリアにプレイヤーが侵入しているときの処理
@@ -53,7 +47,7 @@ public class NormalAttack_Boss : MonoBehaviour
         if (!other.CompareTag("Player")) return;
 
         currentTimer = 0f;
-
+        mover.ToggleActive(false, true);
         currentAttackState = AttackState.Idle;
         //Debug.Log("攻撃待機状態に移行");
     }
@@ -67,19 +61,19 @@ public class NormalAttack_Boss : MonoBehaviour
 
         switch (currentAttackState)
         {
-            case AttackState.Search:
-                mover.MoveStateProcess();
+            case AttackState.Search: //探索状態
+                mover.MoveStateProcess(); //移動処理
                 break;
 
             case AttackState.Idle: //予告表示を行うまでの待機状態
                 currentTimer += Time.deltaTime;
+                mover.MoveStateProcess();
                 //プレイヤーを感知し、予告表示を行うまでの時間
                 if (currentTimer >= triggerDuration)
                 {
                     currentAttackState = AttackState.ShowAttackArea;
                     currentTimer = 0f;
                     //Debug.Log("攻撃予告状態に移行");
-                    //actionEvents.AttackEvent();
                     mover.ToggleActive(false, false);
                 }
                 break;
@@ -98,15 +92,6 @@ public class NormalAttack_Boss : MonoBehaviour
                 break;
 
             case AttackState.Attack: //攻撃状態
-                currentTimer += Time.deltaTime;
-
-                if (currentTimer >= attackDuration)
-                {
-                    InstanceAttack();
-                    currentTimer = 0f;
-                    currentAttackState = AttackState.Cooldown;
-                    //Debug.Log("クールダウン状態に移行");
-                }
                 break;
 
             case AttackState.Cooldown: //クールダウン状態
@@ -114,9 +99,9 @@ public class NormalAttack_Boss : MonoBehaviour
 
                 if (currentTimer >= attackCoolTime)
                 {
+                    IsAttacked = false;
                     currentTimer = 0f;
-                    currentAttackState = AttackState.Idle;
-                    //Debug.Log("攻撃待機状態に移行");
+                    currentAttackState = AttackState.Search;
 
                     mover.ToggleActive(true, true);
                     stateMachine?.actionEvents?.BossAttackFinishEvent();
@@ -124,18 +109,17 @@ public class NormalAttack_Boss : MonoBehaviour
                 break;
 
             case AttackState.Exit: //別の攻撃方法に移行時に呼ぶ処理
+                currentTimer = 0f;
                 mover.ToggleActive(true, true);
                 stateMachine?.actionEvents?.BossAttackStartEvent();
                 isActive = false;
+                IsAttacked = false;
                 break;
         }
-
-        if (previousAttackState != currentAttackState)
-            previousAttackState = currentAttackState;
     }
 
 
-    public void InstanceAttack() //攻撃処理
+    public void InstanceNormalAttack() //攻撃の生成処理
     {
         attackObj = Instantiate(attackPrefab, attackPosition.position, attackPosition.rotation);
         Destroy(attackObj, attackEnabledTime);
