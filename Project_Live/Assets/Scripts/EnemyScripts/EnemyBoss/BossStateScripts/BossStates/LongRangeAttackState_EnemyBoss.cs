@@ -39,7 +39,7 @@ public class LongRangeAttackState_EnemyBoss : IEnemyState
 
     public void Exit()
     {
-        longRangeAttack.IsActive = false;
+        longRangeAttack.CurrentAttackState = LongRangeAttack_Boss.AttackState.Exit;
         //Debug.Log("UŒ‚ó‘ÔI—¹");
     }
 }

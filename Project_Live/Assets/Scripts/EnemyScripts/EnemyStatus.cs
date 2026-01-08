@@ -22,6 +22,8 @@ public class EnemyStatus : CharacterStatus
     [SerializeField] EnemyDeathHandler deathHandler;
     [Header("地面についてからラグドール状態を解除するまでの時間")]
     [SerializeField]float returnRagdollTime = 1f;
+    [Header("のけぞるかどうか")]
+    [SerializeField] bool isKnockbackEnable = true;
     [Header("のけぞるまでの被ダメージ回数")]
     [SerializeField] int knockbackThresholdCount = 1;
     [Header("のけぞりから回復する時間")]
@@ -74,7 +76,7 @@ public class EnemyStatus : CharacterStatus
             ragdollCount = 0;
         }
 
-        if (currentDamageCount >= knockbackThresholdCount)
+        if (isKnockbackEnable && currentDamageCount >= knockbackThresholdCount)
         {
             currentDamageCount = 0;
             actionEvents.KnockbackEvent(); //のけぞり状態への遷移

@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b287a9dba6980984f8eb1bf30a7d6c24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxScale: 30
+  maxScale: 40
   expandSpeed: 100
   destroyOnMaxScale: 0
 --- !u!114 &5306086179325700631
@@ -91,7 +91,6 @@ MonoBehaviour:
   baceForwardKnockbackForce: 50
   baceUpwardKnockbackForce: 120
   baceDownwardKnockbackForce: 0
-  enableForward: 0
   enableSuction: 0
   suctionForce: 10
   damageToTarget: {fileID: 7835967089649186805}
@@ -122,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 414fbc7d6c568614fb95a7458e0b2bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SE: {fileID: 0}
   isRagdoll: 0
 --- !u!33 &6499654661689663358
 MeshFilter:

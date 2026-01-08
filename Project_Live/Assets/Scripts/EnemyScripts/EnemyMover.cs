@@ -25,6 +25,7 @@ public class EnemyMover : MonoBehaviour
 
     [Header("必要なコンポーネント")]
     [SerializeField] EnemyStatus enemyStatus;
+    [SerializeField] EnemyActionStateMachine stateMachine;
 
     private Transform lookTarget; //追いかける対象
     GameObject[] breakables; //破壊できる対象
@@ -72,6 +73,9 @@ public class EnemyMover : MonoBehaviour
         {
             moveTypeTimer = 0f;
             UpdateMoveType(distance);
+
+            if (stateMachine != null && stateMachine.IsBossBehaviour) return;
+
             CallStateEvent();
         }
     }
@@ -162,7 +166,7 @@ public class EnemyMover : MonoBehaviour
 
     public void MoveTowardsPlayer(Transform target)//プレイヤーに向かって移動する
     {
-        if (!isActiveMove || lookTarget == null) return;
+        if (!isActiveMove || target == null) return;
 
         Vector3 targetPos = target.position;
 
@@ -175,11 +179,11 @@ public class EnemyMover : MonoBehaviour
 
     public void LookPlayer(Transform target)//Y軸だけ変える
     {
-        if (!isActiveRotate || lookTarget == null) return;
+        if (!isActiveRotate || target == null) return;
 
         Vector3 playerPos = target.position;
 
-        playerPos.y = lookTarget.transform.position.y;
+        playerPos.y = target.transform.position.y;
 
         Vector3 direction = (playerPos - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(direction);

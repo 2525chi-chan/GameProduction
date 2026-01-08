@@ -4,7 +4,7 @@ using UnityEngine;
 public class WideAreaAttack_Boss : MonoBehaviour
 {
     EnemyActionStateMachine stateMachine;
-    public enum AttackState { Search, Idle, ShowAttackArea, Attack, Cooldown }
+    public enum AttackState { Search, Idle, ShowAttackArea, Attack, Cooldown, Exit}
     
     [Header("攻撃判定を持つオブジェクト")]
     [SerializeField] GameObject attackPrefab;
@@ -41,7 +41,7 @@ public class WideAreaAttack_Boss : MonoBehaviour
     public float AttackCoolTime { get { return attackCoolTime; } }
     public bool IsActive { get { return isActive; } set { isActive = value; } }
 
-    public AttackState CurrentAttackState { get { return currentAttackState; } }
+    public AttackState CurrentAttackState { get { return currentAttackState; } set { currentAttackState = value; } }
     public AttackState PreviousAttackState {  get { return previousAttackState; } }
 
     public void SetStartState()
@@ -77,6 +77,10 @@ public class WideAreaAttack_Boss : MonoBehaviour
 
         switch (currentAttackState)
         {
+            case AttackState.Search:
+                mover.MoveStateProcess();
+                break;
+
             case AttackState.Idle: //予告表示を行うまでの待機状態
                 currentTimer += Time.deltaTime;
                 if (currentTimer >= triggerDuration)
@@ -125,6 +129,13 @@ public class WideAreaAttack_Boss : MonoBehaviour
                     mover.ToggleActive(true, true);
                     stateMachine?.actionEvents?.BossAttackFinishEvent();
                 }
+                break;
+
+            case AttackState.Exit: //別の攻撃方法に移行時に呼ぶ処理
+                currentTimer = 0f;
+                mover.ToggleActive(true, true);
+                stateMachine?.actionEvents?.BossAttackStartEvent();
+                isActive = false;
                 break;
         }
 

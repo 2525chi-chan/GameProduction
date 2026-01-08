@@ -3,7 +3,7 @@ using UnityEngine;
 public class LongRangeAttack_Boss : MonoBehaviour
 {
     EnemyActionStateMachine stateMachine;
-    public enum AttackState { Move, Idle, ShowAttackArea, Attack, Cooldown }
+    public enum AttackState { Move, Idle, ShowAttackArea, Attack, Cooldown, Exit}
     
     [Header("攻撃判定を持つオブジェクト")]
     [SerializeField] GameObject attackPrefab;
@@ -17,6 +17,8 @@ public class LongRangeAttack_Boss : MonoBehaviour
     [SerializeField] float attackEnabledTime = 0.2f;
     [Header("攻撃後のクールタイム")]
     [SerializeField] float attackCoolTime = 1f;
+    [Header("ボスの位置")]
+    [SerializeField] Transform bossPos;
 
     [Header("必要なコンポーネント")]
     [SerializeField] EnemyStatus status;
@@ -36,12 +38,14 @@ public class LongRangeAttack_Boss : MonoBehaviour
 
     public bool IsActive { get { return isActive; } set { isActive = value; } }
 
-    public AttackState CurrentAttackState { get { return currentAttackState; } }
+    public AttackState CurrentAttackState { get { return currentAttackState; } set { currentAttackState = value; } }
     public AttackState PreviousAttackState { get { return previousAttackState; } }
 
     public void SetStartState()
     {
         currentAttackState = AttackState.Move;
+        hasArrived = false;
+        targetPosition = null;
     }
 
     public void StateProcess()
@@ -54,30 +58,34 @@ public class LongRangeAttack_Boss : MonoBehaviour
         switch (currentAttackState)    
         {  
             case AttackState.Move: //攻撃開始地点に移動する状態
-                mover.MoveTowardsPlayer(targetPosition);
-                mover.LookPlayer(targetPosition);
-                //Debug.Log("移動状態");
+                if (targetPosition == null) SetTargetPosition();
 
                 if (!hasArrived)
                 {
-                    Vector3 selfXZ = new Vector3(transform.position.x, 0f, transform.position.z);
+                    Vector3 selfXZ = new Vector3(bossPos.position.x, 0f, bossPos.position.z);
                     Vector3 targetXZ = new Vector3(targetPosition.position.x, 0f, targetPosition.position.z);
                     float xzDistance = Vector3.Distance(selfXZ, targetXZ);
 
                     if (xzDistance <= arriveThreshold)
                     {
                         hasArrived = true;
-                        currentAttackState = AttackState.Idle;
                         currentTimer = 0f;
                     }
+
+                    else
+                    {
+                        mover.MoveTowardsPlayer(targetPosition);
+                        mover.LookPlayer(targetPosition);
+                    }
                 }
+
+                if (hasArrived) currentAttackState = AttackState.Idle;
                 break;
 
             case AttackState.Idle: //待機状態
                 hasArrived = false;
                 currentTimer += Time.deltaTime;
                 mover.LookPlayer(playerPosition);
-                //Debug.Log("待機状態");
 
                 if (currentTimer >= aimRotationDuration)
                 {
@@ -88,10 +96,7 @@ public class LongRangeAttack_Boss : MonoBehaviour
 
             case AttackState.ShowAttackArea: //攻撃予告を表示している状態
                 if (!attackWarningController.IsWarningActive && !attackWarningController.IsWarningFinished)
-                {
-                    //Debug.Log("予告状態");
                     attackWarningController.ShowAttackWarning(attackPosition);
-                }
 
                 if (attackWarningController.IsWarningFinished)
                 {
@@ -103,7 +108,7 @@ public class LongRangeAttack_Boss : MonoBehaviour
 
             case AttackState.Attack: //攻撃状態
                 currentTimer += Time.deltaTime;
-                //Debug.Log("攻撃状態");
+
                 if (currentTimer >= attackDuration)
                 {
                     InstanceAttack();
@@ -114,13 +119,19 @@ public class LongRangeAttack_Boss : MonoBehaviour
 
             case AttackState.Cooldown: //クールダウン状態
                 currentTimer += Time.deltaTime;
-                //Debug.Log("クールダウン状態");
+
                 if (currentTimer >= attackCoolTime)
                 {
                     currentTimer = 0f;
-                    currentAttackState = AttackState.Idle;
                     stateMachine?.actionEvents?.BossAttackFinishEvent();
+                    currentAttackState = AttackState.Idle;                    
                 }
+                break;
+
+            case AttackState.Exit: //別の攻撃方法に移行時に呼ぶ処理
+                currentTimer = 0f;
+                stateMachine?.actionEvents?.BossAttackStartEvent();
+                isActive = false;
                 break;
         }
 
