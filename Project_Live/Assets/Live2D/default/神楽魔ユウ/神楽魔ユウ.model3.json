@@ -6,13 +6,78 @@
 			"神楽魔ユウ.2048/texture_00.png"
 		],
 		"Physics": "神楽魔ユウ.physics3.json",
-		"DisplayInfo": "神楽魔ユウ.cdi3.json"
+		"DisplayInfo": "神楽魔ユウ.cdi3.json",
+		"Expressions": [
+			{
+				"Name": "exp_01_happy",
+				"File": "expressions/exp_01_happy.exp3.json"
+			},
+			{
+				"Name": "exp_02_angry",
+				"File": "expressions/exp_02_angry.exp3.json"
+			},
+			{
+				"Name": "exp_03_sad",
+				"File": "expressions/exp_03_sad.exp3.json"
+			},
+			{
+				"Name": "exp_04_joy",
+				"File": "expressions/exp_04_joy.exp3.json"
+			},
+			{
+				"Name": "mo_blink",
+				"File": "expressions/mo_blink.exp3.json"
+			}
+		],
+		"Motions": {
+			"Motion": [
+				{
+					"File": "mo_attack02.motion3.json"
+				},
+				{
+					"File": "mo_attack03.motion3.json"
+				},
+				{
+					"File": "mo_attack04.motion3.json"
+				},
+				{
+					"File": "mo_blink.motion3.json"
+				},
+				{
+					"File": "mo_body_yure01.motion3.json"
+				},
+				{
+					"File": "mo_body_yure02.motion3.json"
+				},
+				{
+					"File": "mo_damage_01.motion3.json"
+				},
+				{
+					"File": "mo_damage_02.motion3.json"
+				},
+				{
+					"File": "mo_kokyu.motion3.json"
+				},
+				{
+					"File": "mo_nervous.motion3.json"
+				},
+				{
+					"File": "mo_attack01.motion3.json"
+				}
+			]
+		}
 	},
 	"Groups": [
 		{
 			"Target": "Parameter",
 			"Name": "EyeBlink",
 			"Ids": []
+		},
+		{
+			"Target": "Parameter",
+			"Name": "LipSync",
+			"Ids": []
 		}
-	]
+	],
+	"HitAreas": []
 }

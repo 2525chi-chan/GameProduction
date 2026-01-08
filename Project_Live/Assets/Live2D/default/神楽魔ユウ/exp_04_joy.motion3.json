@@ -1,0 +1,152 @@
+{
+	"Version": 3,
+	"Meta": {
+		"Duration": 1.967,
+		"Fps": 30.0,
+		"Loop": true,
+		"AreBeziersRestricted": true,
+		"CurveCount": 6,
+		"TotalSegmentCount": 16,
+		"TotalPointCount": 42,
+		"UserDataCount": 0,
+		"TotalUserDataSize": 0
+	},
+	"Curves": [
+		{
+			"Target": "Parameter",
+			"Id": "ParamMouthForm",
+			"Segments": [
+				0,
+				0,
+				1,
+				0.078,
+				0,
+				0.156,
+				1,
+				0.233,
+				1,
+				1,
+				0.767,
+				1,
+				1.3,
+				1,
+				1.833,
+				1,
+				0,
+				1.967,
+				1
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Id": "ParamMouthOpenY",
+			"Segments": [
+				0,
+				0,
+				1,
+				0.078,
+				0,
+				0.156,
+				1,
+				0.233,
+				1,
+				1,
+				0.767,
+				1,
+				1.3,
+				1,
+				1.833,
+				1,
+				0,
+				1.967,
+				1
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Id": "Param",
+			"Segments": [
+				0,
+				0,
+				1,
+				0.611,
+				0,
+				1.222,
+				0,
+				1.833,
+				0,
+				0,
+				1.967,
+				0
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Id": "cry",
+			"Segments": [
+				0,
+				0,
+				1,
+				0.611,
+				0,
+				1.222,
+				0,
+				1.833,
+				0,
+				0,
+				1.967,
+				0
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Id": "exciting",
+			"Segments": [
+				0,
+				0,
+				1,
+				0.078,
+				0,
+				0.156,
+				1,
+				0.233,
+				1,
+				1,
+				0.767,
+				1,
+				1.3,
+				1,
+				1.833,
+				1,
+				0,
+				1.967,
+				1
+			]
+		},
+		{
+			"Target": "Parameter",
+			"Id": "ParamCheek",
+			"Segments": [
+				0,
+				0,
+				1,
+				0.144,
+				0,
+				0.289,
+				1,
+				0.433,
+				1,
+				1,
+				0.9,
+				1,
+				1.367,
+				1,
+				1.833,
+				1,
+				0,
+				1.967,
+				1
+			]
+		}
+	]
+}

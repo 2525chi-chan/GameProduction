@@ -68,10 +68,12 @@ public class Live2DController : MonoBehaviour//Live2DÇÃìÆÇ´Ç∆ï\èÓÇÃêßå‰
 
         if (!motions.Contains(data)) return;
 
-        // Debug.Log("PlayMotion:" + name);
+         Debug.Log(data.motionName);
         motionController.PlayAnimation(data.animationClip, layerIndex: 0, priority: priority, isLoop: false);
         currentMotionIndex = motions.IndexOf(data);
         currentPlayingMotion = name;
+        expressionController.CurrentExpressionIndex = 3;
+        // SetExpression("blink");
         return;
 
 
@@ -85,7 +87,9 @@ public class Live2DController : MonoBehaviour//Live2DÇÃìÆÇ´Ç∆ï\èÓÇÃêßå‰
         {
             if(exp.expressionName == name)
             {
+
                 expressionController.CurrentExpressionIndex = exp.index;
+                Debug.Log("aassss");
                 return;
             }
         }

@@ -97,14 +97,29 @@
 			"Name": "口　開閉"
 		},
 		{
-			"Id": "ParamCheek",
+			"Id": "Param2",
 			"GroupId": "",
-			"Name": "照れ"
+			"Name": "焦り"
 		},
 		{
 			"Id": "Param",
 			"GroupId": "",
-			"Name": "怒り"
+			"Name": "怒"
+		},
+		{
+			"Id": "cry",
+			"GroupId": "",
+			"Name": "涙"
+		},
+		{
+			"Id": "exciting",
+			"GroupId": "",
+			"Name": "楽"
+		},
+		{
+			"Id": "ParamCheek",
+			"GroupId": "",
+			"Name": "照れ"
 		},
 		{
 			"Id": "ParamBodyAngleX",
@@ -145,8 +160,8 @@
 	"ParameterGroups": [],
 	"Parts": [
 		{
-			"Id": "Part",
-			"Name": "感情グループ"
+			"Id": "Part15",
+			"Name": "神楽魔ユウ.psd（対応無し）"
 		},
 		{
 			"Id": "Part2",
@@ -165,6 +180,14 @@
 			"Name": "後頭部グループ"
 		},
 		{
+			"Id": "Part10",
+			"Name": "顔面グループ（怒り影、照れ、青ざめ含む）"
+		},
+		{
+			"Id": "Part",
+			"Name": "感情グループ"
+		},
+		{
 			"Id": "Part4",
 			"Name": "→目グループ"
 		},
@@ -177,6 +200,10 @@
 		[
 			"ParamEyeBallX",
 			"ParamEyeBallY"
+		],
+		[
+			"ParamMouthForm",
+			"ParamMouthOpenY"
 		]
 	]
 }
