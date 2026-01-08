@@ -9,7 +9,7 @@ public  enum EnemyMoveState { stop, lookOnly, move }
 public class EnemyMover : MonoBehaviour
 {
     public EnemyActionEvents actionEvents = new EnemyActionEvents();
-    public enum EnemyMoveType { PlayerChase, BlockPlayer, StageDestroy }
+    public enum EnemyMoveType { PlayerChase, BlockPlayer, StageDestroy,Stop }
 
 
     [Header("移動するか判断するプレイヤーとの距離")]
@@ -24,7 +24,7 @@ public class EnemyMover : MonoBehaviour
     [SerializeField] float distanceCheckInterval = 0.25f;
 
     [Header("必要なコンポーネント")]
-    [SerializeField] EnemyStatus enemyStatus;
+    [SerializeField]public EnemyStatus enemyStatus;
     [SerializeField] EnemyActionStateMachine stateMachine;
 
     private Transform lookTarget; //追いかける対象
@@ -60,6 +60,9 @@ public class EnemyMover : MonoBehaviour
         if (enemyStatus.IsDead) return; //HPが0、または追いかける対象が見つからない場合
 
         if(enemyStatus.IsRagdoll) return; //ラグドール状態のときは移動しない
+
+        if (enemyStatus.ISBossSpawn) return;
+
 
         if (moveType == EnemyMoveType.StageDestroy && lookTarget == null)
             InitTarget();
@@ -126,12 +129,13 @@ public class EnemyMover : MonoBehaviour
 
                 currentMoveState = (lookTarget != null && distance >= stopRange) ? EnemyMoveState.move : EnemyMoveState.lookOnly;
                 break;
+          
         }
     }
 
     public void MoveStateProcess() //移動状態ごとの移動処理を行う
     {
-        if (enemyStatus.IsDead || enemyStatus.IsRagdoll) return;
+        if (enemyStatus.IsDead || enemyStatus.IsRagdoll||enemyStatus.ISBossSpawn) return;
         if (lookTarget == null) currentMoveState = EnemyMoveState.stop;
 
         switch (currentMoveState)
@@ -151,6 +155,8 @@ public class EnemyMover : MonoBehaviour
 
     void CallStateEvent() //移動状態ごとに、敵の行動状態の遷移を行う
     {
+
+        if (enemyStatus.ISBossSpawn) return;
         switch (currentMoveState)
         {
             case EnemyMoveState.stop: //停止状態（プレイヤーを追従する必要がない）
@@ -166,7 +172,7 @@ public class EnemyMover : MonoBehaviour
 
     public void MoveTowardsPlayer(Transform target)//プレイヤーに向かって移動する
     {
-        if (!isActiveMove || target == null) return;
+        if (!isActiveMove || target == null||enemyStatus.ISBossSpawn) return;
 
         Vector3 targetPos = target.position;
 

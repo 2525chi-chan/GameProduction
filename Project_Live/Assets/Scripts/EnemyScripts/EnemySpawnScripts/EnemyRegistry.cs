@@ -4,7 +4,13 @@ using UnityEngine;
 
 public static class EnemyRegistry
 {
-    static Dictionary<(GameObject prefab, EnemyMover.EnemyMoveType moveType), List<GameObject>> registry = new();
+   static Dictionary<(GameObject prefab, EnemyMover.EnemyMoveType moveType), List<GameObject>> registry = new();
+
+    public static Dictionary<(GameObject prefab, EnemyMover.EnemyMoveType moveType), List<GameObject>> Registry
+    {
+        get { return registry; }
+
+    }
 
     //“G‚Ì“o˜^
     public static void Register(GameObject enemy, GameObject prefab, EnemyMover.EnemyMoveType moveType)

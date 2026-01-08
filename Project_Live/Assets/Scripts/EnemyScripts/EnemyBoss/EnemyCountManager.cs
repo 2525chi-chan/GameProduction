@@ -5,6 +5,7 @@ using TMPro;
 public class EnemyCountManager : MonoBehaviour//敵の数を管理するクラス
 {
     [SerializeField] BossEventManager bossManager;
+    
     [SerializeField] int bossSpawnCount;//ボスを呼ぶためのカウント
     [SerializeField] bool isbossSpawn = false;//ボスが湧くかどうか
     [SerializeField]Animator defeatAnimator;

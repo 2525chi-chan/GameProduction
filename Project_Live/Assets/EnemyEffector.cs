@@ -20,7 +20,7 @@ public class EnemyEffector : MonoBehaviour//おねだりのターゲットになったときの見
     {
         enemyStatus=GetComponent<EnemyStatus>();    
         changeRenderer = new List<Renderer>();
-        setMaterial =new Material( targetMaterial);
+        setMaterial =new Material(targetMaterial);
 
         changeRenderer = rootObject.GetComponentsInChildren<Renderer>().ToList();
 

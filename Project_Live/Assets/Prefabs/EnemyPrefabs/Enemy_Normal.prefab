@@ -422,8 +422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootObject: {fileID: 6896500700280793772}
-  sharedDefaultMat: {fileID: 2100000, guid: 1971449f3ff9b0940995ae4d9b19205f, type: 2}
-  sharedTargetMat: {fileID: 2100000, guid: c898f4bb6cbf08e44a8639420ecb28ac, type: 2}
+  defaultMaterial: {fileID: 2100000, guid: 1971449f3ff9b0940995ae4d9b19205f, type: 2}
+  targetMaterial: {fileID: 2100000, guid: c898f4bb6cbf08e44a8639420ecb28ac, type: 2}
   outlineWidth: 10
   outlineMoveSpeed: 10
   outlineMoveMultiply: 20

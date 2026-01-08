@@ -16,7 +16,13 @@ public class EnemyStatus : CharacterStatus
         get { return isRagdoll; }
         set { isRagdoll = value; }
     }
-    
+
+    bool isBossSpawn = false;
+    public bool ISBossSpawn
+    {
+        get { return isBossSpawn; }
+        set { isBossSpawn = value; }
+    }
 
     [Header("必要なコンポーネント")]
     [SerializeField] EnemyDeathHandler deathHandler;

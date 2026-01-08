@@ -29,6 +29,8 @@ public class CloseAttackState_Enemy : IEnemyState
 
     public void Update()
     {
+        if (mover.enemyStatus.ISBossSpawn) return;
+
         mover.MoveStateProcess(); //移動処理（プレイヤーの注視、回転動作など）
 
         if (!isAttacked) durationTimer += Time.deltaTime;
