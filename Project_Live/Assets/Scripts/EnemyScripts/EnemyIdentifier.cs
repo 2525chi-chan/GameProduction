@@ -8,8 +8,8 @@ public class EnemyIdentifier : MonoBehaviour
 
     public void Start()
     {
-        if (EnemyCountManager.instance == null) return;
-        EnemyCountManager.instance.RegisterEnemy(this.gameObject);
+        //if (EnemyCountManager.instance == null) return;
+        //EnemyCountManager.instance.RegisterEnemy(this.gameObject);
     }
     public void Initialize(GameObject prefab, EnemyMover.EnemyMoveType moveType)
     {
@@ -35,7 +35,7 @@ public class EnemyIdentifier : MonoBehaviour
             EnemyRegistry.Unregister(gameObject, prefabReference, moveType);
             isRegistered = false;
             if (EnemyCountManager.instance == null) return;
-            EnemyCountManager.instance.UnregisterEnemy(this.gameObject);
+            EnemyCountManager.instance.UnregisterEnemy(/*this.gameObject*/);
         }
     }
 

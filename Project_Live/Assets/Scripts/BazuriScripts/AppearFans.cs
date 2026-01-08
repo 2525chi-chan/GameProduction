@@ -90,9 +90,16 @@ public class AppearFans : MonoBehaviour
             FanMove swing = appearFan.Item1.GetComponent<FanMove>();
             var renderers = appearFan.Item2;
 
+            ParticleSystem effect=swing.GetComponentInChildren<ParticleSystem>(true);
             if (swing != null)
             {
                 swing.SwingStart();
+
+                if(effect != null)
+                {
+                    effect.gameObject.SetActive(true);
+                    effect.Play();
+                }
             }
             foreach(var rend in renderers)
             {

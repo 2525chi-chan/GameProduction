@@ -46,14 +46,14 @@ public class EnemyCountManager : MonoBehaviour//“G‚Ì”‚ğŠÇ—‚·‚éƒNƒ‰ƒX
             enemies.Add(enemy);
         }
     }
-    public void UnregisterEnemy(GameObject enemy)
+    public void UnregisterEnemy(/*GameObject enemy*/)
     {
-        if (enemies.Contains(enemy))
-        {
-            enemies.Remove(enemy);
+        //if (enemies.Contains(enemy))
+        //{
+           // enemies.Remove(enemy);
             deadCount++;
             text.text = deadCount + ("‘ÌŒ‚”j!!");
             defeatAnimator.Play("Defeat",-1,0);
-        }
+      //  }
     }
 }

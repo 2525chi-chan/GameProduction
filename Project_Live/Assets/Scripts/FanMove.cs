@@ -6,7 +6,7 @@ public class FanMove : MonoBehaviour
     [SerializeField] GameObject hontai;
     [SerializeField] Renderer quadRenderer;
 
-
+   
     [SerializeField] GameObject rightShoulder;
     [SerializeField] GameObject leftShoulder;
     [SerializeField] float swingLimit=50f;

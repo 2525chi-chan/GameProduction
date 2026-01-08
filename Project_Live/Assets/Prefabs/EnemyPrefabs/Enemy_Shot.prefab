@@ -144,6 +144,14 @@ PrefabInstance:
       propertyPath: defaultMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 86e62cb85e6abba469928eb5312d52b1, type: 2}
+    - target: {fileID: 4785225302605469189, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: sharedTargetMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 7697a1d1cd715d44c8e1ee8bc665c337, type: 2}
+    - target: {fileID: 4785225302605469189, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: sharedDefaultMat
+      value: 
+      objectReference: {fileID: 2100000, guid: 86e62cb85e6abba469928eb5312d52b1, type: 2}
     - target: {fileID: 5567373102757557537, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: m_ConnectedBody
       value: 

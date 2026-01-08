@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -30,6 +31,8 @@ public class BuzzRank
     public List<Image> nextRankImages;
     [Header("このバズリランクのゲージのエフェクト画像(無ければ入れなくていい)")]
     public Image EffectImage;
+    [Header("このバズリランクを示すエフェクト用ゲームオブジェクト")]
+    public GameObject effectObject;
     [Header("このバズリランクの色")]
     [SerializeField] public Color rankColor;
     //[Header("このバズリランクで表示されるコメント")]
@@ -103,9 +106,12 @@ public class BuzuriRank : MonoBehaviour
 
         foreach(var rank in buzzRanks)
         {
-           foreach(var img in rank.nextRankImages)
-
+            foreach (var img in rank.nextRankImages)
+            {
                 img.fillAmount = 0; //全てのバズリランクのゲージ画像をリセット
+            }
+
+               
         }
     }
 
@@ -129,8 +135,11 @@ public class BuzuriRank : MonoBehaviour
         {
             if (goodSystem.GoodNum >= buzzRanks[currentIndex + 1].needNum)  //いいね数が次のバズリランクに必要な数に到達したら実行
             {
+                buzzRanks[currentIndex].effectObject.SetActive(false);
+              
                 currentIndex++; //次のインデックス数に移動
                 currentBuzzRank = buzzRanks[currentIndex];  //バズリランクを上げる
+                buzzRanks[currentIndex].effectObject.SetActive(true);
                // buzuriGage.color = currentBuzzRank.rankColor;    
                 goodSystem.addGoodText.color = currentBuzzRank.rankColor;   //バズリランクゲージといいね獲得数を現在のバズリランクの色にする
 
@@ -139,6 +148,13 @@ public class BuzuriRank : MonoBehaviour
                     currentBuzzRank.EffectImage.enabled = true;  //エフェクト画像が設定されていれば表示させる
                 }
 
+                Animator rankUpAnimator=buzzRanks[currentIndex].effectObject.GetComponent<Animator>();
+
+                if(rankUpAnimator != null)
+                {
+
+                    rankUpAnimator.Play("RankUp", -1, -1);
+                }
 
                 bazuriShot.SetBazuriShotStock(currentBuzzRank.BazuriShotStock); //バズリショットのストック数を現在のバズリランクに応じた数にする
                 if (currentIndex + 1 != buzzRanks.Count)    //設定されている最高のバズリランクに到達しているか確認

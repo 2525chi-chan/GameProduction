@@ -215,6 +215,7 @@ MonoBehaviour:
   agility: 10
   deathHandler: {fileID: 2420152649761166137}
   returnRagdollTime: 2
+  isKnockbackEnable: 1
   knockbackThresholdCount: 1
   knockbackRecoveryTime: 1
   isTarget: 0
@@ -283,6 +284,7 @@ MonoBehaviour:
   rotateSpeed: 100
   distanceCheckInterval: 0.25
   enemyStatus: {fileID: 4098828232468043532}
+  stateMachine: {fileID: 0}
 --- !u!54 &2213797413019997299
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -397,12 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialDelayTime: 0
   isBossBehaviour: 0
-  useSequentialOrder: 1
-  attackQueue:
-    enableNormalAttack: 1
-    enableLongRangeAttack: 1
-    enableAreaAttack: 1
-    attackOrder: 
+  attackPatterns: []
   anim: {fileID: 752392178674883388}
   status: {fileID: 4098828232468043532}
   mover: {fileID: 8259107007558549480}
@@ -411,6 +408,7 @@ MonoBehaviour:
   normalAttack: {fileID: 0}
   longRangeAttack: {fileID: 0}
   wideAreaAttack: {fileID: 0}
+  meteorFallAttack: {fileID: 0}
 --- !u!114 &4785225302605469189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,8 +422,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootObject: {fileID: 6896500700280793772}
-  defaultMaterial: {fileID: 2100000, guid: 1971449f3ff9b0940995ae4d9b19205f, type: 2}
-  targetMaterial: {fileID: 2100000, guid: c898f4bb6cbf08e44a8639420ecb28ac, type: 2}
+  sharedDefaultMat: {fileID: 2100000, guid: 1971449f3ff9b0940995ae4d9b19205f, type: 2}
+  sharedTargetMat: {fileID: 2100000, guid: c898f4bb6cbf08e44a8639420ecb28ac, type: 2}
   outlineWidth: 10
   outlineMoveSpeed: 10
   outlineMoveMultiply: 20
