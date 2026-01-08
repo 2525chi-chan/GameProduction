@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 932069602111bc04fb69c8c3aa4263a5
+guid: c6c0cb3f097ac0d409d6bc0a1bb9adc5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,11 +31,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Sukurappa_Boss_attack
-      takeName: Sukurappa_Boss_attack
-      internalID: -3095275040804626395
+      name: Take 001
+      takeName: Take 001
+      internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 120
+      lastFrame: 300
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
