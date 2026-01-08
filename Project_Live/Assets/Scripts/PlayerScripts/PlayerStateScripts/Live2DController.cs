@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using Unity.IO.LowLevel.Unsafe;
 using Live2D.Cubism.Framework.MotionFade;
+using Live2D.Cubism.Samples.OriginalWorkflow.Expression;
 
 [System.Serializable]
 public class ExpressionData
@@ -26,7 +27,7 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
     [SerializeField] CubismMotionController motionController;
     public CubismMotionController MotionController { get { return motionController; } }
     [SerializeField]CubismExpressionController expressionController;
-   
+    [SerializeField] CubismExpressionPreview prev;
     [SerializeField]List<ExpressionData> expressions = new ();
     [SerializeField]List<MotionData> motions = new ();
     public List<MotionData> Motions { get { return motions; } }
@@ -57,6 +58,12 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
         }
     }
 
+
+    public void Update()
+    {
+       // expressionController.CurrentExpressionIndex = 0;
+    }
+
     public void PlayMotion(string name)//モーション再生
     {
     // if(motionController==null||expressionController==null) return;
@@ -72,7 +79,8 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
         motionController.PlayAnimation(data.animationClip, layerIndex: 0, priority: priority, isLoop: false);
         currentMotionIndex = motions.IndexOf(data);
         currentPlayingMotion = name;
-        expressionController.CurrentExpressionIndex = 3;
+        prev.ChangeExpression(1);
+       // expressionController.CurrentExpressionIndex = 1;
         // SetExpression("blink");
         return;
 

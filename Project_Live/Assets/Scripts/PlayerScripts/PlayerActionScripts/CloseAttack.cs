@@ -155,14 +155,11 @@ public class CloseAttack : MonoBehaviour
 
         live2DTalkPlayer.PlayTalk("Attack_" + (currentComboIndex + 1).ToString());
         //Debug.Log("Attack_" + currentComboIndex + 1);
-        if (currentComboIndex == comboSteps.Count - 1)//�ŏI�i�̏ꍇ
-        {
-            live2DController.PlayMotion("Attack_High");
-        }
-        else
-        {
-            live2DController.PlayMotion("Attack_Low");
-        }
+       
+            live2DController.PlayMotion("Attack_"+(currentComboIndex+1).ToString());
+        
+       
+       
     }
     void EndAttack() //���������U���̏I������
     {

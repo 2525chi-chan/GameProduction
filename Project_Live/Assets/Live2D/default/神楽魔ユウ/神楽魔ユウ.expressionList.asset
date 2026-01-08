@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: "\u795E\u697D\u9B54\u30E6\u30A6.expressionList"
   m_EditorClassIdentifier: 
   CubismExpressionObjects:
-  - {fileID: 11400000, guid: 1b884f78155180c4f8f7b297be3921df, type: 2}
   - {fileID: 11400000, guid: 2e2f045eaaaeb144c8a3c0dcebcd59e6, type: 2}
-  - {fileID: 11400000, guid: 87299499aba4a094a8f5bf2880b59881, type: 2}
   - {fileID: 11400000, guid: 9caf0f7b2c19bd945b6d256dd68cf663, type: 2}
+  - {fileID: 11400000, guid: 8777db4c466a6fd4c91dd2764ef9e558, type: 2}
+  - {fileID: 11400000, guid: 87299499aba4a094a8f5bf2880b59881, type: 2}
+  - {fileID: 11400000, guid: 1b884f78155180c4f8f7b297be3921df, type: 2}
