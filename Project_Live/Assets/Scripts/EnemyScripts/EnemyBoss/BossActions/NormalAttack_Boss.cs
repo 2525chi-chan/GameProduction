@@ -4,7 +4,7 @@ using UnityEngine;
 public class NormalAttack_Boss : MonoBehaviour
 {
     EnemyActionStateMachine stateMachine;
-    public enum AttackState { Search, Idle, ShowAttackArea, Attack, Cooldown}
+    public enum AttackState { Search, Idle, ShowAttackArea, Attack, Cooldown, Exit}
     
     [Header("攻撃判定を持つオブジェクト")]
     [SerializeField] GameObject attackPrefab;
@@ -32,11 +32,13 @@ public class NormalAttack_Boss : MonoBehaviour
     AttackState currentAttackState = AttackState.Search;
     AttackState previousAttackState;
 
+    GameObject attackObj;
+
     float currentTimer = 0f; //経過時間の測定用
     bool isActive = false; //このクラスの処理が有効か
 
     public bool IsActive { get { return isActive; } set { isActive = value; } }
-    public AttackState CurrentAttackState { get { return currentAttackState; } }
+    public AttackState CurrentAttackState { get { return currentAttackState; } set { currentAttackState = value; } }
     public AttackState PreviousAttackState { get { return previousAttackState; } }
     public void SetStartState()
     {
@@ -61,10 +63,14 @@ public class NormalAttack_Boss : MonoBehaviour
         if (stateMachine == null)
             stateMachine = GetComponentInParent<EnemyActionStateMachine>();
 
-        if (status.IsDead || !isActive || currentAttackState == AttackState.Search) return;
+        if (status.IsDead || !isActive) return;
 
         switch (currentAttackState)
         {
+            case AttackState.Search:
+                mover.MoveStateProcess();
+                break;
+
             case AttackState.Idle: //予告表示を行うまでの待機状態
                 currentTimer += Time.deltaTime;
                 //プレイヤーを感知し、予告表示を行うまでの時間
@@ -116,6 +122,12 @@ public class NormalAttack_Boss : MonoBehaviour
                     stateMachine?.actionEvents?.BossAttackFinishEvent();
                 }
                 break;
+
+            case AttackState.Exit: //別の攻撃方法に移行時に呼ぶ処理
+                mover.ToggleActive(true, true);
+                stateMachine?.actionEvents?.BossAttackStartEvent();
+                isActive = false;
+                break;
         }
 
         if (previousAttackState != currentAttackState)
@@ -125,7 +137,7 @@ public class NormalAttack_Boss : MonoBehaviour
 
     public void InstanceAttack() //攻撃処理
     {
-        GameObject attackObj = Instantiate(attackPrefab, attackPosition.position, attackPosition.rotation);
+        attackObj = Instantiate(attackPrefab, attackPosition.position, attackPosition.rotation);
         Destroy(attackObj, attackEnabledTime);
         
         if (mover != null)

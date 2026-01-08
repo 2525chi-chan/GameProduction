@@ -11,6 +11,11 @@ public class EnemyActionEvents
     public event System.Action OnAttackEvent;
     public event System.Action OnBossAttackStartEvent;
     public event System.Action OnBossAttackFinishEvent;
+    public event System.Action OnNormalAttackEvent;
+    public event System.Action OnLongRangeAttackEvent;
+    public event System.Action OnAreaAttackEvent;
+    public event System.Action OnMeteorFallAttackEvent;
+    public event System.Action OnLostEvent;
 
     public void IdleEvent()
     {
@@ -45,5 +50,30 @@ public class EnemyActionEvents
     public void BossAttackFinishEvent()
     {
         OnBossAttackFinishEvent?.Invoke();
+    }
+
+    public void NormalAttackEvent()
+    {
+        OnNormalAttackEvent?.Invoke();
+    }
+
+    public void LongRangeAttackEvent()
+    {
+        OnLongRangeAttackEvent?.Invoke();
+    }
+
+    public void AreaAttackEvent()
+    {
+        OnAreaAttackEvent?.Invoke();
+    }
+
+    public void MeteorFallAttackEvent()
+    {
+        OnMeteorFallAttackEvent?.Invoke();
+    }
+
+    public void LostEvent()
+    {
+        OnLostEvent?.Invoke();
     }
 }

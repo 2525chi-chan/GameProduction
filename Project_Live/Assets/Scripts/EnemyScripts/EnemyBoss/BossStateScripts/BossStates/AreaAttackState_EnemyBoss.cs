@@ -28,7 +28,7 @@ public class AreaAttackState_EnemyBoss : IEnemyState
     public void Update()
     {
         wideAreaAttack.StateProcess();
-        mover.MoveStateProcess();
+        //mover.MoveStateProcess();
 
         if (!isPlayed && wideAreaAttack.CurrentAttackState == WideAreaAttack_Boss.AttackState.Attack)
         {
@@ -39,7 +39,7 @@ public class AreaAttackState_EnemyBoss : IEnemyState
 
     public void Exit()
     {
-        wideAreaAttack.IsActive = false;
+        wideAreaAttack.CurrentAttackState = WideAreaAttack_Boss.AttackState.Exit;
         //Debug.Log("çUåÇèÛë‘èIóπ");
     }
 }

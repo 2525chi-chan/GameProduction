@@ -28,7 +28,7 @@ public class NormalAttackState_EnemyBoss : IEnemyState
     public void Update()
     {
         normalAttack.StateProcess();
-        mover.MoveStateProcess();
+        //mover.MoveStateProcess();
 
         if (!isPlayed && normalAttack.CurrentAttackState == NormalAttack_Boss.AttackState.Attack)
         {
@@ -39,7 +39,7 @@ public class NormalAttackState_EnemyBoss : IEnemyState
 
     public void Exit()
     {
-        normalAttack.IsActive = false;
+        normalAttack.CurrentAttackState = NormalAttack_Boss.AttackState.Exit;
         //Debug.Log("çUåÇèÛë‘èIóπ");
     }
 }
