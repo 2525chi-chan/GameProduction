@@ -287,9 +287,14 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
                 }
                 countCoroutine =StartCoroutine(CountGood(score));
                 
-                goodSystem.AddGood(analyzer.Analyzer(analyzerCamera, layers));
+                goodSystem.AddGood(score);
                 effector.ResetText();
               
+
+                if(BazuriShotHolder.Instance != null)
+                {
+                    BazuriShotHolder.Instance.TryBestBazuriShot(bazuriTexture, score);
+                }
 
                 break;
             }
@@ -317,7 +322,7 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
     public IEnumerator CountGood(int targetScore)
     {
         // ���łɓ��� or �����Ă��瑦�I��
-        if (targetScore <= 0)
+        if (targetScore < 0)
         {
             bazuriText.text = targetScore.ToString();
             countCoroutine = null;
