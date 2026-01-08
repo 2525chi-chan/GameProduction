@@ -36,6 +36,21 @@ public class MeteorFallAttackState_EnemyBoss : IEnemyState
             isPlayed = true;
             anim.PlayMeteorFallAttack();
         }
+
+        var animatorState = anim.Animator.GetCurrentAnimatorStateInfo(0);
+
+        if (animatorState.normalizedTime >= 0.29f && animatorState.IsName("Enemy_MeteorFallAttack_Boss") && !meteorFallAttack.IsAttacked)
+        {
+            meteorFallAttack.StartFirstMeteorFall();
+            meteorFallAttack.IsAttacked = true;
+        }
+
+        if (animatorState.IsName("Idle") && meteorFallAttack.IsAttacked)
+        {
+            meteorFallAttack.CurrentAttackState = MeteorFallAttack_Boss.AttackState.Cooldown;
+            meteorFallAttack.IsAttacked = false;
+            isPlayed = false;
+        }
     }
 
     public void Exit()

@@ -22,18 +22,34 @@ public class LongRangeAttackState_EnemyBoss : IEnemyState
         longRangeAttack.IsActive = true;
         longRangeAttack.SetStartState();
         longRangeAttack.SetTargetPosition();
-
         //Debug.Log("攻撃状態に移行");
     }
 
     public void Update()
     {
-        longRangeAttack.StateProcess();
+        longRangeAttack.StateProcess(); //遠距離攻撃の処理
 
         if (!isPlayed && longRangeAttack.CurrentAttackState == LongRangeAttack_Boss.AttackState.Attack)
         {
             isPlayed = true;
             anim.PlayLongRangeAttack();
+        }
+
+        var animatorState = anim.Animator.GetCurrentAnimatorStateInfo(0);
+
+        //アニメーションの再生時間に合わせて攻撃を生成する
+        if (animatorState.normalizedTime >= 0.46f && animatorState.IsName("Enemy_LongRangeAttack_Boss") && !longRangeAttack.IsAttacked)
+        {
+            longRangeAttack.InstanceLongRangeAttack();
+            longRangeAttack.IsAttacked = true;
+        }
+
+        //アニメーションが待機モーションに遷移したら
+        if (animatorState.IsName("Idle") && longRangeAttack.IsAttacked)
+        {
+            longRangeAttack.CurrentAttackState = LongRangeAttack_Boss.AttackState.Cooldown;
+            longRangeAttack.IsAttacked = false;
+            isPlayed = false;
         }
     }
 

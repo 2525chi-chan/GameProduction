@@ -28,12 +28,26 @@ public class NormalAttackState_EnemyBoss : IEnemyState
     public void Update()
     {
         normalAttack.StateProcess();
-        //mover.MoveStateProcess();
 
         if (!isPlayed && normalAttack.CurrentAttackState == NormalAttack_Boss.AttackState.Attack)
         {
             isPlayed = true;
             anim.PlayNormalAttack();
+        }
+
+        var animatorState = anim.Animator.GetCurrentAnimatorStateInfo(0);
+
+        if (animatorState.normalizedTime >= 0.43f && animatorState.IsName("Enemy_Attack_Boss") && !normalAttack.IsAttacked)
+        {
+            normalAttack.InstanceNormalAttack();
+            normalAttack.IsAttacked = true;
+        }
+
+        if (animatorState.IsName("Idle") && normalAttack.IsAttacked)
+        {
+            normalAttack.CurrentAttackState = NormalAttack_Boss.AttackState.Cooldown;
+            normalAttack.IsAttacked = false;
+            isPlayed = false;
         }
     }
 

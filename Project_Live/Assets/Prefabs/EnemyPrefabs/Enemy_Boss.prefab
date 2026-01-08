@@ -79,7 +79,6 @@ MonoBehaviour:
   attackPrefab: {fileID: 7265270442427516671, guid: 1893008618cb32b46b3abf3d89b5cf40, type: 3}
   attackPosition: {fileID: 8051580934977367488}
   aimRotationDuration: 3
-  attackDuration: 2.5
   attackEnabledTime: 2
   attackCoolTime: 2
   bossPos: {fileID: 4566678235380803533}
@@ -274,7 +273,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPrefab: {fileID: 7823870815333552762, guid: f64bf683cb1cd0948a491b37f2a93303, type: 3}
   attackPosition: {fileID: 1131914981681053185}
-  attackDuration: 1
   attackEnabledTime: 0.5
   attackCoolTime: 1
   triggerRange: {fileID: 4145209778355495398}
@@ -367,16 +365,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meteorPrefab: {fileID: 7921451584358470638, guid: 0a372a93132aaac4e864f21c5a780c1f, type: 3}
   fallArea: {fileID: 3374785169086742318}
-  groundY: 0
   spawnHeight: 30
   meteorCount: 10
-  minDistanceMeteors: 3
-  fallDelay: 1.5
+  minDistanceMeteors: 10
   timeToGround: 2
   meteorInterval: 0.5
   aimRotationDuration: 2
-  attackDuration: 3
-  attackCoolTime: 3
+  attackCoolTime: 4
   bossPos: {fileID: 4566678235380803533}
   status: {fileID: 2801870027672808325}
   mover: {fileID: 7826681584507847521}
@@ -554,7 +549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1319347642589421884, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.2
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 2108013824495171527, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: m_Mass

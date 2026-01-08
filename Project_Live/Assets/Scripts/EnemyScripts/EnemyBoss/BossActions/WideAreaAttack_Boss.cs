@@ -30,7 +30,6 @@ public class WideAreaAttack_Boss : MonoBehaviour
     [SerializeField] AttackWarningController attackWarningController;
 
     AttackState currentAttackState = AttackState.Search;
-    AttackState previousAttackState;
 
     float currentTimer = 0f; //経過時間の測定用
     bool isAttackTrigger = false; //攻撃するかどうか
@@ -40,10 +39,10 @@ public class WideAreaAttack_Boss : MonoBehaviour
     public float AttackDuration { get { return attackDuration; } }
     public float AttackCoolTime { get { return attackCoolTime; } }
     public bool IsActive { get { return isActive; } set { isActive = value; } }
+    public bool IsAttacked { get; set; }
 
     public AttackState CurrentAttackState { get { return currentAttackState; } set { currentAttackState = value; } }
-    public AttackState PreviousAttackState {  get { return previousAttackState; } }
-
+    
     public void SetStartState()
     {
         currentAttackState = AttackState.Search;
@@ -61,9 +60,8 @@ public class WideAreaAttack_Boss : MonoBehaviour
 
         if (!other.CompareTag("Player")) return;
 
-        //Debug.Log("プレイヤーが侵入してきた");
         currentTimer = 0f;
-
+        mover.ToggleActive(false, true);
         currentAttackState = AttackState.Idle;
         //Debug.Log("攻撃待機状態に移行");
     }
@@ -106,15 +104,6 @@ public class WideAreaAttack_Boss : MonoBehaviour
                 break;
 
             case AttackState.Attack: //攻撃状態
-                currentTimer += Time.deltaTime;
-
-                if (currentTimer >= attackDuration)
-                {
-                    InstanceAttack();
-                    currentTimer = 0f;
-                    currentAttackState = AttackState.Cooldown;
-                    //Debug.Log("クールダウン状態に移行");
-                }
                 break;
 
             case AttackState.Cooldown: //クールダウン状態
@@ -124,7 +113,6 @@ public class WideAreaAttack_Boss : MonoBehaviour
                 {
                     currentTimer = 0f;
                     currentAttackState = AttackState.Search;
-                    //Debug.Log("攻撃待機状態に移行");
 
                     mover.ToggleActive(true, true);
                     stateMachine?.actionEvents?.BossAttackFinishEvent();
@@ -138,13 +126,9 @@ public class WideAreaAttack_Boss : MonoBehaviour
                 isActive = false;
                 break;
         }
-
-        if (previousAttackState != currentAttackState)
-            previousAttackState = currentAttackState;
     }
 
-
-    public void InstanceAttack() //攻撃処理
+    public void InstanceWideAreaAttack() //広範囲攻撃の生成処理
     {
         GameObject attackObj = Instantiate(attackPrefab, attackPosition.position, attackPosition.rotation);
         Destroy(attackObj, attackEnabledTime);
