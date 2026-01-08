@@ -23,8 +23,8 @@ public class AttackParameter : MonoBehaviour
     [Header("必要なコンポーネント")]
     [SerializeField] DamageToTarget damageToTarget;
 
-    GameObject target;
-    PlayerStatus status;
+    GameObject target = null;
+    PlayerStatus status = null;
 
     void Start()
     {
