@@ -33,14 +33,16 @@ public class NormalAttackState_EnemyBoss : IEnemyState
         {
             isPlayed = true;
             anim.PlayNormalAttack();
+            normalAttack.PlayChargeSound();
         }
 
         var animatorState = anim.Animator.GetCurrentAnimatorStateInfo(0);
 
         if (animatorState.normalizedTime >= 0.43f && animatorState.IsName("Enemy_Attack_Boss") && !normalAttack.IsAttacked)
-        {
-            normalAttack.InstanceNormalAttack();
+        {          
             normalAttack.IsAttacked = true;
+            normalAttack.InstanceNormalAttack();
+            normalAttack.PlayAttackSound();
         }
 
         if (animatorState.IsName("Idle") && normalAttack.IsAttacked)

@@ -17,6 +17,7 @@ public class DamageToTarget : MonoBehaviour
 
     GameObject hitEffect;
     AudioClip hitSound;
+    Transform effectSpawnPoint;
 
     float damage;
     float forwardKnockbackForce;
@@ -88,24 +89,40 @@ public class DamageToTarget : MonoBehaviour
         }
     }
 
-    public void AddDamageToEnemy(Collider enemy)
+    public void AddDamageToEnemy(Collider enemy, Transform effectSpawnPoint)
     {
         EnemyStatus enemyStatus = enemy.GetComponent<EnemyStatus>();
-
         // なければ子孫オブジェクトから探す
         if (enemyStatus == null) enemyStatus = enemy.GetComponentInChildren<EnemyStatus>();
-
         if (enemyStatus == null)
         {
             Debug.LogWarning($"EnemyStatus が {enemy.name} および、その子に見つかりませんでした");
             return;
         }
-        //
 
         enemyStatus.Hp -= damage;
         //Debug.Log(damage + "ダメージを与えた");
 
-        if (hitEffect != null) Instantiate(hitEffect, enemy.bounds.center, enemy.gameObject.transform.rotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+        if (hitEffect != null)
+        {
+            Vector3 spawnPosition;
+            Quaternion spawnRotation;
+
+            if (enemy.gameObject.name.Contains("Enemy_Boss"))
+            {
+                spawnPosition = effectSpawnPoint.position;
+                spawnRotation = effectSpawnPoint.rotation;
+            }
+
+            else
+            {
+                spawnPosition = enemy.bounds.center;
+                spawnRotation = enemy.gameObject.transform.rotation;
+            }
+            
+            Instantiate(hitEffect, spawnPosition, spawnRotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+        }
+
         if (hitSound != null) SE.PlayOneShot(hitSound);
 
         enemyStatus.CurrentDamageCount++;

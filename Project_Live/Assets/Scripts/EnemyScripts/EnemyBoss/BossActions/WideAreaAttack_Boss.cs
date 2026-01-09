@@ -10,8 +10,10 @@ public class WideAreaAttack_Boss : MonoBehaviour
     [SerializeField] GameObject attackPrefab;
     [Header("攻撃を生成する位置")]
     [SerializeField] Transform attackPosition;
-    [Header("攻撃するまでの待ち時間")]
-    [SerializeField] float attackDuration = 3f;
+    [Header("攻撃待機中に出力する音")]
+    [SerializeField] AudioClip chargeSound;
+    [Header("攻撃生成時に出力する音")]
+    [SerializeField] AudioClip attackSound;
     [Header("攻撃判定の持続時間")]
     [SerializeField] float attackEnabledTime = 0.2f;
     [Header("攻撃後のクールタイム")]
@@ -30,13 +32,14 @@ public class WideAreaAttack_Boss : MonoBehaviour
     [SerializeField] AttackWarningController attackWarningController;
 
     AttackState currentAttackState = AttackState.Search;
+    AttackState previousAttackState;
 
     float currentTimer = 0f; //経過時間の測定用
     bool isAttackTrigger = false; //攻撃するかどうか
     bool isActive = false;
+    AudioSource SE;
 
     public bool IsAttackTrigger { get { return isAttackTrigger; } set { isAttackTrigger = value; } }
-    public float AttackDuration { get { return attackDuration; } }
     public float AttackCoolTime { get { return attackCoolTime; } }
     public bool IsActive { get { return isActive; } set { isActive = value; } }
     public bool IsAttacked { get; set; }
@@ -46,12 +49,7 @@ public class WideAreaAttack_Boss : MonoBehaviour
     public void SetStartState()
     {
         currentAttackState = AttackState.Search;
-    }
-
-    private void Start() //ステートマシン適用後は削除予定
-    {
-        SetStartState();
-        currentTimer = 0f;
+        previousAttackState = currentAttackState;
     }
 
     void OnTriggerStay(Collider other) //攻撃判定を行うエリアにプレイヤーが侵入しているときの処理
@@ -64,6 +62,11 @@ public class WideAreaAttack_Boss : MonoBehaviour
         mover.ToggleActive(false, true);
         currentAttackState = AttackState.Idle;
         //Debug.Log("攻撃待機状態に移行");
+    }
+
+    void Start()
+    {
+        SE = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
     }
 
     public void StateProcess()
@@ -125,6 +128,23 @@ public class WideAreaAttack_Boss : MonoBehaviour
                 stateMachine?.actionEvents?.BossAttackStartEvent();
                 isActive = false;
                 break;
+        }
+
+        if (previousAttackState != currentAttackState)
+            previousAttackState = currentAttackState;
+    }
+
+    public void PlayChargeSound()
+    {
+        if (SE != null && chargeSound != null) SE.PlayOneShot(chargeSound);
+    }
+
+    public void PlayAttackSound()
+    {
+        if (SE != null && attackSound != null)
+        {
+            SE.Stop();
+            SE.PlayOneShot(attackSound);
         }
     }
 
