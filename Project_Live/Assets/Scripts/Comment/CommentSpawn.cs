@@ -7,6 +7,8 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
 using Live2D.Cubism.Core.Unmanaged;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering.PostProcessing;
 
 
 //作成者　寺村
@@ -21,6 +23,12 @@ public class CommentSpawn : MonoBehaviour
     [SerializeField] int requestCommentCount = 20;
     [Header("返信コメントが流れるまでのコメント数")]
     [SerializeField] int replyCommnetCount = 10;
+    [Header("妨害が始まったときの警告音")]
+    [SerializeField] AudioClip interceptSound;
+    [Header("画面の妨害エフェクトの時間")]
+    [SerializeField] float effectTime;
+    [Header("画面の妨害エフェクトの濃さ")]
+    [SerializeField] float effectIntensity;
 
     [Header("必要なコンポーネント")]
     public GameObject Canvas;
@@ -31,6 +39,8 @@ public class CommentSpawn : MonoBehaviour
     [SerializeField] GameObject ReplyCommentPrefab;
     [SerializeField] BuzuriRank buzuriRank;
     [SerializeField] RequestManager requestManager;
+    [SerializeField] AudioSource SE;
+    [SerializeField] Volume volume;
     
     [HideInInspector] public bool cheeringCommentIsExist ;
     [HideInInspector] public bool antiCommentIsExist;
@@ -53,6 +63,10 @@ public class CommentSpawn : MonoBehaviour
     RectTransform canvasRect;
     string nextText = null; //関連コメントの内容保存用string
     bool conectComment = false; //関連コメントのフラグ
+
+    bool playSound;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -131,6 +145,20 @@ public class CommentSpawn : MonoBehaviour
             beforeRaneNum = raneNum;
             spawnTime = 0;
         }
+
+        if(interceptEnemyIsExist&&!playSound)
+        {
+            SE.PlayOneShot(interceptSound);
+
+            StartCoroutine(FadeInOutVolume(effectTime,effectIntensity));
+            
+            playSound = true;
+        }
+
+        if(!interceptEnemyIsExist&&playSound)
+        {
+            playSound = false;
+        }
     }
 
     //Vector2 DecideSpawnPos(RectTransform rectTransform, int raneNum)
@@ -200,8 +228,9 @@ public class CommentSpawn : MonoBehaviour
         }
         else if(CommentType==ReplyCommentPrefab)
         {
-            int decideIndex = Random.Range(0, replyComment.commentContents.Count);
-            selectedText = replyComment.commentContents[decideIndex].commentText;
+            //int decideIndex = Random.Range(0, replyComment.commentContents.Count);
+            int decideIndex = Random.Range(0, replyComment.rankComments[buzuriRank.CurrentIndex].commentContents.Count);
+            selectedText = replyComment.rankComments[buzuriRank.CurrentIndex].commentContents[decideIndex].commentText;
         }
         
         GameObject newTextObj = Instantiate(CommentType, canvasRect);
@@ -253,5 +282,27 @@ public class CommentSpawn : MonoBehaviour
         float changeValue = antiCommentCount + ((100 - percent) / 100);
         antiCommentCount = (int)changeValue;
         Debug.Log("アンチコメントの湧き間隔が" + percent + "%減少し、湧き間隔が" + antiCommentCount + "になりました。");
+    }
+
+    void SetIntensity(float newIntensity)
+    {
+        if (volume.profile.TryGet<ScreenSpaceLensFlare>(out var lensFlare))
+        {
+            lensFlare.intensity.value = newIntensity;
+        }
+    }
+
+    float GetIntensity()
+    {
+        if (volume.profile.TryGet<ScreenSpaceLensFlare>(out var lensFlare))
+            return lensFlare.intensity.value;
+        return 0;
+    }
+
+    IEnumerator FadeInOutVolume(float time,float Intensity)
+    {
+        SetIntensity(Intensity);
+        yield return new WaitForSeconds(time);
+        SetIntensity(0);
     }
 }

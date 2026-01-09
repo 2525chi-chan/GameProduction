@@ -26,14 +26,26 @@ public abstract class ReplyCommentBase : MonoBehaviour
         [Header("このコメントでラマユウがしゃべるボイス")]
         public AudioClip replyVoice;
     }
+    [System.Serializable]
+    public class RankComments
+    {
+        [Header("バズリランク名")]
+        [SerializeField] string name;
+        [Header("このバズリランクで生成するコメントの内容")]
+        public List<CommentContents> commentContents=new List<CommentContents>();
+    }
+
 
     protected AudioClip decideVoice;    //生成されたときにテキストに合わせたボイスが格納される
-    
+
     //[Header("コメントの内容")]
     //public List<string> commentContents = new List<string>();
 
     [Header("コメントの内容")]
-    public List <CommentContents> commentContents=new List<CommentContents>();
+    public List<CommentContents> commentContents = new List<CommentContents>();
+
+    [Header("各バズリランクで生成するコメント")]
+    public List<RankComments>　rankComments = new List<RankComments>();
 
     [Header("決定時のエフェクト")]
     [SerializeField] protected ParticleSystem pressEffect;
