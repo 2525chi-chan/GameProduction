@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
@@ -119,17 +118,7 @@ public class BuzuriRank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.digit1Key.wasPressedThisFrame)
-        {
-            if (currentIndex + 1 >= buzzRanks.Count)    //最高のバズリランクに到達しているか確認
-            {
-                return; //到達していれば以降の処理を行わない
-            }
-            else
-                goodSystem.AddGood(buzzRanks[currentIndex + 1].needNum);
-        }
-
-        if (currentIndex + 1 >= buzzRanks.Count)    //最高のバズリランクに到達しているか確認
+        if(currentIndex + 1 >= buzzRanks.Count)    //最高のバズリランクに到達しているか確認
         {
             return; //到達していれば以降の処理を行わない
         }
