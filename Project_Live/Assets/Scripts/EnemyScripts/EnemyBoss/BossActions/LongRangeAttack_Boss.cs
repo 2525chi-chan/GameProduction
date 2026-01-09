@@ -9,6 +9,10 @@ public class LongRangeAttack_Boss : MonoBehaviour
     [SerializeField] GameObject attackPrefab;
     [Header("攻撃を生成する位置")]
     [SerializeField] Transform attackPosition;
+    [Header("攻撃待機中に出力する音")]
+    [SerializeField] AudioClip chargeSound;
+    [Header("攻撃生成時に出力する音")]
+    [SerializeField] AudioClip attackSound;
     [Header("照準をプレイヤーに合わせる時間")]
     [SerializeField] float aimRotationDuration = 2f;
     [Header("攻撃判定の持続時間")]
@@ -25,6 +29,7 @@ public class LongRangeAttack_Boss : MonoBehaviour
     [SerializeField] AttackWarningController attackWarningController;
 
     AttackState currentAttackState = AttackState.Move;
+    AttackState previousAttackState;
     float currentTimer = 0f; //経過時間の測定用
     bool hasArrived = false; //目標地点に到達したか
     bool isActive = false;
@@ -32,6 +37,7 @@ public class LongRangeAttack_Boss : MonoBehaviour
     string actionPointTag = "ActionPoint_EnemyBoss"; //移動先となるオブジェクトのタグ
     Transform targetPosition; //移動先の位置
     Transform playerPosition; //プレイヤーの位置
+    AudioSource SE;
 
     public bool IsActive { get { return isActive; } set { isActive = value; } }
     public bool IsAttacked { get; set; }
@@ -39,8 +45,14 @@ public class LongRangeAttack_Boss : MonoBehaviour
     public void SetStartState()
     {
         currentAttackState = AttackState.Move;
+        previousAttackState = currentAttackState;
         hasArrived = false;
         targetPosition = null;
+    }
+    
+    void Start()
+    {
+        SE = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
     }
 
     public void StateProcess()
@@ -122,6 +134,23 @@ public class LongRangeAttack_Boss : MonoBehaviour
                 isActive = false;
                 IsAttacked = false;
                 break;
+        }
+
+        if (previousAttackState != currentAttackState)
+            previousAttackState = currentAttackState;
+    }
+
+    public void PlayChargeSound()
+    {
+        if (SE != null && chargeSound != null) SE.PlayOneShot(chargeSound);
+    }
+
+    public void PlayAttackSound()
+    {
+        if (SE != null && attackSound != null)
+        {
+            SE.Stop();
+            SE.PlayOneShot(attackSound);
         }
     }
 

@@ -33,6 +33,7 @@ public class LongRangeAttackState_EnemyBoss : IEnemyState
         {
             isPlayed = true;
             anim.PlayLongRangeAttack();
+            longRangeAttack.PlayChargeSound();
         }
 
         var animatorState = anim.Animator.GetCurrentAnimatorStateInfo(0);
@@ -40,8 +41,9 @@ public class LongRangeAttackState_EnemyBoss : IEnemyState
         //アニメーションの再生時間に合わせて攻撃を生成する
         if (animatorState.normalizedTime >= 0.46f && animatorState.IsName("Enemy_LongRangeAttack_Boss") && !longRangeAttack.IsAttacked)
         {
-            longRangeAttack.InstanceLongRangeAttack();
             longRangeAttack.IsAttacked = true;
+            longRangeAttack.InstanceLongRangeAttack();
+            longRangeAttack.PlayAttackSound();
         }
 
         //アニメーションが待機モーションに遷移したら

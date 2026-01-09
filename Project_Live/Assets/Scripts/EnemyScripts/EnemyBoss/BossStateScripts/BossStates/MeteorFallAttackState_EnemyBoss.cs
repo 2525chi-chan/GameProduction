@@ -35,14 +35,16 @@ public class MeteorFallAttackState_EnemyBoss : IEnemyState
         {
             isPlayed = true;
             anim.PlayMeteorFallAttack();
+            meteorFallAttack.PlayChargeSound();
         }
 
         var animatorState = anim.Animator.GetCurrentAnimatorStateInfo(0);
 
         if (animatorState.normalizedTime >= 0.29f && animatorState.IsName("Enemy_MeteorFallAttack_Boss") && !meteorFallAttack.IsAttacked)
         {
-            meteorFallAttack.StartFirstMeteorFall();
             meteorFallAttack.IsAttacked = true;
+            meteorFallAttack.StartFirstMeteorFall();           
+            meteorFallAttack.PlayAttackSound();
         }
 
         if (animatorState.IsName("Idle") && meteorFallAttack.IsAttacked)

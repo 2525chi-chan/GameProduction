@@ -1,3 +1,4 @@
+using OpenCover.Framework.Model;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,12 +15,17 @@ public class MeteorFallAttack_Boss : MonoBehaviour
     [Header("隕石生成時の初期高度")]
     [SerializeField] float spawnHeight = 30f;
 
+    [Header("攻撃待機中に出力する音")]
+    [SerializeField] AudioClip chargeSound;
+    [Header("攻撃生成時に出力する音")]
+    [SerializeField] AudioClip attackSound;
+    [Header("隕石落下時に出力する音")]
+    [SerializeField] AudioClip fallSound;
+
     [Header("隕石数")]
     [SerializeField] int meteorCount = 5;
     [Header("隕石同士の距離")]
     [SerializeField] float minDistanceMeteors = 3f;
-    //[Header("生成から落下開始までの待機時間")]
-    //[SerializeField] float fallDelay = 1.5f;
     [Header("地面に着弾するまでの時間")]
     [SerializeField] float timeToGround = 5f;
     [Header("1つ目の隕石落下後、次の隕石が落下するまでの間隔")]
@@ -39,6 +45,7 @@ public class MeteorFallAttack_Boss : MonoBehaviour
     [SerializeField] MultiAttackWarningController multiWarningController;
 
     AttackState currentAttackState = AttackState.Move;
+    AttackState previousAttackState;
     float currentTimer = 0f;
     bool hasArrived = false;
     bool isActive = false;
@@ -51,17 +58,23 @@ public class MeteorFallAttack_Boss : MonoBehaviour
     List<Vector3> meteorPositions = new List<Vector3>();
     List<GameObject> warningInstances = new List<GameObject>();
     List<GameObject> meteors;
+    AudioSource SE;
 
-    //public float FallDelay { get { return fallDelay; } }
-    public bool IsActive { get { return isActive; } set { isActive = value; } }
+     public bool IsActive { get { return isActive; } set { isActive = value; } }
     public bool IsAttacked { get; set; }
     public AttackState CurrentAttackState { get { return currentAttackState; } set { currentAttackState = value; } }
 
     public void SetStartState()
     {
         currentAttackState = AttackState.Move;
+        previousAttackState = currentAttackState;
         hasArrived = false;
         targetPosition = null;
+    }
+
+    void Start()
+    {
+        SE = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
     }
 
     public void StateProcess()
@@ -111,7 +124,7 @@ public class MeteorFallAttack_Boss : MonoBehaviour
                 }
                 break;
 
-            case AttackState.ShowAttackArea:               
+            case AttackState.ShowAttackArea:
                 meteorPositions.Clear();
                 List<Vector3> candidates = new List<Vector3>();
                 int maxAttempts = 50 * meteorCount;
@@ -145,7 +158,6 @@ public class MeteorFallAttack_Boss : MonoBehaviour
                 break;
 
             case AttackState.Attack:
-                //InstanceMeteorAttack();
                 break;
 
             case AttackState.Cooldown:
@@ -166,6 +178,23 @@ public class MeteorFallAttack_Boss : MonoBehaviour
                 isActive = false;
                 IsAttacked = false;
                 break;
+        }
+
+        if (previousAttackState != currentAttackState)
+            previousAttackState = currentAttackState;
+    }
+
+    public void PlayChargeSound()
+    {
+        if (SE != null && chargeSound != null) SE.PlayOneShot(chargeSound);
+    }
+
+    public void PlayAttackSound()
+    {
+        if (SE != null && attackSound != null)
+        {
+            SE.Stop();
+            SE.PlayOneShot(attackSound);
         }
     }
 
@@ -204,7 +233,12 @@ public class MeteorFallAttack_Boss : MonoBehaviour
             rb.isKinematic = false;
             float fallVelocity = (spawnHeight - groundY) / timeToGround;
             rb.linearVelocity = new Vector3(0, -fallVelocity, 0);
+            SE.PlayOneShot(fallSound);
         }
+
+        var m = firstMeteor.GetComponent<Meteor>();
+        if (m != null) m.DestroyLinkedWarning(); //生成された隕石プレハブと対応する予告プレハブを結び付ける
+        else Destroy(firstMeteor);
 
         StartCoroutine(SequentialMeteorFall(1)); //2個目以降の隕石の落下
     }
@@ -230,6 +264,7 @@ public class MeteorFallAttack_Boss : MonoBehaviour
             rb.isKinematic = false;
             float fallVelocity = (spawnHeight - groundY) / timeToGround;
             rb.linearVelocity = new Vector3(0, -fallVelocity, 0);
+            SE.PlayOneShot(fallSound);
         }
 
         while (meteor != null && meteor.transform.position.y > groundY + 0.5f)
@@ -237,7 +272,6 @@ public class MeteorFallAttack_Boss : MonoBehaviour
 
         var m = meteor.GetComponent<Meteor>();
         if (m != null) m.DestroyLinkedWarning(); //生成された隕石プレハブと対応する予告プレハブを結び付ける
-
         else Destroy(meteor);
     }
 
