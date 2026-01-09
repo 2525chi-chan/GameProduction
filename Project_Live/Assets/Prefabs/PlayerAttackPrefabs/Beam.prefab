@@ -105,8 +105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baceDamage: 500
   hitEffect: {fileID: 1044492289889190018, guid: 993441711f651c545bcc0c39bb7e345f, type: 3}
-  baceForwardKnockbackForce: 80
-  baceUpwardKnockbackForce: 80
+  baceForwardKnockbackForce: 175
+  baceUpwardKnockbackForce: 175
   baceDownwardKnockbackForce: 0
   enableSuction: 0
   suctionForce: 10
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b50e7d229de66489b057bbe57c1976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyDelay: 3
+  destroyDelay: 3.5
 --- !u!114 &6502001243641348044
 MonoBehaviour:
   m_ObjectHideFlags: 0
