@@ -110,7 +110,7 @@ public class HitboxTrigger : MonoBehaviour
     void ApplyDamage(Collider other) //ダメージ処理
     {
         if (other.CompareTag("Player")) damageToTarget?.AddDamageToPlayer(other); //プレイヤーへのダメージ処理
-        else if (other.CompareTag("Enemy")) damageToTarget?.AddDamageToEnemy(other); //敵へのダメージ処理
+        else if (other.CompareTag("Enemy")) damageToTarget?.AddDamageToEnemy(other, transform); //敵へのダメージ処理
         else if (other.CompareTag("Breakable")) damageToTarget?.AddDamageToObject(other); //破壊可能オブジェクトへのダメージ処理（仮）
     }
 }

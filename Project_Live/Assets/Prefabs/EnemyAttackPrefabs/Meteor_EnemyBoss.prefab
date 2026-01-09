@@ -201,3 +201,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19522cb3ad750649af5d0deddb5990d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impactSound: {fileID: 8300000, guid: 4d881e49e28519246bf5cfc920793730, type: 3}

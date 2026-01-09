@@ -33,14 +33,16 @@ public class AreaAttackState_EnemyBoss : IEnemyState
         {
             isPlayed = true;
             anim.PlayAreaAttack();
+            wideAreaAttack.PlayChargeSound();
         }
 
         var animatorState = anim.Animator.GetCurrentAnimatorStateInfo(0);
 
         if (animatorState.normalizedTime >= 0.44f && animatorState.IsName("Enemy_AreaAttack_Boss") && !wideAreaAttack.IsAttacked)
         {
-            wideAreaAttack.InstanceWideAreaAttack();
             wideAreaAttack.IsAttacked = true;
+            wideAreaAttack.InstanceWideAreaAttack();
+            wideAreaAttack.PlayAttackSound();
         }
 
         if (animatorState.IsName("Idle") && wideAreaAttack.IsAttacked)
