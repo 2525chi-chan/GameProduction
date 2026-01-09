@@ -1,25 +1,25 @@
-﻿using System.Linq;
-using UnityEditor;
+﻿//using System.Linq;
+////using UnityEditor;
 
-namespace Unity.Animations.SpringBones
-{
-    [CustomEditor(typeof(SpringSphereCollider))]
-    [CanEditMultipleObjects]
-    public class SpringSphereColliderInspector : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            base.OnInspectorGUI();
-            if (boneSelector == null)
-            {
-                boneSelector = SpringColliderBoneSelector.Create<SpringSphereCollider>(
-                    targets, (bone, colliders) => bone.sphereColliders.Any(collider => colliders.Contains(collider)));
-            }
-            boneSelector.ShowInspector();
-        }
+//namespace Unity.Animations.SpringBones
+//{
+//    [CustomEditor(typeof(SpringSphereCollider))]
+//    [CanEditMultipleObjects]
+//    public class SpringSphereColliderInspector : Editor
+//    {
+//        public override void OnInspectorGUI()
+//        {
+//            base.OnInspectorGUI();
+//            if (boneSelector == null)
+//            {
+//                boneSelector = SpringColliderBoneSelector.Create<SpringSphereCollider>(
+//                    targets, (bone, colliders) => bone.sphereColliders.Any(collider => colliders.Contains(collider)));
+//            }
+//            boneSelector.ShowInspector();
+//        }
 
-        // private
+//        // private
 
-        private SpringColliderBoneSelector boneSelector;
-    }
-}
+//        private SpringColliderBoneSelector boneSelector;
+//    }
+//}

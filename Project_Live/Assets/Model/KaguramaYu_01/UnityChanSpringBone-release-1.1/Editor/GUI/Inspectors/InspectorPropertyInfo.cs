@@ -1,33 +1,33 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿//using UnityEditor;
+//using UnityEngine;
 
-namespace Unity.Animations.SpringBones
-{
-    namespace Inspector
-    {
-        public class PropertyInfo
-        {
-            public SerializedProperty serializedProperty;
+//namespace Unity.Animations.SpringBones
+//{
+//    namespace Inspector
+//    {
+//        public class PropertyInfo
+//        {
+//            public SerializedProperty serializedProperty;
 
-            public PropertyInfo(string newName, string labelText)
-            {
-                name = newName;
-                label = new GUIContent(labelText);
-            }
+//            public PropertyInfo(string newName, string labelText)
+//            {
+//                name = newName;
+//                label = new GUIContent(labelText);
+//            }
 
-            public void Initialize(SerializedObject serializedObject)
-            {
-                serializedProperty = serializedObject.FindProperty(name);
-            }
+//            public void Initialize(SerializedObject serializedObject)
+//            {
+//                serializedProperty = serializedObject.FindProperty(name);
+//            }
 
-            public virtual void Show()
-            {
-                EditorGUILayout.PropertyField(serializedProperty, label, true, null);
-            }
+//            public virtual void Show()
+//            {
+//                EditorGUILayout.PropertyField(serializedProperty, label, true, null);
+//            }
 
-            protected GUIContent label;
+//            protected GUIContent label;
 
-            private string name;
-        }
-    }
-}
+//            private string name;
+//        }
+//    }
+//}
