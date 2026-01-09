@@ -26,36 +26,39 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
 {
     [SerializeField] CubismMotionController motionController;
     public CubismMotionController MotionController { get { return motionController; } }
-    [SerializeField]CubismExpressionController expressionController;
-    [SerializeField] CubismExpressionPreview prev;
+  //  [SerializeField]CubismExpressionController expressionController;
+  //  [SerializeField] CubismExpressionPreview prev;
     [SerializeField]List<ExpressionData> expressions = new ();
     [SerializeField]List<MotionData> motions = new ();
     public List<MotionData> Motions { get { return motions; } }
+
+
+    public LipSync lip;
     private string currentPlayingMotion = "";
     public string CurrentPlayingMotion { get { return currentPlayingMotion; } }
     private int currentMotionIndex = -1;
     private void OnValidate()
     {
-        if (motionController == null||expressionController==null) return; 
+     //   if (motionController == null||expressionController==null) return; 
         
             
         
-        if (expressions.Count > 0)
-        {
-            var index = 0;
-            foreach(var exp in expressions)
-            {
+        //if (expressions.Count > 0)
+        //{
+        //    var index = 0;
+        //    foreach(var exp in expressions)
+        //    {
 
-                if (exp != null && expressionController.ExpressionsList != null)
-                {
-                    exp.index = index;
-                    exp.expressionName = expressionController.ExpressionsList.CubismExpressionObjects[index].name;
-                    exp.expressionName = exp.expressionName.Replace(".exp3", "").Replace(".exp", "");
-                    index++;
-                }
+        //        if (exp != null && expressionController.ExpressionsList != null)
+        //        {
+        //            exp.index = index;
+        //            exp.expressionName = expressionController.ExpressionsList.CubismExpressionObjects[index].name;
+        //            exp.expressionName = exp.expressionName.Replace(".exp3", "").Replace(".exp", "");
+        //            index++;
+        //        }
              
-            }
-        }
+        //    }
+        //}
     }
 
 
@@ -79,9 +82,8 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
         motionController.PlayAnimation(data.animationClip, layerIndex: 0, priority: priority, isLoop: false);
         currentMotionIndex = motions.IndexOf(data);
         currentPlayingMotion = name;
-        prev.ChangeExpression(1);
-       // expressionController.CurrentExpressionIndex = 1;
-        // SetExpression("blink");
+      //  prev.ChangeExpression(1);
+      
         return;
 
 
@@ -90,13 +92,13 @@ public class Live2DController : MonoBehaviour//Live2Dの動きと表情の制御
   
     public void SetExpression(string name)//表情設定
     {
-        if(motionController == null || expressionController == null) return;
+      //  if(motionController == null || expressionController == null) return;
         foreach (var exp in expressions)
         {
             if(exp.expressionName == name)
             {
 
-                expressionController.CurrentExpressionIndex = exp.index;
+             //   expressionController.CurrentExpressionIndex = exp.index;
                 Debug.Log("aassss");
                 return;
             }

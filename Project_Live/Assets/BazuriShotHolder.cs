@@ -7,7 +7,8 @@ public class BazuriShotHolder : MonoBehaviour
 
     public RenderTexture BestShotRT;
     public int BestScore;
-
+    public int rank;
+    public int good;
 
     void Awake()
     {
@@ -20,7 +21,14 @@ public class BazuriShotHolder : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
+    public void GetRank(int finalRank)
+    {
+        rank = finalRank;
+    }
+    public void GetGood(int finalGood)
+    {
+        good = finalGood;
+    }
     public void TryBestBazuriShot(RenderTexture rt, int score)
     {
         if (score < BestScore) return;
