@@ -1,109 +1,123 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;  // ★追加
+
+#if UNITY_EDITOR
 using UnityEditor.Animations;
+#endif
 
 [System.Serializable]
- public class Bazuri
-    {
-     public   string motionName;
-       public float motionRate=1f;
-    }
-
+public class Bazuri
+{
+    public string motionName;
+    public float motionRate = 1f;
+}
 
 public class BazuriMotionRate : MonoBehaviour
 {
-  
-    [SerializeField] List<Bazuri> bazuriMotion;
-    [SerializeField]Animator animator;
- 
-    List<string> nameList=new List<string>();
-    public List<Bazuri> BazuriMotion
-    {
-        get { return bazuriMotion; }
-        set { bazuriMotion = value; }
-    }
- 
+    [SerializeField] List<Bazuri> bazuriMotion = new();
+    [SerializeField] Animator animator;
+
+    List<string> nameList = new List<string>();
+    bool isInitialized = false;
 
 #if UNITY_EDITOR
-    private void OnValidate()//スクリプト/インスペクター更新時に自動で呼び出される
+    private void OnValidate()
     {
-        if (animator == null)
-        {
-            animator = GetComponent<Animator>();
-           
-        }
-        if (animator == null) return; 
-            var ac = animator.runtimeAnimatorController as AnimatorController;
-        if (ac == null) return;
+        InitializeMotionListEditor();
+    }
+#endif
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+#if UNITY_EDITOR
+        InitializeMotionListEditor();
+#else
+        // ★ビルド時: AnimationClipからState名取得（高速・安全）
+        InitializeMotionListRuntime();
+#endif
+        isInitialized = true;
+    }
+
+    // Editor専用: AnimatorController解析
+#if UNITY_EDITOR
+    void InitializeMotionListEditor()
+    {
+        if (animator?.runtimeAnimatorController == null) return;
+        var ac = animator.runtimeAnimatorController as AnimatorController;
+        if (ac?.layers == null || ac.layers.Length == 0) return;
 
         nameList.Clear();
         GetAllStateMachineName(ac.layers[0].stateMachine, nameList);
 
-        Dictionary<string, float> prevRate = new();
-        
-        foreach(var bazuri in bazuriMotion)//直前のデータの保存
-        {
+        UpdateBazuriList();
+    }
+#endif
 
-            if (!string.IsNullOrEmpty(bazuri.motionName))
-            {
-                prevRate[bazuri.motionName]=bazuri.motionRate;
-            }
+    // ビルド時: AnimationClip名を使用（State名とほぼ一致）
+    void InitializeMotionListRuntime()
+    {
+        if (animator?.runtimeAnimatorController == null) return;
+
+        nameList.Clear();
+        var clips = animator.runtimeAnimatorController.animationClips;
+        if (clips != null)
+        {
+            foreach (var clip in clips)
+                nameList.Add(clip.name);
         }
+
+        UpdateBazuriList();
+    }
+
+    void UpdateBazuriList()
+    {
+        if (nameList.Count == 0) return;
+
+        Dictionary<string, float> prevRate = bazuriMotion
+            .Where(b => !string.IsNullOrEmpty(b.motionName))
+            .ToDictionary(b => b.motionName, b => b.motionRate);
 
         bazuriMotion.Clear();
-       
-       
-       
-        
-        for(int i = 0; i < nameList.Count; i++)
+        foreach (var name in nameList.Distinct())
         {
-            var bazuri = new Bazuri
+            bazuriMotion.Add(new Bazuri
             {
-                motionName = nameList[i],
-                motionRate = prevRate.ContainsKey(nameList[i]) ? prevRate[nameList[i]] :1f
-            };
-
-
-            bazuriMotion.Add(bazuri);
+                motionName = name,
+                motionRate = prevRate.ContainsKey(name) ? prevRate[name] : 1f
+            });
         }
     }
-  #endif
-    public float GetCurrentMotionRate(Animator animator)//今のモーションのスコア倍率を返す
-    {
-        
-        if (animator == null)
-        {
-            Debug.Log("ddddd");
-            return 1f;
-        }
-        var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-       
-        foreach (var bazuri in BazuriMotion)
+    public float GetCurrentMotionRate(Animator targetAnimator = null)
+    {
+        targetAnimator ??= animator;
+        if (targetAnimator == null) return 1f;
+
+        var stateInfo = targetAnimator.GetCurrentAnimatorStateInfo(0);
+        foreach (var bazuri in bazuriMotion)
         {
             if (stateInfo.IsName(bazuri.motionName))
-            {
-         
                 return bazuri.motionRate;
-            }
-            
-            
         }
-         Debug.Log(animator.gameObject.name);
         return 1f;
     }
 
-    private static void GetAllStateMachineName(AnimatorStateMachine stateMachine,List<string > result)
+#if UNITY_EDITOR
+    private static void GetAllStateMachineName(AnimatorStateMachine stateMachine, List<string> result)
     {
-        foreach(var state in stateMachine.states)
+        if (stateMachine?.states == null) return;
+        foreach (var state in stateMachine.states)
         {
-            result.Add(state.state.name);
+            if (state.state != null) result.Add(state.state.name);
         }
 
-        foreach (var substateMachines in stateMachine.stateMachines)
+        if (stateMachine.stateMachines != null)
         {
-            GetAllStateMachineName(substateMachines.stateMachine, result);
+            foreach (var sub in stateMachine.stateMachines)
+                GetAllStateMachineName(sub.stateMachine, result);
         }
     }
-
+#endif
 }
