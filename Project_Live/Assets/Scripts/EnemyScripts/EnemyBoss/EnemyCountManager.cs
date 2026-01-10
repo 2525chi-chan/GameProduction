@@ -54,6 +54,7 @@ public class EnemyCountManager : MonoBehaviour//“G‚Ì”‚ğŠÇ—‚·‚éƒNƒ‰ƒX
            // enemies.Remove(enemy);
             deadCount++;
             text.text = deadCount + ("‘ÌŒ‚”j!!");
+        if(defeatAnimator!=null)
             defeatAnimator.Play("Defeat",-1,0);
       //  }
     }

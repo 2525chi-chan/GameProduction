@@ -6,7 +6,8 @@ public class ObjectStatus : CharacterStatus
     [SerializeField] GameObject destroyEffect;
     [Header("破壊時に再生する効果音")]
     [SerializeField] AudioClip destroySound;
-
+    [Header("被ダメージ時に再生する効果音")]
+    [SerializeField] AudioClip damageSound;
     [Header("回復速度")]
     public float recoveryRate = 1f;
     [Header("回復までの時間")]
@@ -44,11 +45,13 @@ public class ObjectStatus : CharacterStatus
                 Hp = MaxHp;
             }
         }
-        if (prevHp < Hp)
+        if (prevHp > Hp && Hp > 0 && !isBroken)
         {
+            if (SE != null && damageSound != null)
+                SE.PlayOneShot(damageSound);
             ResetTime();
         }
-            prevHp= Hp;
+        prevHp = Hp;
 
         if (Hp <= 0 && !isBroken)
         {
@@ -69,5 +72,6 @@ public class ObjectStatus : CharacterStatus
     public void ResetTime()
     {
         count = 0f;
+      
     }
 }
