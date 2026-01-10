@@ -127,6 +127,7 @@ MonoBehaviour:
   attackPower: 10
   agility: 10
   destroyEffect: {fileID: 1376598843723980918, guid: 416ceb4e2c39a5d458d3cb632268b888, type: 3}
+  destroySound: {fileID: 0}
   recoveryRate: 12
   recoveryTime: 0
   isBarrier: 1
@@ -362,6 +363,7 @@ MonoBehaviour:
   attackPower: 10
   agility: 10
   destroyEffect: {fileID: 1376598843723980918, guid: 416ceb4e2c39a5d458d3cb632268b888, type: 3}
+  destroySound: {fileID: 8300000, guid: 926bf2c281c7ab847bb687d0aa94303e, type: 3}
   recoveryRate: 20
   recoveryTime: 0
   isBarrier: 0
