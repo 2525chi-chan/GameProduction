@@ -28,12 +28,15 @@ public class PlayerBuffManager : MonoBehaviour
     [SerializeField] ParticleSystem powerBuffEffect;
     [Header("スピードバフ出現時のエフェクト")]
     [SerializeField] ParticleSystem agilityBuffEffect;
+    [Header("HP回復の音声")]
+    [SerializeField] AudioClip healSound;
 
     [Header("必要なコンポーネント")]
     [SerializeField] GameObject AgilityImage;
     [SerializeField] TextMeshProUGUI AgilityTimerText;
     [SerializeField] GameObject PowerImage;
     [SerializeField] TextMeshProUGUI PowerTimerText;
+    [SerializeField] AudioSource SE;
 
     PlayerStatus playerStatus;
 
@@ -97,6 +100,7 @@ public class PlayerBuffManager : MonoBehaviour
     public void AddHP(float value)
     {
         int addValue = (int)(originalHp * (value / 100));
+        SE.PlayOneShot(healSound);
         Debug.Log("プレイヤーの最大HP" + originalHp + "の" + value + "%分(" + addValue + ")プレイヤーのHPを回復しました。");
         playerStatus.Hp += addValue;
     }

@@ -201,6 +201,10 @@ PrefabInstance:
       propertyPath: hp
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 4098828232468043532, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
+      propertyPath: isTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4183218902171131781, guid: b2acedd80aa7abb45b6324a2632b88a4, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

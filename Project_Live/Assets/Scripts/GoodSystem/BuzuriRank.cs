@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
@@ -78,9 +79,12 @@ public class BuzuriRank : MonoBehaviour
     public bool changeConectCommentCol = true;
     [Header("バズリランクゲージバー")]
     [SerializeField] Slider BuzuriSlider;
+    [Header("バズリランク上昇音")]
+    [SerializeField] AudioClip RankSound;
     [Header("必要なコンポーネント")]
   //  [SerializeField] Image buzuriGage;
     [SerializeField] BazuriShot bazuriShot;
+    [SerializeField] AudioSource SE;
     private int currentIndex = 0;   //現在のクラスのインデックス数
     private float beforeMaxValue = 0;   //前のバズリランクに到達するまでに必要ないいね数
 
@@ -118,7 +122,17 @@ public class BuzuriRank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentIndex + 1 >= buzzRanks.Count)    //最高のバズリランクに到達しているか確認
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
+            if (currentIndex + 1 >= buzzRanks.Count)    //最高のバズリランクに到達しているか確認
+            {
+                return; //到達していれば以降の処理を行わない
+            }
+            else
+                goodSystem.AddGood(buzzRanks[currentIndex + 1].needNum);
+        }
+
+        if (currentIndex + 1 >= buzzRanks.Count)    //最高のバズリランクに到達しているか確認
         {
             return; //到達していれば以降の処理を行わない
         }
@@ -152,8 +166,9 @@ public class BuzuriRank : MonoBehaviour
 
                 if(rankUpAnimator != null)
                 {
-
+                    
                     rankUpAnimator.Play("RankUp", -1, -1);
+                    StartCoroutine(DelayPlay(1));
                 }
 
                 bazuriShot.SetBazuriShotStock(currentBuzzRank.BazuriShotStock); //バズリショットのストック数を現在のバズリランクに応じた数にする
@@ -166,4 +181,12 @@ public class BuzuriRank : MonoBehaviour
             }
         }
     }
+
+    IEnumerator DelayPlay(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        SE.PlayOneShot(RankSound);
+    }
+    
 }

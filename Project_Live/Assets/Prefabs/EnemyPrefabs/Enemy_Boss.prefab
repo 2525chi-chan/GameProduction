@@ -839,7 +839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4258189648188175544, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: hp
-      value: 7500
+      value: 6000
       objectReference: {fileID: 0}
     - target: {fileID: 4258189648188175544, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: agility
