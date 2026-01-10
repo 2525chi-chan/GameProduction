@@ -370,6 +370,7 @@ public class BazuriShot : MonoBehaviour// バズリショットの制御
         {
             mainCamera.Priority = highPriority;
             bazuriCamera.Priority = lowPriority;
+         
         }
         currentStock--;
         countTimeUI.fillAmount = 1;

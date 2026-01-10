@@ -78,7 +78,7 @@ public class Live2DController : MonoBehaviour//Live2DÇÃìÆÇ´Ç∆ï\èÓÇÃêßå‰
 
         if (!motions.Contains(data)) return;
 
-         Debug.Log(data.motionName);
+       //  Debug.Log(data.motionName);
         motionController.PlayAnimation(data.animationClip, layerIndex: 0, priority: priority, isLoop: false);
         currentMotionIndex = motions.IndexOf(data);
         currentPlayingMotion = name;

@@ -54,7 +54,8 @@ public class LoadingGame : MonoBehaviour
 
             case SelectScene.SceneName.Main:
             return "MainScene";
-
+            case SelectScene.SceneName.Guide:
+                return "GuideScene";
             case SelectScene.SceneName.GameClear:
             return "GameClearScene";
 
