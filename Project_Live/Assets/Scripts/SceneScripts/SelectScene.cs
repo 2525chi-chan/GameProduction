@@ -8,6 +8,7 @@ public class SelectScene : MonoBehaviour
     {
         Menu,
         Loading,
+        Guide,
         Main,
         GameClear,
         GameOver

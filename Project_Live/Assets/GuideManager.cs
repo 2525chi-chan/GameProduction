@@ -7,8 +7,24 @@ public class GuideManager : MonoBehaviour
 
     [SerializeField] GameObject rootGuide;
     [SerializeField] List<Image> guideImages = new();
+    public List<Image>GuideImages { get { return guideImages; } }
     [SerializeField] InputAction action;
+    [SerializeField]bool isLooped = true;
+    [SerializeField] Image rightArrow;
+    [SerializeField] Image leftArrow;
     int currentIndex = 0;
+
+    public int CurrentIndex
+    {
+        get
+        {
+            return currentIndex;
+        }
+        set
+        {
+            currentIndex = value;
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,8 +51,23 @@ public class GuideManager : MonoBehaviour
         if (guideImages.Count == 0) return;
         if (!context.performed) return;
         currentIndex++;
+
+
         if (currentIndex >= guideImages.Count)
-            currentIndex = 0; // 末尾で止める（ループさせたいなら 0）
+        {
+            if (isLooped)
+            {
+                currentIndex = 0; // 末尾で止める（ループさせたいなら 0）
+            }
+            else
+            { currentIndex=guideImages.Count-1;
+               
+            }
+
+        }
+
+        rightArrow.enabled=isLooped||currentIndex!=guideImages.Count-1;
+        leftArrow.enabled = true;
 
         SetGuideIndex(currentIndex);
     }
@@ -47,8 +78,23 @@ public class GuideManager : MonoBehaviour
         if (!context.performed) return;
         currentIndex--;
         if (currentIndex < 0)
-            currentIndex = guideImages.Count - 1; // 先頭で止める（ループさせたいなら guideImages.Count-1）
+        {
+            if (isLooped)
+            {
 
+                currentIndex = guideImages.Count - 1; // 先頭で止める（ループさせたいなら guideImages.Count-1）
+
+            }
+            else
+            {
+                currentIndex = 0;
+
+            }
+
+        }
+
+        leftArrow.enabled = isLooped || currentIndex!=0;
+        rightArrow.enabled = true;
         SetGuideIndex(currentIndex);
     }
 

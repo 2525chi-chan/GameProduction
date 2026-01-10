@@ -3268,7 +3268,7 @@ MonoBehaviour:
   - {fileID: 333056483}
   - {fileID: 1786304871}
   action:
-    m_Name: 
+    m_Name: Action
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 33137af7-b150-4781-819e-1f0588907b1f
@@ -3276,6 +3276,9 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  isLooped: 1
+  rightArrow: {fileID: 1866668486}
+  leftArrow: {fileID: 2129707816}
 --- !u!1 &1516061501
 GameObject:
   m_ObjectHideFlags: 0
