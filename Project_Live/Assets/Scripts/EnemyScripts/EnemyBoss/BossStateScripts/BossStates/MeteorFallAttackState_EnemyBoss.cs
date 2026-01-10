@@ -30,7 +30,9 @@ public class MeteorFallAttackState_EnemyBoss : IEnemyState
     {
         meteorFallAttack.StateProcess();
 
-        // çUåÇäÆóπîªíË
+        if (meteorFallAttack.TargetPosition == null)
+            meteorFallAttack.SetTargetPosition();
+
         if (!isPlayed && meteorFallAttack.CurrentAttackState == MeteorFallAttack_Boss.AttackState.Attack)
         {
             isPlayed = true;

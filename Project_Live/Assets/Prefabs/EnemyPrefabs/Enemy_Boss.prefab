@@ -374,7 +374,6 @@ MonoBehaviour:
   chargeSound: {fileID: 8300000, guid: 4cb9546fc6b1b36489789682bc0d0372, type: 3}
   attackSound: {fileID: 8300000, guid: 1976bf5085a7ed44c98127b1524aaa87, type: 3}
   fallSound: {fileID: 8300000, guid: 7625caf70c0bc744eb27f3ff35f96a90, type: 3}
-  impactSound: {fileID: 8300000, guid: 4d881e49e28519246bf5cfc920793730, type: 3}
   meteorCount: 10
   minDistanceMeteors: 10
   timeToGround: 2
@@ -786,7 +785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3718490458120221149, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: attackPatterns.Array.data[0].enableNormalAttack
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3718490458120221149, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: attackPatterns.Array.data[0].normalAttackWeight
@@ -842,7 +841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3718490458120221149, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: attackPatterns.Array.data[0].enableLongRangeAttack
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3718490458120221149, guid: 07419985e8993174696f9559c2e48540, type: 3}
       propertyPath: attackPatterns.Array.data[0].longRangeAttackWeight

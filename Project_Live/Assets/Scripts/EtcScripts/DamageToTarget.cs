@@ -107,9 +107,12 @@ public class DamageToTarget : MonoBehaviour
         {
             Vector3 spawnPosition;
             Quaternion spawnRotation;
+            Vector3 effectScale = Vector3.one;
 
             if (enemy.gameObject.name.Contains("Enemy_Boss"))
             {
+                float enemyScaleX = enemy.transform.lossyScale.x;
+                effectScale = Vector3.one * enemyScaleX;
                 spawnPosition = effectSpawnPoint.position;
                 spawnRotation = effectSpawnPoint.rotation;
             }
@@ -120,7 +123,8 @@ public class DamageToTarget : MonoBehaviour
                 spawnRotation = enemy.gameObject.transform.rotation;
             }
             
-            Instantiate(hitEffect, spawnPosition, spawnRotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+            GameObject effectInstance = Instantiate(hitEffect, spawnPosition, spawnRotation); //エフェクトが設定されていたら、命中時にエフェクトを生成する
+            effectInstance.transform.localScale = effectScale;
         }
 
         if (hitSound != null) SE.PlayOneShot(hitSound);
