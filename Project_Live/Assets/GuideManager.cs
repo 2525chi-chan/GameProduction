@@ -12,6 +12,9 @@ public class GuideManager : MonoBehaviour
     [SerializeField]bool isLooped = true;
     [SerializeField] Image rightArrow;
     [SerializeField] Image leftArrow;
+    [SerializeField] AudioSource buttonAudio;
+    [SerializeField] AudioClip clip;
+    [SerializeField] AudioClip cancelClip;
     int currentIndex = 0;
 
     public int CurrentIndex
@@ -44,6 +47,7 @@ public class GuideManager : MonoBehaviour
 
         if (rootGuide.activeSelf)
             rootGuide.SetActive(false);
+        buttonAudio.PlayOneShot(cancelClip);
     }
 
     public void NextGuide(InputAction.CallbackContext context)
@@ -107,5 +111,7 @@ public class GuideManager : MonoBehaviour
             bool active = (i == currentIndex);
             guideImages[i].gameObject.SetActive(active);
         }
+
+        buttonAudio.PlayOneShot(clip);
     }
     }

@@ -20,12 +20,16 @@ public class BazuriShotResult : MonoBehaviour
     [SerializeField] TMP_Text goodText;
     void Start()
     {
+        if (rankText != null)
+        {
+            foreach (var rank in rankText)
+            {
 
-        foreach (var rank in rankText) { 
-        
-        rank.enabled = false;
+                rank.enabled = false;
+            }
+
         }
-
+      
         var holder = BazuriShotHolder.Instance;
 
         if (holder != null && holder.BestShotRT != null)
@@ -42,8 +46,10 @@ public class BazuriShotResult : MonoBehaviour
             if (bestScoreText != null)
                 bestScoreText.text = "-";
         }
-        
-        rankText[holder.rank].enabled = true;
+
+        if (rankText != null&&rankText.Length!=0) {  rankText[holder.rank].enabled = true; }
+
+      
         goodText.text=holder.good.ToString()+"\n‚¢‚¢‚ËŠl“¾!!!";
       
     }
