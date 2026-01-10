@@ -34,6 +34,7 @@ public class EnemyMover : MonoBehaviour
     float moveTypeTimer = 0f; //移動タイプ更新時間の計測用
     bool isActiveMove = true;
     bool isActiveRotate = true;
+    GameClearManager clearManager;
 
     public EnemyMoveState MoveState { get { return currentMoveState; } }
     public EnemyMoveType MoveType { get { return moveType; } }   
@@ -53,6 +54,7 @@ public class EnemyMover : MonoBehaviour
     void Start()
     {
         MoveSetState(EnemyMoveState.stop);
+        clearManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameClearManager>();
     }
 
     void Update()
@@ -61,7 +63,7 @@ public class EnemyMover : MonoBehaviour
 
         if(enemyStatus.IsRagdoll) return; //ラグドール状態のときは移動しない
 
-        if (enemyStatus.ISBossSpawn) return;
+        if (enemyStatus.ISBossSpawn || clearManager.IsActiveClear) return;
 
 
         if (moveType == EnemyMoveType.StageDestroy && lookTarget == null)

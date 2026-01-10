@@ -1052,6 +1052,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathHandler: {fileID: 4581805128912596912}
   gameClearManager: {fileID: 0}
+  deathEffect: {fileID: 3268733254871707116, guid: 3b69c39cd95638343bf26cb429bc8987, type: 3}
+  deathSound: {fileID: 8300000, guid: 6d5fb4fca5d77a2489782665e2be224e, type: 3}
 --- !u!1001 &8004616623843176185
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4,7 +4,8 @@ public class ObjectStatus : CharacterStatus
 {
     [Header("破壊時に発生するエフェクト")]
     [SerializeField] GameObject destroyEffect;
-
+    [Header("破壊時に再生する効果音")]
+    [SerializeField] AudioClip destroySound;
 
     [Header("回復速度")]
     public float recoveryRate = 1f;
@@ -23,10 +24,14 @@ public class ObjectStatus : CharacterStatus
         set { count = value; }
     }
     float prevHp;
+
+    AudioSource SE;
+
     // Update is called once per frame
     private void Start()
     {
         prevHp= Hp;
+        SE = GameObject.FindWithTag("SE").GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -57,6 +62,7 @@ public class ObjectStatus : CharacterStatus
         {
             isBroken = true; //破壊判定
             if (destroyEffect != null) Instantiate(destroyEffect, transform.position, Quaternion.identity); //エフェクトの生成
+            if (SE != null && destroySound != null) SE.PlayOneShot(destroySound);
             Destroy(gameObject); //この建物を破壊する
         }
     }
