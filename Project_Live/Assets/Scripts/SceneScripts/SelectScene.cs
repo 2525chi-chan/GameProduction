@@ -33,6 +33,11 @@ public class SelectScene : MonoBehaviour
         DontDestroyOnLoad(gameObject); // 必要なら
     }
 
+    private void Start()
+    {
+        
+    }
+
     // ボタンなどから呼ぶ static API
     public static void LoadScene(SceneName target)
     {

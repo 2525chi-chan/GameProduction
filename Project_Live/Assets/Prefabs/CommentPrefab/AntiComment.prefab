@@ -387,8 +387,9 @@ MonoBehaviour:
     replyVoice: {fileID: 8300000, guid: 00b569f5fb7f30241bcc424236bbc408, type: 3}
   - commentText: "\u666E\u901A\u306B\u4E0B\u624B\u3067\u8349"
     replyVoice: {fileID: 8300000, guid: d638cddd5b8b297428bcc09aafe244b8, type: 3}
-  - commentText: "\u25CB\u306D\u25CB\u306D\u25CB\u306D\u25CB\u306D\u25CB\u306D"
+  - commentText: "\u8CA0\u3051\u308D\u8CA0\u3051\u308D\u8CA0\u3051\u308D\u8CA0\u3051\u308D\u8CA0\u3051\u308D\u8CA0\u3051\u308D"
     replyVoice: {fileID: 8300000, guid: 64ec3e66ca03d7c40bc93f7468023f75, type: 3}
+  rankComments: []
   pressEffect: {fileID: 127665776651069535}
   trailEffect: {fileID: 0}
   trailFlag: 0

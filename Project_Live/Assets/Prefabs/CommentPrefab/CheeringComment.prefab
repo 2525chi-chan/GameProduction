@@ -587,6 +587,7 @@ MonoBehaviour:
     replyVoice: {fileID: 8300000, guid: 53904fbd6dab72a4ea1e8848ab6d3e71, type: 3}
   - commentText: "\u8CA0\u3051\u3093\u306A\uFF01\uFF01"
     replyVoice: {fileID: 8300000, guid: 4d8d641aa1152974a90534b2dd357bda, type: 3}
+  rankComments: []
   pressEffect: {fileID: 5410154455633384482}
   trailEffect: {fileID: 5054387600023684386}
   trailFlag: 1
@@ -618,7 +619,7 @@ MonoBehaviour:
   commentSound: {fileID: 8300000, guid: 4624094ba53c86a4ea9228ac11e318ca, type: 3}
   text: {fileID: 5436835106294436230}
   addHPPercent: 30
-  hpPercent: 50
+  hpPercent: 70
   attackMagnification: 1.5
   agilityMagnification: 2
   buffTime: 30

@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections;
 
 public class CheeringComment  :ReplyCommentBase
 {
@@ -78,9 +79,29 @@ public class CheeringComment  :ReplyCommentBase
 
     public void AddHP()     //HP回復効果
     {
-        PlaySound();
+        PressMethod();
+    }
+
+    IEnumerator WaitSecond()
+    {
+        yield return new WaitForSeconds(2.0f);
+        
         playerBuffManager.AddHP(addHPPercent);
-        DestroyComment();
+
+        Destroy(this.gameObject);
+    }
+
+    void PressMethod()  //押された瞬間のエフェクトやコメント移動の停止関数
+    {
+        Pressed = true;
+        pressEffect.Play();
+        animator.Play("CommentHighlight");
+        PlaySound();
+        UnregisterReplyList();
+        EventSystem.current.SetSelectedGameObject(null);
+        commentMove.enabled = false;
+
+        StartCoroutine(WaitSecond());
     }
 
     public void BuffAtack()     //攻撃バフ効果

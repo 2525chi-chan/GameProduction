@@ -28,72 +28,94 @@ public abstract class RequestBaseSO : ScriptableObject
 
     protected virtual void OnEnable()
     {
-        UpdateRequestType(); // 派生クラスでオーバーライド可能
+        UpdateRequestType();
     }
+
+    // 手動初期化メソッドを追加（Resources.Load用）
+    //public virtual void Initialize()
+    //{
+    //    UpdateRequestType();
+    //}
     protected virtual void UpdateRequestType() { /* 基底クラス用 */ }
 }
 
-[CreateAssetMenu(fileName = "New RequestEnemy", menuName = "Request/Enemy")]
-public class RequestEnemySO : RequestBaseSO
-{
-    public enum EnemyType
-    {
-        All, Selected
-    }
+//[CreateAssetMenu(fileName = "New RequestEnemy", menuName = "Request/Enemy")]
+//public class RequestEnemySO : RequestBaseSO
+//{
+//    public enum EnemyType
+//    {
+//        All, Selected
+//    }
 
-    [Header("倒す敵は何でもいいのか、指定された敵か")]
-    public EnemyType enemyType;
-    [Header("倒してほしい敵の数")]
-    public int defeatEnemyNum;
-    [Header("倒してほしい敵の種類(*Allの場合はNone")]
-    public GameObject targetEnemy;
-    [Header("倒してほしい敵の名前")]
-    public string enemyName;
+//    [Header("倒す敵は何でもいいのか、指定された敵か")]
+//    public EnemyType enemyType;
+//    [Header("倒してほしい敵の数")]
+//    public int defeatEnemyNum;
+//    [Header("倒してほしい敵の種類(*Allの場合はNone")]
+//    public GameObject targetEnemy;
+//    [Header("倒してほしい敵の名前")]
+//    public string enemyName;
 
-    [System.NonSerialized]
-    public int enemyCounter = 0;
+//    [System.NonSerialized]
+//    public int enemyCounter = 0;
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        requestType = RequestType.Enemy;
-        switch (enemyType)
-        {
-            case EnemyType.All:
-                displayText = "あと"+defeatEnemyNum + "体敵を倒そう!!!";
-                break;
-            case EnemyType.Selected:
-                displayText = enemyName + "をあと" + defeatEnemyNum + "体倒そう！！！";
-                break;
-        }
-    }
-}
+//    protected override void OnEnable()
+//    {
+//        base.OnEnable();
+//        //Initialize();
+//        requestType = RequestType.Enemy;
+//        switch (enemyType)
+//        {
+//            case EnemyType.All:
+//                displayText = "あと" + defeatEnemyNum + "体敵を倒そう!!!";
+//                break;
+//            case EnemyType.Selected:
+//                displayText = enemyName + "をあと" + defeatEnemyNum + "体倒そう！！！";
+//                break;
+//        }
+//    }
 
-[CreateAssetMenu(fileName = "New RequestEmote", menuName = "Request/Emote")]
-public class RequestEmoteSO : RequestBaseSO
-{
-    public bool doneEmote { set; private get; }
+//    //public override void Initialize()
+//    //{
+//    //    base.Initialize();
+//    //    requestType = RequestType.Enemy;
+//    //    switch (enemyType)
+//    //    {
+//    //        case EnemyType.All:
+//    //            displayText = "あと" + defeatEnemyNum + "体敵を倒そう!!!";
+//    //            break;
+//    //        case EnemyType.Selected:
+//    //            displayText = enemyName + "をあと" + defeatEnemyNum + "体倒そう！！！";
+//    //            break;
+//    //    }
+//    //}
+//}
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        requestType= RequestType.Emote;
-        displayText = "エモートをしよう!!!";
-    }
-}
+//[CreateAssetMenu(fileName = "New RequestEmote", menuName = "Request/Emote")]
+//public class RequestEmoteSO : RequestBaseSO
+//{
+//    public bool doneEmote { set; private get; }
 
-[CreateAssetMenu(fileName = "New RequestBazuriShot", menuName = "Request/BazuriShot")]
-public class RequestBazuriShotSO : RequestBaseSO
-{
-    [Header("バズリショットで稼いでほしい、いいね数")]
-    public int requestNum;
+//    protected override void OnEnable()
+//    {
+//        base.OnEnable();
+//        requestType= RequestType.Emote;
+//        displayText = "エモートをしよう!!!";
+//    }
+//}
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        requestType=RequestType.BazuriShot;
-        displayText = "バズリショットで" + requestNum + "いいねを稼ごう!!!";
-    }
-}
+//[CreateAssetMenu(fileName = "New RequestBazuriShot", menuName = "Request/BazuriShot")]
+//public class RequestBazuriShotSO : RequestBaseSO
+//{
+//    [Header("バズリショットで稼いでほしい、いいね数")]
+//    public int requestNum;
+
+//    protected override void OnEnable()
+//    {
+//        base.OnEnable();
+//        requestType = RequestType.BazuriShot;
+//        displayText = "バズリショットで" + requestNum + "いいねを稼ごう!!!";
+//    }
+//}
 
 

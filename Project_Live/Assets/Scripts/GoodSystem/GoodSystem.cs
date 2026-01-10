@@ -107,8 +107,6 @@ public class GoodSystem : MonoBehaviour
         decreaseGoodText.enabled = true;
 
         yield return new WaitForSeconds(getDuration);
-
-        SE.PlayOneShot(goodSound);
         
         decreaseGoodText.enabled=false;
 

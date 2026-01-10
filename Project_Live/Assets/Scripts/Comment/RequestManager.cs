@@ -39,7 +39,6 @@ public class RequestManager : MonoBehaviour
     [System.NonSerialized] public RequestEnemySO currentRequestEnemy;
     [System.NonSerialized] public RequestEmoteSO currentRequestEmote;
 
-    
     Animator ClearTextAnimator;
     Animator ClearStampAnimator;
     int nextDisplayIndex;

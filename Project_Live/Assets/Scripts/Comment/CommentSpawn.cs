@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
 using Live2D.Cubism.Core.Unmanaged;
+using UnityEngine.Rendering.Universal;
 
 
 //作成者　寺村
@@ -21,6 +22,12 @@ public class CommentSpawn : MonoBehaviour
     [SerializeField] int requestCommentCount = 20;
     [Header("返信コメントが流れるまでのコメント数")]
     [SerializeField] int replyCommnetCount = 10;
+    [Header("妨害が始まったときの警告音")]
+    [SerializeField] AudioClip interceptSound;
+    [Header("妨害が始まったときのエフェクトの強さ")]
+    [SerializeField] float effectIntensity = 20;
+    [Header("妨害が始まったときのエフェクトの時間")]
+    [SerializeField] float effectTime = 2;
 
     [Header("必要なコンポーネント")]
     public GameObject Canvas;
@@ -31,6 +38,8 @@ public class CommentSpawn : MonoBehaviour
     [SerializeField] GameObject ReplyCommentPrefab;
     [SerializeField] BuzuriRank buzuriRank;
     [SerializeField] RequestManager requestManager;
+    [SerializeField] AudioSource SE;
+    [SerializeField] Volume volume;
     
     [HideInInspector] public bool cheeringCommentIsExist ;
     [HideInInspector] public bool antiCommentIsExist;
@@ -53,6 +62,8 @@ public class CommentSpawn : MonoBehaviour
     RectTransform canvasRect;
     string nextText = null; //関連コメントの内容保存用string
     bool conectComment = false; //関連コメントのフラグ
+
+    bool playSound;
 
     // Start is called before the first frame update
     void Start()
@@ -131,6 +142,18 @@ public class CommentSpawn : MonoBehaviour
             beforeRaneNum = raneNum;
             spawnTime = 0;
         }
+
+        if(interceptEnemyIsExist&&!playSound)
+        {
+            SE.PlayOneShot(interceptSound);
+            StartCoroutine(InterceptEffect(effectIntensity, effectTime));
+            playSound = true;
+        }
+
+        if(!interceptEnemyIsExist&&playSound)
+        {
+            playSound = false;
+        }
     }
 
     //Vector2 DecideSpawnPos(RectTransform rectTransform, int raneNum)
@@ -149,7 +172,7 @@ public class CommentSpawn : MonoBehaviour
     //    return localPos;
     //}
 
-    Vector2 DecideSpawnPos(RectTransform rectTransform ,int raneNum)
+    public Vector2 DecideSpawnPos(RectTransform rectTransform ,int raneNum)
     {
         float raneHeight=(canvasRect.rect.height-rectTransform.sizeDelta.y)/8;
 
@@ -200,8 +223,9 @@ public class CommentSpawn : MonoBehaviour
         }
         else if(CommentType==ReplyCommentPrefab)
         {
-            int decideIndex = Random.Range(0, replyComment.commentContents.Count);
-            selectedText = replyComment.commentContents[decideIndex].commentText;
+            //int decideIndex = Random.Range(0, replyComment.commentContents.Count);
+            int decideIndex = Random.Range(0, replyComment.rankComments[buzuriRank.CurrentIndex].commentContents.Count);
+            selectedText = replyComment.rankComments[buzuriRank.CurrentIndex].commentContents[decideIndex].commentText;
         }
         
         GameObject newTextObj = Instantiate(CommentType, canvasRect);
@@ -211,33 +235,41 @@ public class CommentSpawn : MonoBehaviour
             if (newTextObj == null)
                 return;
             requestComment = newTextObj.gameObject.GetComponent<RequestCommentIdentifier>();
-            if (requestComment.thisRequest==null)
+            if (requestComment.thisRequest == null)
                 Debug.LogWarning("thisRequestが設定されていません");
             selectedText = requestComment.thisRequest.commentText[Random.Range(0, requestComment.thisRequest.commentText.Count)];
         }
 
-        //if(CommentType==CheeringCommentPrefab||CommentType==AntiCommentPrefab)
-        //{
-        //    EventSystem.current.SetSelectedGameObject(newTextObj);
-        //}
 
-        GetCommetText commentText = newTextObj.GetComponent<GetCommetText>();
-        RectTransform rectTransform = newTextObj.GetComponent<RectTransform>();
+            GetCommetText commentText = newTextObj.GetComponent<GetCommetText>();
+            RectTransform rectTransform = newTextObj.GetComponent<RectTransform>();
 
-        // テキストを設定
-        commentText.SetCommentText(selectedText);
+            // テキストを設定
+            commentText.SetCommentText(selectedText);
 
-        if(conectComment&&selectedText==nextText)
-        {
-            if (buzuriRank.changeConectCommentCol)
+            if (conectComment && selectedText == nextText)
             {
-                commentText.SetCommentTextColor(buzuriRank.currentBuzzRank.conectCommentColor);
+                if (buzuriRank.changeConectCommentCol)
+                {
+                    commentText.SetCommentTextColor(buzuriRank.currentBuzzRank.conectCommentColor);
+                }
+                conectComment = false;
             }
-            conectComment = false;
+
+            rectTransform.sizeDelta = new Vector2(commentText.GetTextBoxSizeWidth(), commentText.GetTextBoxSizeHeight());
+            rectTransform.anchoredPosition = DecideSpawnPos(rectTransform, raneNum);
+    }
+
+    IEnumerator InterceptEffect(float intensity,float time)
+    {
+        if(volume.profile.TryGet<ScreenSpaceLensFlare>(out var lensFlare))
+        {
+            lensFlare.intensity.value = intensity;
         }
 
-        rectTransform.sizeDelta = new Vector2(commentText.GetTextBoxSizeWidth(), commentText.GetTextBoxSizeHeight());
-        rectTransform.anchoredPosition = DecideSpawnPos(rectTransform,raneNum);
+        yield return new WaitForSeconds(time);
+
+        lensFlare.intensity.value = 0f;
     }
 
 

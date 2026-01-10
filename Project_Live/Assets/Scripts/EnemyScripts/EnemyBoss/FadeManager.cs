@@ -10,7 +10,8 @@ public class FadeManager : MonoBehaviour//フェードイン・アウトを管理する
     [SerializeField]float fadeInSpeed = 0.02f;
     [SerializeField]float fadeOutSpeed = 0.02f;
     float fadeTimer = 0f;
-  public  IEnumerator FadeIn()
+
+    public  IEnumerator FadeIn()
     {
         fadeTimer = 0f;
         while (fadeImage.color.a < 1)
