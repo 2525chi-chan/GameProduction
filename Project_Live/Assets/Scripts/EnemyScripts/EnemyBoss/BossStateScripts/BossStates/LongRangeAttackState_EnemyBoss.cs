@@ -29,6 +29,9 @@ public class LongRangeAttackState_EnemyBoss : IEnemyState
     {
         longRangeAttack.StateProcess(); //‰“‹——£UŒ‚‚Ìˆ—
 
+        if (longRangeAttack.TargetPosion == null)
+            longRangeAttack.SetTargetPosition();
+
         if (!isPlayed && longRangeAttack.CurrentAttackState == LongRangeAttack_Boss.AttackState.Attack)
         {
             isPlayed = true;
