@@ -4,7 +4,8 @@ public class GameOverManager : MonoBehaviour//ゲームオーバー画面遷移を管理する
 {
     [Header("死亡後ゲームオーバー画面に遷移するまでの時間")]
     [SerializeField]  float gameOverTime = 2f;
-
+    [SerializeField] BuzuriRank rank;
+    [SerializeField] GoodSystem good;
     public static GameOverManager Instance { get; private set; }
 
     void Awake() => Instance = this;
@@ -16,7 +17,9 @@ public class GameOverManager : MonoBehaviour//ゲームオーバー画面遷移を管理する
     {
        
         yield return new WaitForSeconds(gameOverTime);
- Debug.Log("GameOver!!!!");
+        BazuriShotHolder.Instance.GetRank(rank.CurrentIndex);
+        BazuriShotHolder.Instance.GetGood((int)good.GoodNum);
+        Debug.Log("GameOver!!!!");
         SelectScene.LoadScene(SelectScene.SceneName.GameOver);
 
     }
