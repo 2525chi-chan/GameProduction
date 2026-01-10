@@ -41,6 +41,7 @@ public class LongRangeAttack_Boss : MonoBehaviour
 
     public bool IsActive { get { return isActive; } set { isActive = value; } }
     public bool IsAttacked { get; set; }
+    public Transform TargetPosion { get { return targetPosition; } }
     public AttackState CurrentAttackState { get { return currentAttackState; } set { currentAttackState = value; } }
     public void SetStartState()
     {
@@ -48,6 +49,7 @@ public class LongRangeAttack_Boss : MonoBehaviour
         previousAttackState = currentAttackState;
         hasArrived = false;
         targetPosition = null;
+        mover.ToggleActive(true, true);
     }
     
     void Start()
@@ -61,6 +63,8 @@ public class LongRangeAttack_Boss : MonoBehaviour
             stateMachine = GetComponentInParent<EnemyActionStateMachine>();
 
         if (status.IsDead || !isActive) return;
+
+        //Debug.Log(targetPosition);
         
         switch (currentAttackState)    
         {  
@@ -84,6 +88,8 @@ public class LongRangeAttack_Boss : MonoBehaviour
                         mover.MoveTowardsPlayer(targetPosition);
                         mover.LookPlayer(targetPosition);
                     }
+                    //Debug.Log(xzDistance);
+                    //Debug.Log(hasArrived);
                 }
 
                 if (hasArrived) currentAttackState = AttackState.Idle;

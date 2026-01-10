@@ -11,12 +11,6 @@ public class EnemyActionStateMachine : MonoBehaviour
     [Header("群れとボスのどちらの行動パターンを適用するか")]
     [SerializeField] bool isBossBehaviour = false;
 
-    //[Header("HP残量に応じて行動パターンの切り替えを適用するか")]
-    //[SerializeField] bool isPatternChangeEnable = false;
-    //[Header("ステート遷移を順番かランダムのどちらで行うか")]
-    //[Tooltip("チェックをつけると順番、外すとランダムで状態が遷移する")]
-    //[SerializeField] bool useSequentialOrder = true;
-
     public enum BossAttackType { Normal, LongRange, Area, MeteorFall }
 
     [System.Serializable]
@@ -52,7 +46,6 @@ public class EnemyActionStateMachine : MonoBehaviour
         [Tooltip("数値が大きいほど発動確率が高くなる")]
         [UnityEngine.Range(0f, 1f)]
         public float meteorFallAttackWeight = 1f;
-        //public List<BossAttackType> attackOrder = new List<BossAttackType>(); //順番指定用
     }
     [SerializeField] List<BossAttackPattern> attackPatterns =  new List<BossAttackPattern>();
 
@@ -75,8 +68,7 @@ public class EnemyActionStateMachine : MonoBehaviour
     float currentTimer = 0f;
     bool isDelayFinished;
 
-    public bool IsActive { get { return isActive; } set { isActive = value; } }
-    
+    public bool IsActive { get { return isActive; } set { isActive = value; } }    
     public IEnemyState CurrentState { get { return currentState; } }
     public bool IsBossBehaviour { get { return isBossBehaviour; } }
 
@@ -243,7 +235,16 @@ public class EnemyActionStateMachine : MonoBehaviour
             return;
         }
 
-        if (isBossBehaviour /*&& isPatternChangeEnable*/)
+        currentState?.Update();
+        //Debug.Log(currentState);
+        
+        if (status.Hp <= 0)
+        {
+            actionEvents.LostEvent();
+            return;
+        }
+
+        if (isBossBehaviour)
         {
             BossAttackPattern patternForHp = GetPatternForCurrentHp();
 
@@ -253,11 +254,6 @@ public class EnemyActionStateMachine : MonoBehaviour
                 OnBossAttackStartProcess();
             }
         }
-
-        if (status.Hp <= 0) actionEvents.LostEvent();
-
-        currentState?.Update();
-        //Debug.Log(currentState);
     }
 
     public void ChangeState(IEnemyState newState)
@@ -326,27 +322,4 @@ public class EnemyActionStateMachine : MonoBehaviour
         if (currentState is LostState_Enemy) return;
         ChangeState(new LostState_Enemy(anim));
     }
-
-    //void BuildBossAttackQueue(BossAttackQueue pattern)
-    //{
-    //    pattern.attackOrder.Clear();
-
-    //    if (pattern.enableNormalAttack) pattern.attackOrder.Add(BossAttackType.Normal);
-    //    if (pattern.enableLongRangeAttack) pattern.attackOrder.Add(BossAttackType.LongRange);
-    //    if (pattern.enableAreaAttack) pattern.attackOrder.Add(BossAttackType.Area);
-
-    //    if (!useSequentialOrder && pattern.attackOrder.Count > 1)
-    //        ShuffleAttackOrder(pattern);
-    //}
-
-    //void ShuffleAttackOrder(BossAttackQueue pattern) //攻撃内容のシャッフル
-    //{
-    //    for (int i = pattern.attackOrder.Count - 1; i > 0; i--)
-    //    {
-    //        int randomIndex = Random.Range(0, 0 + i);
-    //        var temp = pattern.attackOrder[i];
-    //        pattern.attackOrder[i] = pattern.attackOrder[randomIndex];
-    //        pattern.attackOrder[randomIndex] = temp;
-    //    }
-    //}
 }
